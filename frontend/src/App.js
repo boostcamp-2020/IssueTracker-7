@@ -1,15 +1,8 @@
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Learn React
-        </p>
-      </header>
-    </div>
-  );
-}
+import React from 'react';
+const App = () => (
+  <div>
+    Hello, Webpack!
+  </div>
+);
 
 export default App;
