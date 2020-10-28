@@ -15,21 +15,41 @@ class SignInController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         signInAppleButton.delegate = self
+        setUpNotificationCenter()
     }
     
-    
-    
-    @objc func loginSuccess() {
-        // notification 오는 경우 로그인 성공으로 간주, 다음 화면 전환
-        
+    func setUpNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: Notification.Name.loginSuccessReceived, object: nil)
     }
-    
     
     @IBAction func githubLogin(_ sender: Any) {
         oauth = OAuthManager(oauth: GithubLoginManager())
         oauth?.requestAuthorization()
+    }
+}
+
+// MARK: - Extension
+
+// MARK: NotificationCenter selectors
+extension SignInController {
+    
+    func setUpTransitionStyle() {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window?.layer.add(transition, forKey: kCATransition)
+    }
+    
+    @objc func loginSuccess() {
+        // notification 오는 경우 로그인 성공으로 간주, 여기서 다음 화면으로 전환
+        let vc = self.storyboard?.instantiateViewController(identifier: "NavigationController")
+        vc?.modalPresentationStyle = .fullScreen
+        setUpTransitionStyle() // TODO: transition 공부하고 좀 더 수정해보기
+        view.window?.rootViewController = vc
     }
 }
 

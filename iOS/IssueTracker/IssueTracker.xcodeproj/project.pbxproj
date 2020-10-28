@@ -15,7 +15,6 @@
 		33375C462547E71000E8A8E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33375C442547E71000E8A8E8 /* LaunchScreen.storyboard */; };
 		33375C512547E71000E8A8E8 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C502547E71000E8A8E8 /* IssueTrackerTests.swift */; };
 		33375C5C2547E71000E8A8E8 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C5B2547E71000E8A8E8 /* IssueTrackerUITests.swift */; };
-		33375C7C2547F12800E8A8E8 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C7B2547F12800E8A8E8 /* APIManager.swift */; };
 		33375C872547F34A00E8A8E8 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C862547F34A00E8A8E8 /* TokenManager.swift */; };
 		33375C8C2547F59500E8A8E8 /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C8B2547F59500E8A8E8 /* HTTPManager.swift */; };
 		33375C9925483E2600E8A8E8 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C9825483E2600E8A8E8 /* APICredentials.swift */; };
@@ -29,6 +28,7 @@
 		33BD8DD3254989E100537960 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DD2254989E100537960 /* NotificationName.swift */; };
 		33BD8DDA25498DC000537960 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339892B12549876B00D9FB63 /* UserInfo.swift */; };
 		33BD8DDE25498E0300537960 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339892A025497CB400D9FB63 /* UserDefault.swift */; };
+		33BD8DE62549956B00537960 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DE52549956B00537960 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +63,6 @@
 		33375C572547E71000E8A8E8 /* IssueTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33375C5B2547E71000E8A8E8 /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
 		33375C5D2547E71000E8A8E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		33375C7B2547F12800E8A8E8 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIManager.swift; path = ../../../../../../../Documents/APIManager.swift; sourceTree = "<group>"; };
 		33375C862547F34A00E8A8E8 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		33375C8B2547F59500E8A8E8 /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		33375C93254810F200E8A8E8 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		339892A025497CB400D9FB63 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		339892B12549876B00D9FB63 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		33BD8DD2254989E100537960 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		33BD8DE52549956B00537960 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,11 +194,9 @@
 			isa = PBXGroup;
 			children = (
 				33375CBB2548839000E8A8E8 /* ValueObject */,
-				33375C7B2547F12800E8A8E8 /* APIManager.swift */,
-				33375C862547F34A00E8A8E8 /* TokenManager.swift */,
-				33375C8B2547F59500E8A8E8 /* HTTPManager.swift */,
-				33375CAB2548583800E8A8E8 /* GithubLoginManager.swift */,
-				33375CB02548595700E8A8E8 /* OAuthManager.swift */,
+				33BD8DE2254994A700537960 /* Network */,
+				33BD8DE32549950000537960 /* OAuth */,
+				33BD8DE42549955300537960 /* BackEndAPI */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,6 +226,32 @@
 				339892B12549876B00D9FB63 /* UserInfo.swift */,
 			);
 			path = ValueObject;
+			sourceTree = "<group>";
+		};
+		33BD8DE2254994A700537960 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				33375C8B2547F59500E8A8E8 /* HTTPManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		33BD8DE32549950000537960 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				33375CB02548595700E8A8E8 /* OAuthManager.swift */,
+				33375CAB2548583800E8A8E8 /* GithubLoginManager.swift */,
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
+		33BD8DE42549955300537960 /* BackEndAPI */ = {
+			isa = PBXGroup;
+			children = (
+				33BD8DE52549956B00537960 /* APIManager.swift */,
+				33375C862547F34A00E8A8E8 /* TokenManager.swift */,
+			);
+			path = BackEndAPI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,7 +387,6 @@
 				33375C3E2547E70E00E8A8E8 /* SignInController.swift in Sources */,
 				33375CAC2548583800E8A8E8 /* GithubLoginManager.swift in Sources */,
 				33375C8C2547F59500E8A8E8 /* HTTPManager.swift in Sources */,
-				33375C7C2547F12800E8A8E8 /* APIManager.swift in Sources */,
 				33375C872547F34A00E8A8E8 /* TokenManager.swift in Sources */,
 				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
@@ -372,6 +395,7 @@
 				33375CA72548495F00E8A8E8 /* GithubJSONData.swift in Sources */,
 				33BD8DD3254989E100537960 /* NotificationName.swift in Sources */,
 				33375C3C2547E70E00E8A8E8 /* SceneDelegate.swift in Sources */,
+				33BD8DE62549956B00537960 /* APIManager.swift in Sources */,
 				339892B22549876B00D9FB63 /* UserInfo.swift in Sources */,
 				339892A125497CB400D9FB63 /* UserDefault.swift in Sources */,
 			);
