@@ -14,13 +14,6 @@ class TokenManager {
     let tokenUrl = ""
 //    let renewTokenUrl = ""
     
-    init() {
-        setUpNotification()
-    }
-    
-    func setUpNotification() {
-        
-    }
     
     // Token Manager
     // 1. 최초에 어세스토큰 / 리프레쉬 토큰을 얻음 -> property wrapper 를 이용한 Userdefaults 에 저장
