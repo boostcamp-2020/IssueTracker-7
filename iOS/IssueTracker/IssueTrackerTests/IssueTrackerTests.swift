@@ -19,6 +19,26 @@ class IssueTrackerTests: XCTestCase {
     }
 
     func testExample() throws {
+        
+        let dic = ["secret_code": "abc", "client_id": "def"]
+        
+        let result = dic.encode()
+        guard let firstLetter = result.first, firstLetter == "?" else {
+            XCTAssertFalse(true)
+            return
+        }
+        
+        let strArray = result.dropFirst(1).components(separatedBy: "&")
+        
+        var dic2 = [String: String]()
+        
+        for str in strArray {
+            let subStr = str.components(separatedBy: "=")
+            dic2[subStr[0]] = subStr[1]
+        }
+        
+        XCTAssertTrue(dic == dic2)
+        
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
