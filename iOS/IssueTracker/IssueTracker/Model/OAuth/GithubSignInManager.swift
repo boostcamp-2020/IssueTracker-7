@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GithubLoginManager {
+class GithubSignInManager {
     private let codeUrl = "https://github.com/login/oauth/authorize?client_id=\(GithubAPICredentials.clientId)&scope=user"
     private let accessTokenUrl = "https://github.com/login/oauth/access_token"
     private let userUrl = "https://api.github.com/user"
@@ -37,7 +37,7 @@ class GithubLoginManager {
     }
 }
 
-extension GithubLoginManager: OAuthAble {
+extension GithubSignInManager: OAuthAble {
     func requestAuthorization() {
         HTTPManager.openSite(url: codeUrl)
     }

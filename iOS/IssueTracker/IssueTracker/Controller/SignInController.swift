@@ -25,7 +25,7 @@ class SignInController: UIViewController {
     }
     
     @IBAction func githubLogin(_ sender: Any) {
-        oauth = OAuthManager(oauth: GithubLoginManager())
+        oauth = OAuthManager(oauth: GithubSignInManager())
         oauth?.requestAuthorization()
     }
 }

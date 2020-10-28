@@ -19,11 +19,11 @@
 		33375C462547E71000E8A8E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33375C442547E71000E8A8E8 /* LaunchScreen.storyboard */; };
 		33375C512547E71000E8A8E8 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C502547E71000E8A8E8 /* IssueTrackerTests.swift */; };
 		33375C5C2547E71000E8A8E8 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C5B2547E71000E8A8E8 /* IssueTrackerUITests.swift */; };
-		33375C872547F34A00E8A8E8 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C862547F34A00E8A8E8 /* TokenManager.swift */; };
+		33375C872547F34A00E8A8E8 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C862547F34A00E8A8E8 /* AuthenticationManager.swift */; };
 		33375C8C2547F59500E8A8E8 /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C8B2547F59500E8A8E8 /* HTTPManager.swift */; };
 		33375C9925483E2600E8A8E8 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C9825483E2600E8A8E8 /* APICredentials.swift */; };
 		33375CA72548495F00E8A8E8 /* GithubJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CA62548495F00E8A8E8 /* GithubJSONData.swift */; };
-		33375CAC2548583800E8A8E8 /* GithubLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CAB2548583800E8A8E8 /* GithubLoginManager.swift */; };
+		33375CAC2548583800E8A8E8 /* GithubSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CAB2548583800E8A8E8 /* GithubSignInManager.swift */; };
 		33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB02548595700E8A8E8 /* OAuthManager.swift */; };
 		33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */; };
 		3398929925493ADD00D9FB63 /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C8B2547F59500E8A8E8 /* HTTPManager.swift */; };
@@ -71,12 +71,12 @@
 		33375C572547E71000E8A8E8 /* IssueTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33375C5B2547E71000E8A8E8 /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
 		33375C5D2547E71000E8A8E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		33375C862547F34A00E8A8E8 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		33375C862547F34A00E8A8E8 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		33375C8B2547F59500E8A8E8 /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		33375C93254810F200E8A8E8 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		33375C9825483E2600E8A8E8 /* APICredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
 		33375CA62548495F00E8A8E8 /* GithubJSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubJSONData.swift; sourceTree = "<group>"; };
-		33375CAB2548583800E8A8E8 /* GithubLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManager.swift; sourceTree = "<group>"; };
+		33375CAB2548583800E8A8E8 /* GithubSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSignInManager.swift; sourceTree = "<group>"; };
 		33375CB02548595700E8A8E8 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 		339892A025497CB400D9FB63 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				33375CB02548595700E8A8E8 /* OAuthManager.swift */,
-				33375CAB2548583800E8A8E8 /* GithubLoginManager.swift */,
+				33375CAB2548583800E8A8E8 /* GithubSignInManager.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				33BD8DE52549956B00537960 /* APIManager.swift */,
-				33375C862547F34A00E8A8E8 /* TokenManager.swift */,
+				33375C862547F34A00E8A8E8 /* AuthenticationManager.swift */,
 			);
 			path = BackEndAPI;
 			sourceTree = "<group>";
@@ -409,9 +409,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				33375C3E2547E70E00E8A8E8 /* SignInController.swift in Sources */,
-				33375CAC2548583800E8A8E8 /* GithubLoginManager.swift in Sources */,
+				33375CAC2548583800E8A8E8 /* GithubSignInManager.swift in Sources */,
 				33375C8C2547F59500E8A8E8 /* HTTPManager.swift in Sources */,
-				33375C872547F34A00E8A8E8 /* TokenManager.swift in Sources */,
+				33375C872547F34A00E8A8E8 /* AuthenticationManager.swift in Sources */,
 				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
 				33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */,
