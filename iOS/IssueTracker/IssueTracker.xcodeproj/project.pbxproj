@@ -9,12 +9,21 @@
 /* Begin PBXBuildFile section */
 		33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C392547E70E00E8A8E8 /* AppDelegate.swift */; };
 		33375C3C2547E70E00E8A8E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C3B2547E70E00E8A8E8 /* SceneDelegate.swift */; };
-		33375C3E2547E70E00E8A8E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C3D2547E70E00E8A8E8 /* ViewController.swift */; };
+		33375C3E2547E70E00E8A8E8 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C3D2547E70E00E8A8E8 /* SignInController.swift */; };
 		33375C412547E70E00E8A8E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33375C3F2547E70E00E8A8E8 /* Main.storyboard */; };
 		33375C432547E71000E8A8E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33375C422547E71000E8A8E8 /* Assets.xcassets */; };
 		33375C462547E71000E8A8E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33375C442547E71000E8A8E8 /* LaunchScreen.storyboard */; };
 		33375C512547E71000E8A8E8 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C502547E71000E8A8E8 /* IssueTrackerTests.swift */; };
 		33375C5C2547E71000E8A8E8 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C5B2547E71000E8A8E8 /* IssueTrackerUITests.swift */; };
+		33375C7C2547F12800E8A8E8 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C7B2547F12800E8A8E8 /* APIManager.swift */; };
+		33375C872547F34A00E8A8E8 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C862547F34A00E8A8E8 /* TokenManager.swift */; };
+		33375C8C2547F59500E8A8E8 /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C8B2547F59500E8A8E8 /* HTTPManager.swift */; };
+		33375C9925483E2600E8A8E8 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C9825483E2600E8A8E8 /* APICredentials.swift */; };
+		33375CA72548495F00E8A8E8 /* GithubJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CA62548495F00E8A8E8 /* GithubJSONData.swift */; };
+		33375CAC2548583800E8A8E8 /* GithubLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CAB2548583800E8A8E8 /* GithubLoginManager.swift */; };
+		33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB02548595700E8A8E8 /* OAuthManager.swift */; };
+		33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */; };
+		3398929925493ADD00D9FB63 /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C8B2547F59500E8A8E8 /* HTTPManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +47,7 @@
 		33375C362547E70E00E8A8E8 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33375C392547E70E00E8A8E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33375C3B2547E70E00E8A8E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		33375C3D2547E70E00E8A8E8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		33375C3D2547E70E00E8A8E8 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		33375C402547E70E00E8A8E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33375C422547E71000E8A8E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33375C452547E71000E8A8E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +58,15 @@
 		33375C572547E71000E8A8E8 /* IssueTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33375C5B2547E71000E8A8E8 /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
 		33375C5D2547E71000E8A8E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33375C7B2547F12800E8A8E8 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIManager.swift; path = ../../../../../../../Documents/APIManager.swift; sourceTree = "<group>"; };
+		33375C862547F34A00E8A8E8 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		33375C8B2547F59500E8A8E8 /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
+		33375C93254810F200E8A8E8 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
+		33375C9825483E2600E8A8E8 /* APICredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
+		33375CA62548495F00E8A8E8 /* GithubJSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubJSONData.swift; sourceTree = "<group>"; };
+		33375CAB2548583800E8A8E8 /* GithubLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManager.swift; sourceTree = "<group>"; };
+		33375CB02548595700E8A8E8 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
+		33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +117,12 @@
 		33375C382547E70E00E8A8E8 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				33375C392547E70E00E8A8E8 /* AppDelegate.swift */,
-				33375C3B2547E70E00E8A8E8 /* SceneDelegate.swift */,
-				33375C3D2547E70E00E8A8E8 /* ViewController.swift */,
-				33375C3F2547E70E00E8A8E8 /* Main.storyboard */,
-				33375C422547E71000E8A8E8 /* Assets.xcassets */,
-				33375C442547E71000E8A8E8 /* LaunchScreen.storyboard */,
-				33375C472547E71000E8A8E8 /* Info.plist */,
+				33375C93254810F200E8A8E8 /* IssueTracker.entitlements */,
+				33375C712547ECF000E8A8E8 /* SupportingFile */,
+				33375C9725483D6A00E8A8E8 /* Constant */,
+				33375C7A2547F0C000E8A8E8 /* Model */,
+				33375C6F2547EC7C00E8A8E8 /* Controller */,
+				33375CB5254879B200E8A8E8 /* View */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -126,6 +143,80 @@
 				33375C5D2547E71000E8A8E8 /* Info.plist */,
 			);
 			path = IssueTrackerUITests;
+			sourceTree = "<group>";
+		};
+		33375C6F2547EC7C00E8A8E8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				33375C3D2547E70E00E8A8E8 /* SignInController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		33375C712547ECF000E8A8E8 /* SupportingFile */ = {
+			isa = PBXGroup;
+			children = (
+				33375C732547ED6A00E8A8E8 /* App */,
+				33375C722547ED5700E8A8E8 /* Storyboard */,
+				33375C422547E71000E8A8E8 /* Assets.xcassets */,
+				33375C472547E71000E8A8E8 /* Info.plist */,
+			);
+			path = SupportingFile;
+			sourceTree = "<group>";
+		};
+		33375C722547ED5700E8A8E8 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				33375C3F2547E70E00E8A8E8 /* Main.storyboard */,
+				33375C442547E71000E8A8E8 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		33375C732547ED6A00E8A8E8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				33375C392547E70E00E8A8E8 /* AppDelegate.swift */,
+				33375C3B2547E70E00E8A8E8 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		33375C7A2547F0C000E8A8E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				33375CBB2548839000E8A8E8 /* ValueObject */,
+				33375C7B2547F12800E8A8E8 /* APIManager.swift */,
+				33375C862547F34A00E8A8E8 /* TokenManager.swift */,
+				33375C8B2547F59500E8A8E8 /* HTTPManager.swift */,
+				33375CAB2548583800E8A8E8 /* GithubLoginManager.swift */,
+				33375CB02548595700E8A8E8 /* OAuthManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		33375C9725483D6A00E8A8E8 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				33375C9825483E2600E8A8E8 /* APICredentials.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		33375CB5254879B200E8A8E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		33375CBB2548839000E8A8E8 /* ValueObject */ = {
+			isa = PBXGroup;
+			children = (
+				33375CA62548495F00E8A8E8 /* GithubJSONData.swift */,
+			);
+			path = ValueObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +349,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33375C3E2547E70E00E8A8E8 /* ViewController.swift in Sources */,
+				33375C3E2547E70E00E8A8E8 /* SignInController.swift in Sources */,
+				33375CAC2548583800E8A8E8 /* GithubLoginManager.swift in Sources */,
+				33375C8C2547F59500E8A8E8 /* HTTPManager.swift in Sources */,
+				33375C7C2547F12800E8A8E8 /* APIManager.swift in Sources */,
+				33375C872547F34A00E8A8E8 /* TokenManager.swift in Sources */,
+				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
+				33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */,
+				33375C9925483E2600E8A8E8 /* APICredentials.swift in Sources */,
+				33375CA72548495F00E8A8E8 /* GithubJSONData.swift in Sources */,
 				33375C3C2547E70E00E8A8E8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33375C512547E71000E8A8E8 /* IssueTrackerTests.swift in Sources */,
+				3398929925493ADD00D9FB63 /* HTTPManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,9 +536,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IssueTracker/IssueTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
-				INFOPLIST_FILE = IssueTracker/Info.plist;
+				INFOPLIST_FILE = IssueTracker/SupportingFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,9 +556,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IssueTracker/IssueTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
-				INFOPLIST_FILE = IssueTracker/Info.plist;
+				INFOPLIST_FILE = IssueTracker/SupportingFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
