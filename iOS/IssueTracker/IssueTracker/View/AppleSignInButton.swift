@@ -11,7 +11,8 @@ import AuthenticationServices
 class AppleSignInButton: UIView {
     
     weak var delegate: (ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding)?
-    
+    let authorizationButton = ASAuthorizationAppleIDButton()
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
@@ -23,11 +24,14 @@ class AppleSignInButton: UIView {
         
         setupProviderLoginView()
     }
-    
+  
     func setupProviderLoginView() {
-        let authorizationButton = ASAuthorizationAppleIDButton()
+        authorizationButton.frame = bounds
+        
         authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
         addSubview(authorizationButton)
+
+        authorizationButton.autoresizingMask = [.flexibleWidth, .flexibleHeight] // 제약이 잡히기 전이기 때문에 미리 설정해줘야 한다.
     }
     
     @objc
@@ -41,6 +45,4 @@ class AppleSignInButton: UIView {
         authorizationController.presentationContextProvider = delegate
         authorizationController.performRequests()
     }
-    
-    
 }
