@@ -9,7 +9,6 @@ import UIKit
 
 class TokenManager {
         
-    let tokenInfo = TokenInfo()
     
     // 백엔드에 Token 요청할 Url
     let tokenUrl = ""

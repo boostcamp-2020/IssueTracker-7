@@ -19,6 +19,14 @@ class SignInController: UIViewController {
         signInAppleButton.delegate = self
     }
     
+    
+    
+    @objc func loginSuccess() {
+        // notification 오는 경우 로그인 성공으로 간주, 다음 화면 전환
+        
+    }
+    
+    
     @IBAction func githubLogin(_ sender: Any) {
         oauth = OAuthManager(oauth: GithubLoginManager())
         oauth?.requestAuthorization()

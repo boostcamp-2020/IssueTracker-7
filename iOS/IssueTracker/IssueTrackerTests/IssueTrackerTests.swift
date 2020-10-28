@@ -17,6 +17,10 @@ class IssueTrackerTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testExample2() throws {
+        print(UserInfo.shared.isAllInfoExisted())
+    }
 
     func testExample() throws {
         
