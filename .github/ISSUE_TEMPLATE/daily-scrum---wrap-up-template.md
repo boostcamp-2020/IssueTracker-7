@@ -1,10 +1,10 @@
 ---
 name: Daily scrum & Wrap up Template
 about: Daily scrum & Wrap up Template
-title: Day _ Scrum Log 및 Wrap Up
+title: Day _ Scrum 및 Wrap Up
 labels: "\U0001F468‍\U0001F469‍\U0001F467‍\U0001F466 daily scrum & Wrap up, \U0001F4D2
   \ document"
-assignees: ''
+assignees: tksrl0379, domino8788, seoulboy, ahnsoheee
 
 ---
 
