@@ -8,14 +8,10 @@
 import Foundation
 
 class GithubLoginManager {
-    
-    // code 얻기
     let codeUrl = "https://github.com/login/oauth/authorize?client_id=\(GithubAPICredentials.clientId)&scope=user"
-    // AccessToken 얻기
     let accessTokenUrl = "https://github.com/login/oauth/access_token"
-    
-    let githubAPIUrl = "https://api.github.com/user"
-    
+    let userUrl = "https://api.github.com/user"
+   
     init() {
         setUpNotificationCenter()
     }
@@ -35,7 +31,7 @@ class GithubLoginManager {
             let accessToken = githubJSONData.accessToken
             let header = ["Authorization": "token \(accessToken)"]
             
-            HTTPManager.request(method: .get, url: self.githubAPIUrl, header: header) { data, error in
+            HTTPManager.request(method: .get, url: self.userUrl, header: header) { data, error in
                 print(try! JSONSerialization.jsonObject(with: data, options: []))
             }
         }

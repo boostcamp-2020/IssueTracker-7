@@ -20,8 +20,6 @@ class HTTPManager {
         UIApplication.shared.open(url)
     }
     
-    
-    
     static func request(method: HttpMethod, url: String, body: [String: String]? = nil, header: [String: String]? = nil, completionHandler: ((Data, Error?) -> Void)? = nil) {
         guard let url = URL(string: url) else { return }
         
@@ -31,11 +29,9 @@ class HTTPManager {
         let body = body?.encode().data(using:String.Encoding.utf8)
         request.httpBody = body
         
-       
         header?.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
         }
-        
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             // TODO: 응답처리 및 이 부분 모듈화
