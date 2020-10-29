@@ -175,7 +175,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8T-FK-yGz">
                                 <rect key="frame" x="0.0" y="113" width="414" height="695"/>
                                 <connections>
-                                    <segue destination="ylc-c1-0M9" kind="embed" id="GXe-Ov-7LI"/>
+                                    <segue destination="ylc-c1-0M9" kind="embed" identifier="FilteringTableView" id="GXe-Ov-7LI"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yFa-Sf-h2l" userLabel="seperator">
