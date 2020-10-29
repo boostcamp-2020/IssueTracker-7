@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.STRING(50),
         allowNull: false,
+        defaultValue: '',
       },
       color: {
         type: DataTypes.STRING(10),
