@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
 const sequelize = require('./models').sequelize;
-var indexRouter = require('./routes/index');
+const passport = require('passport');
+const passportConfig = require('./config/passport');
+var authRouter = require('./routes/auth');
 
 var app = express();
 sequelize.sync();
@@ -19,8 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+passportConfig();
 
-app.use('/', indexRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

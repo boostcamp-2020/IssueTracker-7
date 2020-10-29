@@ -10,9 +10,15 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.0",
+    "express-session": "^1.17.1",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "mysql2": "^2.2.5",
+    "passport": "^0.4.1",
+    "passport-github": "^1.1.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "passport-oauth2-refresh": "^2.0.0",
     "pug": "2.0.0-beta11",
     "sequelize": "^6.3.5"
   }
