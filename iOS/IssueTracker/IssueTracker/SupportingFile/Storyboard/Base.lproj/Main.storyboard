@@ -156,7 +156,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Us-Ia-JlF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2293" y="114"/>
+            <point key="canvasLocation" x="2368" y="-193"/>
         </scene>
         <!--Filtering Controller-->
         <scene sceneID="4GL-9x-SNI">
@@ -201,18 +201,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JbC-lr-yHe">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="ghp-5c-80Z"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="hT4-c1-sIh"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="ghp-5c-80Z">
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="FET-n7-A7v" id="wno-6x-8sK"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="hT4-c1-sIh">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="FET-n7-A7v" id="ZyZ-fK-TJu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reD-zt-Mbe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2956.521739130435" y="113.83928571428571"/>
+            <point key="canvasLocation" x="3057" y="-193"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Filtering Table View Controller-->
         <scene sceneID="K5y-CT-1TR">
             <objects>
-                <tableViewController id="ylc-c1-0M9" sceneMemberID="viewController">
+                <tableViewController id="ylc-c1-0M9" customClass="FilteringTableViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Xl5-V7-3vq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="695"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -388,7 +396,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NU3-fx-gp6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3725" y="114"/>
+            <point key="canvasLocation" x="3774" y="-193"/>
         </scene>
     </scenes>
     <resources>
