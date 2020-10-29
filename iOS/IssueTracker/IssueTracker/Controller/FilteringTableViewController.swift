@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Issuecondition {
+enum PreSpecifiedCondition {
     case openIssue
     case myIssue
     case assignedIssue
@@ -16,7 +16,7 @@ enum Issuecondition {
 }
 
 protocol SendFilterConditionDelegate: AnyObject {
-    func send(condition: Issuecondition)
+    func sendPreSpecified(condition: PreSpecifiedCondition) // 미리 지정된 조건 전송
 }
 
 class FilteringTableViewController: UITableViewController {
@@ -47,15 +47,15 @@ class FilteringTableViewController: UITableViewController {
             
             switch indexPath.row {
             case 0:
-                delegate?.send(condition: .openIssue)
+                delegate?.sendPreSpecified(condition: .openIssue)
             case 1:
-                delegate?.send(condition: .myIssue)
+                delegate?.sendPreSpecified(condition: .myIssue)
             case 2:
-                delegate?.send(condition: .assignedIssue)
+                delegate?.sendPreSpecified(condition: .assignedIssue)
             case 3:
-                delegate?.send(condition: .commentedIssue)
+                delegate?.sendPreSpecified(condition: .commentedIssue)
             case 4:
-                delegate?.send(condition: .closedIssued)
+                delegate?.sendPreSpecified(condition: .closedIssued)
             default:
                 break
             }

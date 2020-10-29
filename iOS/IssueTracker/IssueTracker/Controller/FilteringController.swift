@@ -32,7 +32,7 @@ class FilteringController: UIViewController {
 
 extension FilteringController: SendFilterConditionDelegate {
     // 선택한 조건 수신 시 바로 화면 dismiss
-    func send(condition: Issuecondition) {
+    func sendPreSpecified(condition: PreSpecifiedCondition) {
         print(condition)
         dismiss(animated: true)
     }
