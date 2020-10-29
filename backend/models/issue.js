@@ -6,10 +6,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(45),
         allowNull: false,
       },
-      comment: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       status: {
         type: DataTypes.ENUM('open', 'closed'),
         allowNull: false,
