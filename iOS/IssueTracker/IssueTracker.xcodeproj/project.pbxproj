@@ -33,8 +33,8 @@
 		33BD8DDA25498DC000537960 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339892B12549876B00D9FB63 /* UserInfo.swift */; };
 		33BD8DDE25498E0300537960 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339892A025497CB400D9FB63 /* UserDefault.swift */; };
 		33BD8DE62549956B00537960 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DE52549956B00537960 /* APIManager.swift */; };
-		71531F52254A83ED00CCFAE2 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F51254A83ED00CCFAE2 /* APICredentials.swift */; };
 		71531F57254A859F00CCFAE2 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F56254A859F00CCFAE2 /* IssueListViewController.swift */; };
+		71531F60254A88F000CCFAE2 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F5F254A88F000CCFAE2 /* UIButton+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,8 +85,8 @@
 		339892B12549876B00D9FB63 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		33BD8DD2254989E100537960 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		33BD8DE52549956B00537960 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		71531F51254A83ED00CCFAE2 /* APICredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
 		71531F56254A859F00CCFAE2 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
+		71531F5F254A88F000CCFAE2 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +149,7 @@
 		33375C382547E70E00E8A8E8 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				71531F5E254A88E100CCFAE2 /* Extension */,
 				33375C93254810F200E8A8E8 /* IssueTracker.entitlements */,
 				33375C712547ECF000E8A8E8 /* SupportingFile */,
 				33375C9725483D6A00E8A8E8 /* Constant */,
@@ -231,7 +232,6 @@
 			children = (
 				33375C9825483E2600E8A8E8 /* APICredentials.swift */,
 				33BD8DD2254989E100537960 /* NotificationName.swift */,
-				71531F51254A83ED00CCFAE2 /* APICredentials.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -278,6 +278,14 @@
 				33375C862547F34A00E8A8E8 /* AuthenticationManager.swift */,
 			);
 			path = BackEndAPI;
+			sourceTree = "<group>";
+		};
+		71531F5E254A88E100CCFAE2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				71531F5F254A88F000CCFAE2 /* UIButton+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,9 +435,9 @@
 				33375C3C2547E70E00E8A8E8 /* SceneDelegate.swift in Sources */,
 				33BD8DE62549956B00537960 /* APIManager.swift in Sources */,
 				71531F57254A859F00CCFAE2 /* IssueListViewController.swift in Sources */,
-				71531F52254A83ED00CCFAE2 /* APICredentials.swift in Sources */,
 				339892B22549876B00D9FB63 /* UserInfo.swift in Sources */,
 				339892A125497CB400D9FB63 /* UserDefault.swift in Sources */,
+				71531F60254A88F000CCFAE2 /* UIButton+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
