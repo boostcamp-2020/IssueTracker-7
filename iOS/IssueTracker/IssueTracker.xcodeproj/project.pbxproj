@@ -35,6 +35,7 @@
 		33BD8DE62549956B00537960 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DE52549956B00537960 /* APIManager.swift */; };
 		71531F57254A859F00CCFAE2 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F56254A859F00CCFAE2 /* IssueListViewController.swift */; };
 		71531F60254A88F000CCFAE2 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F5F254A88F000CCFAE2 /* UIButton+.swift */; };
+		719453B3254AAF6600A5864E /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 719453B2254AAF6600A5864E /* IssueList.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		33BD8DE52549956B00537960 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		71531F56254A859F00CCFAE2 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		71531F5F254A88F000CCFAE2 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		719453B2254AAF6600A5864E /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			children = (
 				33375C3F2547E70E00E8A8E8 /* Main.storyboard */,
 				33375C442547E71000E8A8E8 /* LaunchScreen.storyboard */,
+				719453B2254AAF6600A5864E /* IssueList.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				719453B3254AAF6600A5864E /* IssueList.storyboard in Resources */,
 				33151F2725499E04006B94A9 /* NanumSquareBold.ttf in Resources */,
 				33151F2825499E04006B94A9 /* NanumSquareLight.ttf in Resources */,
 				33375C462547E71000E8A8E8 /* LaunchScreen.storyboard in Resources */,
