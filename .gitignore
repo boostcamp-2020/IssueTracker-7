@@ -9,6 +9,8 @@
 *.xcuserstate 
 *.DS_Store
 
+APICredentials.swift
+
 ## User settings
 xcuserdata/
 
