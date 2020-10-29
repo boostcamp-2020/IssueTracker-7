@@ -42,6 +42,9 @@ class FilteringTableViewController: UITableViewController {
          닫힌 이슈들
          */
         case 0:
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.accessoryType = .checkmark
+            
             switch indexPath.row {
             case 0:
                 delegate?.send(condition: .openIssue)
