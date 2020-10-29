@@ -11,6 +11,7 @@
 		33151F2825499E04006B94A9 /* NanumSquareLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33151F2425499E04006B94A9 /* NanumSquareLight.ttf */; };
 		33151F2925499E04006B94A9 /* NanumSquareOTF_acEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 33151F2525499E04006B94A9 /* NanumSquareOTF_acEB.otf */; };
 		33151F2A25499E04006B94A9 /* NanumSquareRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33151F2625499E04006B94A9 /* NanumSquareRegular.ttf */; };
+		33151F3E254A6464006B94A9 /* FilteringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F3D254A6464006B94A9 /* FilteringController.swift */; };
 		33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C392547E70E00E8A8E8 /* AppDelegate.swift */; };
 		33375C3C2547E70E00E8A8E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C3B2547E70E00E8A8E8 /* SceneDelegate.swift */; };
 		33375C3E2547E70E00E8A8E8 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C3D2547E70E00E8A8E8 /* SignInController.swift */; };
@@ -57,6 +58,7 @@
 		33151F2425499E04006B94A9 /* NanumSquareLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareLight.ttf; sourceTree = "<group>"; };
 		33151F2525499E04006B94A9 /* NanumSquareOTF_acEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acEB.otf; sourceTree = "<group>"; };
 		33151F2625499E04006B94A9 /* NanumSquareRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRegular.ttf; sourceTree = "<group>"; };
+		33151F3D254A6464006B94A9 /* FilteringController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringController.swift; sourceTree = "<group>"; };
 		33375C362547E70E00E8A8E8 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33375C392547E70E00E8A8E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33375C3B2547E70E00E8A8E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				33375C3D2547E70E00E8A8E8 /* SignInController.swift */,
+				33151F3D254A6464006B94A9 /* FilteringController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */,
 				33375C9925483E2600E8A8E8 /* APICredentials.swift in Sources */,
 				33375CA72548495F00E8A8E8 /* GithubJSONData.swift in Sources */,
+				33151F3E254A6464006B94A9 /* FilteringController.swift in Sources */,
 				33BD8DD3254989E100537960 /* NotificationName.swift in Sources */,
 				33375C3C2547E70E00E8A8E8 /* SceneDelegate.swift in Sources */,
 				33BD8DE62549956B00537960 /* APIManager.swift in Sources */,
