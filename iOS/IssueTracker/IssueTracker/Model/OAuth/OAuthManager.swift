@@ -7,15 +7,17 @@
 
 import Foundation
 
-protocol OAuthAble {
+protocol OAuthable {
+    var handler: (() -> ())? { get set }
     func requestAuthorization()
 }
 
 class OAuthManager {
-    private let oauth: OAuthAble
+    private var oauth: OAuthable
     
-    init (oauth: OAuthAble) {
+    init (oauth: OAuthable, handler: (()->())? = nil) {
         self.oauth = oauth
+        self.oauth.handler = handler
     }
     
     func requestAuthorization() {
