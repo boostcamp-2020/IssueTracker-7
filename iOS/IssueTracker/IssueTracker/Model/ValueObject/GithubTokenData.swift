@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GithubJSONData: Decodable {
+struct GithubTokenData: Decodable {
     enum CodingKeys: String, CodingKey {
         case scope,
              accessToken = "access_token",
