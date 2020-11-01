@@ -9,41 +9,24 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="tek-Jt-Ti6">
             <objects>
-                <navigationController id="ABG-JX-FJB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" id="ABG-JX-FJB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="ogt-OC-NeK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Y0g-6n-Nhi">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Gt4-sv-sR9" kind="relationship" relationship="rootViewController" id="U2f-fU-wRk"/>
+                        <segue destination="Fiu-tR-AEc" kind="relationship" relationship="rootViewController" id="qvb-BG-R2E"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTX-vr-N1b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="114"/>
+            <point key="canvasLocation" x="2674" y="114"/>
         </scene>
-        <!--이슈-->
-        <scene sceneID="Swa-0N-gJp">
-            <objects>
-                <tabBarController id="Gt4-sv-sR9" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="이슈" id="mzr-Ok-CuO"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="59f-KU-5R1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Fiu-tR-AEc" kind="relationship" relationship="viewControllers" id="S3w-aj-M9Z"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BfK-tx-HsK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1774" y="114"/>
-        </scene>
-        <!--이슈-->
+        <!--이슈목록-->
         <scene sceneID="gdl-FY-vGc">
             <objects>
                 <viewController id="Fiu-tR-AEc" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -164,13 +147,46 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="Kyi-Eh-ypv"/>
+                    <navigationItem key="navigationItem" title="이슈목록" id="RzU-8r-oEh">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="bkx-PW-boa">
+                            <connections>
+                                <segue destination="0jM-ha-VGr" kind="presentation" id="YAw-Ar-zCf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="VGO-WG-P6r" id="UAZ-Uo-Shu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyB-SY-otq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2608.6956521739135" y="113.83928571428571"/>
+            <point key="canvasLocation" x="3387" y="114"/>
+        </scene>
+        <!--FilterInitController-->
+        <scene sceneID="3XD-sq-RCe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filter" referencedIdentifier="FilterInitController" id="0jM-ha-VGr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NBX-3h-MAz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3994" y="-85"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="4Fd-Fz-iWx">
+            <objects>
+                <tabBarController storyboardIdentifier="IssueListStoryboardInitialViewController" automaticallyAdjustsScrollViewInsets="NO" id="ppn-fi-FhU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Rtr-Ro-k8n">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ABG-JX-FJB" kind="relationship" relationship="viewControllers" id="pc0-rF-gjY"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H2f-VD-Aa9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1949" y="114"/>
         </scene>
     </scenes>
     <resources>

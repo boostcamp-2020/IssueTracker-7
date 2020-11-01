@@ -51,10 +51,14 @@ extension SignInController {
     
     @objc func loginSuccess() {
         // notification 오는 경우 로그인 성공으로 간주, 여기서 다음 화면으로 전환
-        let vc = self.storyboard?.instantiateViewController(identifier: "NavigationController")
-        vc?.modalPresentationStyle = .fullScreen
+        let storyboard: UIStoryboard = UIStoryboard(name: StoryboardName.issueList, bundle: nil)
+        let viewController = storyboard.instantiateViewController(
+            withIdentifier: StoryboardName.issueListStoryboardInitialViewController
+        )
+        
+        viewController.modalPresentationStyle = .fullScreen
         setUpTransitionStyle() // TODO: transition 공부하고 좀 더 수정해보기
-        view.window?.rootViewController = vc
+        view.window?.rootViewController = viewController
     }
 }
 
