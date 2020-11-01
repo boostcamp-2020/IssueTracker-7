@@ -162,10 +162,10 @@
             </objects>
             <point key="canvasLocation" x="3387" y="114"/>
         </scene>
-        <!--FilterViewController-->
+        <!--FilterInitController-->
         <scene sceneID="3XD-sq-RCe">
             <objects>
-                <viewControllerPlaceholder storyboardName="Filter" referencedIdentifier="FilterViewController" id="0jM-ha-VGr" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Filter" referencedIdentifier="FilterInitController" id="0jM-ha-VGr" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NBX-3h-MAz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3994" y="-85"/>
@@ -173,7 +173,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="4Fd-Fz-iWx">
             <objects>
-                <tabBarController storyboardIdentifier="IssueListTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="ppn-fi-FhU" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="IssueListInitController" automaticallyAdjustsScrollViewInsets="NO" id="ppn-fi-FhU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Rtr-Ro-k8n">
                         <autoresizingMask key="autoresizingMask"/>

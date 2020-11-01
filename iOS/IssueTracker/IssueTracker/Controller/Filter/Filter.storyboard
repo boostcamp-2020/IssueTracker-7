@@ -15,7 +15,7 @@
         <!--Navigation Controller-->
         <scene sceneID="eG7-aC-PPz">
             <objects>
-                <navigationController storyboardIdentifier="FilterViewController" id="YXU-Be-1PP" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FilterInitController" id="YXU-Be-1PP" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2ph-js-hoT">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
