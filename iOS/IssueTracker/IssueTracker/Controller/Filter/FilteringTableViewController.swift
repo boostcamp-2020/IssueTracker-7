@@ -28,7 +28,6 @@ class FilteringTableViewController: UITableViewController {
         
     }
     
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
@@ -52,7 +51,5 @@ class FilteringTableViewController: UITableViewController {
             break
         }
         
-        
     }
-    
 }
