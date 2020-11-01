@@ -293,7 +293,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="SC8-F0-Vtu">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailConditionCell" id="SC8-F0-Vtu">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SC8-F0-Vtu" id="w7a-RO-wnX">
@@ -302,6 +302,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BUE-OQ-FOZ" id="ZpQ-hW-oUD"/>
+                                    <outlet property="delegate" destination="BUE-OQ-FOZ" id="wLV-hJ-EWd"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ofV-aI-fsE"/>
@@ -314,6 +318,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ofZ-Mf-cbS"/>
+                    <connections>
+                        <outlet property="tableView" destination="gRc-uc-DDH" id="GjG-K6-KYf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2u-1y-Egc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
