@@ -9,7 +9,10 @@ import UIKit
 
 class FilteringController: UIViewController {
     
-    let detailFilterInfo = DetailFilterInfo()
+    var detailFilterInfo: DetailFilterInfo?
+    var preDefinedConditionHandler: (()->())?
+    var detailConditionHandler: (()->())?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +27,9 @@ class FilteringController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        // SignInController 로 세부 조건 전달
         print(detailFilterInfo)
+        if let handler = detailConditionHandler { handler() }
         dismiss(animated: true)
-        
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -36,9 +38,10 @@ class FilteringController: UIViewController {
 }
 
 extension FilteringController: SendFilterConditionDelegate {
-    // 선택한 조건 수신 시 바로 화면 dismiss
     func sendPreSpecified(condition: PreSpecifiedCondition) {
         print(condition)
+        if let handler = preDefinedConditionHandler {
+            handler() }
         dismiss(animated: true)
     }
 }

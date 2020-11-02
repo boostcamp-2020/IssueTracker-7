@@ -11,7 +11,6 @@ class DetailConditionTableViewController<InfoType: Decodable>: UIViewController,
 
     @IBOutlet weak var tableView: UITableView!
     
-    private let router = Router<BackEndAPI>()
     private let route: BackEndAPI
     private let detailFilterInfo: DetailFilterInfo
     
@@ -30,9 +29,10 @@ class DetailConditionTableViewController<InfoType: Decodable>: UIViewController,
         print(route, InfoType.self)
         
         // 여기서 API 호출(작성자, 레이블, 마일스톤, 담당자)해서 데이터 객체 갱신
-//        router.request(route: route) { (result: Result<InfoType, APIError>) in
+//        BackEndAPIManager.shared.requestDetailCondition(route: route) { (result: Result<InfoType, APIError>) in
 //
 //        }
+
         
         
     }

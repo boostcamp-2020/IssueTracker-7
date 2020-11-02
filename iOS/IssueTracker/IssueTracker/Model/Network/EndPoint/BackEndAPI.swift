@@ -8,10 +8,12 @@
 import Foundation
 
 enum BackEndAPI {
-    case allAuthors
-    case allLabels
-    case allMilestones
-    case allAssignees
+    case allAuthors,
+         allLabels,
+         allMilestones,
+         allAssignees
+    
+    case filterIssueList
 }
 
 extension BackEndAPI: EndPointable, CaseIterable {

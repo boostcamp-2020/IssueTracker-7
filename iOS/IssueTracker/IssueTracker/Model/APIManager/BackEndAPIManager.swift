@@ -9,7 +9,24 @@ import Foundation
 
 class BackEndAPIManager {
     
-  
+    static let shared = BackEndAPIManager()
+    
+    private let router = Router<BackEndAPI>()
+    
+    
+    // route: 작성자 or 레이블 or 마일스톤 or 담당자
+    func requestDetailCondition<infoType: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
+        router.request(route: route) { (result: Result<infoType, APIError>) in
+            
+            
+        }
+    }
+    
+    func requestFiltering<infoType: Decodable>(completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
+        router.request(route: .filterIssueList) { (result: Result<infoType, APIError>) in
+            
+        }
+    }
   
     
 }
