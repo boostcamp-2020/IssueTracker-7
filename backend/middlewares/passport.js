@@ -14,8 +14,12 @@ const githubVerify = (req, accessToken, refreshToken, profile, done) => {
     },
   })
     .then((user) => {
-      if (!user) return done(err, null);
-      return done(null, user[0]);
+      const userModel = user[0];
+      userModel.photo_url = profile._json.avatar_url;
+      userModel.save();
+
+      if (!userModel) return done(err, null);
+      return done(null, userModel);
     })
     .catch((err) => {
       console.log(err);
