@@ -300,13 +300,9 @@
 		33375CBB2548839000E8A8E8 /* ValueObject */ = {
 			isa = PBXGroup;
 			children = (
+				3358A5DD2550382E008CEFA3 /* FilterConditions */,
 				3358A5BE254FE609008CEFA3 /* Token */,
 				33F1C286254C70E1000E1649 /* GithubUserInfo.swift */,
-				3358A5C9254FE86B008CEFA3 /* AuthorsInfo.swift */,
-				3358A5B1254FE462008CEFA3 /* MilestonesInfo.swift */,
-				3358A5AC254FDDFB008CEFA3 /* LabelsInfo.swift */,
-				3358A5B9254FE5AD008CEFA3 /* AssigneesInfo.swift */,
-				3358A5C4254FE724008CEFA3 /* FilterInfo.swift */,
 			);
 			path = ValueObject;
 			sourceTree = "<group>";
@@ -354,6 +350,18 @@
 				339892B12549876B00D9FB63 /* UserInfo.swift */,
 			);
 			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		3358A5DD2550382E008CEFA3 /* FilterConditions */ = {
+			isa = PBXGroup;
+			children = (
+				3358A5C9254FE86B008CEFA3 /* AuthorsInfo.swift */,
+				3358A5B1254FE462008CEFA3 /* MilestonesInfo.swift */,
+				3358A5AC254FDDFB008CEFA3 /* LabelsInfo.swift */,
+				3358A5B9254FE5AD008CEFA3 /* AssigneesInfo.swift */,
+				3358A5C4254FE724008CEFA3 /* FilterInfo.swift */,
+			);
+			path = FilterConditions;
 			sourceTree = "<group>";
 		};
 		33BD8DE2254994A700537960 /* Network */ = {
