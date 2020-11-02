@@ -7,8 +7,10 @@
 
 import Foundation
 
-class DetailFilterInfo {
+class FilterInfo {
     
+    // 열림/닫힘
+    var status = ""
     
     // 작성자, 마일스톤, 레이블, 담당자
     var authors: [Author] = []
