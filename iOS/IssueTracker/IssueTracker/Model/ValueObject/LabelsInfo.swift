@@ -19,7 +19,7 @@ import Foundation
 //}
 
 // MARK: - Welcome
-struct LabelInfo: Codable {
+struct LabelsInfo: Codable {
     let labels: [Label]
 }
 

@@ -7,9 +7,16 @@
 
 import Foundation
 
-struct DetailFilterInfo {
+class DetailFilterInfo {
+    
+    
     // 작성자, 마일스톤, 레이블, 담당자
-    var
+    var authors: [Author] = []
+    var labels: [Label] = []
+    var milestones: [Milestone] = []
+    var assignees: [Assignee] = []
+    
+    
     
     
     

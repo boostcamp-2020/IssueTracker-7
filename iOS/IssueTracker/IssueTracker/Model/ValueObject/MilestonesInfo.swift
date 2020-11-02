@@ -17,7 +17,7 @@ import Foundation
 //    ]
 //}
 
-struct MilestoneInfo: Codable {
+struct MilestonesInfo: Codable {
     let milestones: [Milestone]
 }
 
