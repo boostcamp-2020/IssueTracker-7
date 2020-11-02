@@ -12,9 +12,9 @@ class DetailConditionTableViewController<InfoType: Decodable>: UIViewController,
     @IBOutlet weak var tableView: UITableView!
     
     private let route: BackEndAPI
-    private let detailFilterInfo: DetailFilterInfo
+    private let detailFilterInfo: FilterInfo
     
-    init?(coder: NSCoder, route: BackEndAPI, detailFilterInfo: DetailFilterInfo) {
+    init?(coder: NSCoder, route: BackEndAPI, detailFilterInfo: FilterInfo) {
         self.route = route
         self.detailFilterInfo = detailFilterInfo
         super.init(coder: coder)

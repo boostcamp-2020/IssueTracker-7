@@ -22,7 +22,7 @@ protocol SendFilterConditionDelegate: AnyObject {
 class FilteringTableViewController: UITableViewController {
     
     weak var delegate: SendFilterConditionDelegate?
-    var detailFilterInfo: DetailFilterInfo?
+    var detailFilterInfo: FilterInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()

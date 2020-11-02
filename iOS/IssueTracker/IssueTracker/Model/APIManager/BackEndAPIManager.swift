@@ -22,7 +22,10 @@ class BackEndAPIManager {
         }
     }
     
-    func requestFiltering<infoType: Decodable>(completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
+    func requestFiltering<infoType: Decodable>(conditions: FilterInfo, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
+        
+        // conditions 파싱 후 .filterIssueList 에 넣어서 보내기
+        
         router.request(route: .filterIssueList) { (result: Result<infoType, APIError>) in
             
         }
