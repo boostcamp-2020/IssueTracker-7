@@ -23,9 +23,11 @@ extension DetailConditionTableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DetailConditionCell.reuseIdentifier)
-        cell?.textLabel?.text = "샘플"
-        return cell!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailConditionCell.reuseIdentifier) else {
+            return UITableViewCell()
+        }
+        cell.textLabel?.text = "샘플"
+        return cell
     }
     
     
