@@ -6,25 +6,28 @@ var logger = require('morgan');
 require('dotenv').config();
 const sequelize = require('./models').sequelize;
 const passport = require('passport');
-const passportConfig = require('./config/passport');
-var authRouter = require('./routes/auth');
+const passportConfig = require('./middlewares/passport');
+const apiRouter = require('./routes/api');
+const indexRouter = require('./routes/index');
 
 var app = express();
 sequelize.sync();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser(process.env.SECRET_CODE));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());
-passportConfig();
 
-app.use('/auth', authRouter);
+app.use(passport.initialize());
+passportConfig(passport);
+
+app.use('/', indexRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
