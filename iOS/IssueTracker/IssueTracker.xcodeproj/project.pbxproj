@@ -32,7 +32,7 @@
 		33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */; };
 		3358A56C254D1C95008CEFA3 /* GithubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A56B254D1C95008CEFA3 /* GithubAPIManager.swift */; };
 		3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */; };
-		3358A57C254ED757008CEFA3 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A57B254ED757008CEFA3 /* StoryboardName.swift */; };
+		3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A57B254ED757008CEFA3 /* StoryboardID.swift */; };
 		3358A581254ED7D3008CEFA3 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3358A580254ED7D3008CEFA3 /* Filter.storyboard */; };
 		3358A593254EEBDF008CEFA3 /* DetailConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A592254EEBDF008CEFA3 /* DetailConditionTableViewController.swift */; };
 		3398929925493ADD00D9FB63 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C8B2547F59500E8A8E8 /* Router.swift */; };
@@ -98,7 +98,7 @@
 		33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 		3358A56B254D1C95008CEFA3 /* GithubAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPIManager.swift; sourceTree = "<group>"; };
 		3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndAPI.swift; sourceTree = "<group>"; };
-		3358A57B254ED757008CEFA3 /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
+		3358A57B254ED757008CEFA3 /* StoryboardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardID.swift; sourceTree = "<group>"; };
 		3358A580254ED7D3008CEFA3 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
 		3358A592254EEBDF008CEFA3 /* DetailConditionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionTableViewController.swift; sourceTree = "<group>"; };
 		339892A025497CB400D9FB63 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 			children = (
 				3328A970254AF37800126761 /* APICredentials.swift */,
 				33BD8DD2254989E100537960 /* NotificationName.swift */,
-				3358A57B254ED757008CEFA3 /* StoryboardName.swift */,
+				3358A57B254ED757008CEFA3 /* StoryboardID.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -507,7 +507,7 @@
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
 				33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */,
 				3358A593254EEBDF008CEFA3 /* DetailConditionTableViewController.swift in Sources */,
-				3358A57C254ED757008CEFA3 /* StoryboardName.swift in Sources */,
+				3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */,
 				3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */,
 				33151F43254A6E55006B94A9 /* FilteringTableViewController.swift in Sources */,
 				33375CA72548495F00E8A8E8 /* GithubTokenData.swift in Sources */,
