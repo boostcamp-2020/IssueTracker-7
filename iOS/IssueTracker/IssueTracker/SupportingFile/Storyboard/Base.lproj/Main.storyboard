@@ -100,6 +100,34 @@
             </objects>
             <point key="canvasLocation" x="176.81159420289856" y="113.83928571428571"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="JhV-Xb-wnq">
+            <objects>
+                <tabBarController storyboardIdentifier="InitialTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="hjM-R9-DJr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lrm-xC-dPB">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="EcO-C0-4Qd" kind="relationship" relationship="viewControllers" id="XQG-Lq-EGG"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vyJ-z4-918" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1025" y="114"/>
+        </scene>
+        <!--IssueListInitialController-->
+        <scene sceneID="pgs-GO-chh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="IssueList" referencedIdentifier="IssueListInitialController" id="EcO-C0-4Qd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="akk-J6-sEW"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="agi-qx-EEb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1625" y="-82"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
