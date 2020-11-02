@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(88),
         allowNull: true,
       },
+      photo_url: {
+        type: DataTypes.STRING(200),
+        allowNull: true,
+      },
       type: {
         type: DataTypes.STRING(45),
         allowNull: false,
