@@ -9,6 +9,8 @@ import UIKit
 
 class FilteringController: UIViewController {
     
+    let detailFilterInfo = DetailFilterInfo()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -17,12 +19,15 @@ class FilteringController: UIViewController {
         if segue.identifier == "FilteringTableView" {
             guard let childVc = segue.destination as? FilteringTableViewController else { return }
             childVc.delegate = self
+            childVc.detailFilterInfo = detailFilterInfo
         }
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         // SignInController 로 세부 조건 전달
+        print(detailFilterInfo)
         dismiss(animated: true)
+        
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {

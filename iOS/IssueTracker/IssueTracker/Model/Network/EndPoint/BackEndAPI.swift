@@ -7,32 +7,35 @@
 
 import Foundation
 
-//enum BackEndAPI {
-//    
-//}
-//
-//extension BackEndAPI: EndPointable {
-//    var environmentBaseURL: String {
-//        
-//    }
-//    
-//    var baseURL: URL {
-//        
-//    }
-//    
-//    var query: String {
-//        
-//    }
-//    
-//    var httpMethod: HTTPMethod? {
-//        
-//    }
-//    
-//    var headers: HTTPHeader? {
-//        
-//    }
-//    
-//    var bodies: HTTPBody? {
-//        
-//    }
-//}
+enum BackEndAPI {
+    case allAuthors
+    case allLabels
+    case allMilestones
+    case allAssignees
+}
+
+extension BackEndAPI: EndPointable, CaseIterable {
+    var environmentBaseURL: String {
+        return ""
+    }
+    
+    var baseURL: URL {
+        return URL(string: "")!
+    }
+    
+    var query: String {
+        return ""
+    }
+    
+    var httpMethod: HTTPMethod? {
+        return nil
+    }
+    
+    var headers: HTTPHeader? {
+        return nil
+    }
+    
+    var bodies: HTTPBody? {
+        return nil
+    }
+}

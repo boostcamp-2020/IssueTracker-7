@@ -22,11 +22,14 @@ protocol SendFilterConditionDelegate: AnyObject {
 class FilteringTableViewController: UITableViewController {
     
     weak var delegate: SendFilterConditionDelegate?
+    var detailFilterInfo: DetailFilterInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
+//    let types: [Codable.Type] = [Author.self, Label.self, Milestone.self, Assignee.self]
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -46,10 +49,32 @@ class FilteringTableViewController: UITableViewController {
             
             let condition = PreSpecifiedCondition.allCases[indexPath.row]
             delegate?.sendPreSpecified(condition: condition)
+        case 1:
+            guard let filterInfo = detailFilterInfo else { return }
+            guard let vc = storyboard?.instantiateViewController(identifier: "DetailConditionTableViewController", creator: { coder in
+                let route = BackEndAPI.allCases[indexPath.row]
+                switch indexPath.row {
+                case 0:
+                    return DetailConditionTableViewController<Author>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                case 1:
+                    return DetailConditionTableViewController<Label>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                case 2:
+                    return DetailConditionTableViewController<Milestone>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                case 3:
+                    return DetailConditionTableViewController<Assignee>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                default:
+                    return nil
+                }
+            }) else { return }
+            
+            navigationController?.pushViewController(vc, animated: true)
             
         default:
             break
         }
-        
     }
+    
+    
+    
 }
+

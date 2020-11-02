@@ -7,17 +7,36 @@
 
 import UIKit
 
-class DetailConditionTableViewController: UIViewController {
+class DetailConditionTableViewController<InfoType: Decodable>: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
+    private let router = Router<BackEndAPI>()
+    private let route: BackEndAPI
+    private let detailFilterInfo: DetailFilterInfo
+    
+    init?(coder: NSCoder, route: BackEndAPI, detailFilterInfo: DetailFilterInfo) {
+        self.route = route
+        self.detailFilterInfo = detailFilterInfo
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(route, InfoType.self)
+        
         // 여기서 API 호출(작성자, 레이블, 마일스톤, 담당자)해서 데이터 객체 갱신
+//        router.request(route: route) { (result: Result<InfoType, APIError>) in
+//
+//        }
+        
+        
     }
-}
-
-extension DetailConditionTableViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -30,12 +49,14 @@ extension DetailConditionTableViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        detailFilterInfo.assignees.append(Assignee(id: 3, userID: "dsdf"))
+    }
+    
+    
     
 }
 
-extension DetailConditionTableViewController: UITableViewDelegate {
-    
-}
 
 class DetailConditionCell: UITableViewCell {
     static let reuseIdentifier = String(describing: DetailConditionCell.self)
