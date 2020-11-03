@@ -30,7 +30,8 @@ class SignInController: UIViewController {
                 self.loginSuccess()
             }
         }
-        oauth = OAuthManager(oauth: GithubOAuthManager(), handler: handler)
+//        oauth = OAuthManager(oauth: GithubOAuthManager(), handler: handler)
+        oauth = OAuthManager(oauth: BackEndOAuthManager(), handler: handler)
         oauth?.requestAuthorization()
     }
 }

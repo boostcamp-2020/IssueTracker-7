@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let loginSuccessReceived = Notification.Name("loginSuccessReceived")
+    static let backEndTokenReceived = Notification.Name("BackEndTokenReceived")
 }

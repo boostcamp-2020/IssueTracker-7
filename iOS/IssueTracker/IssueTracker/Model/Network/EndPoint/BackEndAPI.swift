@@ -8,6 +8,8 @@
 import Foundation
 
 enum BackEndAPI {
+    case token
+    
     case allAuthors,
          allLabels,
          allMilestones,
@@ -18,11 +20,17 @@ enum BackEndAPI {
 
 extension BackEndAPI: EndPointable, CaseIterable {
     var environmentBaseURL: String {
-        return ""
+        switch self {
+        case .token:
+            return "http://192.168.0.31/api/auth/github"
+        default:
+            return ""
+        }
     }
     
     var baseURL: URL {
-        return URL(string: "")!
+        guard let url = URL(string: environmentBaseURL) else { fatalError() } // TODO: 예외처리로 바꿔주기
+        return url
     }
     
     var query: String {
@@ -30,7 +38,12 @@ extension BackEndAPI: EndPointable, CaseIterable {
     }
     
     var httpMethod: HTTPMethod? {
-        return nil
+        switch self {
+        case .token:
+            return .post
+        default:
+            return nil
+        }
     }
     
     var headers: HTTPHeader? {
