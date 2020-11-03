@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -42,9 +42,12 @@
 		33BD8DDE25498E0300537960 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339892A025497CB400D9FB63 /* UserDefault.swift */; };
 		33BD8DE62549956B00537960 /* BackEndAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DE52549956B00537960 /* BackEndAPIManager.swift */; };
 		33F1C287254C70E1000E1649 /* GithubUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F1C286254C70E1000E1649 /* GithubUserInfo.swift */; };
+		712CBEA12550032F00E8F95F /* RegisterIssue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 712CBEA02550032F00E8F95F /* RegisterIssue.storyboard */; };
+		712CBEA6255008B700E8F95F /* RegisterIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712CBEA5255008B700E8F95F /* RegisterIssueViewController.swift */; };
 		71531F57254A859F00CCFAE2 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F56254A859F00CCFAE2 /* IssueListViewController.swift */; };
 		71531F60254A88F000CCFAE2 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F5F254A88F000CCFAE2 /* UIButton+.swift */; };
 		719453B3254AAF6600A5864E /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 719453B2254AAF6600A5864E /* IssueList.storyboard */; };
+		71969BDE25510D4F00C96CE2 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 71969BDD25510D4F00C96CE2 /* MarkdownView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +107,8 @@
 		33BD8DD2254989E100537960 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		33BD8DE52549956B00537960 /* BackEndAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndAPIManager.swift; sourceTree = "<group>"; };
 		33F1C286254C70E1000E1649 /* GithubUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserInfo.swift; sourceTree = "<group>"; };
+		712CBEA02550032F00E8F95F /* RegisterIssue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegisterIssue.storyboard; sourceTree = "<group>"; };
+		712CBEA5255008B700E8F95F /* RegisterIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterIssueViewController.swift; sourceTree = "<group>"; };
 		71531F56254A859F00CCFAE2 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		71531F5F254A88F000CCFAE2 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		719453B2254AAF6600A5864E /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
@@ -114,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71969BDE25510D4F00C96CE2 /* MarkdownView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +225,7 @@
 		33375C6F2547EC7C00E8A8E8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				712CBE9F255002D100E8F95F /* RegisterIssue */,
 				3358A589254EDEDA008CEFA3 /* SignIn */,
 				3358A58D254EDEED008CEFA3 /* IssueList */,
 				3358A58E254EDEFF008CEFA3 /* Filter */,
@@ -350,6 +357,15 @@
 			path = APIManager;
 			sourceTree = "<group>";
 		};
+		712CBE9F255002D100E8F95F /* RegisterIssue */ = {
+			isa = PBXGroup;
+			children = (
+				712CBEA02550032F00E8F95F /* RegisterIssue.storyboard */,
+				712CBEA5255008B700E8F95F /* RegisterIssueViewController.swift */,
+			);
+			path = RegisterIssue;
+			sourceTree = "<group>";
+		};
 		71531F5E254A88E100CCFAE2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +390,9 @@
 			dependencies = (
 			);
 			name = IssueTracker;
+			packageProductDependencies = (
+				71969BDD25510D4F00C96CE2 /* MarkdownView */,
+			);
 			productName = IssueTracker;
 			productReference = 33375C362547E70E00E8A8E8 /* IssueTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -445,6 +464,9 @@
 				Base,
 			);
 			mainGroup = 33375C2D2547E70E00E8A8E8;
+			packageReferences = (
+				71969BDC25510D4F00C96CE2 /* XCRemoteSwiftPackageReference "MarkdownView" */,
+			);
 			productRefGroup = 33375C372547E70E00E8A8E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -466,6 +488,7 @@
 				3358A581254ED7D3008CEFA3 /* Filter.storyboard in Resources */,
 				33151F2825499E04006B94A9 /* NanumSquareLight.ttf in Resources */,
 				33375C462547E71000E8A8E8 /* LaunchScreen.storyboard in Resources */,
+				712CBEA12550032F00E8F95F /* RegisterIssue.storyboard in Resources */,
 				33151F2A25499E04006B94A9 /* NanumSquareRegular.ttf in Resources */,
 				33375C432547E71000E8A8E8 /* Assets.xcassets in Resources */,
 				33375C412547E70E00E8A8E8 /* Main.storyboard in Resources */,
@@ -502,6 +525,7 @@
 				3358A56C254D1C95008CEFA3 /* GithubAPIManager.swift in Sources */,
 				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
+				712CBEA6255008B700E8F95F /* RegisterIssueViewController.swift in Sources */,
 				33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */,
 				3358A57C254ED757008CEFA3 /* StoryboardName.swift in Sources */,
 				3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */,
@@ -855,6 +879,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		71969BDC25510D4F00C96CE2 /* XCRemoteSwiftPackageReference "MarkdownView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/keitaoouchi/MarkdownView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		71969BDD25510D4F00C96CE2 /* MarkdownView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71969BDC25510D4F00C96CE2 /* XCRemoteSwiftPackageReference "MarkdownView" */;
+			productName = MarkdownView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 33375C2E2547E70E00E8A8E8 /* Project object */;
 }

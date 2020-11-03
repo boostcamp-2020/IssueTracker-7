@@ -136,12 +136,21 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQ1-L5-yoe">
+                                <rect key="frame" x="351" y="794" width="20" height="22"/>
+                                <state key="normal" image="plus.circle.fill" catalog="system"/>
+                                <connections>
+                                    <segue destination="Ozp-3E-fwx" kind="presentation" id="cgu-Vp-CwH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kHZ-Od-lMj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="VGO-WG-P6r" firstAttribute="leading" secondItem="kHZ-Od-lMj" secondAttribute="leading" id="9SW-73-bTP"/>
                             <constraint firstItem="VGO-WG-P6r" firstAttribute="top" secondItem="kHZ-Od-lMj" secondAttribute="top" id="BdE-3R-wpk"/>
+                            <constraint firstItem="kHZ-Od-lMj" firstAttribute="bottom" secondItem="mQ1-L5-yoe" secondAttribute="bottom" constant="46" id="CHY-FW-FeW"/>
+                            <constraint firstItem="kHZ-Od-lMj" firstAttribute="trailing" secondItem="mQ1-L5-yoe" secondAttribute="trailing" constant="43" id="OEE-DY-cti"/>
                             <constraint firstItem="kHZ-Od-lMj" firstAttribute="bottom" secondItem="VGO-WG-P6r" secondAttribute="bottom" id="SXK-5c-rES"/>
                             <constraint firstItem="kHZ-Od-lMj" firstAttribute="trailing" secondItem="VGO-WG-P6r" secondAttribute="trailing" id="waS-hX-paS"/>
                         </constraints>
@@ -161,6 +170,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyB-SY-otq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3387" y="114"/>
+        </scene>
+        <!--RegisterIssueInitialController-->
+        <scene sceneID="fkY-G1-vSk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RegisterIssue" referencedIdentifier="RegisterIssueInitialController" id="Ozp-3E-fwx" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C6U-Qe-egg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4023" y="329"/>
         </scene>
         <!--FilterInitController-->
         <scene sceneID="3XD-sq-RCe">
@@ -191,6 +208,7 @@
     </scenes>
     <resources>
         <image name="1.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
