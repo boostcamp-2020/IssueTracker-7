@@ -17,69 +17,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14K-Hj-Wjf">
-                                <rect key="frame" x="184" y="241" width="46" height="30"/>
+                                <rect key="frame" x="184" y="101" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="oZ6-DZ-q1v" eventType="touchUpInside" id="dqh-Lh-07h"/>
-                                </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ZO-28-sTd">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jop-fU-krX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S8U-zN-FvY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="136" y="89"/>
-        </scene>
-        <!--Reaction View Controller-->
-        <scene sceneID="O4g-jI-c7S">
-            <objects>
-                <viewController storyboardIdentifier="ReactionViewController" id="TZH-kh-dMW" customClass="ReactionViewController" customModule="bottomCard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TmR-AA-Cwh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r2R-Wf-teZ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
-                            <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2BL-Sm-OBO" userLabel="Dimmer View">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmV-hh-gWl" userLabel="cardView">
-                                <rect key="frame" x="0.0" y="74" width="414" height="822"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="ykh-oE-wBG"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="r2R-Wf-teZ" firstAttribute="leading" secondItem="ykh-oE-wBG" secondAttribute="leading" id="6e7-gA-yOu"/>
-                            <constraint firstItem="2BL-Sm-OBO" firstAttribute="top" secondItem="TmR-AA-Cwh" secondAttribute="top" id="9QR-xs-ibK"/>
-                            <constraint firstItem="hmV-hh-gWl" firstAttribute="top" secondItem="ykh-oE-wBG" secondAttribute="top" constant="30" id="APq-LG-lKr"/>
-                            <constraint firstItem="ykh-oE-wBG" firstAttribute="trailing" secondItem="r2R-Wf-teZ" secondAttribute="trailing" id="CzL-5g-jcR"/>
-                            <constraint firstAttribute="bottom" secondItem="2BL-Sm-OBO" secondAttribute="bottom" id="R9B-zL-iF7"/>
-                            <constraint firstItem="r2R-Wf-teZ" firstAttribute="top" secondItem="TmR-AA-Cwh" secondAttribute="top" id="RnM-E3-vJN"/>
-                            <constraint firstAttribute="bottom" secondItem="r2R-Wf-teZ" secondAttribute="bottom" id="WjP-sL-ZDq"/>
-                            <constraint firstItem="hmV-hh-gWl" firstAttribute="leading" secondItem="ykh-oE-wBG" secondAttribute="leading" id="gNY-Zf-2ki"/>
-                            <constraint firstItem="2BL-Sm-OBO" firstAttribute="leading" secondItem="ykh-oE-wBG" secondAttribute="leading" id="gng-cX-v6O"/>
-                            <constraint firstItem="ykh-oE-wBG" firstAttribute="trailing" secondItem="hmV-hh-gWl" secondAttribute="trailing" id="l7B-H2-Qvq"/>
-                            <constraint firstAttribute="bottom" secondItem="hmV-hh-gWl" secondAttribute="bottom" id="oYL-H8-MBg"/>
-                            <constraint firstItem="ykh-oE-wBG" firstAttribute="trailing" secondItem="2BL-Sm-OBO" secondAttribute="trailing" id="ub2-2n-RAd"/>
+                            <constraint firstItem="6ZO-28-sTd" firstAttribute="top" secondItem="Bdj-fF-fUS" secondAttribute="top" id="Pn6-pj-13o"/>
+                            <constraint firstItem="6ZO-28-sTd" firstAttribute="leading" secondItem="Jop-fU-krX" secondAttribute="leading" id="gso-te-bZb"/>
+                            <constraint firstAttribute="bottom" secondItem="6ZO-28-sTd" secondAttribute="bottom" id="rUD-7m-1c2"/>
+                            <constraint firstItem="6ZO-28-sTd" firstAttribute="trailing" secondItem="Jop-fU-krX" secondAttribute="trailing" id="vf0-da-YLE"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backingImageView" destination="r2R-Wf-teZ" id="VcM-MH-hV8"/>
-                        <outlet property="cardView" destination="hmV-hh-gWl" id="sjI-ie-piL"/>
-                        <outlet property="cardViewTopConstraint" destination="APq-LG-lKr" id="Occ-Ac-jzM"/>
-                        <outlet property="dimmerView" destination="2BL-Sm-OBO" id="McB-2h-cSb"/>
+                        <outlet property="dimmerView" destination="6ZO-28-sTd" id="z4Z-6g-s0Z"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pVk-Rr-nbR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S8U-zN-FvY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841" y="88"/>
+            <point key="canvasLocation" x="134.78260869565219" y="88.392857142857139"/>
         </scene>
     </scenes>
     <resources>

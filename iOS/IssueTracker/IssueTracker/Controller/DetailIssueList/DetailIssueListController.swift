@@ -8,38 +8,121 @@
 import UIKit
 
 class DetailIssueListController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        DetailIssueListController
-        // Do any additional setup after loading the view.
-        
-        
+    
+    enum CardState {
+        case collapsed
+        case expanded
     }
     
-    @IBAction func buttonTapped(_ sender: Any) {
+    @IBOutlet weak var dimmerView: UIView!
+    
+    lazy var cardStartY: CGFloat = view.bounds.height * 0.1
+    lazy var cardEndY: CGFloat = view.bounds.height * 0.75
+    
+    lazy var cardLatestY : CGFloat = cardEndY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
+    var cardCurrentState: CardState = .collapsed
+    
+    var cardViewController:CardViewController!
+    var visualEffectView:UIVisualEffectView!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let vc = storyboard?.instantiateViewController(identifier: "ReactionViewController") as! ReactionViewController
+        dimmerView.isUserInteractionEnabled = false
+        dimmerView.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        vc.modalPresentationStyle = .fullScreen
+        setupCard()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        // 딜레이를 넣어야 누른 버튼이 희미해지는 현상 해결 가능
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            // tabbar.view 로 해야 탭바까지 스냅샷
-            vc.backingImage = self.view.asImage()
+        visualEffectView.removeFromSuperview()
+        cardViewController.view.removeFromSuperview()
+    }
+    
+    func setupCard() {
+        
+        visualEffectView = UIVisualEffectView()
+        visualEffectView.frame = tabBarController!.view.bounds
+        visualEffectView.isUserInteractionEnabled = false
+        tabBarController?.view.addSubview(visualEffectView)
+        
+        cardViewController = CardViewController(nibName: "CardViewController", bundle: nil)
+        tabBarController?.view.addSubview(cardViewController.view)
+        self.cardViewController.view.frame = CGRect(x: 0, y: view.bounds.height, width: self.view.bounds.width, height: self.view.frame.height - cardStartY)
+
+        UIViewPropertyAnimator(duration: 0.1, curve: .easeIn) {
+            self.cardViewController.view.frame.origin.y = self.cardEndY
+        }.startAnimation()
+        cardViewController.view.clipsToBounds = true
+        cardViewController.view.layer.cornerRadius = 15.0
+        cardViewController.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(recognizer:)))
+        cardViewController.view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    @objc
+    func handleCardPan (recognizer:UIPanGestureRecognizer) {
+
+        switch recognizer.state {
+        case .began:
+            cardLatestY = cardViewController.view.frame.origin.y
+        case .changed:
+            let translation = recognizer.translation(in: cardViewController.view)
+            let expectedY = cardLatestY + translation.y
             
-            self.present(vc, animated: false) // false 로 해야 default 애니메이션을 안 쓸 수 있음
+            if (cardStartY...cardEndY) ~= expectedY {
+                cardViewController.view.frame.origin.y = cardLatestY + translation.y
+            }
+        case .ended:
+            switch cardCurrentState {
+            case .collapsed:
+                if cardViewController.view.frame.origin.y < cardLatestY {
+                    animateTransitionIfNeeded(state: .expanded, duration: 0.1) // 확장
+                }
+            case .expanded:
+                if cardViewController.view.frame.origin.y > cardLatestY {
+                    animateTransitionIfNeeded(state: .collapsed, duration: 0.1) // 최소화
+                }
+            }
+        default:
+            break
         }
     }
     
+    // Animate transistion function
+    func animateTransitionIfNeeded (state: CardState, duration: TimeInterval) {
+        
+        // TODO: 추후 UIViewPropertyAnimator fractionComplete 활용해서 더 interactive 하게 만들어보기
+        let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) {
+            switch state {
+            case .expanded:
+                self.cardViewController.view.frame.origin.y = self.cardStartY
+                self.dimmerView.alpha = 0.7
+                self.visualEffectView.effect = UIBlurEffect(style: .dark)
+                self.visualEffectView.alpha = 0.65
+                
+                self.cardCurrentState = .expanded
+            case .collapsed:
+                self.cardViewController.view.frame.origin.y = self.cardEndY
+                self.dimmerView.alpha = 0
+                self.visualEffectView.effect = nil
+                self.visualEffectView.alpha = 1
+                
+                self.cardCurrentState = .collapsed
+            }
+        }
+        
+        cardLatestY = cardViewController.view.frame.origin.y
+    
+        frameAnimator.startAnimation()
+    }
 }
 
-extension UIView  {
-    // render the view within the view's bounds, then capture it as image
-  func asImage() -> UIImage {
-    let renderer = UIGraphicsImageRenderer(bounds: bounds)
-    return renderer.image(actions: { rendererContext in
-        layer.render(in: rendererContext.cgContext)
-    })
-  }
-}
