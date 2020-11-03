@@ -21,7 +21,7 @@ class SignInController: UIViewController {
     }
     
     func setUpNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: Notification.Name.loginSuccessReceived, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: Notification.Name.backEndTokenReceived, object: nil)
     }
     
     @IBAction func githubLogin(_ sender: Any) {

@@ -22,7 +22,7 @@ extension BackEndAPI: EndPointable, CaseIterable {
     var environmentBaseURL: String {
         switch self {
         case .token:
-            return "http://192.168.0.31/api/auth/github"
+            return "http://192.168.0.31:3000/api/auth/github/ios"
         default:
             return ""
         }

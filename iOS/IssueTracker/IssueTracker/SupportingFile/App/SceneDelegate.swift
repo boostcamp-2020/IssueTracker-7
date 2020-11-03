@@ -14,10 +14,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // 백엔드 서버로부터 토큰, 유저 정보 오는 곳. UserInfo 구조체에 저장 후 signincontroller 로 notification
 //        NotificationCenter.default.post(name: Notification.Name.userInfoReceived, object: nil)
-        print(URLContexts.first)
+        
         if let url = URLContexts.first?.url {
-            let secretCode = String(String(describing: url).suffix(20))
-            NotificationCenter.default.post(name: Notification.Name("complete"), object: nil, userInfo: ["code": secretCode])
+            let stringURL = String(describing: url)
+            guard let accessToken = stringURL.accessToken(),
+                  let refreshToken = stringURL.refreshToken() else { return }
+            UserInfo.shared.accessToken = accessToken
+            UserInfo.shared.refreshToken = refreshToken
+            NotificationCenter.default.post(name: Notification.Name.backEndTokenReceived, object: nil)
         }
     }
 
@@ -39,7 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        autoLogin(scene: scene)
+//        autoLogin(scene: scene)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
