@@ -22,6 +22,27 @@ final class IssueListViewController: UIViewController {
         configureLayout()
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "IssueListToFilter" {
+            guard let navigationController = segue.destination as? UINavigationController,
+                  let viewController = navigationController.topViewController as? FilteringController
+            else { return }
+            
+            viewController.preDefinedConditionHandler = { conditions in
+//                BackEndAPIManager.shared.requestFiltering(conditions: conditions) { (result: Result<이슈목록Decodable객체, APIError>) in
+//
+//                }
+                print("predefinedConditionHandler") //
+            }
+            viewController.detailConditionHandler = { conditions in
+//                BackEndAPIManager.shared.requestFiltering(conditions: conditions) { (result: Result<이슈목록Decodable객체, APIError>) in
+//                    
+//                }
+                print("detailConditionHandler")
+            }
+        }
+    }
 }
 
 extension IssueListViewController {

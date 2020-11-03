@@ -151,7 +151,7 @@
                     <navigationItem key="navigationItem" title="이슈목록" id="RzU-8r-oEh">
                         <barButtonItem key="leftBarButtonItem" title="Filter" id="bkx-PW-boa">
                             <connections>
-                                <segue destination="0jM-ha-VGr" kind="presentation" id="YAw-Ar-zCf"/>
+                                <segue destination="0jM-ha-VGr" kind="presentation" identifier="IssueListToFilter" id="YAw-Ar-zCf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
