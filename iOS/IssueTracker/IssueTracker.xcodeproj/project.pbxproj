@@ -30,6 +30,8 @@
 		33375CAC2548583800E8A8E8 /* GithubOAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CAB2548583800E8A8E8 /* GithubOAuthManager.swift */; };
 		33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB02548595700E8A8E8 /* OAuthManager.swift */; };
 		33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */; };
+		333FE2A52551513F000C0F0B /* DetailIssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333FE2A42551513F000C0F0B /* DetailIssueList.storyboard */; };
+		333FE2AA25515167000C0F0B /* DetailIssueListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE2A925515167000C0F0B /* DetailIssueListController.swift */; };
 		3358A56C254D1C95008CEFA3 /* GithubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A56B254D1C95008CEFA3 /* GithubAPIManager.swift */; };
 		3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */; };
 		3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A57B254ED757008CEFA3 /* StoryboardID.swift */; };
@@ -101,6 +103,8 @@
 		33375CAB2548583800E8A8E8 /* GithubOAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubOAuthManager.swift; sourceTree = "<group>"; };
 		33375CB02548595700E8A8E8 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
+		333FE2A42551513F000C0F0B /* DetailIssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailIssueList.storyboard; sourceTree = "<group>"; };
+		333FE2A925515167000C0F0B /* DetailIssueListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIssueListController.swift; sourceTree = "<group>"; };
 		3358A56B254D1C95008CEFA3 /* GithubAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPIManager.swift; sourceTree = "<group>"; };
 		3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndAPI.swift; sourceTree = "<group>"; };
 		3358A57B254ED757008CEFA3 /* StoryboardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardID.swift; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 			children = (
 				3358A589254EDEDA008CEFA3 /* SignIn */,
 				3358A58D254EDEED008CEFA3 /* IssueList */,
+				333FE2A325515111000C0F0B /* DetailIssueList */,
 				3358A58E254EDEFF008CEFA3 /* Filter */,
 			);
 			path = Controller;
@@ -305,6 +310,15 @@
 				33F1C286254C70E1000E1649 /* GithubUserInfo.swift */,
 			);
 			path = ValueObject;
+			sourceTree = "<group>";
+		};
+		333FE2A325515111000C0F0B /* DetailIssueList */ = {
+			isa = PBXGroup;
+			children = (
+				333FE2A42551513F000C0F0B /* DetailIssueList.storyboard */,
+				333FE2A925515167000C0F0B /* DetailIssueListController.swift */,
+			);
+			path = DetailIssueList;
 			sourceTree = "<group>";
 		};
 		3358A589254EDEDA008CEFA3 /* SignIn */ = {
@@ -512,6 +526,7 @@
 				33375C432547E71000E8A8E8 /* Assets.xcassets in Resources */,
 				33375C412547E70E00E8A8E8 /* Main.storyboard in Resources */,
 				33151F2925499E04006B94A9 /* NanumSquareOTF_acEB.otf in Resources */,
+				333FE2A52551513F000C0F0B /* DetailIssueList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +560,7 @@
 				3358A56C254D1C95008CEFA3 /* GithubAPIManager.swift in Sources */,
 				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
+				333FE2AA25515167000C0F0B /* DetailIssueListController.swift in Sources */,
 				33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */,
 				3358A593254EEBDF008CEFA3 /* DetailConditionTableViewController.swift in Sources */,
 				3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */,
