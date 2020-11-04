@@ -301,8 +301,8 @@
 		33375CB5254879B200E8A8E8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3393E0A6255253C2003DCDA4 /* AppleSignInButton */,
 				3393E0A2255249EB003DCDA4 /* CardView */,
-				33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -386,10 +386,18 @@
 		3393E0A2255249EB003DCDA4 /* CardView */ = {
 			isa = PBXGroup;
 			children = (
-				3393E09425523D29003DCDA4 /* CardView.swift */,
 				3393E09925523D38003DCDA4 /* CardView.xib */,
+				3393E09425523D29003DCDA4 /* CardView.swift */,
 			);
 			path = CardView;
+			sourceTree = "<group>";
+		};
+		3393E0A6255253C2003DCDA4 /* AppleSignInButton */ = {
+			isa = PBXGroup;
+			children = (
+				33375CB625487A1700E8A8E8 /* AppleSignInButton.swift */,
+			);
+			path = AppleSignInButton;
 			sourceTree = "<group>";
 		};
 		33BD8DE2254994A700537960 /* Network */ = {
