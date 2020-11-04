@@ -14,7 +14,5 @@ extension UIView {
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = radius
         self.layer.shadowOpacity = opacity
-        
-        self.layer.cornerRadius = 5
     }
 }

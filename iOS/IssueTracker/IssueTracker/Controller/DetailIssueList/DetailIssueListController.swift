@@ -73,7 +73,7 @@ final class DetailIssueListController: UIViewController {
             height: self.view.frame.height - cardStartY
         )
         
-        UIViewPropertyAnimator(duration: 0.1, curve: .easeIn) {
+        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
             self.cardView.frame.origin.y = self.cardEndY
         }.startAnimation()
 
