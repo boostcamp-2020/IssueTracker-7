@@ -112,6 +112,42 @@ final class IssueCell: UICollectionViewCell {
     @IBOutlet var title: UILabel!
     @IBOutlet var content: UILabel!
     @IBOutlet var milestone: UIButton!
-    @IBOutlet var label: UIButton!
+    
+    @IBOutlet weak var labelStackView: UIStackView!
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+    }
+    
+    override func prepareForReuse() {
+        labelStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+    
+    func configure(issueData: IssueData) {
+        title.text = issueData.title
+        // cell.content.text = // TODO: API 쪽에서 아직 구현이 안되서 추후 수정
+        milestone.setTitle(issueData.milestone.title, for: .normal)
+        
+        issueData.labels?.forEach {
+            let btn = UIButton()
+            btn.setTitle(" \($0.name) ", for: .normal)
+            btn.backgroundColor = hexStringToUIColor(hex: $0.color)
+            btn.setTitleColor(UIColor.black, for: .normal)
+            btn.titleLabel?.font = .systemFont(ofSize: 15)
+            btn.cornerRadius = 5
+            
+            labelStackView.addArrangedSubview(btn)
+        }
+
+    }
     
 }
