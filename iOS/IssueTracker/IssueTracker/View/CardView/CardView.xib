@@ -10,7 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardView" customModule="IssueTracker" customModuleProvider="target">
             <connections>
-                <outlet property="commentStack" destination="19t-7N-gA5" id="eQD-BV-EGv"/>
+                <outlet property="baseView" destination="CJF-Ge-hYI" id="AJ0-Gi-cXa"/>
+                <outlet property="commentAddBtn" destination="fRt-gj-pzI" id="ZQf-ff-Qa7"/>
+                <outlet property="commentUpDownStackView" destination="Qwa-bS-to7" id="t2H-JY-9jH"/>
                 <outlet property="handle" destination="USR-i8-uKi" id="KCt-zr-LAE"/>
             </connections>
         </placeholder>
@@ -27,35 +29,52 @@
                         <constraint firstAttribute="height" constant="6" id="exk-Pm-Uzn"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="19t-7N-gA5">
-                    <rect key="frame" x="15" y="32" width="349" height="35"/>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="19t-7N-gA5">
+                    <rect key="frame" x="15" y="32" width="349" height="45"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRt-gj-pzI">
-                            <rect key="frame" x="0.0" y="0.0" width="259" height="35"/>
-                            <color key="backgroundColor" systemColor="systemGray3Color"/>
+                            <rect key="frame" x="0.0" y="0.0" width="246" height="45"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="9vx-rx-0s8"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="댓글 추가"/>
                         </button>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-bS-to7">
-                            <rect key="frame" x="274" y="0.0" width="75" height="35"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJF-Ge-hYI">
+                            <rect key="frame" x="256" y="0.0" width="93" height="45"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2GJ-T8-9R8">
-                                    <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="2GJ-T8-9R8" secondAttribute="height" multiplier="1:1" id="G74-A4-znf"/>
-                                    </constraints>
-                                    <state key="normal" image="arrow.up" catalog="system"/>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNB-AW-x8N">
-                                    <rect key="frame" x="40" y="0.0" width="35" height="35"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="iNB-AW-x8N" secondAttribute="height" multiplier="1:1" id="Hnb-Hg-PgT"/>
-                                    </constraints>
-                                    <state key="normal" image="arrow.down" catalog="system"/>
-                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-bS-to7">
+                                    <rect key="frame" x="0.0" y="0.0" width="93" height="45"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2GJ-T8-9R8">
+                                            <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="2GJ-T8-9R8" secondAttribute="height" multiplier="1:1" id="G74-A4-znf"/>
+                                            </constraints>
+                                            <state key="normal" image="arrow.up" catalog="system"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNB-AW-x8N">
+                                            <rect key="frame" x="48" y="0.0" width="45" height="45"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="iNB-AW-x8N" secondAttribute="height" multiplier="1:1" id="Hnb-Hg-PgT"/>
+                                            </constraints>
+                                            <state key="normal" image="arrow.down" catalog="system"/>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemGray4Color"/>
-                        </stackView>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="Qwa-bS-to7" firstAttribute="top" secondItem="CJF-Ge-hYI" secondAttribute="top" id="a7k-6a-BKQ"/>
+                                <constraint firstItem="Qwa-bS-to7" firstAttribute="leading" secondItem="CJF-Ge-hYI" secondAttribute="leading" id="lW1-sv-HyM"/>
+                                <constraint firstAttribute="bottom" secondItem="Qwa-bS-to7" secondAttribute="bottom" id="q0F-oN-p0J"/>
+                                <constraint firstAttribute="trailing" secondItem="Qwa-bS-to7" secondAttribute="trailing" id="ytW-rH-nMm"/>
+                            </constraints>
+                        </view>
                     </subviews>
                 </stackView>
             </subviews>
@@ -75,11 +94,8 @@
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="arrow.up" catalog="system" width="120" height="128"/>
-        <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

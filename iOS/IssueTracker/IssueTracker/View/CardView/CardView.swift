@@ -10,27 +10,38 @@ import UIKit
 class CardView: UIView {
 
     @IBOutlet weak var handle: UIView!
-    @IBOutlet weak var commentStack: UIStackView!
+    @IBOutlet weak var commentAddBtn: UIButton!
+    @IBOutlet weak var commentUpDownStackView: UIStackView!
+    @IBOutlet weak var baseView: UIView!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         xibSetup()
+        
+        setUpViews()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         xibSetup()
+        
+        setUpViews()
     }
     
     // MARK: - Method
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func setUpViews() {
+        handle.layer.cornerRadius = 5
         
-        handle.layer.masksToBounds = true
-        handle.layer.cornerRadius = 3
+        commentAddBtn.setUpShadow()
+        
+        baseView.backgroundColor = UIColor.clear
+        baseView.setUpShadow()
+        
+        commentUpDownStackView.layer.masksToBounds = true
+        commentUpDownStackView.layer.cornerRadius = 5
     }
-        
+    
     func loadViewFromNib() -> UIView? {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "CardView", bundle: bundle)
@@ -45,3 +56,4 @@ class CardView: UIView {
         addSubview(view)
     }
 }
+
