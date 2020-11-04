@@ -9,6 +9,7 @@ import Foundation
 
 enum BackEndAPI {
     case token
+    case Issues
     
     case allAuthors,
          allLabels,
@@ -22,7 +23,9 @@ extension BackEndAPI: EndPointable, CaseIterable {
     var environmentBaseURL: String {
         switch self {
         case .token:
-            return "http://192.168.0.31:3000/api/auth/github/ios"
+            return "http://\(BackEndAPICredentials.ip)/api/auth/github/ios"
+        case .Issues:
+            return "http://\(BackEndAPICredentials.ip)/api/issue"
         default:
             return ""
         }
@@ -41,13 +44,15 @@ extension BackEndAPI: EndPointable, CaseIterable {
         switch self {
         case .token:
             return .post
+        case .Issues:
+            return .get
         default:
             return nil
         }
     }
     
     var headers: HTTPHeader? {
-        return nil
+        return ["Authorization": "bearer \(UserInfo.shared.accessToken)"]
     }
     
     var bodies: HTTPBody? {
