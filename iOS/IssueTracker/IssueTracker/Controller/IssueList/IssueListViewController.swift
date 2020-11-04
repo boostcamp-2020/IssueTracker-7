@@ -84,10 +84,26 @@ extension IssueListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let headerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: "searchBarHeader",
+                for: indexPath)
+        
+        return headerView
+    }
 }
 
 extension IssueListViewController: UICollectionViewDelegate {
     
+extension IssueListViewController: UICollectionViewDelegate { }
+
+extension IssueListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("입력")
+    }
 }
 
 final class IssueCell: UICollectionViewCell {
