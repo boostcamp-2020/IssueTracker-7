@@ -8,49 +8,48 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewController" customModule="IssueTracker" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardView" customModule="IssueTracker" customModuleProvider="target">
             <connections>
-                <outlet property="commentStack" destination="boD-hB-e0u" id="bup-tx-1vz"/>
-                <outlet property="handle" destination="20s-iZ-hPC" id="UgH-D5-SAr"/>
-                <outlet property="view" destination="kVo-9j-XIs" id="asr-UI-BX5"/>
+                <outlet property="commentStack" destination="19t-7N-gA5" id="eQD-BV-EGv"/>
+                <outlet property="handle" destination="USR-i8-uKi" id="KCt-zr-LAE"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="kVo-9j-XIs">
+        <view contentMode="scaleToFill" id="Y3Q-HM-dmj">
             <rect key="frame" x="0.0" y="0.0" width="379" height="790"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20s-iZ-hPC">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USR-i8-uKi">
                     <rect key="frame" x="164.5" y="10" width="50" height="6"/>
                     <color key="backgroundColor" systemColor="systemGrayColor"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="ofG-2I-TFp"/>
-                        <constraint firstAttribute="height" constant="6" id="wd4-Vr-1tH"/>
+                        <constraint firstAttribute="width" constant="50" id="KgV-cx-81P"/>
+                        <constraint firstAttribute="height" constant="6" id="exk-Pm-Uzn"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="boD-hB-e0u">
-                    <rect key="frame" x="15" y="32" width="161" height="35"/>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="19t-7N-gA5">
+                    <rect key="frame" x="15" y="32" width="349" height="35"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wh-nh-tKf">
-                            <rect key="frame" x="0.0" y="0.0" width="71" height="35"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRt-gj-pzI">
+                            <rect key="frame" x="0.0" y="0.0" width="259" height="35"/>
                             <color key="backgroundColor" systemColor="systemGray3Color"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="댓글 추가"/>
                         </button>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GDS-FK-ivr">
-                            <rect key="frame" x="86" y="0.0" width="75" height="35"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-bS-to7">
+                            <rect key="frame" x="274" y="0.0" width="75" height="35"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCX-L0-5kc">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2GJ-T8-9R8">
                                     <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="PCX-L0-5kc" secondAttribute="height" multiplier="1:1" id="Y0F-Ut-j4L"/>
+                                        <constraint firstAttribute="width" secondItem="2GJ-T8-9R8" secondAttribute="height" multiplier="1:1" id="G74-A4-znf"/>
                                     </constraints>
                                     <state key="normal" image="arrow.up" catalog="system"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGF-9r-xzv">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNB-AW-x8N">
                                     <rect key="frame" x="40" y="0.0" width="35" height="35"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="aGF-9r-xzv" secondAttribute="height" multiplier="1:1" id="8aK-ck-S8l"/>
+                                        <constraint firstAttribute="width" secondItem="iNB-AW-x8N" secondAttribute="height" multiplier="1:1" id="Hnb-Hg-PgT"/>
                                     </constraints>
                                     <state key="normal" image="arrow.down" catalog="system"/>
                                 </button>
@@ -60,11 +59,14 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="nmz-Ig-mtb"/>
+            <viewLayoutGuide key="safeArea" id="b8Z-kj-X7j"/>
             <color key="backgroundColor" systemColor="systemGray6Color"/>
             <constraints>
-                <constraint firstItem="20s-iZ-hPC" firstAttribute="top" secondItem="kVo-9j-XIs" secondAttribute="top" constant="10" id="ZTe-Jy-O2f"/>
-                <constraint firstItem="20s-iZ-hPC" firstAttribute="centerX" secondItem="nmz-Ig-mtb" secondAttribute="centerX" id="aM9-Ok-UnR"/>
+                <constraint firstItem="USR-i8-uKi" firstAttribute="centerX" secondItem="b8Z-kj-X7j" secondAttribute="centerX" id="AQN-uJ-Byy"/>
+                <constraint firstItem="b8Z-kj-X7j" firstAttribute="trailing" secondItem="19t-7N-gA5" secondAttribute="trailing" constant="15" id="PFP-DQ-mxQ"/>
+                <constraint firstItem="19t-7N-gA5" firstAttribute="leading" secondItem="b8Z-kj-X7j" secondAttribute="leading" constant="15" id="WG3-fB-eYm"/>
+                <constraint firstItem="USR-i8-uKi" firstAttribute="top" secondItem="Y3Q-HM-dmj" secondAttribute="top" constant="10" id="vOL-Ma-En7"/>
+                <constraint firstItem="19t-7N-gA5" firstAttribute="top" secondItem="USR-i8-uKi" secondAttribute="bottom" constant="16" id="w0G-XC-HUB"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="50.000000000000007" y="51.5625"/>
