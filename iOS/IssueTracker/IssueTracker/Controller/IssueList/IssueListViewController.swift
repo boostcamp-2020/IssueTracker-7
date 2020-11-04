@@ -9,9 +9,13 @@ import UIKit
 
 final class IssueListViewController: UIViewController {
    
-    @IBOutlet var collectionView: UICollectionView!
+    // MARK: - Property
+    
+    @IBOutlet private var collectionView: UICollectionView!
     private var issueDataList: [IssueData] = []
 
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,8 @@ final class IssueListViewController: UIViewController {
         configureLayout()
     }
     
+    
+    // MARK: - Method
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "IssueListToFilter" {
@@ -44,6 +50,9 @@ final class IssueListViewController: UIViewController {
         }
     }
 }
+
+
+// MARK: - Extension
 
 extension IssueListViewController {
     
