@@ -37,6 +37,8 @@ router.get(
       case 'ios':
         redirectUrl = `IssueTracker://login#accessToken=${res.locals.accessToken}refreshToken=${res.locals.refreshToken}`;
         break;
+      default:
+        return res.status(404).send('유효하지 않은 요청 입니다.');
     }
     return res.redirect(redirectUrl);
   }
