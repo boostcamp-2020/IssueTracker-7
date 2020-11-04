@@ -9,41 +9,25 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--이슈-->
         <scene sceneID="tek-Jt-Ti6">
             <objects>
-                <navigationController id="ABG-JX-FJB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="IssueListInitialController" id="ABG-JX-FJB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="4CL-rm-bJY"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Y0g-6n-Nhi">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Gt4-sv-sR9" kind="relationship" relationship="rootViewController" id="U2f-fU-wRk"/>
+                        <segue destination="Fiu-tR-AEc" kind="relationship" relationship="rootViewController" id="qvb-BG-R2E"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTX-vr-N1b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="114"/>
+            <point key="canvasLocation" x="2674" y="114"/>
         </scene>
-        <!--이슈-->
-        <scene sceneID="Swa-0N-gJp">
-            <objects>
-                <tabBarController id="Gt4-sv-sR9" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="이슈" id="mzr-Ok-CuO"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="59f-KU-5R1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Fiu-tR-AEc" kind="relationship" relationship="viewControllers" id="S3w-aj-M9Z"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BfK-tx-HsK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1774" y="114"/>
-        </scene>
-        <!--이슈-->
+        <!--이슈목록-->
         <scene sceneID="gdl-FY-vGc">
             <objects>
                 <viewController id="Fiu-tR-AEc" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -54,24 +38,44 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VGO-WG-P6r">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
+<<<<<<< Updated upstream
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="1" id="rRT-tx-TJG">
+=======
+<<<<<<< Updated upstream
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="1" minimumInteritemSpacing="2" id="rRT-tx-TJG">
+>>>>>>> Stashed changes
                                     <size key="itemSize" width="412" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IssueCell" id="aIG-2q-XR7" customClass="IssueCell" customModule="IssueTracker" customModuleProvider="target">
+<<<<<<< Updated upstream
+                                        <rect key="frame" x="1" y="10" width="412" height="100"/>
+=======
                                         <rect key="frame" x="1" y="2" width="412" height="100"/>
+=======
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="1" minimumInteritemSpacing="1" id="rRT-tx-TJG">
+                                    <size key="itemSize" width="412" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IssueCell" id="aIG-2q-XR7" customClass="IssueCell" customModule="IssueTracker" customModuleProvider="target">
+                                        <rect key="frame" x="1" y="0.0" width="412" height="100"/>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ONO-gj-CGL">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="100"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다. 뒷줄은 잘리게 될 것 입니다 쩜쩜쩜" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRY-D3-c3q">
-                                                    <rect key="frame" x="23" y="44" width="260" height="41"/>
+                                                    <rect key="frame" x="15" y="44" width="300" height="41"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="260" id="2tS-Pr-XBv"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="2tS-Pr-XBv"/>
                                                         <constraint firstAttribute="height" constant="41" id="bFF-6b-ZHC"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -125,7 +129,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ac-H0-ytB">
-                                                    <rect key="frame" x="23" y="16" width="162.5" height="23"/>
+                                                    <rect key="frame" x="15" y="16" width="162.5" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -133,10 +137,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="zMu-hK-bfQ" firstAttribute="top" secondItem="btQ-GT-NEf" secondAttribute="bottom" constant="4" id="6SB-dC-WS3"/>
-                                                <constraint firstItem="7Ac-H0-ytB" firstAttribute="leading" secondItem="ONO-gj-CGL" secondAttribute="leading" constant="23" id="7IB-Gn-odC"/>
+                                                <constraint firstItem="7Ac-H0-ytB" firstAttribute="leading" secondItem="ONO-gj-CGL" secondAttribute="leading" constant="15" id="7IB-Gn-odC"/>
                                                 <constraint firstAttribute="trailing" secondItem="zMu-hK-bfQ" secondAttribute="trailing" constant="6" id="MbS-N1-2ak"/>
                                                 <constraint firstItem="btQ-GT-NEf" firstAttribute="top" secondItem="7Ac-H0-ytB" secondAttribute="top" id="QIL-rS-jk0"/>
                                                 <constraint firstItem="rRY-D3-c3q" firstAttribute="leading" secondItem="7Ac-H0-ytB" secondAttribute="leading" id="RBb-5Y-unO"/>
+                                                <constraint firstItem="zMu-hK-bfQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rRY-D3-c3q" secondAttribute="trailing" constant="30" id="a1W-rO-tN7"/>
                                                 <constraint firstItem="rRY-D3-c3q" firstAttribute="top" secondItem="7Ac-H0-ytB" secondAttribute="bottom" constant="5" id="bQE-SC-JJ0"/>
                                                 <constraint firstItem="7Ac-H0-ytB" firstAttribute="top" secondItem="ONO-gj-CGL" secondAttribute="top" constant="16" id="jPF-lS-saF"/>
                                                 <constraint firstAttribute="trailing" secondItem="btQ-GT-NEf" secondAttribute="trailing" constant="8" id="tDk-Fk-9Ub"/>
@@ -164,13 +169,28 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="Kyi-Eh-ypv"/>
+                    <navigationItem key="navigationItem" title="이슈목록" id="RzU-8r-oEh">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="bkx-PW-boa">
+                            <connections>
+                                <segue destination="0jM-ha-VGr" kind="presentation" id="YAw-Ar-zCf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="VGO-WG-P6r" id="UAZ-Uo-Shu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyB-SY-otq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2608.6956521739135" y="113.83928571428571"/>
+            <point key="canvasLocation" x="3387" y="114"/>
+        </scene>
+        <!--FilterInitController-->
+        <scene sceneID="3XD-sq-RCe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filter" referencedIdentifier="FilterInitController" id="0jM-ha-VGr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NBX-3h-MAz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3994" y="-85"/>
         </scene>
     </scenes>
     <resources>

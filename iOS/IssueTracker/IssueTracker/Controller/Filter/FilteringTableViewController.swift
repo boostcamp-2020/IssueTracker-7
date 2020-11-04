@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum PreSpecifiedCondition {
+enum PreSpecifiedCondition: CaseIterable {
     case openIssue
     case myIssue
     case assignedIssue
@@ -28,7 +28,6 @@ class FilteringTableViewController: UITableViewController {
         
     }
     
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
@@ -45,25 +44,12 @@ class FilteringTableViewController: UITableViewController {
             let cell = tableView.cellForRow(at: indexPath)
             cell?.accessoryType = .checkmark
             
-            switch indexPath.row {
-            case 0:
-                delegate?.sendPreSpecified(condition: .openIssue)
-            case 1:
-                delegate?.sendPreSpecified(condition: .myIssue)
-            case 2:
-                delegate?.sendPreSpecified(condition: .assignedIssue)
-            case 3:
-                delegate?.sendPreSpecified(condition: .commentedIssue)
-            case 4:
-                delegate?.sendPreSpecified(condition: .closedIssued)
-            default:
-                break
-            }
+            let condition = PreSpecifiedCondition.allCases[indexPath.row]
+            delegate?.sendPreSpecified(condition: condition)
+            
         default:
             break
         }
         
-        
     }
-    
 }

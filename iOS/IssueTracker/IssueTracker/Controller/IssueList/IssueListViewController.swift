@@ -16,8 +16,39 @@ final class IssueListViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.dataSource = self
+<<<<<<< Updated upstream
         collectionView.delegate = self
+        
+        collectionView.layoutIfNeeded()
+        configureLayout()
+        
+    }
+}
 
+<<<<<<< Updated upstream
+extension IssueListViewController {
+    private func configureLayout() {
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        collectionViewFlowLayout.itemSize = CGSize(width: collectionView.bounds.size.width, height: 100)
+        collectionViewFlowLayout.minimumLineSpacing = 2
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)
+        collectionView.collectionViewLayout = collectionViewFlowLayout
+=======
+=======
+        
+        configureLayout()
+    }
+}
+
+extension IssueListViewController {
+    private func configureLayout() {
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        collectionViewFlowLayout.itemSize = CGSize(width: view.bounds.size.width, height: 100)
+        collectionViewFlowLayout.minimumLineSpacing = 1
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)
+        collectionView.collectionViewLayout = collectionViewFlowLayout
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     }
 }
 
@@ -37,6 +68,9 @@ extension IssueListViewController: UICollectionViewDataSource {
     }
 }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
 extension IssueListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -44,10 +78,13 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+>>>>>>> Stashed changes
 extension IssueListViewController: UICollectionViewDelegate {
     
 }
 
+=======
+>>>>>>> Stashed changes
 final class IssueCell: UICollectionViewCell {
     
     static let reuseIdentifier = String(describing: IssueCell.self)
