@@ -46,7 +46,8 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     port: port,
     open: true,
-    hotOnly: true,
+    hot: true,
+    inline: true,
     historyApiFallback: true,
   },
 
