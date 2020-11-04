@@ -17,7 +17,41 @@ final class IssueListViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        collectionView.layoutIfNeeded()
+        configureLayout()
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "IssueListToFilter" {
+            guard let navigationController = segue.destination as? UINavigationController,
+                  let viewController = navigationController.topViewController as? FilteringController
+            else { return }
+            
+            viewController.preDefinedConditionHandler = { conditions in
+//                BackEndAPIManager.shared.requestFiltering(conditions: conditions) { (result: Result<이슈목록Decodable객체, APIError>) in
+//
+//                }
+                print("predefinedConditionHandler") //
+            }
+            viewController.detailConditionHandler = { conditions in
+//                BackEndAPIManager.shared.requestFiltering(conditions: conditions) { (result: Result<이슈목록Decodable객체, APIError>) in
+//                    
+//                }
+                print("detailConditionHandler")
+            }
+        }
+    }
+}
 
+extension IssueListViewController {
+    private func configureLayout() {
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        collectionViewFlowLayout.itemSize = CGSize(width: collectionView.bounds.size.width, height: 100)
+        collectionViewFlowLayout.minimumLineSpacing = 2
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)
+        collectionView.collectionViewLayout = collectionViewFlowLayout
     }
 }
 
@@ -34,13 +68,6 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
         return cell
-    }
-}
-
-extension IssueListViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.size.width, height: 100 )
     }
 }
 

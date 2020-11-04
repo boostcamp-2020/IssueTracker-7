@@ -204,9 +204,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="BUE-OQ-FOZ" kind="show" id="A58-wY-zHb"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="wT8-oT-azj">
                                         <rect key="frame" x="0.0" y="372.5" width="414" height="43.5"/>
@@ -224,9 +221,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="BUE-OQ-FOZ" kind="show" id="Hhn-Hh-YTg"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="YYV-aE-Yk5">
                                         <rect key="frame" x="0.0" y="416" width="414" height="43.5"/>
@@ -244,9 +238,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="BUE-OQ-FOZ" kind="show" id="7EL-rD-h3q"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="ccW-CK-6Zo">
                                         <rect key="frame" x="0.0" y="459.5" width="414" height="43.5"/>
@@ -264,9 +255,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="BUE-OQ-FOZ" kind="show" id="5yv-Ac-jVZ"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -284,13 +272,13 @@
         <!--Detail Condition Table View Controller-->
         <scene sceneID="zaD-dt-tOz">
             <objects>
-                <viewController id="BUE-OQ-FOZ" customClass="DetailConditionTableViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailConditionTableViewController" id="BUE-OQ-FOZ" customClass="DetailConditionTableViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ScM-Wh-CQZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gRc-uc-DDH">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailConditionCell" id="SC8-F0-Vtu">
@@ -327,9 +315,6 @@
             <point key="canvasLocation" x="3200.0000000000005" y="-158.37053571428569"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="7EL-rD-h3q"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
