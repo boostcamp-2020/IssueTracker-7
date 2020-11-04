@@ -49,6 +49,11 @@ db.Issue.belongsTo(db.Milestone, {
   foreignKey: 'milestone_id',
   targetKey: 'id',
 });
+db.label_has_issue = sequelize.define(
+  'label_has_issue',
+  {},
+  { underscored: true, tableName: 'label_has_issue', timestamps: true }
+);
 db.Issue.hasMany(db.label_has_issue, {
   foreignKey: 'issue_id',
   sourceKey: 'id',
@@ -58,11 +63,6 @@ db.Issue.belongsToMany(db.Label, {
   through: db.label_has_issue,
 });
 
-db.label_has_issue = sequelize.define(
-  'label_has_issue',
-  {},
-  { underscored: true, tableName: 'label_has_issue', timestamps: true }
-);
 db.label_has_issue.belongsTo(db.Label, {
   foreignKey: 'label_id',
   targetKey: 'id',
