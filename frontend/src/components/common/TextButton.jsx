@@ -15,7 +15,7 @@ font-weight: bold;
 const Button = ({...options}) => {
   return(
     <FlexItem><TextButton {...options}/></FlexItem> 
-  )
+  );
 };
 
 export default Button;
