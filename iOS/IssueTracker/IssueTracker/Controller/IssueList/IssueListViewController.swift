@@ -71,11 +71,12 @@ extension IssueListViewController {
     }
     
     private func configureLayout() {
+        let spacing: CGFloat = 10
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width, height: 50)
+        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width-30, height: 50)
         collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: 50)
-        collectionViewFlowLayout.minimumLineSpacing = 2
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)
+        collectionViewFlowLayout.minimumLineSpacing = spacing
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: 0, right: 0)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
 }
@@ -89,6 +90,9 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
         cell.configure(issueData: issueDataList[indexPath.row])
+        
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
         return cell
     }
     

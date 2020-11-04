@@ -27,10 +27,10 @@ final class IssueCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+        // cell 내부에서 최대 width 제약 길이가 같아서 이렇게 지정하지 않아도 고정된 가로 길이로 잡히지만 만약 달라지는 경우 이렇게 강제로 잡아 줘야 함
+//        widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
     }
-    
-    
+
     // MARK: - Method
     
     override func prepareForReuse() {
