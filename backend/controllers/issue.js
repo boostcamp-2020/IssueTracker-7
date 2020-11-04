@@ -130,3 +130,20 @@ exports.get = async (req, res) => {
       console.log(err);
     });
 };
+
+exports.update = (req, res) => {
+  const { title, status } = req.body;
+  const issue_id = req.params.issue_id;
+  Issue.findByPk(issue_id).then((issue) => {
+    if (issue) {
+      issue.title = title;
+      issue.status = status;
+      issue
+        .save()
+        .then((updatedIssue) => res.status(200).json(updatedIssue))
+        .catch((err) => res.status(401).send('유효하지 않은 입력 입니다.'));
+    } else {
+      res.status(401).send('유효하지 않은 Label 입니다.');
+    }
+  });
+};
