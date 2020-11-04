@@ -19,6 +19,7 @@ class CustomSearchBar: UICollectionReusableView {
     
     override func awakeFromNib() {
         searchBar.backgroundImage = UIImage()
+        searchBar.placeholder = "Search"
     }
 
 }
