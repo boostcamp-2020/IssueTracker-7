@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Bold = styled.p`
+const Label = styled.p`
   margin-bottom: 5px;
   font-weight: bold;
   font-size: 15px;
@@ -11,16 +11,11 @@ const Input = styled.input`
   height: 25px;
   border: 1px solid #d6d8db;
 `;
-const InputBox = (props) => {
+const InputBox = ({label, ...options}) => {
   return (
     <label>
-      <Bold>{props.title}</Bold>
-      <Input
-        type={props.type}
-        name={props.name}
-        minlength={props.minlength}
-        maxlength={props.maxlength}
-      />
+      <Label>{label}</Label>
+      <Input {...options}/>
     </label>
   );
 };
