@@ -3,7 +3,22 @@ var router = express.Router();
 
 const { createToken, verifyToken } = require('../../middlewares/token');
 
-router.get('/github', verifyToken('github'));
+router.get(
+  '/github/web',
+  (req, res, next) => {
+    res.cookie('media_type', 'web', { signed: true, httpOnly: true });
+    next();
+  },
+  verifyToken('github')
+);
+router.get(
+  '/github/ios',
+  (req, res, next) => {
+    res.cookie('media_type', 'ios', { signed: true, httpOnly: true });
+    next();
+  },
+  verifyToken('github')
+);
 
 router.get(
   '/github/callback',
@@ -14,7 +29,18 @@ router.get(
   (req, res) => {
     res.cookie('accessToken', res.locals.accessToken, { signed: true, httpOnly: true });
     res.cookie('refreshToken', res.locals.refreshToken, { signed: true, httpOnly: true });
-    return res.redirect('/');
+    let redirectUrl = null;
+    switch (req.signedCookies.media_type) {
+      case 'web':
+        redirectUrl = '/';
+        break;
+      case 'ios':
+        redirectUrl = `IssueTracker://login#accessToken=${res.locals.accessToken}refreshToken=${res.locals.refreshToken}`;
+        break;
+      default:
+        return res.status(404).send('유효하지 않은 요청 입니다.');
+    }
+    return res.redirect(redirectUrl);
   }
 );
 
