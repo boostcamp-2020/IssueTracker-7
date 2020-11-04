@@ -8,20 +8,20 @@
 import UIKit
 
 final class IssueListViewController: UIViewController {
-
-    
+   
     @IBOutlet var collectionView: UICollectionView!
+    private var issueDataList: [IssueData] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        setUpIssueData()
         
         collectionView.layoutIfNeeded()
         configureLayout()
-        
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "IssueListToFilter" {
@@ -63,7 +63,8 @@ extension IssueListViewController {
     
     private func configureLayout() {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewFlowLayout.itemSize = CGSize(width: collectionView.bounds.size.width, height: 100)
+        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width, height: 50)
+        collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: 50)
         collectionViewFlowLayout.minimumLineSpacing = 2
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)
         collectionView.collectionViewLayout = collectionViewFlowLayout
@@ -72,16 +73,13 @@ extension IssueListViewController {
 
 extension IssueListViewController: UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return issueDataList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
+        cell.configure(issueData: issueDataList[indexPath.row])
         return cell
     }
     
@@ -96,8 +94,6 @@ extension IssueListViewController: UICollectionViewDataSource {
     }
 }
 
-extension IssueListViewController: UICollectionViewDelegate {
-    
 extension IssueListViewController: UICollectionViewDelegate { }
 
 extension IssueListViewController: UISearchBarDelegate {
@@ -150,4 +146,18 @@ final class IssueCell: UICollectionViewCell {
 
     }
     
+}
+
+func hexStringToUIColor (hex:String) -> UIColor {
+    var rgbValue:UInt64 = 0
+    let cString = hex.dropFirst()
+
+    Scanner(string: String(cString)).scanHexInt64(&rgbValue)
+
+    return UIColor(
+        red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+        green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+        blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+        alpha: CGFloat(1.0)
+    )
 }
