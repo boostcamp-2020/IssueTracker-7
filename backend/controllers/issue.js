@@ -37,7 +37,7 @@ exports.getAll = async (req, res) => {
       attributes: ['id', 'name', 'description', 'color'],
       include: {
         model: label_has_issue,
-        required: query.no.includes('label') ? true : query.label ? false : true,
+        required: query.label ? true : false,
         include: [
           {
             model: Label,
@@ -127,7 +127,7 @@ exports.getAll = async (req, res) => {
       res.status(200).json(queryResult);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(401).send('유효하지 않은 요청 입니다.');
     });
 };
 
