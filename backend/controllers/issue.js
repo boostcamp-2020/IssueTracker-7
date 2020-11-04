@@ -25,6 +25,7 @@ const queryToObject = (queryString) => {
 exports.get = async (req, res) => {
   const query = queryToObject(req.query.q ? req.query.q : '');
   const where = {};
+  const user_id = req.user.user_id;
   const include = [
     {
       model: Label,
@@ -55,7 +56,7 @@ exports.get = async (req, res) => {
       as: 'assignees',
       where: query.assignee
         ? {
-            user_id: query.assignee == '@me' ? req.user.user_id : query.assignee,
+            user_id: query.assignee == '@me' ? user_id : query.assignee,
           }
         : null,
       attributes: ['id', 'user_id', 'photo_url', 'type'],
@@ -68,7 +69,7 @@ exports.get = async (req, res) => {
       as: 'author',
       where: query.author
         ? {
-            user_id: query.assignee == '@me' ? req.user.user_id : query.author,
+            user_id: query.assignee == '@me' ? user_id : query.author,
           }
         : null,
       attributes: ['id', 'user_id', 'photo_url', 'type'],
