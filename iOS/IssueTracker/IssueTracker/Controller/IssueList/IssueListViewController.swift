@@ -46,6 +46,21 @@ final class IssueListViewController: UIViewController {
 }
 
 extension IssueListViewController {
+    
+    private func setUpIssueData() {
+        BackEndAPIManager.shared.requestAllIssues() { result in
+            switch result {
+            case .success(let issues):
+                self.issueDataList = issues
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func configureLayout() {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.itemSize = CGSize(width: collectionView.bounds.size.width, height: 100)
