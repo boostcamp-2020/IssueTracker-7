@@ -17,27 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14K-Hj-Wjf">
-                                <rect key="frame" x="184" y="101" width="46" height="30"/>
+                                <rect key="frame" x="184" y="241" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ZO-28-sTd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jop-fU-krX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="6ZO-28-sTd" firstAttribute="top" secondItem="Bdj-fF-fUS" secondAttribute="top" id="Pn6-pj-13o"/>
-                            <constraint firstItem="6ZO-28-sTd" firstAttribute="leading" secondItem="Jop-fU-krX" secondAttribute="leading" id="gso-te-bZb"/>
-                            <constraint firstAttribute="bottom" secondItem="6ZO-28-sTd" secondAttribute="bottom" id="rUD-7m-1c2"/>
-                            <constraint firstItem="6ZO-28-sTd" firstAttribute="trailing" secondItem="Jop-fU-krX" secondAttribute="trailing" id="vf0-da-YLE"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="dimmerView" destination="6ZO-28-sTd" id="z4Z-6g-s0Z"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8U-zN-FvY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
