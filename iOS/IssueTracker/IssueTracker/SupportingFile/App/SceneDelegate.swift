@@ -16,11 +16,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        NotificationCenter.default.post(name: Notification.Name.userInfoReceived, object: nil)
         
         if let url = URLContexts.first?.url {
+            print(url)
             let stringURL = String(describing: url)
             guard let accessToken = stringURL.accessToken(),
                   let refreshToken = stringURL.refreshToken() else { return }
             UserInfo.shared.accessToken = accessToken
             UserInfo.shared.refreshToken = refreshToken
+            
+            print(UserInfo.shared.accessToken)
+            print(UserInfo.shared.refreshToken)
+            
             NotificationCenter.default.post(name: Notification.Name.backEndTokenReceived, object: nil)
         }
     }
@@ -43,9 +48,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-//        autoLogin(scene: scene)
+        autoLogin(scene: scene)
+        
     }
-
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

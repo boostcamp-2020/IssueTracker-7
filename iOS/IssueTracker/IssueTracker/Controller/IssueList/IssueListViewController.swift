@@ -91,8 +91,6 @@ extension IssueListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
         cell.configure(issueData: issueDataList[indexPath.row])
         
-        cell.layer.cornerRadius = 10
-        cell.layer.masksToBounds = true
         return cell
     }
     
