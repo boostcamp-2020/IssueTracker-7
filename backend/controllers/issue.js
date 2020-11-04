@@ -22,7 +22,7 @@ const queryToObject = (queryString) => {
   return queryObject;
 };
 
-exports.get = async (req, res) => {
+exports.getAll = async (req, res) => {
   const query = queryToObject(req.query.q ? req.query.q : '');
   const where = {};
   const user_id = req.user.user_id;
@@ -129,6 +129,16 @@ exports.get = async (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+exports.getOne = (req, res) => {
+  const issue_id = req.params.issue_id;
+  return Issue.findByPk(issue_id)
+    .then((issue) => {
+      if (issue) res.status(200).json(issue);
+      else res.status(401).send('유효하지 않은 Label 입니다.');
+    })
+    .catch((err) => res.status(401).send('유효하지 않은 요청 입니다.'));
 };
 
 exports.update = (req, res) => {
