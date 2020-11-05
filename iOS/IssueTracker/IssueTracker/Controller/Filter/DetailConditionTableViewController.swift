@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailConditionTableViewController<InfoType: Decodable>: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailConditionTableViewController<T: Decodable>: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -26,10 +26,10 @@ class DetailConditionTableViewController<InfoType: Decodable>: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(route, InfoType.self)
+        print(route, T.self)
         
         // 여기서 API 호출(작성자, 레이블, 마일스톤, 담당자)해서 데이터 객체 갱신
-//        BackEndAPIManager.shared.requestDetailCondition(route: route) { (result: Result<InfoType, APIError>) in
+//        BackEndAPIManager.shared.requestDetailCondition(route: route) { (result: Result<T, APIError>) in
 //
 //        }
 
@@ -50,7 +50,7 @@ class DetailConditionTableViewController<InfoType: Decodable>: UIViewController,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        detailFilterInfo.assignees.append(Assignee(id: 3, userID: "dsdf"))
+        detailFilterInfo.assignees.append(Assignee(id: 1, userID: "sample", photoURL: nil, type: "sample"))
     }
     
     
