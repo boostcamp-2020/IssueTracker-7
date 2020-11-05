@@ -161,7 +161,7 @@ final class DetailIssueListController: UIViewController {
     }
 }
 
-// MARK: collectionView 세팅
+// MARK: collectionView
 
 extension DetailIssueListController {
     
@@ -184,13 +184,10 @@ extension DetailIssueListController {
     }
     
     private func configureCollectionView() {
-        
         collectionView.collectionViewLayout = createLayout()
     }
     
     private func configureDataSource() {
-        
-        
         dataSource = UICollectionViewDiffableDataSource<Section, DetailIssueInfo>(collectionView: collectionView) {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
