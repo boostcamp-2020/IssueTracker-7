@@ -112,11 +112,22 @@
                     </tabBar>
                     <connections>
                         <segue destination="EcO-C0-4Qd" kind="relationship" relationship="viewControllers" id="XQG-Lq-EGG"/>
+                        <segue destination="mxQ-DE-Jdl" kind="relationship" relationship="viewControllers" id="7g9-qE-Vzc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyJ-z4-918" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1025" y="114"/>
+        </scene>
+        <!--ManageLabelInitialController-->
+        <scene sceneID="GNT-Zk-frP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ManageLabel" referencedIdentifier="ManageLabelInitialController" id="mxQ-DE-Jdl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Ix8-tq-DAi"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5gv-61-Roa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679" y="322"/>
         </scene>
         <!--IssueListInitialController-->
         <scene sceneID="pgs-GO-chh">
