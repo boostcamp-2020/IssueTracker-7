@@ -8,6 +8,9 @@
 import Foundation
 
 enum BackEndAPI {
+    case token
+    case Issues
+    
     case allAuthors,
          allLabels,
          allMilestones,
@@ -18,11 +21,19 @@ enum BackEndAPI {
 
 extension BackEndAPI: EndPointable, CaseIterable {
     var environmentBaseURL: String {
-        return ""
+        switch self {
+        case .token:
+            return "http://\(BackEndAPICredentials.ip)/api/auth/github/ios"
+        case .Issues:
+            return "http://\(BackEndAPICredentials.ip)/api/issue"
+        default:
+            return ""
+        }
     }
     
     var baseURL: URL {
-        return URL(string: "")!
+        guard let url = URL(string: environmentBaseURL) else { fatalError() } // TODO: 예외처리로 바꿔주기
+        return url
     }
     
     var query: String {
@@ -30,11 +41,18 @@ extension BackEndAPI: EndPointable, CaseIterable {
     }
     
     var httpMethod: HTTPMethod? {
-        return nil
+        switch self {
+        case .token:
+            return .post
+        case .Issues:
+            return .get
+        default:
+            return nil
+        }
     }
     
     var headers: HTTPHeader? {
-        return nil
+        return ["Authorization": "bearer \(UserInfo.shared.accessToken)"]
     }
     
     var bodies: HTTPBody? {

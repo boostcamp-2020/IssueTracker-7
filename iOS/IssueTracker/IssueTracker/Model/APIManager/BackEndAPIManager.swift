@@ -14,6 +14,12 @@ class BackEndAPIManager {
     private let router = Router<BackEndAPI>()
     
     
+    func requestAllIssues(completionHandler: @escaping ((Result<[IssueData], APIError>) -> Void)) {
+        router.request(route: .Issues) { (result: Result<[IssueData], APIError>) in
+            completionHandler(result)
+        }
+    }
+    
     // route: 작성자 or 레이블 or 마일스톤 or 담당자
     func requestDetailCondition<infoType: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
         router.request(route: route) { (result: Result<infoType, APIError>) in

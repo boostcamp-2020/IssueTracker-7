@@ -14,9 +14,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // 백엔드 서버로부터 토큰, 유저 정보 오는 곳. UserInfo 구조체에 저장 후 signincontroller 로 notification
 //        NotificationCenter.default.post(name: Notification.Name.userInfoReceived, object: nil)
+        
         if let url = URLContexts.first?.url {
-            let secretCode = String(String(describing: url).suffix(20))
-            NotificationCenter.default.post(name: Notification.Name("complete"), object: nil, userInfo: ["code": secretCode])
+            print(url)
+            let stringURL = String(describing: url)
+            guard let accessToken = stringURL.accessToken(),
+                  let refreshToken = stringURL.refreshToken() else { return }
+            UserInfo.shared.accessToken = accessToken
+            UserInfo.shared.refreshToken = refreshToken
+            
+            print(UserInfo.shared.accessToken)
+            print(UserInfo.shared.refreshToken)
+            
+            NotificationCenter.default.post(name: Notification.Name.backEndTokenReceived, object: nil)
         }
     }
 
@@ -40,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         autoLogin(scene: scene)
     }
-
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

@@ -25,9 +25,13 @@ struct AssigneesInfo: Codable {
 struct Assignee: Codable {
     let id: Int
     let userID: String
+    let photoURL: String?
+    let type: String
 
     enum CodingKeys: String, CodingKey {
         case id
         case userID = "user_id"
+        case photoURL = "photo_url"
+        case type
     }
 }

@@ -20,8 +20,7 @@ class UserInfo {
     
     func isAllInfoExisted() -> Bool {
         
-        if userName != "" &&
-            accessToken != "" &&
+        if accessToken != "" &&
             refreshToken != ""  {
             return true
         } else {

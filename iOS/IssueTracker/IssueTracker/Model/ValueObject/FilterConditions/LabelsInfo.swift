@@ -26,6 +26,6 @@ struct LabelsInfo: Codable {
 // MARK: - Label
 struct Label: Codable {
     let id: Int
-    let name, color, labelDescription: String
+    let name, color, description: String
 }
 
