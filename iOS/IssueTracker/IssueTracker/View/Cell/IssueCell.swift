@@ -22,13 +22,14 @@ final class IssueCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setUpView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        // cell 내부에서 최대 width 제약 길이가 같아서 이렇게 지정하지 않아도 고정된 가로 길이로 잡히지만 만약 달라지는 경우 이렇게 강제로 잡아 줘야 함
-//        widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+        setUpView()
     }
 
     // MARK: - Method
@@ -37,6 +38,11 @@ final class IssueCell: UICollectionViewCell {
         labelStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
+    }
+    
+    func setUpView() {
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
     }
     
     func hexStringToUIColor (hex: String) -> UIColor {
