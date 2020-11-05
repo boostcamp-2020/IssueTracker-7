@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailIssueCell: UICollectionViewCell {
+final class DetailIssueHeaderCell: UICollectionViewCell {
     
     static let reuseIdentifier = String(describing: DetailIssueCell.self)
     @IBOutlet weak var label: UILabel!
@@ -24,9 +24,35 @@ final class DetailIssueCell: UICollectionViewCell {
         
     }
     
-    static func configureCell(cell: DetailIssueCell, data: String) {
+    static func configureCell(cell: DetailIssueCell, data: DetailIssueInfo) {
         
-        cell.label.text = data
+        cell.label.text = data.name
+        
+    }
+    
+}
+
+
+final class DetailIssueHeaderCell: UICollectionViewCell {
+    
+    static let reuseIdentifier = String(describing: DetailIssueCell.self)
+    @IBOutlet weak var label: UILabel!
+    
+    // MARK: - Initializer
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+    }
+    
+    static func configureCell(cell: DetailIssueCell, data: DetailIssueInfo) {
+        
+        cell.label.text = data.name
         
     }
     
