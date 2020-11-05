@@ -13,7 +13,7 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const GithubButton = ({ onClick, children }) => {
+const GithubButton = ({ onClick, children, image }) => {
     return (
         <Button onClick={onClick}>{children}{image}</Button>
     );
