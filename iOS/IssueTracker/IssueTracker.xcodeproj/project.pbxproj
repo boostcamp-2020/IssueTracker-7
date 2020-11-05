@@ -483,6 +483,8 @@
 				712CBEA5255008B700E8F95F /* RegisterIssueViewController.swift */,
 			);
 			path = RegisterIssue;
+               sourceTree = "<group>";
+        };
 		7130A68E2551636900EE2141 /* ManageLabel */ = {
 			isa = PBXGroup;
 			children = (
