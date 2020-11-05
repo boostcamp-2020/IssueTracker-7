@@ -103,6 +103,8 @@ private struct MilestoneDueDateValidator: ValidatorConvertible {
     
     func validate(_ value: String) throws -> String {
         
+        guard value.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else { return "" }
+        
         let matchError = ValidationError("올바른 날짜 형식이 아닙니다. \n 예) 2020-11-05")
         do {
             if try value.trimmingCharacters(in: .whitespacesAndNewlines).matchesRegexPattern("[0-9]{4}-[0-9]{2}-[0-9]{2}") {
