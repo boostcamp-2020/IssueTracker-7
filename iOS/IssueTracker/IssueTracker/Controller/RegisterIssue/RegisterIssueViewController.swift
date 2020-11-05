@@ -15,7 +15,7 @@ final class RegisterIssueViewController: UIViewController, UINavigationControlle
     @IBOutlet var segmentedControl: UISegmentedControl!
     
     var imageView: UIImageView!
-    var markdownView: MarkdownView!
+    var markdownView = MarkdownView()
     var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
