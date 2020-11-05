@@ -76,16 +76,21 @@ exports.get = async (req, res) => {
     },
     {
       model: Comment,
-      include: {
-        model: User,
-        as: 'mentions',
-        where:
-          query.mentions == '@me'
-            ? {
-                user_id: query.mentions,
-              }
-            : null,
-      },
+      limit: 1,
+      include: [
+        {
+          model: User,
+          as: 'mentions',
+          where:
+            query.mentions == '@me'
+              ? {
+                  user_id: query.mentions,
+                }
+              : null,
+          attributes: ['id', 'user_id', 'photo_url', 'type'],
+        },
+      ],
+      attributes: ['id', 'content', 'created_at', 'updated_at', 'user_id'],
     },
     {
       model: Milestone,
