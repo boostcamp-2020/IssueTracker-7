@@ -9,14 +9,27 @@ import UIKit
 
 class BackEndOAuthManager {
         
-    // 백엔드에 요청할 Url
-    let authenticateUrl = ""
+    private let router = Router<BackEndAPI>()
+    var handler: (() -> ())?
     
-    /*
-     백엔드 서버로 request -> url 받으면 open 하고 인증 -> Scenedelegate 에서 받음
-     */
-    func request() {
-        
+    init() {
+        setUpNotificationCenter()
+    }
+    
+    func setUpNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveToken), name: Notification.Name.backEndTokenReceived, object: nil)
+    }
+    
+    @objc func receiveToken() {
+        if let handler = handler { handler() }
+    }
+    
+    
+}
+
+extension BackEndOAuthManager: OAuthable {
+    func requestAuthorization() {
+        router.openSite(from: .token)
     }
     
     

@@ -8,20 +8,26 @@
 import UIKit
 
 final class IssueListViewController: UIViewController {
+   
+    // MARK: - Property
+    
+    @IBOutlet private var collectionView: UICollectionView!
+    private var issueDataList: [IssueData] = []
 
     
-    @IBOutlet var collectionView: UICollectionView!
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        setUpIssueData()
         
         collectionView.layoutIfNeeded()
         configureLayout()
-        
     }
+    
+    
+    // MARK: - Method
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "IssueListToFilter" {
@@ -45,42 +51,66 @@ final class IssueListViewController: UIViewController {
     }
 }
 
+
+// MARK: - Extension
+
 extension IssueListViewController {
+    
+    private func setUpIssueData() {
+        BackEndAPIManager.shared.requestAllIssues() { result in
+            switch result {
+            case .success(let issues):
+                self.issueDataList = issues
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func configureLayout() {
+        let spacing: CGFloat = 10
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewFlowLayout.itemSize = CGSize(width: collectionView.bounds.size.width, height: 100)
-        collectionViewFlowLayout.minimumLineSpacing = 2
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0)
+        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width-30, height: 50)
+        collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: 50)
+        collectionViewFlowLayout.minimumLineSpacing = spacing
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: 0, right: 0)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
 }
 
 extension IssueListViewController: UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return issueDataList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
+        cell.configure(issueData: issueDataList[indexPath.row])
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let headerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: "searchBarHeader",
+                for: indexPath)
+        
+        return headerView
     }
 }
 
-extension IssueListViewController: UICollectionViewDelegate {
-    
+extension IssueListViewController: UICollectionViewDelegate { }
+
+extension IssueListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("입력")
+    }
 }
 
-final class IssueCell: UICollectionViewCell {
-    
-    static let reuseIdentifier = String(describing: IssueCell.self)
-    @IBOutlet var title: UILabel!
-    @IBOutlet var content: UILabel!
-    @IBOutlet var milestone: UIButton!
-    @IBOutlet var label: UIButton!
-    
-}
+
