@@ -199,13 +199,3 @@ extension ManageLabelModalViewController: UIColorPickerViewControllerDelegate {
         thirdTextField.text = viewController.selectedColor.toHex
     }
 }
-
-// MARK: - Validation 로직을 사용하기 위한 익스텐션
-extension UITextField {
-    @discardableResult
-    func validatedText(validationType: ValidatorType) throws -> String {
-        
-        let validator = ValidatorFactory.validatorFor(type: validationType)
-        return try validator.validate(self.text!)
-    }
-}
