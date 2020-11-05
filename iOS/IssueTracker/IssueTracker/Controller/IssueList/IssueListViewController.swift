@@ -93,7 +93,16 @@ extension IssueListViewController: UICollectionViewDataSource {
         
         return cell
     }
-    
+}
+
+extension IssueListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "DetailIssueList", bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: "DetailIssueListController")
+        
+        navigationController?.pushViewController(viewController, animated: true)
+
+    }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let headerView = collectionView.dequeueReusableSupplementaryView(
@@ -102,6 +111,7 @@ extension IssueListViewController: UICollectionViewDataSource {
                 for: indexPath)
         
         return headerView
+
     }
 }
 
