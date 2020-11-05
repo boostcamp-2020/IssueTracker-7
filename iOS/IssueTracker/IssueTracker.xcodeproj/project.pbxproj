@@ -13,6 +13,7 @@
 		33151F2A25499E04006B94A9 /* NanumSquareRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33151F2625499E04006B94A9 /* NanumSquareRegular.ttf */; };
 		33151F3E254A6464006B94A9 /* FilteringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F3D254A6464006B94A9 /* FilteringController.swift */; };
 		33151F43254A6E55006B94A9 /* FilteringTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F42254A6E55006B94A9 /* FilteringTableViewController.swift */; };
+		3322CF7E25539E3B0022ABA6 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322CF7D25539E3B0022ABA6 /* Comment.swift */; };
 		3328A979254B14F600126761 /* EndPointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328A978254B14F600126761 /* EndPointable.swift */; };
 		3328A97F254B155000126761 /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328A97E254B155000126761 /* GithubAPI.swift */; };
 		33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C392547E70E00E8A8E8 /* AppDelegate.swift */; };
@@ -81,6 +82,7 @@
 		33151F2625499E04006B94A9 /* NanumSquareRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRegular.ttf; sourceTree = "<group>"; };
 		33151F3D254A6464006B94A9 /* FilteringController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringController.swift; sourceTree = "<group>"; };
 		33151F42254A6E55006B94A9 /* FilteringTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringTableViewController.swift; sourceTree = "<group>"; };
+		3322CF7D25539E3B0022ABA6 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		3328A978254B14F600126761 /* EndPointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointable.swift; sourceTree = "<group>"; };
 		3328A97E254B155000126761 /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
 		33375C362547E70E00E8A8E8 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -371,6 +373,7 @@
 				3358A5AC254FDDFB008CEFA3 /* LabelsInfo.swift */,
 				3358A5B9254FE5AD008CEFA3 /* AssigneesInfo.swift */,
 				3358A5C4254FE724008CEFA3 /* FilterInfo.swift */,
+				3322CF7D25539E3B0022ABA6 /* Comment.swift */,
 			);
 			path = FilterConditions;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
 				33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */,
+				3322CF7E25539E3B0022ABA6 /* Comment.swift in Sources */,
 				3358A593254EEBDF008CEFA3 /* DetailConditionTableViewController.swift in Sources */,
 				3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */,
 				3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */,

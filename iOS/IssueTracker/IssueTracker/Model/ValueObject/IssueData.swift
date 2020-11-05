@@ -20,7 +20,7 @@ struct IssueData: Codable {
     let labels: [Label]?
     let assignees: [Assignee]?
     let author: Author?
-    let comments: [String]  // TODO: 데이터 뭘로 올지 확실치 않으므로 추후 수정 필요할 수도 있음
+    let comments: [Comment]
     let milestone: Milestone
 
     enum CodingKeys: String, CodingKey {
