@@ -7,10 +7,13 @@
 
 import UIKit
 
-final class DetailIssueHeaderCell: UICollectionViewCell {
+final class DetailIssueTopCell: UICollectionViewCell {
     
-    static let reuseIdentifier = String(describing: DetailIssueCell.self)
-    @IBOutlet weak var label: UILabel!
+    static let reuseIdentifier = String(describing: DetailIssueTopCell.self)
+    @IBOutlet weak var userId: UILabel!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var issueNumber: UILabel!
+    
     
     // MARK: - Initializer
     
@@ -24,19 +27,20 @@ final class DetailIssueHeaderCell: UICollectionViewCell {
         
     }
     
-    static func configureCell(cell: DetailIssueCell, data: DetailIssueInfo) {
+    static func configureCell(cell: DetailIssueTopCell, data: DetailIssueInfo) {
         
-        cell.label.text = data.name
-        
+        cell.userId.text = "sampleId"
+        cell.title.text = "곧 완성될 제목"
     }
-    
 }
 
 
-final class DetailIssueHeaderCell: UICollectionViewCell {
+final class DetailIssueCell: UICollectionViewCell {
     
     static let reuseIdentifier = String(describing: DetailIssueCell.self)
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var userId: UILabel!
+    @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var content: UITextView!
     
     // MARK: - Initializer
     
@@ -52,7 +56,7 @@ final class DetailIssueHeaderCell: UICollectionViewCell {
     
     static func configureCell(cell: DetailIssueCell, data: DetailIssueInfo) {
         
-        cell.label.text = data.name
+        cell.userId.text = "sample_id2"
         
     }
     
