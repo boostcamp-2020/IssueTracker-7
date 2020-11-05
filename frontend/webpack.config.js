@@ -3,12 +3,15 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const port = process.env.PORT || 3000;
-
+const port = process.env.PORT || 80;
 module.exports = {
   mode: 'development',
   entry: './src/index',
   output: {
+    path: path.join(
+      __dirname + process.env.DIST_PATH || '',
+      process.env.DIST_PATH ? 'public' : 'dist'
+    ),
     filename: 'bundle.js',
   },
 
@@ -17,6 +20,8 @@ module.exports = {
     alias: {
       '@components': path.resolve(__dirname, './src/components'),
       '@pages': path.resolve(__dirname, './src/pages'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@styles': path.resolve(__dirname, './src/styles'),
     },
   },
 
@@ -43,7 +48,10 @@ module.exports = {
 
   devServer: {
     host: process.env.HOST,
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(
+      __dirname + process.env.DIST_PATH || '',
+      process.env.DIST_PATH ? 'public' : 'dist'
+    ),
     port: port,
     open: true,
     hot: true,
@@ -58,4 +66,5 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
   ],
+  devtool: 'cheap-module-source-map',
 };
