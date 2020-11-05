@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BackEndOAuthManager {
+class AuthenticationManager {
         
     // 백엔드에 요청할 Url
     let authenticateUrl = ""
