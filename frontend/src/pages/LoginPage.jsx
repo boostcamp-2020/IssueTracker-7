@@ -1,16 +1,26 @@
 import React from 'react';
-import GithubButton from '../components/login/GithubButton';
-import{ FontAwesomeIcon }from"@fortawesome/react-fontawesome";
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import styled from 'styled-components';
+import LoginForm from '../components/login/Form';
+import '../style/LoginPage.css';
 
 const LoginPage = () => {
-    const handleGitHubLogin = () => {
-        location.href = '/api/auth/github/web';
-    };
-    return (
-        <GithubButton onClick={handleGitHubLogin}>
-            Sign with GitHub <FontAwesomeIcon icon={faGithub} />
-        </GithubButton>
+    const LoginPage = styled.div`
+        width: fit-content;
+        padding-left: 40%;
+        padding-top: 100px;
+    `;
+
+    const LoginTitle = styled.p`
+        font-weight: bold;
+        font-size: 25px;
+        text-align: center;
+    `;
+
+    return ( 
+        <LoginPage>
+            <LoginTitle>이슈 트래커</LoginTitle>
+            <LoginForm></LoginForm>
+        </LoginPage>
     );
 };
 
