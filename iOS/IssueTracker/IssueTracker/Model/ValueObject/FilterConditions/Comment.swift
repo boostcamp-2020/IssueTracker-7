@@ -9,32 +9,16 @@ import Foundation
 
 struct Comment: Codable {
     let id: Int
-    let content, createdAt, updatedAt: String
-    let deletedAt: String?
-    let userID, issueID: Int
-    let mentions: Mentions
+    let content, createdAt, updatedAt: String?
+    let userID: Int
+    let mentions: Assignee
 
     enum CodingKeys: String, CodingKey {
-        case id, content, createdAt, updatedAt, deletedAt
+        case id, content
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
         case userID = "user_id"
-        case issueID = "issue_id"
         case mentions
     }
 }
 
-struct Mentions: Codable {
-    let id: Int
-    let userID: String
-    let password, photoURL: String?
-    let type: String
-    let createdAt, updatedAt: String
-    let deletedAt: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case userID = "user_id"
-        case password
-        case photoURL = "photo_url"
-        case type, createdAt, updatedAt, deletedAt
-    }
-}

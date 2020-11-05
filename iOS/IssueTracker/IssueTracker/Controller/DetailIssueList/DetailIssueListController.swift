@@ -16,6 +16,10 @@ final class DetailIssueListController: UIViewController {
         case expanded
     }
     
+    enum Section {
+        case main
+    }
+    
     
     // MARK: - Property
     
@@ -33,15 +37,19 @@ final class DetailIssueListController: UIViewController {
     lazy var cardLatestY : CGFloat = cardEndY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
     var cardCurrentState: CardState = .collapsed
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>! = nil
+    
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpDimmerView()
         
-        dimmerView.isUserInteractionEnabled = false
-        dimmerView.alpha = 0
+        configureCollectionView()
+        configureDataSource()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,6 +67,11 @@ final class DetailIssueListController: UIViewController {
     
     
     // MARK: - Method
+    
+    func setUpDimmerView() {
+        dimmerView.isUserInteractionEnabled = false
+        dimmerView.alpha = 0
+    }
     
     func setupCard() {
         tabBarController?.view.addSubview(dimmerView)
@@ -146,6 +159,66 @@ final class DetailIssueListController: UIViewController {
     
         frameAnimator.startAnimation()
     }
-    
 }
 
+// MARK: collectionView
+
+extension DetailIssueListController {
+    
+    private func createLayout() -> UICollectionViewLayout {
+//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+//                                             heightDimension: .fractionalHeight(1.0))
+//        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//
+//        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+//                                              heightDimension: .fractionalWidth(0.2))
+//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+//                                                         subitems: [item])
+//
+//        let section = NSCollectionLayoutSection(group: group)
+//
+//        let layout = UICollectionViewCompositionalLayout(section: section)
+//        return layout
+        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        return UICollectionViewCompositionalLayout.list(using: config)
+    }
+    
+    private func configureCollectionView() {
+        collectionView.collectionViewLayout = createLayout()
+    }
+    
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, DetailIssueInfo>(collectionView: collectionView) {
+            (collectionView, indexPath, item) -> UICollectionViewCell? in
+            
+            switch indexPath.row {
+            case 0:
+                // TODO: 이 부분은 추후에 HeaderView 로 수정필요
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueTopCell.reuseIdentifier, for: indexPath) as? DetailIssueTopCell else {
+                    fatalError("Cannot create new cell")
+                }
+                DetailIssueTopCell.configureCell(cell: cell, data: item)
+                return cell
+            default:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueCell.reuseIdentifier, for: indexPath) as? DetailIssueCell else {
+                    fatalError("Cannot create new cell")
+                }
+                DetailIssueCell.configureCell(cell: cell, data: item)
+                return cell
+            }
+        }
+        
+        let dummy = [DetailIssueInfo(id: 1, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 2, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 3, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 4, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 5, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 6, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플"))]
+        
+        // initial data
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailIssueInfo>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(dummy)
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
