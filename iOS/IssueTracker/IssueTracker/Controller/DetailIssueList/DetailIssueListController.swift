@@ -16,6 +16,10 @@ final class DetailIssueListController: UIViewController {
         case expanded
     }
     
+    enum Section {
+        case main
+    }
+    
     
     // MARK: - Property
     
@@ -33,6 +37,9 @@ final class DetailIssueListController: UIViewController {
     lazy var cardLatestY : CGFloat = cardEndY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
     var cardCurrentState: CardState = .collapsed
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
+    
     
     // MARK: - Life Cycle
     
@@ -40,6 +47,9 @@ final class DetailIssueListController: UIViewController {
         super.viewDidLoad()
         
         setUpDimmerView()
+        
+        configureHierarchy()
+        configureDataSource()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,3 +162,46 @@ final class DetailIssueListController: UIViewController {
     
 }
 
+extension DetailIssueListController {
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                             heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalWidth(0.2))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                         subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    private func configureHierarchy() {
+        
+        collectionView.collectionViewLayout = createLayout()
+    }
+    private func configureDataSource() {
+        
+        
+        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueCell.reuseIdentifier, for: indexPath) as? DetailIssueCell else {
+                fatalError("Cannot create new cell")
+            }
+            
+            DetailIssueCell.configureCell(cell: cell, data: "샘플")
+            
+            return cell
+        }
+
+        // initial data
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(Array(0..<5))
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
