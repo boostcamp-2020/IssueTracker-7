@@ -14,7 +14,6 @@
 		33151F3E254A6464006B94A9 /* FilteringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F3D254A6464006B94A9 /* FilteringController.swift */; };
 		33151F43254A6E55006B94A9 /* FilteringTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F42254A6E55006B94A9 /* FilteringTableViewController.swift */; };
 		3322CF7E25539E3B0022ABA6 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322CF7D25539E3B0022ABA6 /* Comment.swift */; };
-		3322CFA52553B8810022ABA6 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322CFA42553B8810022ABA6 /* AppleSignInButton.swift */; };
 		3322CFAA2553B8900022ABA6 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322CFA92553B8900022ABA6 /* AppleSignInButton.swift */; };
 		3328A979254B14F600126761 /* EndPointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328A978254B14F600126761 /* EndPointable.swift */; };
 		3328A97F254B155000126761 /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328A97E254B155000126761 /* GithubAPI.swift */; };
@@ -98,7 +97,6 @@
 		33151F3D254A6464006B94A9 /* FilteringController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringController.swift; sourceTree = "<group>"; };
 		33151F42254A6E55006B94A9 /* FilteringTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringTableViewController.swift; sourceTree = "<group>"; };
 		3322CF7D25539E3B0022ABA6 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		3322CFA42553B8810022ABA6 /* AppleSignInButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppleSignInButton.swift; path = IssueTracker/View/AppleSignInButton/AppleSignInButton.swift; sourceTree = SOURCE_ROOT; };
 		3322CFA92553B8900022ABA6 /* AppleSignInButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 		3328A978254B14F600126761 /* EndPointable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointable.swift; sourceTree = "<group>"; };
 		3328A97E254B155000126761 /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
@@ -442,7 +440,6 @@
 		3393E0D025530B0B003DCDA4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				3322CFA42553B8810022ABA6 /* AppleSignInButton.swift */,
 				3393E0D125530B33003DCDA4 /* IssueCell.swift */,
 			);
 			path = Cell;
@@ -483,8 +480,8 @@
 				712CBEA5255008B700E8F95F /* RegisterIssueViewController.swift */,
 			);
 			path = RegisterIssue;
-               sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		7130A68E2551636900EE2141 /* ManageLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,8 +660,7 @@
 				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
 				712CBEA6255008B700E8F95F /* RegisterIssueViewController.swift in Sources */,
-				33375CB725487A1700E8A8E8 /* AppleSignInButton.swift in Sources */,
-				3358A57C254ED757008CEFA3 /* StoryboardName.swift in Sources */,
+				3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */,
 				333FE2AA25515167000C0F0B /* DetailIssueListController.swift in Sources */,
 				7130A6A025527E8900EE2141 /* ManageLabelModalView.swift in Sources */,
 				7130A69525516AC500EE2141 /* ManageLabelViewController.swift in Sources */,
@@ -695,7 +691,6 @@
 				7130A6D12552CD0F00EE2141 /* InputValidator.swift in Sources */,
 				339892B22549876B00D9FB63 /* UserInfo.swift in Sources */,
 				7130A6CC2552A2A700EE2141 /* UIColor+.swift in Sources */,
-				3322CFA52553B8810022ABA6 /* AppleSignInButton.swift in Sources */,
 				3322CFAA2553B8900022ABA6 /* AppleSignInButton.swift in Sources */,
 				339892A125497CB400D9FB63 /* UserDefault.swift in Sources */,
 				3393E09525523D29003DCDA4 /* CardView.swift in Sources */,

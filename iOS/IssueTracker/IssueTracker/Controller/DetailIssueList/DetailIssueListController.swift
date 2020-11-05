@@ -39,9 +39,7 @@ final class DetailIssueListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        dimmerView.isUserInteractionEnabled = false
-        dimmerView.alpha = 0
+        setUpDimmerView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,6 +57,11 @@ final class DetailIssueListController: UIViewController {
     
     
     // MARK: - Method
+    
+    func setUpDimmerView() {
+        dimmerView.isUserInteractionEnabled = false
+        dimmerView.alpha = 0
+    }
     
     func setupCard() {
         tabBarController?.view.addSubview(dimmerView)
