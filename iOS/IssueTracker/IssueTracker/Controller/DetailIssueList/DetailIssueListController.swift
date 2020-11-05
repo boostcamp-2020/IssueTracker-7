@@ -38,7 +38,7 @@ final class DetailIssueListController: UIViewController {
     var cardCurrentState: CardState = .collapsed
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
+    var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>! = nil
     
     
     // MARK: - Life Cycle
@@ -48,7 +48,7 @@ final class DetailIssueListController: UIViewController {
         
         setUpDimmerView()
         
-        configureHierarchy()
+        configureCollectionView()
         configureDataSource()
     }
     
@@ -159,49 +159,69 @@ final class DetailIssueListController: UIViewController {
     
         frameAnimator.startAnimation()
     }
-    
 }
 
+// MARK: collectionView 세팅
+
 extension DetailIssueListController {
+    
     private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                             heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalWidth(0.2))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                         subitems: [item])
-
-        let section = NSCollectionLayoutSection(group: group)
-
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+//                                             heightDimension: .fractionalHeight(1.0))
+//        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//
+//        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+//                                              heightDimension: .fractionalWidth(0.2))
+//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+//                                                         subitems: [item])
+//
+//        let section = NSCollectionLayoutSection(group: group)
+//
+//        let layout = UICollectionViewCompositionalLayout(section: section)
+//        return layout
+        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        return UICollectionViewCompositionalLayout.list(using: config)
     }
     
-    private func configureHierarchy() {
+    private func configureCollectionView() {
         
         collectionView.collectionViewLayout = createLayout()
     }
+    
     private func configureDataSource() {
         
         
-        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, DetailIssueInfo>(collectionView: collectionView) {
+            (collectionView, indexPath, item) -> UICollectionViewCell? in
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueCell.reuseIdentifier, for: indexPath) as? DetailIssueCell else {
-                fatalError("Cannot create new cell")
+            switch indexPath.row {
+            case 0:
+                // TODO: 이 부분은 추후에 HeaderView 로 수정필요
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueTopCell.reuseIdentifier, for: indexPath) as? DetailIssueTopCell else {
+                    fatalError("Cannot create new cell")
+                }
+                DetailIssueTopCell.configureCell(cell: cell, data: item)
+                return cell
+            default:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueCell.reuseIdentifier, for: indexPath) as? DetailIssueCell else {
+                    fatalError("Cannot create new cell")
+                }
+                DetailIssueCell.configureCell(cell: cell, data: item)
+                return cell
             }
-            
-            DetailIssueCell.configureCell(cell: cell, data: "샘플")
-            
-            return cell
         }
-
+        
+        let dummy = [DetailIssueInfo(id: 1, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 2, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 3, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 4, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 5, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
+                     DetailIssueInfo(id: 6, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플"))]
+        
         // initial data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailIssueInfo>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(Array(0..<5))
+        snapshot.appendItems(dummy)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
