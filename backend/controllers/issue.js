@@ -138,7 +138,16 @@ exports.getAll = async (req, res) => {
 
 exports.getOne = (req, res) => {
   const issue_id = req.params.issue_id;
-  return Issue.findByPk(issue_id)
+  return Issue.findByPk(issue_id, {
+    attributes: ['id', 'title', 'status', 'created_at', 'updated_at'],
+    include: [
+      {
+        model: User,
+        as: 'author',
+        attributes: ['id', 'user_id', 'photo_url', 'type'],
+      },
+    ],
+  })
     .then((issue) => {
       if (issue) res.status(200).json(issue);
       else res.status(401).send('유효하지 않은 Label 입니다.');
