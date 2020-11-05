@@ -84,11 +84,11 @@ db.Label.belongsToMany(db.Issue, {
 db.Comment.belongsTo(db.User, {
   as: 'mentions',
   foreignKey: 'user_id',
-  sourceKey: 'id',
+  targetKey: 'id',
 });
 db.Comment.belongsTo(db.Issue, {
   foreignKey: 'issue_id',
-  sourceKey: 'id',
+  targetKey: 'id',
 });
 
 db.Milestone.hasMany(db.Issue, {
