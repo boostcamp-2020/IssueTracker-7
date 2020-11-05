@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import LoginForm from '../components/login/Form';
-import '../style/LoginPage.css';
+import '@styles/LoginPage.css';
 
 const LoginPage = () => {
+
     const LoginPage = styled.div`
         width: fit-content;
         padding-left: 40%;
