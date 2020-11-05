@@ -115,8 +115,6 @@ extension IssueListViewController: UICollectionViewDelegate {
     }
 }
 
-extension IssueListViewController: UICollectionViewDelegate { }
-
 extension IssueListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("입력")
