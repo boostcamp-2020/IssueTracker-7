@@ -15,7 +15,7 @@ const Button = styled.button`
 
 const GithubButton = ({ onClick, children }) => {
     return (
-        <Button onClick={onClick}>{children}</Button>
+        <Button onClick={onClick}>{children}{image}</Button>
     );
 };
 
