@@ -21,7 +21,7 @@ class SignInController: UIViewController {
     }
     
     func setUpNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: Notification.Name.loginSuccessReceived, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: Notification.Name.backEndTokenReceived, object: nil)
     }
     
     @IBAction func githubLogin(_ sender: Any) {
@@ -30,7 +30,8 @@ class SignInController: UIViewController {
                 self.loginSuccess()
             }
         }
-        oauth = OAuthManager(oauth: GithubOAuthManager(), handler: handler)
+//        oauth = OAuthManager(oauth: GithubOAuthManager(), handler: handler)
+        oauth = OAuthManager(oauth: BackEndOAuthManager(), handler: handler)
         oauth?.requestAuthorization()
     }
 }
@@ -51,9 +52,9 @@ extension SignInController {
     
     @objc func loginSuccess() {
         // notification 오는 경우 로그인 성공으로 간주, 여기서 다음 화면으로 전환
-        let storyboard: UIStoryboard = UIStoryboard(name: StoryboardName.issueList, bundle: nil)
+        let storyboard: UIStoryboard = UIStoryboard(name: StoryboardID.main, bundle: nil)
         let viewController = storyboard.instantiateViewController(
-            withIdentifier: StoryboardName.issueListStoryboardInitialViewController
+            withIdentifier: StoryboardID.initialTabBarController
         )
         
         viewController.modalPresentationStyle = .fullScreen

@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum PreSpecifiedCondition {
+enum PreSpecifiedCondition: CaseIterable {
     case openIssue
     case myIssue
     case assignedIssue
@@ -22,12 +22,14 @@ protocol SendFilterConditionDelegate: AnyObject {
 class FilteringTableViewController: UITableViewController {
     
     weak var delegate: SendFilterConditionDelegate?
+    var detailFilterInfo: FilterInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+//    let types: [Codable.Type] = [Author.self, Label.self, Milestone.self, Assignee.self]
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -45,25 +47,34 @@ class FilteringTableViewController: UITableViewController {
             let cell = tableView.cellForRow(at: indexPath)
             cell?.accessoryType = .checkmark
             
-            switch indexPath.row {
-            case 0:
-                delegate?.sendPreSpecified(condition: .openIssue)
-            case 1:
-                delegate?.sendPreSpecified(condition: .myIssue)
-            case 2:
-                delegate?.sendPreSpecified(condition: .assignedIssue)
-            case 3:
-                delegate?.sendPreSpecified(condition: .commentedIssue)
-            case 4:
-                delegate?.sendPreSpecified(condition: .closedIssued)
-            default:
-                break
-            }
+            let condition = PreSpecifiedCondition.allCases[indexPath.row]
+            delegate?.sendPreSpecified(condition: condition)
+        case 1:
+            guard let filterInfo = detailFilterInfo else { return }
+            guard let vc = storyboard?.instantiateViewController(identifier: "DetailConditionTableViewController", creator: { coder in
+                let route = BackEndAPI.allCases[indexPath.row]
+                switch indexPath.row {
+                case 0:
+                    return DetailConditionTableViewController<Author>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                case 1:
+                    return DetailConditionTableViewController<Label>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                case 2:
+                    return DetailConditionTableViewController<Milestone>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                case 3:
+                    return DetailConditionTableViewController<Assignee>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                default:
+                    return nil
+                }
+            }) else { return }
+            
+            navigationController?.pushViewController(vc, animated: true)
+            
         default:
             break
         }
-        
-        
     }
     
+    
+    
 }
+
