@@ -1,6 +1,10 @@
 const passportJWT = require('passport-jwt');
 const ExtractJWT = passportJWT.ExtractJwt;
 require('dotenv').config();
+const ExtractJWTCookieOrHeader = (req) =>
+  req.signedCookies.accessToken
+    ? req.signedCookies.accessToken
+    : ExtractJWT.fromAuthHeaderAsBearerToken()(req);
 
 const fieldOption = {
   usernameField: 'user_id',
@@ -9,7 +13,7 @@ const fieldOption = {
   passReqToCallback: true,
 };
 const JWTOption = {
-  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: ExtractJWTCookieOrHeader,
   secretOrKey: process.env.JWT_SECRET,
 };
 const githubOption = {

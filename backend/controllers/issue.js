@@ -99,7 +99,7 @@ exports.getAll = async (req, res) => {
             title: query.milestone,
           }
         : null,
-      attributes: ['id', 'title', 'due_date'],
+      attributes: ['id', 'title', 'due_date', 'description'],
     },
   ];
 
@@ -120,6 +120,7 @@ exports.getAll = async (req, res) => {
   Issue.findAll({
     where,
     include,
+    attributes: ['id', 'title', 'status', 'created_at', 'updated_at'],
   })
     .then((issues) => {
       let queryResult = issues;
