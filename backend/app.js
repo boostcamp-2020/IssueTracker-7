@@ -8,7 +8,6 @@ const sequelize = require('./models').sequelize;
 const passport = require('passport');
 const passportConfig = require('./middlewares/passport');
 const apiRouter = require('./routes/api');
-const indexRouter = require('./routes/index');
 
 var app = express();
 sequelize.sync();
