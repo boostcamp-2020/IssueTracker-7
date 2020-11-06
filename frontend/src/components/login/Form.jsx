@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import InputBox from './InputBox';
-import FlexBox from '../common/FlexBox';
-import TextButton from '../common/TextButton';
-import GithubButton from './GithubButton';
+import InputBox from '@components/login/InputBox';
+import FlexBox from '@components/common/FlexBox';
+import TextButton from '@components/common/TextButton';
+import GithubButton from '@components/login/GithubButton';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
