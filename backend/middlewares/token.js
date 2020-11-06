@@ -1,10 +1,18 @@
+require('dotenv').config();
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
-exports.verifyToken = (type) => (req, res, next) => {
-  passport.authenticate(type, { session: false }, (err, user, info) => {
+exports.createToken = (req, res, next) => {
+  res.locals.accessToken = jwt.sign(req.user, process.env.JWT_SECRET);
+  res.locals.refreshToken = jwt.sign(req.user, process.env.JWT_SECRET);
+  return next();
+};
+
+exports.verifyToken = (type, option) => (req, res, next) => {
+  passport.authenticate(type ? type : 'local', option, (err, user, info) => {
     if (user) {
-      req.user = user;
-      req.token = info;
+      const { id, type, user_id } = user;
+      req.user = { id, type, user_id };
       return next();
     }
     switch (info ? info.name : null || err.name) {

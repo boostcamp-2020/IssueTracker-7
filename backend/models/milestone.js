@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },
+      description: {
+        type: DataTypes.STRING(400),
+        allowNull: false,
+        defaultValue: '',
+      },
     },
     {
       underscored: true,
