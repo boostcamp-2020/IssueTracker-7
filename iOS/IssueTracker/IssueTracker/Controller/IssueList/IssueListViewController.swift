@@ -89,6 +89,7 @@ extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
+        cell.delegate = self
         cell.configure(issueData: issueDataList[indexPath.row])
         
         return cell
@@ -121,4 +122,14 @@ extension IssueListViewController: UISearchBarDelegate {
     }
 }
 
+extension IssueListViewController: IssueCellDelegate {
+    func IssueListDidInteracted(cell: IssueCell) {
+        guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
+        visibleCells.forEach { visibleCell in
+            if  cell != visibleCell {
+                cell.resetOffset()
+            }
+        }
+    }
+}
 

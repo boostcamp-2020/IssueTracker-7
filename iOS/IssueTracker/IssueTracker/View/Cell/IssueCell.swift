@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol IssueCellDelegate: AnyObject {
+    func IssueListDidInteracted(cell: IssueCell)
+}
+
 final class IssueCell: UICollectionViewCell {
     
     // MARK: - Property
     
     static let reuseIdentifier = String(describing: IssueCell.self)
+    weak var delegate: IssueCellDelegate?
     
     // For swipe
     private lazy var scrollView: UIScrollView = {
@@ -42,6 +47,7 @@ final class IssueCell: UICollectionViewCell {
         return view
     }()
     
+    
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -69,6 +75,9 @@ final class IssueCell: UICollectionViewCell {
     }
     
     private func setUpTapGesture() {
+        let visibleRecognizer = UITapGestureRecognizer(target: self, action: #selector(contentTapped))
+        visibleView.addGestureRecognizer(visibleRecognizer)
+        
         let closeRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeIssue))
         closeView.addGestureRecognizer(closeRecognizer)
         
@@ -76,6 +85,9 @@ final class IssueCell: UICollectionViewCell {
         deleteView.addGestureRecognizer(deleteRecognizer)
     }
     
+    @objc private func contentTapped() {
+        delegate?.IssueListDidInteracted(cell: self)
+    }
     
     @objc private func closeIssue() {
         print("close")
@@ -137,6 +149,12 @@ final class IssueCell: UICollectionViewCell {
     func configure(issueData: IssueData) {
         visibleView.configure(issueData: issueData)
     }
+    
+    func resetOffset() {
+        UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
+            self.scrollView.contentOffset.x = 0
+        }.startAnimation()
+    }
 }
 
 
@@ -145,7 +163,13 @@ final class IssueCell: UICollectionViewCell {
 extension IssueCell: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.bounces = scrollView.contentOffset.x > 0
+        
+        delegate?.IssueListDidInteracted(cell: self)
     }
+    
+    
 }
+
+
 
 
