@@ -19,6 +19,7 @@ final class IssueCell: UICollectionViewCell {
         scrollView.isPagingEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.backgroundColor = .systemRed
         return scrollView
     }()
     
@@ -109,6 +110,23 @@ final class IssueCell: UICollectionViewCell {
             closeView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
             deleteView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2)
         ])
+        
+        addImage(view: closeView, imageName: "xmark.rectangle")
+        addImage(view: deleteView, imageName: "trash")
+    }
+    
+    func addImage(view: UIView, imageName: String) {
+        let image = UIImage(systemName: imageName)
+        let imageView = UIImageView(image: image)
+        imageView.tintColor = .white
+        
+        view.addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     private func setUpView() {
