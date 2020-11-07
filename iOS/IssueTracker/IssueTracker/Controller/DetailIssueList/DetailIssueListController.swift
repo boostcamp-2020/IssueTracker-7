@@ -122,6 +122,8 @@ final class DetailIssueListController: UIViewController {
         
     @objc func handleCardPan (recognizer:UIPanGestureRecognizer) {
 
+        dimmerView.alpha = (1 - (baseView.frame.origin.y - cardMinimumY) / (cardMaximumY - cardMinimumY)) * 0.7
+        
         switch recognizer.state {
         case .began:
             cardLatestY = baseView.frame.origin.y
@@ -156,19 +158,18 @@ final class DetailIssueListController: UIViewController {
     
     func animateCardView (to state: CardState, duration: TimeInterval) {
         
-        // TODO: 추후 UIViewPropertyAnimator fractionComplete 활용해서 더 interactive 하게 만들어보기
         let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) {
             switch state {
             case .expanded:
                 self.baseView.frame.origin.y = self.cardMinimumY
-                self.dimmerView.alpha = 0.7
                 self.dimmerView.isUserInteractionEnabled = true
+                self.dimmerView.alpha = 0.7
                 
                 self.cardCurrentState = .expanded
             case .collapsed:
                 self.baseView.frame.origin.y = self.cardMaximumY
-                self.dimmerView.alpha = 0
                 self.dimmerView.isUserInteractionEnabled = false
+                self.dimmerView.alpha = 0
         
                 self.cardCurrentState = .collapsed
             }
