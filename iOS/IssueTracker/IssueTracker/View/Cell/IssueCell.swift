@@ -169,7 +169,7 @@ final class IssueCell: UICollectionViewCell {
 
 extension IssueCell: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x < 0 {
+        if scrollView.contentOffset.x <= 0 {
             scrollView.contentOffset.x = 0
             scrollView.bounces = false
         } else {
