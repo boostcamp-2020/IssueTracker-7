@@ -9,6 +9,7 @@ import UIKit
 
 protocol IssueCellDelegate: AnyObject {
     func issueListDidInteracted(cell: IssueCell)
+    func issueListDidTapped(cell: IssueCell)
 }
 
 final class IssueCell: UICollectionViewCell {
@@ -86,6 +87,7 @@ final class IssueCell: UICollectionViewCell {
     }
     
     @objc private func contentTapped() {
+        delegate?.issueListDidTapped(cell: self)
         delegate?.issueListDidInteracted(cell: self)
     }
     
@@ -151,10 +153,15 @@ final class IssueCell: UICollectionViewCell {
     }
     
     func resetOffset() {
-        UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
+        UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
             self.scrollView.contentOffset.x = 0
         }.startAnimation()
     }
+    
+    func isSwiped() -> Bool {
+        scrollView.contentOffset.x != 0
+    }
+    
 }
 
 

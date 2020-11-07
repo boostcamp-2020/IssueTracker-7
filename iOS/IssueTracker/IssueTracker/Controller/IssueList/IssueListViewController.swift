@@ -97,13 +97,7 @@ extension IssueListViewController: UICollectionViewDataSource {
 }
 
 extension IssueListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailIssueList", bundle: nil)
-        let viewController = storyboard.instantiateViewController(identifier: "DetailIssueListController")
-        
-        navigationController?.pushViewController(viewController, animated: true)
-
-    }
+   
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let headerView = collectionView.dequeueReusableSupplementaryView(
@@ -112,17 +106,18 @@ extension IssueListViewController: UICollectionViewDelegate {
                 for: indexPath)
         
         return headerView
-
     }
 }
 
 extension IssueListViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("입력")
     }
 }
 
 extension IssueListViewController: IssueCellDelegate {
+    
     func issueListDidInteracted(cell: IssueCell) {
         guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
         visibleCells.forEach { visibleCell in
@@ -130,6 +125,19 @@ extension IssueListViewController: IssueCellDelegate {
                 visibleCell.resetOffset()
             }
         }
+    }
+    
+    func issueListDidTapped(cell: IssueCell) {
+        
+        guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
+        for visibleCell in visibleCells {
+            if visibleCell.isSwiped() { return }
+        }
+        
+        let storyboard = UIStoryboard(name: "DetailIssueList", bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: "DetailIssueListController")
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
