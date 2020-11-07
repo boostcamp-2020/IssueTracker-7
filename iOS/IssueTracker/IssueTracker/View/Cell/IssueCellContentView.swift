@@ -31,12 +31,12 @@ class IssueCellContentView: UIView {
         }
     }
     
-    func hexStringToUIColor (hex: String) -> UIColor {
+    private func hexStringToUIColor (hex: String) -> UIColor {
         var rgbValue: UInt64 = 0
         let droppedString = hex.dropFirst()
 
         Scanner(string: String(droppedString)).scanHexInt64(&rgbValue)
-
+        
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
@@ -63,7 +63,7 @@ class IssueCellContentView: UIView {
         }
     }
     
-    func loadViewFromNib() -> UIView? {
+    private func loadViewFromNib() -> UIView? {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: IssueCellContentView.self), bundle: bundle)
         return nib.instantiate(
@@ -71,7 +71,7 @@ class IssueCellContentView: UIView {
                     options: nil).first as? UIView
     }
     
-    func xibSetup() {
+    private func xibSetup() {
         guard let view = loadViewFromNib() else { return }
         view.frame = bounds
         addSubview(view)
