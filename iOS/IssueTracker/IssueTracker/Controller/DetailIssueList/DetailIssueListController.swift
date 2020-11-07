@@ -31,10 +31,10 @@ final class DetailIssueListController: UIViewController {
         return dimmerView
     }()
     
-    lazy var cardStartY: CGFloat = view.bounds.height * 0.1
-    lazy var cardEndY: CGFloat = view.bounds.height * 0.85
+    lazy var cardMinimumY: CGFloat = view.bounds.height * 0.1
+    lazy var cardMaximumY: CGFloat = view.bounds.height * 0.85
     
-    lazy var cardLatestY : CGFloat = cardEndY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
+    lazy var cardLatestY : CGFloat = cardMaximumY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
     var cardCurrentState: CardState = .collapsed
     
     @IBOutlet weak var collectionView: UICollectionView!
