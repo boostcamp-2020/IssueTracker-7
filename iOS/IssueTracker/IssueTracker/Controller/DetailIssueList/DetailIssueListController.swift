@@ -137,6 +137,7 @@ final class DetailIssueListController: UIViewController {
                 baseView.frame.origin.y = cardLatestY + translation.y
             }
         case .ended:
+            // velocity 기준 자동 확대 / 축소
             let velocity = recognizer.velocity(in: baseView)
             if velocity.y > 1000 {
                 animateCardView(to: .collapsed, withDuration: 0.2, bounce: bounce)
@@ -146,6 +147,7 @@ final class DetailIssueListController: UIViewController {
                 return
             }
     
+            // CardView Y 좌표 기준 자동 확대 / 축소
             let cardMidY = cardMinimumY + (cardMaximumY - cardMinimumY) / 2
             
             if (cardMinimumY...cardMidY) ~= baseView.frame.origin.y {
