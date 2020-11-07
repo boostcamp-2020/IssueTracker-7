@@ -123,12 +123,22 @@ extension IssueListViewController: UISearchBarDelegate {
 }
 
 extension IssueListViewController: IssueCellDelegate {
-    func IssueListDidInteracted(cell: IssueCell) {
+    func issueListDidInteracted(cell: IssueCell) {
         guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
         visibleCells.forEach { visibleCell in
             if  cell != visibleCell {
-                cell.resetOffset()
+                visibleCell.resetOffset()
             }
+        }
+    }
+}
+
+extension IssueListViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
+        visibleCells.forEach { visibleCell in
+            visibleCell.resetOffset()
         }
     }
 }
