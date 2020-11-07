@@ -25,6 +25,8 @@ final class DetailIssueListController: UIViewController {
     
     var cardView: CardView = CardView()
     var baseView = UIView()
+    let bounce: CGFloat = 10
+    let maximumAlpha: CGFloat = 0.7
     
     lazy var dimmerView: UIView = {
         let dimmerView = UIView()
@@ -76,7 +78,7 @@ final class DetailIssueListController: UIViewController {
     }
     
     func addGesture() {
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(recognizer:)))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(baseViewPanned))
         baseView.addGestureRecognizer(panGestureRecognizer)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dimmerViewTapped))
@@ -93,7 +95,7 @@ final class DetailIssueListController: UIViewController {
             x: 0,
             y: view.bounds.height,
             width: self.view.bounds.width,
-            height: self.view.frame.height - cardMinimumY
+            height: self.view.frame.height - cardMinimumY + bounce
         )
         
         UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
@@ -117,12 +119,12 @@ final class DetailIssueListController: UIViewController {
     }
     
     @objc func dimmerViewTapped() {
-        animateCardView(to: .collapsed, duration: 0.1) // 최소화
+        animateCardView(to: .collapsed, withDuration: 0.1) // 최소화
     }
         
-    @objc func handleCardPan (recognizer:UIPanGestureRecognizer) {
+    @objc func baseViewPanned (recognizer:UIPanGestureRecognizer) {
 
-        dimmerView.alpha = (1 - (baseView.frame.origin.y - cardMinimumY) / (cardMaximumY - cardMinimumY)) * 0.7
+        dimmerView.alpha = (1 - (baseView.frame.origin.y - cardMinimumY) / (cardMaximumY - cardMinimumY)) * maximumAlpha
         
         switch recognizer.state {
         case .began:
@@ -137,37 +139,37 @@ final class DetailIssueListController: UIViewController {
         case .ended:
             let velocity = recognizer.velocity(in: baseView)
             if velocity.y > 1000 {
-                animateCardView(to: .collapsed, duration: 0.15)
+                animateCardView(to: .collapsed, withDuration: 0.2, bounce: bounce)
                 return
             } else if velocity.y < -1000 {
-                animateCardView(to: .expanded, duration: 0.15)
+                animateCardView(to: .expanded, withDuration: 0.2, bounce: bounce)
                 return
             }
     
             let cardMidY = cardMinimumY + (cardMaximumY - cardMinimumY) / 2
             
             if (cardMinimumY...cardMidY) ~= baseView.frame.origin.y {
-                animateCardView(to: .expanded, duration: 0.15)
+                animateCardView(to: .expanded, withDuration: 0.2)
             } else {
-                animateCardView(to: .collapsed, duration: 0.15)
+                animateCardView(to: .collapsed, withDuration: 0.2)
             }
         default:
             break
         }
     }
     
-    func animateCardView (to state: CardState, duration: TimeInterval) {
+    func animateCardView (to state: CardState, withDuration duration: TimeInterval, bounce: CGFloat = 0) {
         
-        let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) {
+        let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
             switch state {
             case .expanded:
-                self.baseView.frame.origin.y = self.cardMinimumY
+                self.baseView.frame.origin.y = self.cardMinimumY - bounce
                 self.dimmerView.isUserInteractionEnabled = true
-                self.dimmerView.alpha = 0.7
+                self.dimmerView.alpha = self.maximumAlpha
                 
                 self.cardCurrentState = .expanded
             case .collapsed:
-                self.baseView.frame.origin.y = self.cardMaximumY
+                self.baseView.frame.origin.y = self.cardMaximumY + bounce
                 self.dimmerView.isUserInteractionEnabled = false
                 self.dimmerView.alpha = 0
         
@@ -175,8 +177,22 @@ final class DetailIssueListController: UIViewController {
             }
         }
         
+        if bounce != 0 {
+            frameAnimator.addCompletion { _ in
+                switch state {
+                case .expanded:
+                    UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
+                        self.baseView.frame.origin.y = self.cardMinimumY
+                    }.startAnimation()
+                case .collapsed:
+                    UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
+                        self.baseView.frame.origin.y = self.cardMaximumY
+                    }.startAnimation()
+                }
+            }
+        }
+        
         cardLatestY = baseView.frame.origin.y
-    
         frameAnimator.startAnimation()
     }
 }
