@@ -83,11 +83,11 @@ final class DetailIssueListController: UIViewController {
             x: 0,
             y: view.bounds.height,
             width: self.view.bounds.width,
-            height: self.view.frame.height - cardStartY
+            height: self.view.frame.height - cardMinimumY
         )
         
         UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
-            self.cardView.frame.origin.y = self.cardEndY
+            self.cardView.frame.origin.y = self.cardMaximumY
         }.startAnimation()
 
         cardView.clipsToBounds = true
@@ -101,13 +101,14 @@ final class DetailIssueListController: UIViewController {
         dimmerView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    @objc
-    func dimmerViewTapped() {
-        animateTransitionIfNeeded(state: .collapsed, duration: 0.1) // 최소화
+    
+    @objc func dimmerViewTapped() {
+        animateCardView(to: .collapsed, duration: 0.1) // 최소화
     }
     
-    @objc
-    func handleCardPan (recognizer:UIPanGestureRecognizer) {
+    var frameAnimator = UIViewPropertyAnimator()
+    
+    @objc func handleCardPan (recognizer:UIPanGestureRecognizer) {
 
         switch recognizer.state {
         case .began:
@@ -116,38 +117,44 @@ final class DetailIssueListController: UIViewController {
             let translation = recognizer.translation(in: cardView)
             let expectedY = cardLatestY + translation.y
             
-            if (cardStartY...cardEndY) ~= expectedY {
+            if (cardMinimumY...cardMaximumY) ~= expectedY {
                 cardView.frame.origin.y = cardLatestY + translation.y
             }
         case .ended:
-            switch cardCurrentState {
-            case .collapsed:
-                if cardView.frame.origin.y < cardLatestY {
-                    animateTransitionIfNeeded(state: .expanded, duration: 0.1) // 확장
-                }
-            case .expanded:
-                if cardView.frame.origin.y > cardLatestY {
-                    animateTransitionIfNeeded(state: .collapsed, duration: 0.1) // 최소화
-                }
+            let velocity = recognizer.velocity(in: cardView)
+            if velocity.y > 1000 {
+                animateCardView(to: .collapsed, duration: 0.15)
+                return
+            } else if velocity.y < -1000 {
+                animateCardView(to: .expanded, duration: 0.15)
+                return
+            }
+    
+            let cardMidY = cardMinimumY + (cardMaximumY - cardMinimumY) / 2
+            
+            if (cardMinimumY...cardMidY) ~= cardView.frame.origin.y {
+                animateCardView(to: .expanded, duration: 0.15)
+            } else {
+                animateCardView(to: .collapsed, duration: 0.15)
             }
         default:
             break
         }
     }
     
-    func animateTransitionIfNeeded (state: CardState, duration: TimeInterval) {
+    func animateCardView (to state: CardState, duration: TimeInterval) {
         
         // TODO: 추후 UIViewPropertyAnimator fractionComplete 활용해서 더 interactive 하게 만들어보기
-        let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) {
+        frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) {
             switch state {
             case .expanded:
-                self.cardView.frame.origin.y = self.cardStartY
+                self.cardView.frame.origin.y = self.cardMinimumY
                 self.dimmerView.alpha = 0.7
                 self.dimmerView.isUserInteractionEnabled = true
                 
                 self.cardCurrentState = .expanded
             case .collapsed:
-                self.cardView.frame.origin.y = self.cardEndY
+                self.cardView.frame.origin.y = self.cardMaximumY
                 self.dimmerView.alpha = 0
                 self.dimmerView.isUserInteractionEnabled = false
         
@@ -158,6 +165,7 @@ final class DetailIssueListController: UIViewController {
         cardLatestY = cardView.frame.origin.y
     
         frameAnimator.startAnimation()
+        
     }
 }
 
