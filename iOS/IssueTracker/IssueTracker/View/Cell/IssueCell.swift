@@ -24,14 +24,22 @@ final class IssueCell: UICollectionViewCell {
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.frame = bounds
         stackView.axis = .horizontal
         stackView.distribution = .fill
         return stackView
     }()
     
-    private var visibleView: IssueCellContentView!
-    
+    private let visibleView = IssueCellContentView()
+    private var closeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.systemGreen
+        return view
+    }()
+    private var deleteView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.systemRed
+        return view
+    }()
     
     // MARK: - Initializer
     
@@ -47,6 +55,7 @@ final class IssueCell: UICollectionViewCell {
         
         setUpView()
         setUpSwipable()
+        setUpTapGesture()
     }
 
     // MARK: - Method
@@ -55,39 +64,47 @@ final class IssueCell: UICollectionViewCell {
         visibleView.initLabels()
     }
     
+    private func setUpTapGesture() {
+        let closeRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeIssue))
+        closeView.addGestureRecognizer(closeRecognizer)
+        
+        let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteIssue))
+        deleteView.addGestureRecognizer(deleteRecognizer)
+    }
+    
+    
+    @objc private func closeIssue() {
+        print("close")
+    }
+    
+    
+    @objc private func deleteIssue() {
+        print("delete")
+    }
+    
     private func setUpSwipable() {
         addSubview(scrollView)
         scrollView.addSubview(stackView)
 
         scrollView.pinEdgesToSuperView()
         stackView.pinEdgesToSuperView()
-        
-        visibleView = IssueCellContentView()
-        
-        let hiddenView = UIView()
-        hiddenView.backgroundColor = UIColor.blue
-        
-        let hiddenView2 = UIView()
-        hiddenView2.backgroundColor = UIColor.systemRed
-        
+                
         stackView.addArrangedSubview(visibleView)
-        stackView.addArrangedSubview(hiddenView)
-        stackView.addArrangedSubview(hiddenView2)
-        
+        stackView.addArrangedSubview(closeView)
+        stackView.addArrangedSubview(deleteView)
         
         visibleView.translatesAutoresizingMaskIntoConstraints = false
-        hiddenView.translatesAutoresizingMaskIntoConstraints = false
-        hiddenView2.translatesAutoresizingMaskIntoConstraints = false
+        closeView.translatesAutoresizingMaskIntoConstraints = false
+        deleteView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         
         NSLayoutConstraint.activate([
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1.4),
             stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
             visibleView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            hiddenView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
-            hiddenView2.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2)
+            closeView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
+            deleteView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2)
         ])
     }
     
