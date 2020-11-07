@@ -9,10 +9,15 @@ import UIKit
 
 class IssueCellContentView: UIView {
     
+    // MARK: - Property
+    
     @IBOutlet var title: UILabel!
     @IBOutlet var content: UILabel!
     @IBOutlet var milestone: UIButton!
     @IBOutlet weak var labelStackView: UIStackView!
+    
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +28,11 @@ class IssueCellContentView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
+        xibSetup()
     }
+    
+    
+    // MARK: - Method
     
     func initLabels() {
         labelStackView.arrangedSubviews.forEach {
