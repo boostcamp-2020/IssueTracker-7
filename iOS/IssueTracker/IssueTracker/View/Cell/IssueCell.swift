@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IssueCellDelegate: AnyObject {
-    func IssueListDidInteracted(cell: IssueCell)
+    func issueListDidInteracted(cell: IssueCell)
 }
 
 final class IssueCell: UICollectionViewCell {
@@ -86,7 +86,7 @@ final class IssueCell: UICollectionViewCell {
     }
     
     @objc private func contentTapped() {
-        delegate?.IssueListDidInteracted(cell: self)
+        delegate?.issueListDidInteracted(cell: self)
     }
     
     @objc private func closeIssue() {
@@ -170,7 +170,9 @@ extension IssueCell: UIScrollViewDelegate {
         }
     }
     
-    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.issueListDidInteracted(cell: self)
+    }
 }
 
 
