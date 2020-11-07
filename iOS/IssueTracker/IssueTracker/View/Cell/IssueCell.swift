@@ -46,13 +46,16 @@ final class IssueCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        scrollView.delegate = self
         setUpView()
         setUpSwipable()
+        setUpTapGesture()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
+        scrollView.delegate = self
         setUpView()
         setUpSwipable()
         setUpTapGesture()
@@ -115,6 +118,15 @@ final class IssueCell: UICollectionViewCell {
 
     func configure(issueData: IssueData) {
         visibleView.configure(issueData: issueData)
+    }
+}
+
+
+// MARK: - Extension
+
+extension IssueCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.bounces = scrollView.contentOffset.x > 0
     }
 }
 
