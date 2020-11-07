@@ -21,11 +21,14 @@ exports.findByName = async (label) => {
 }
 
 exports.create = async (label) => {
-    let result;
+    const { name, description, color } = newLabel;
     try {
-        result = await Label.create(label);
+        const result = await Label.findOrCreate({
+            where: { name: name },
+            defaults: { description: description, color: color }
+        });
+        return result[1];
     } catch (err) {
         return false;
     }
-    return result;
 }
