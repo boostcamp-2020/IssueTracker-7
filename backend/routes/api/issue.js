@@ -12,4 +12,6 @@ router.get('/:issue_id/milestone', issueController.getMilestone);
 router.post('/:issue_id/milestone/:milestone_id', issueController.addMilestone);
 router.delete('/:issue_id/milestone', issueController.deleteMilestone);
 
+router.get('/:issue_id/label', labelController.get);
+
 module.exports = router;
