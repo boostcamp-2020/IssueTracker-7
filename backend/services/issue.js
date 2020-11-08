@@ -1,10 +1,10 @@
 const { Issue } = require('../models');
 
-exports.create = async ({ title, mileston_id, author_id }) => {
+exports.create = async ({ title, milestone_id, author_id }) => {
   try {
     const result = await Issue.findOrCreate({
       where: { title },
-      defaults: { mileston_id, author_id },
+      defaults: { milestone_id: milestone_id, user_id: author_id },
     });
     if (result[1]) {
       return { status: 200, data: result[0] };
