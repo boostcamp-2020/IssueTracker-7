@@ -35,7 +35,9 @@ exports.create = async (newLabel) => {
 
 exports.update = async ({ label_id }, { name, description, color }) => {
   try {
-    const label = await Label.findByPk(label_id);
+    const label = await Label.findByPk(label_id, {
+      attributes: ['id', 'name', 'description', 'color'],
+    });
     if (label) {
       if (name) label.name = name;
       if (description) label.description = description;
