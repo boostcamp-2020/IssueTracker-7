@@ -28,16 +28,6 @@ exports.getAll = async (issue) => {
     else return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
 };
 
-exports.findByName = async (label) => {
-    let result;
-    try {
-        result = await Label.findOne({ where: { name: label.name } });
-    } catch (err) {
-        return false;
-    }
-    return result;
-}
-
 exports.create = async (newLabel) => {
     const { name, description, color } = newLabel;
     try {
