@@ -7,16 +7,6 @@
 
 import Foundation
 
-//{
-//    "milestones": [
-//        {
-//            "id": 1,
-//            "title": "1주차",
-//            "due_date": "2020-11-03"
-//        }
-//    ]
-//}
-
 struct MilestonesInfo: Codable {
     let milestones: [Milestone]
 }

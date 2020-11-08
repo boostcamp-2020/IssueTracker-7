@@ -40,6 +40,23 @@
 		33493B9D2558449000BB1E11 /* MockRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493B9C2558449000BB1E11 /* MockRouter.swift */; };
 		33493BA2255844D700BB1E11 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493BA1255844D700BB1E11 /* Routable.swift */; };
 		33493BAB255849F200BB1E11 /* JsonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493BAA255849F200BB1E11 /* JsonFactory.swift */; };
+		33493BB52558581A00BB1E11 /* MockRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493B9C2558449000BB1E11 /* MockRouter.swift */; };
+		33493BB92558581D00BB1E11 /* JsonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493BAA255849F200BB1E11 /* JsonFactory.swift */; };
+		33493BC02558589200BB1E11 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493BA1255844D700BB1E11 /* Routable.swift */; };
+		33493BC4255858A000BB1E11 /* IssueInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393E0BC2552AACC003DCDA4 /* IssueInfo.swift */; };
+		33493BC8255858AD00BB1E11 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5C4254FE724008CEFA3 /* FilterInfo.swift */; };
+		33493BCC255858B200BB1E11 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE28C25510BEC000C0F0B /* APICredentials.swift */; };
+		33493BD0255858B800BB1E11 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393E0D125530B33003DCDA4 /* IssueCell.swift */; };
+		33493BD42558592C00BB1E11 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5AC254FDDFB008CEFA3 /* Label.swift */; };
+		33493BD82558593700BB1E11 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5C9254FE86B008CEFA3 /* Author.swift */; };
+		33493BDC2558593A00BB1E11 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B1254FE462008CEFA3 /* Milestone.swift */; };
+		33493BE02558593E00BB1E11 /* Assignees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B9254FE5AD008CEFA3 /* Assignees.swift */; };
+		33493BE42558594000BB1E11 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322CF7D25539E3B0022ABA6 /* Comment.swift */; };
+		33493BE82558596500BB1E11 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DD2254989E100537960 /* NotificationName.swift */; };
+		33493BEC2558596B00BB1E11 /* FilteringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F3D254A6464006B94A9 /* FilteringController.swift */; };
+		33493BF02558597200BB1E11 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F5F254A88F000CCFAE2 /* UIButton+.swift */; };
+		33493BF42558598000BB1E11 /* FilteringTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F42254A6E55006B94A9 /* FilteringTableViewController.swift */; };
+		33493BF82558599600BB1E11 /* DetailConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A592254EEBDF008CEFA3 /* DetailConditionTableViewController.swift */; };
 		3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */; };
 		3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A57B254ED757008CEFA3 /* StoryboardID.swift */; };
 		3358A581254ED7D3008CEFA3 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3358A580254ED7D3008CEFA3 /* Filter.storyboard */; };
@@ -748,16 +765,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33493BD82558593700BB1E11 /* Author.swift in Sources */,
+				33493BC8255858AD00BB1E11 /* FilterInfo.swift in Sources */,
 				33BD8DDE25498E0300537960 /* UserDefault.swift in Sources */,
 				33493B90255833FE00BB1E11 /* OAuthManager.swift in Sources */,
+				33493BC02558589200BB1E11 /* Routable.swift in Sources */,
+				33493BB92558581D00BB1E11 /* JsonFactory.swift in Sources */,
 				33493B982558340B00BB1E11 /* IssueListViewController.swift in Sources */,
+				33493BF82558599600BB1E11 /* DetailConditionTableViewController.swift in Sources */,
+				33493BB52558581A00BB1E11 /* MockRouter.swift in Sources */,
+				33493BCC255858B200BB1E11 /* APICredentials.swift in Sources */,
+				33493BF02558597200BB1E11 /* UIButton+.swift in Sources */,
+				33493BE42558594000BB1E11 /* Comment.swift in Sources */,
+				33493BE82558596500BB1E11 /* NotificationName.swift in Sources */,
 				33493B942558340200BB1E11 /* BackEndOAuthManager.swift in Sources */,
+				33493BEC2558596B00BB1E11 /* FilteringController.swift in Sources */,
 				33493B8C255833A100BB1E11 /* BackEndAPI.swift in Sources */,
 				33375C512547E71000E8A8E8 /* IssueTrackerTests.swift in Sources */,
 				33493B882558339F00BB1E11 /* EndPointable.swift in Sources */,
 				33493B842558339600BB1E11 /* BackEndAPIManager.swift in Sources */,
 				33BD8DDA25498DC000537960 /* UserInfo.swift in Sources */,
+				33493BD42558592C00BB1E11 /* Label.swift in Sources */,
+				33493BF42558598000BB1E11 /* FilteringTableViewController.swift in Sources */,
+				33493BE02558593E00BB1E11 /* Assignees.swift in Sources */,
 				3398929925493ADD00D9FB63 /* Router.swift in Sources */,
+				33493BD0255858B800BB1E11 /* IssueCell.swift in Sources */,
+				33493BDC2558593A00BB1E11 /* Milestone.swift in Sources */,
+				33493BC4255858A000BB1E11 /* IssueInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

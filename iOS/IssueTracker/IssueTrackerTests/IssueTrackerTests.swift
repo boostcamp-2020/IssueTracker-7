@@ -18,10 +18,32 @@ class IssueTrackerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testExample2() throws {
-        print(UserInfo.shared.isAllInfoExisted())
-    }
+    func testExample3() {
 
+        BackEndAPIManager(router: MockRouter(jsonFactory: JsonFactoryTrue())).requestAllIssues() { result in
+            switch result {
+            case .success:
+                XCTAssert(true)
+            case .failure:
+                XCTAssert(false)
+            }
+        }
+        
+        
+    }
+    
+    func testExample4() {
+
+        BackEndAPIManager(router: MockRouter(jsonFactory: JsonFactoryFalse())).requestAllIssues() { result in
+            switch result {
+            case .success:
+                XCTAssert(false)
+            case .failure:
+                XCTAssert(true)
+            }
+        }
+    }
+    
     func testExample() throws {
         
         let dic = ["secret_code": "abc", "client_id": "def"]

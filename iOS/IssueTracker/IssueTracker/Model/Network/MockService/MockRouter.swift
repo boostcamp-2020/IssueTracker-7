@@ -9,6 +9,12 @@ import Foundation
 
 final class MockRouter: Routable {
     
+    private let jsonFactory: JsonFactory
+    
+    init(jsonFactory: JsonFactory) {
+        self.jsonFactory = jsonFactory
+    }
+    
     func openSite(from route: EndPointable) { }
     
     func request<T: Decodable>(route: EndPointable, completionHandler: ((Result<T, APIError>) -> Void)? = nil) {
@@ -17,7 +23,7 @@ final class MockRouter: Routable {
             
             guard let completionHandler = completionHandler else { return }
             
-            guard let data = JsonFactory.loadJson(endPoint: route) else {
+            guard let data = self.jsonFactory.loadJson(endPoint: route) else {
                 completionHandler(.failure(.data))
                 return
             }

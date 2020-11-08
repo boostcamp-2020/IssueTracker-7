@@ -13,7 +13,7 @@ final class IssueListViewController: UIViewController {
     
     @IBOutlet private var collectionView: UICollectionView!
     private var issueDataList: [IssueInfo] = []
-    private let api = BackEndAPIManager(router: MockRouter())
+    private let api = BackEndAPIManager(router: MockRouter(jsonFactory: JsonFactoryTrue()))
     
     
     // MARK: - Life Cycle
