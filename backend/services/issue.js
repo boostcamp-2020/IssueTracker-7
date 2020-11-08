@@ -186,6 +186,10 @@ exports.update = async ({ issue_id }, { title, status }) => {
     } else {
       return { status: 401, data: { message: '유효하지 않은 Label 입니다.' } };
     }
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
+  }
+};
     
 exports.create = async ({ title, milestone_id, author_id }) => {
   try {
