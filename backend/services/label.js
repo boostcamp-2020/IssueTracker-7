@@ -44,16 +44,6 @@ exports.getOne = async ({ label_id }) => {
   }
 };
 
-exports.findByName = async (label) => {
-  let result;
-  try {
-    result = await Label.findOne({ where: { name: label.name } });
-  } catch (err) {
-    return false;
-  }
-  return result;
-};
-
 exports.create = async (newLabel) => {
   const { name, description, color } = newLabel;
   try {
