@@ -26,7 +26,10 @@ app.use(passport.initialize());
 passportConfig(passport);
 
 app.use('/api', apiRouter);
-app.use((req, res) => res.sendFile(__dirname + '/public/index.html'));
+app.use('/', (req, res, next) => {
+  if (!req.params.route == 'api') res.sendFile(__dirname + '/public/index.html');
+  else res.status(404).json({ message: '유효하지 않은 요청 입니다.' });
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
