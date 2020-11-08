@@ -1,9 +1,12 @@
 const labelService = require('../services/label');
 
 exports.get = async (req, res) => {
-    const labels = await labelService.getAll();
-    if (labels) res.json(labels);
-    res.status(401).json('유효하지 않은 요청입니다.');
+    const labels = await labelService.getAll(req.params.issue_id);
+    if (labels) {
+        res.json(labels);
+    } else {
+        res.status(401).json('유효하지 않은 요청입니다.');   
+    };
 };
 
 exports.add = async (req, res) => {
