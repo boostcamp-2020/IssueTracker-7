@@ -8,14 +8,24 @@
 import Foundation
 
 class BackEndAPIManager {
+        
+    // MARK: - Property
     
-    static let shared = BackEndAPIManager()
+    private let router: Routable
     
-    private let router = Router<BackEndAPI>()
     
+    // MARK: - Initializer
+    
+    init(router: Routable) {
+        self.router = router
+    }
+    
+    
+    // MARK: - Method
     
     func requestAllIssues(completionHandler: @escaping ((Result<[IssueInfo], APIError>) -> Void)) {
-        router.request(route: .Issues) { (result: Result<[IssueInfo], APIError>) in
+        
+        router.request(route: BackEndAPI.allIssues) { (result: Result<[IssueInfo], APIError>) in
             completionHandler(result)
         }
     }
@@ -32,7 +42,7 @@ class BackEndAPIManager {
         
         // conditions 파싱 후 .filterIssueList 에 넣어서 보내기
         
-        router.request(route: .filterIssueList) { (result: Result<infoType, APIError>) in
+        router.request(route: BackEndAPI.filterIssueList) { (result: Result<infoType, APIError>) in
             
         }
     }

@@ -13,17 +13,18 @@ final class IssueListViewController: UIViewController {
     
     @IBOutlet private var collectionView: UICollectionView!
     private var issueDataList: [IssueInfo] = []
-
+    private let api = BackEndAPIManager(router: MockRouter())
+    
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpIssueData()
-        
         collectionView.layoutIfNeeded()
         configureLayout()
+        
+        setUpIssueData()
     }
     
     
@@ -57,7 +58,7 @@ final class IssueListViewController: UIViewController {
 extension IssueListViewController {
     
     private func setUpIssueData() {
-        BackEndAPIManager.shared.requestAllIssues() { result in
+        api.requestAllIssues() { result in
             switch result {
             case .success(let issues):
                 self.issueDataList = issues

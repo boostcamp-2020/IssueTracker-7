@@ -9,7 +9,7 @@ import Foundation
 
 enum BackEndAPI {
     case token
-    case Issues
+    case allIssues
     
     case allAuthors,
          allLabels,
@@ -24,7 +24,7 @@ extension BackEndAPI: EndPointable, CaseIterable {
         switch self {
         case .token:
             return "http://\(BackEndAPICredentials.ip)/api/auth/github/ios"
-        case .Issues:
+        case .allIssues:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
         default:
             return ""
@@ -44,7 +44,7 @@ extension BackEndAPI: EndPointable, CaseIterable {
         switch self {
         case .token:
             return .post
-        case .Issues:
+        case .allIssues:
             return .get
         default:
             return nil

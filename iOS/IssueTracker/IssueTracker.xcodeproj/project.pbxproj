@@ -31,6 +31,15 @@
 		333FE2992551214A000C0F0B /* RegParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE2982551214A000C0F0B /* RegParser.swift */; };
 		333FE2A52551513F000C0F0B /* DetailIssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333FE2A42551513F000C0F0B /* DetailIssueList.storyboard */; };
 		333FE2AA25515167000C0F0B /* DetailIssueListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE2A925515167000C0F0B /* DetailIssueListController.swift */; };
+		33493B842558339600BB1E11 /* BackEndAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DE52549956B00537960 /* BackEndAPIManager.swift */; };
+		33493B882558339F00BB1E11 /* EndPointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328A978254B14F600126761 /* EndPointable.swift */; };
+		33493B8C255833A100BB1E11 /* BackEndAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */; };
+		33493B90255833FE00BB1E11 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB02548595700E8A8E8 /* OAuthManager.swift */; };
+		33493B942558340200BB1E11 /* BackEndOAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C862547F34A00E8A8E8 /* BackEndOAuthManager.swift */; };
+		33493B982558340B00BB1E11 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F56254A859F00CCFAE2 /* IssueListViewController.swift */; };
+		33493B9D2558449000BB1E11 /* MockRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493B9C2558449000BB1E11 /* MockRouter.swift */; };
+		33493BA2255844D700BB1E11 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493BA1255844D700BB1E11 /* Routable.swift */; };
+		33493BAB255849F200BB1E11 /* JsonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493BAA255849F200BB1E11 /* JsonFactory.swift */; };
 		3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */; };
 		3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A57B254ED757008CEFA3 /* StoryboardID.swift */; };
 		3358A581254ED7D3008CEFA3 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3358A580254ED7D3008CEFA3 /* Filter.storyboard */; };
@@ -124,6 +133,9 @@
 		333FE2982551214A000C0F0B /* RegParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegParser.swift; sourceTree = "<group>"; };
 		333FE2A42551513F000C0F0B /* DetailIssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailIssueList.storyboard; sourceTree = "<group>"; };
 		333FE2A925515167000C0F0B /* DetailIssueListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIssueListController.swift; sourceTree = "<group>"; };
+		33493B9C2558449000BB1E11 /* MockRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRouter.swift; sourceTree = "<group>"; };
+		33493BA1255844D700BB1E11 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		33493BAA255849F200BB1E11 /* JsonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFactory.swift; sourceTree = "<group>"; };
 		3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndAPI.swift; sourceTree = "<group>"; };
 		3358A57B254ED757008CEFA3 /* StoryboardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardID.swift; sourceTree = "<group>"; };
 		3358A580254ED7D3008CEFA3 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
@@ -214,6 +226,7 @@
 		3328A986254B15C000126761 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				33493BA1255844D700BB1E11 /* Routable.swift */,
 				33375C8B2547F59500E8A8E8 /* Router.swift */,
 			);
 			path = Service;
@@ -376,6 +389,15 @@
 			path = SearchBar;
 			sourceTree = "<group>";
 		};
+		33493BA9255849D900BB1E11 /* MockService */ = {
+			isa = PBXGroup;
+			children = (
+				33493B9C2558449000BB1E11 /* MockRouter.swift */,
+				33493BAA255849F200BB1E11 /* JsonFactory.swift */,
+			);
+			path = MockService;
+			sourceTree = "<group>";
+		};
 		3358A589254EDEDA008CEFA3 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +476,7 @@
 		33BD8DE2254994A700537960 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				33493BA9255849D900BB1E11 /* MockService */,
 				3328A986254B15C000126761 /* Service */,
 				3328A97D254B153E00126761 /* EndPoint */,
 			);
@@ -674,6 +697,7 @@
 				3358A5BA254FE5AD008CEFA3 /* Assignees.swift in Sources */,
 				33375C872547F34A00E8A8E8 /* BackEndOAuthManager.swift in Sources */,
 				718C38AA2553FC5C002E4903 /* UITextField+.swift in Sources */,
+				33493B9D2558449000BB1E11 /* MockRouter.swift in Sources */,
 				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
 				712CBEA6255008B700E8F95F /* RegisterIssueViewController.swift in Sources */,
@@ -689,6 +713,7 @@
 				3393E0AC2552698C003DCDA4 /* UIView+.swift in Sources */,
 				3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */,
 				339F611E2553FF7B00FDB2A9 /* DetailIssueCell.swift in Sources */,
+				33493BAB255849F200BB1E11 /* JsonFactory.swift in Sources */,
 				3393E0BD2552AACC003DCDA4 /* IssueInfo.swift in Sources */,
 				333FE28D25510BEC000C0F0B /* APICredentials.swift in Sources */,
 				3393E0D225530B33003DCDA4 /* IssueCell.swift in Sources */,
@@ -703,6 +728,7 @@
 				718C38932553E6FB002E4903 /* ManageMilestoneViewController.swift in Sources */,
 				33BD8DD3254989E100537960 /* NotificationName.swift in Sources */,
 				33375C3C2547E70E00E8A8E8 /* SceneDelegate.swift in Sources */,
+				33493BA2255844D700BB1E11 /* Routable.swift in Sources */,
 				33BD8DE62549956B00537960 /* BackEndAPIManager.swift in Sources */,
 				33A108E32553DF54007F1BB2 /* DetailIssueInfo.swift in Sources */,
 				71531F57254A859F00CCFAE2 /* IssueListViewController.swift in Sources */,
@@ -723,7 +749,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				33BD8DDE25498E0300537960 /* UserDefault.swift in Sources */,
+				33493B90255833FE00BB1E11 /* OAuthManager.swift in Sources */,
+				33493B982558340B00BB1E11 /* IssueListViewController.swift in Sources */,
+				33493B942558340200BB1E11 /* BackEndOAuthManager.swift in Sources */,
+				33493B8C255833A100BB1E11 /* BackEndAPI.swift in Sources */,
 				33375C512547E71000E8A8E8 /* IssueTrackerTests.swift in Sources */,
+				33493B882558339F00BB1E11 /* EndPointable.swift in Sources */,
+				33493B842558339600BB1E11 /* BackEndAPIManager.swift in Sources */,
 				33BD8DDA25498DC000537960 /* UserInfo.swift in Sources */,
 				3398929925493ADD00D9FB63 /* Router.swift in Sources */,
 			);
