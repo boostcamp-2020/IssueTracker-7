@@ -17,9 +17,4 @@ class FilterInfo {
     var labels: [Label] = []
     var milestones: [Milestone] = []
     var assignees: [Assignee] = []
-    
-    
-    
-    
-    
 }

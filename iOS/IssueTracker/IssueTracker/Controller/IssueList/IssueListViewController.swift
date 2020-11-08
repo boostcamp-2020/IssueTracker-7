@@ -12,7 +12,7 @@ final class IssueListViewController: UIViewController {
     // MARK: - Property
     
     @IBOutlet private var collectionView: UICollectionView!
-    private var issueDataList: [IssueData] = []
+    private var issueDataList: [IssueInfo] = []
 
     
     // MARK: - Life Cycle

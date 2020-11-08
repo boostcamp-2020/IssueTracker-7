@@ -59,7 +59,7 @@ final class IssueCell: UICollectionViewCell {
         )
     }
     
-    func configure(issueData: IssueData) {
+    func configure(issueData: IssueInfo) {
         title.text = issueData.title
         // cell.content.text = // TODO: API 쪽에서 아직 구현이 안되서 추후 수정
         milestone.setTitle(issueData.milestone?.title, for: .normal)

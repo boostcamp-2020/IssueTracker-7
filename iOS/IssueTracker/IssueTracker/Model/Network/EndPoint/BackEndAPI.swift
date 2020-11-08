@@ -59,3 +59,13 @@ extension BackEndAPI: EndPointable, CaseIterable {
         return nil
     }
 }
+
+
+//var bodies: HTTPBody? {
+//    switch self {
+//    case .accessToken(let code):
+//        return ["client_id": GithubAPICredentials.clientId, "client_secret": GithubAPICredentials.clientSecret, "code": code]
+//    default:
+//        return nil
+//    }
+//}

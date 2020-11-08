@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct IssueData: Codable {
+struct IssueInfo: Codable {
     let id: Int
     let title: String
     let status: String
