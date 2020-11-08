@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const milestoneController = require('../../controllers/milestone')
+const milestoneController = require('../../controllers/milestone');
 
-router.get('/', milestoneController.get);
+router.get('/', milestoneController.getAll);
 
 module.exports = router;
