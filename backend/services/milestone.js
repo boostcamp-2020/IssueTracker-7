@@ -31,3 +31,20 @@ exports.create = async ({ title, due_date, description }) => {
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
+
+exports.update = async ({ milestone_id }, { title, due_date, description }) => {
+  try {
+    const milestone = await Milestone.findByPk(milestone_id);
+    if (milestone) {
+      if (title) milestone.title = title;
+      if (due_date) milestone.due_date = due_date;
+      if (description) milestone.description = description;
+      const updatedMilestone = await milestone.save();
+      return { status: 200, data: updatedMilestone };
+    } else {
+      return { status: 401, data: { message: '유효하지 않은 milestone 입니다.' } };
+    }
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
+  }
+};
