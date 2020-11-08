@@ -65,6 +65,11 @@ final class IssueCell: UICollectionViewCell {
         return view
     }()
     
+    private var selectView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
     
     // MARK: - Initializer
     
