@@ -49,6 +49,23 @@ exports.create = async (newLabel) => {
   }
 };
 
+exports.delete = async ({ label_id }) => {
+  try {
+    const result = await Label.destroy({
+      where: {
+        id: label_id,
+      },
+    });
+    if (result) {
+      return { status: 200, data: { message: '삭제 되었습니다.' } };
+    } else {
+      return { status: 401, data: { message: '유효하지 않은 레이블 입니다.' } };
+    }
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
+  }
+};
+
 exports.update = async ({ label_id }, { name, description, color }) => {
   try {
     const label = await Label.findByPk(label_id, {
