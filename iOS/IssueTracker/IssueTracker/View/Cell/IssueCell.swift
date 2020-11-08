@@ -122,28 +122,38 @@ final class IssueCell: UICollectionViewCell {
     }
     
     private func setUpSwipable() {
+        
         addSubview(scrollView)
         scrollView.addSubview(stackView)
 
         scrollView.pinEdgesToSuperView()
         stackView.pinEdgesToSuperView()
                 
+        stackView.addArrangedSubview(selectView)
         stackView.addArrangedSubview(visibleView)
         stackView.addArrangedSubview(closeView)
         stackView.addArrangedSubview(deleteView)
         
+        selectView.addSubview(selectLabel)
+
+        selectLabel.translatesAutoresizingMaskIntoConstraints = false
+        selectView.translatesAutoresizingMaskIntoConstraints = false
         visibleView.translatesAutoresizingMaskIntoConstraints = false
         closeView.translatesAutoresizingMaskIntoConstraints = false
         deleteView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1.4),
+            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1.5),
             stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
+            selectView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.1),
             visibleView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             closeView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
-            deleteView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2)
+            deleteView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
+
+            selectLabel.centerXAnchor.constraint(equalTo: selectView.centerXAnchor, constant: 5),
+            selectLabel.centerYAnchor.constraint(equalTo: selectView.centerYAnchor)
         ])
         
         addImage(view: closeView, imageName: "xmark.rectangle")
