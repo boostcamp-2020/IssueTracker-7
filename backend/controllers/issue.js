@@ -26,3 +26,8 @@ exports.add = async (req, res) => {
   const { status, data } = await issueService.create(issueParam);
   res.status(status).json(data);
 };
+
+exports.getMilestone = async (req, res) => {
+  const { status, data } = await issueService.getMilestone(req.params);
+  res.status(status).json(data);
+};
