@@ -1,6 +1,6 @@
 const labelService = require('../services/label');
 
-exports.get = async (req, res) => {
+exports.getAll = async (req, res) => {
   const { status, data } = await labelService.getAll(req.params.issue_id);
   res.status(status).json(data);
 };
