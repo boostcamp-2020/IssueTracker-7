@@ -9,6 +9,7 @@ import UIKit
 
 protocol IssueCellDelegate: AnyObject {
     func issueListDidInteracted(cell: IssueCell)
+    func issueListDidTapped(cell: IssueCell)
 }
 
 final class IssueCell: UICollectionViewCell {
@@ -89,11 +90,13 @@ final class IssueCell: UICollectionViewCell {
     }()
     
     private let visibleView = IssueCellContentView()
+    
     private var closeView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.systemGreen
         return view
     }()
+    
     private var deleteView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.systemRed
@@ -109,6 +112,7 @@ final class IssueCell: UICollectionViewCell {
     // MARK: - Initializer
     
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
         
         scrollView.delegate = self
@@ -118,6 +122,7 @@ final class IssueCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
+        
         super.init(coder: coder)
         
         scrollView.delegate = self
@@ -129,10 +134,13 @@ final class IssueCell: UICollectionViewCell {
     // MARK: - Method
     
     override func prepareForReuse() {
+        
         visibleView.initLabels()
+        self.isSelected = false
     }
     
     private func setUpTapGesture() {
+        
         let visibleRecognizer = UITapGestureRecognizer(target: self, action: #selector(contentTapped))
         visibleView.addGestureRecognizer(visibleRecognizer)
         
@@ -144,16 +152,22 @@ final class IssueCell: UICollectionViewCell {
     }
     
     @objc private func contentTapped() {
+    
+        delegate?.issueListDidTapped(cell: self)
         delegate?.issueListDidInteracted(cell: self)
     }
     
     @objc private func closeIssue() {
+        
         print("close")
+        resetOffset()
     }
     
     
     @objc private func deleteIssue() {
+        
         print("delete")
+        resetOffset()
     }
     
     private func setUpSwipable() {
@@ -196,6 +210,7 @@ final class IssueCell: UICollectionViewCell {
     }
     
     func addImage(view: UIView, imageName: String) {
+        
         let image = UIImage(systemName: imageName)
         let imageView = UIImageView(image: image)
         imageView.tintColor = .white
@@ -210,41 +225,61 @@ final class IssueCell: UICollectionViewCell {
     }
     
     private func setUpView() {
+        
         layer.cornerRadius = 10
         layer.masksToBounds = true
     }
 
     func configure(issueData: IssueData) {
+        
         visibleView.configure(issueData: issueData)
     }
     
     func resetOffset() {
-        UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
-            self.scrollView.contentOffset.x = 0
+        
+        UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+            self.scrollView.contentOffset.x = 38
         }.startAnimation()
     }
+    
+    func isSwiped() -> Bool {
+        
+        return scrollView.contentOffset.x != 38
+    }
+    
 }
 
 
 // MARK: - Extension
 
 extension IssueCell: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x < 0 {
-            scrollView.contentOffset.x = 0
-            scrollView.bounces = false
+        
+        if !isEditing {
+            if scrollView.contentOffset.x < 45 {
+                scrollView.contentOffset.x = 38
+                scrollView.bounces = false
+            } else {
+                scrollView.bounces = true
+            }
         } else {
-            scrollView.bounces = true
+            if scrollView.contentOffset.x < 0 {
+                scrollView.contentOffset.x = 0
+                scrollView.bounces = false
+            }
         }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        delegate?.issueListDidInteracted(cell: self)
+        
+        if !isEditing {
+            delegate?.issueListDidInteracted(cell: self)
+        }
     }
 }
 
-
-
+// MARK: - show / hide select label
 
 extension IssueCell {
     
