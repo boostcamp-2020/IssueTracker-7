@@ -8,7 +8,6 @@ const sequelize = require('./models').sequelize;
 const passport = require('passport');
 const passportConfig = require('./middlewares/passport');
 const apiRouter = require('./routes/api');
-const indexRouter = require('./routes/index');
 
 var app = express();
 sequelize.sync();
@@ -26,8 +25,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 passportConfig(passport);
 
-app.use('/', indexRouter);
 app.use('/api', apiRouter);
+app.use('/', (req, res, next) => {
+  if (!req.params.route == 'api') res.sendFile(__dirname + '/public/index.html');
+  else res.status(404).json({ message: '유효하지 않은 요청 입니다.' });
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
