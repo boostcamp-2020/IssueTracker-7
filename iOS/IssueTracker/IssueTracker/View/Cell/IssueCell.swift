@@ -18,6 +18,41 @@ final class IssueCell: UICollectionViewCell {
     static let reuseIdentifier = String(describing: IssueCell.self)
     weak var delegate: IssueCellDelegate?
     
+    var isEditing: Bool = false {
+        didSet {
+            if !isEditing {
+                
+                scrollView.isUserInteractionEnabled = true
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                            self.scrollView.contentOffset.x = 38
+                    }, completion: nil)
+                }
+                hideSelectLabel()
+            } else {
+
+                scrollView.isUserInteractionEnabled = false
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                            self.scrollView.contentOffset.x = -38
+                    }, completion: nil)
+                }
+                showSelectLabel()
+            }
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isEditing {
+                selectLabel.text = isSelected ? "✓" : ""
+                selectLabel.backgroundColor = isSelected ? .systemBlue : .white
+                selectLabel.layer.borderColor = isSelected ? UIColor.systemBlue.cgColor : UIColor.gray.cgColor
+                visibleView.subviews.first?.backgroundColor = isSelected ? .systemGray5 : .white
+                selectView.backgroundColor = isSelected ? .systemGray5 : .white
+            }
+        }
+    }
     
     private lazy var selectLabel: UILabel = {
        let selectLabel = UILabel()
@@ -211,3 +246,16 @@ extension IssueCell: UIScrollViewDelegate {
 
 
 
+extension IssueCell {
+    
+    func showSelectLabel() {
+        
+        selectLabel.isHidden = false
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: { self.selectLabel.alpha = 1.0 }, completion: { _ in self.selectLabel.isHidden = false })
+    }
+    
+    func hideSelectLabel() {
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { self.selectLabel.alpha = 0 }, completion: { _ in self.selectLabel.isHidden = true })
+    }
+}
