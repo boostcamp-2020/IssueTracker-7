@@ -9,6 +9,22 @@ exports.getAll = async () => {
   }
   return result;
 };
+
+exports.getOne = async ({ label_id }) => {
+  try {
+    const label = await Label.findByPk(label_id, {
+      attributes: ['id', 'name', 'color', 'description'],
+    });
+    if (label) {
+      return { status: 200, data: label };
+    } else {
+      return { status: 401, data: '유효하지 않은 레이블 입니다.' };
+    }
+  } catch (err) {
+    return { status: 401, data: '유효하지 않은 입력 입니다.' };
+  }
+};
+
 exports.findByName = async (label) => {
   let result;
   try {
@@ -47,5 +63,24 @@ exports.delete = async ({ label_id }) => {
     }
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
+  }
+};
+
+exports.update = async ({ label_id }, { name, description, color }) => {
+  try {
+    const label = await Label.findByPk(label_id, {
+      attributes: ['id', 'name', 'description', 'color'],
+    });
+    if (label) {
+      if (name) label.name = name;
+      if (description) label.description = description;
+      if (color) label.color = color;
+      const updatedLabel = await label.save();
+      return { status: 200, data: updatedLabel };
+    } else {
+      return { status: 401, data: { message: '유효하지 않은 레이블 입니다.' } };
+    }
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
   }
 };
