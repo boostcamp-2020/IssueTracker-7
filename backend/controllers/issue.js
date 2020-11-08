@@ -1,4 +1,5 @@
 const { Issue, Label, Comment, User, Milestone, label_has_issue } = require('../models');
+const issueService = require('../services/issue');
 const queryParser = (queryString) => queryString.match(/(\w+)([@/-\w가-힇]+)|(".*?")+(?=\:?)/gi);
 const queryToObject = (queryString) => {
   const queryArray = queryParser(queryString);
