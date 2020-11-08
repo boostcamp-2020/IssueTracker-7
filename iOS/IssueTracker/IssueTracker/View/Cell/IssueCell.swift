@@ -7,15 +7,46 @@
 
 import UIKit
 
+protocol IssueCellDelegate: AnyObject {
+    func issueListDidInteracted(cell: IssueCell)
+    func issueListDidTapped(cell: IssueCell)
+}
+
 final class IssueCell: UICollectionViewCell {
     
     // MARK: - Property
     
     static let reuseIdentifier = String(describing: IssueCell.self)
-    @IBOutlet var title: UILabel!
-    @IBOutlet var content: UILabel!
-    @IBOutlet var milestone: UIButton!
-    @IBOutlet weak var labelStackView: UIStackView!
+    weak var delegate: IssueCellDelegate?
+    
+    // For swipe
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isPagingEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.backgroundColor = .systemRed
+        return scrollView
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
+    private let visibleView = IssueCellContentView()
+    private var closeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.systemGreen
+        return view
+    }()
+    private var deleteView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.systemRed
+        return view
+    }()
     
     
     // MARK: - Initializer
@@ -23,58 +54,134 @@ final class IssueCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        scrollView.delegate = self
         setUpView()
+        setUpSwipable()
+        setUpTapGesture()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
+        scrollView.delegate = self
         setUpView()
+        setUpSwipable()
+        setUpTapGesture()
     }
 
     // MARK: - Method
     
     override func prepareForReuse() {
-        labelStackView.arrangedSubviews.forEach {
-            $0.removeFromSuperview()
-        }
+        visibleView.initLabels()
     }
     
-    func setUpView() {
+    private func setUpTapGesture() {
+        let visibleRecognizer = UITapGestureRecognizer(target: self, action: #selector(contentTapped))
+        visibleView.addGestureRecognizer(visibleRecognizer)
+        
+        let closeRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeIssue))
+        closeView.addGestureRecognizer(closeRecognizer)
+        
+        let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteIssue))
+        deleteView.addGestureRecognizer(deleteRecognizer)
+    }
+    
+    @objc private func contentTapped() {
+        delegate?.issueListDidTapped(cell: self)
+        delegate?.issueListDidInteracted(cell: self)
+    }
+    
+    @objc private func closeIssue() {
+        print("close")
+    }
+    
+    
+    @objc private func deleteIssue() {
+        print("delete")
+    }
+    
+    private func setUpSwipable() {
+        addSubview(scrollView)
+        scrollView.addSubview(stackView)
+
+        scrollView.pinEdgesToSuperView()
+        stackView.pinEdgesToSuperView()
+                
+        stackView.addArrangedSubview(visibleView)
+        stackView.addArrangedSubview(closeView)
+        stackView.addArrangedSubview(deleteView)
+        
+        visibleView.translatesAutoresizingMaskIntoConstraints = false
+        closeView.translatesAutoresizingMaskIntoConstraints = false
+        deleteView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1.4),
+            stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            
+            visibleView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            closeView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
+            deleteView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2)
+        ])
+        
+        addImage(view: closeView, imageName: "xmark.rectangle")
+        addImage(view: deleteView, imageName: "trash")
+    }
+    
+    func addImage(view: UIView, imageName: String) {
+        let image = UIImage(systemName: imageName)
+        let imageView = UIImageView(image: image)
+        imageView.tintColor = .white
+        
+        view.addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    private func setUpView() {
         layer.cornerRadius = 10
         layer.masksToBounds = true
     }
-    
-    func hexStringToUIColor (hex: String) -> UIColor {
-        var rgbValue: UInt64 = 0
-        let droppedString = hex.dropFirst()
 
-        Scanner(string: String(droppedString)).scanHexInt64(&rgbValue)
-
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
+    func configure(issueData: IssueData) {
+        visibleView.configure(issueData: issueData)
     }
     
-    func configure(issueData: IssueData) {
-        title.text = issueData.title
-        // cell.content.text = // TODO: API 쪽에서 아직 구현이 안되서 추후 수정
-        milestone.setTitle(issueData.milestone.title, for: .normal)
-        
-        issueData.labels?.forEach {
-            let btn = UIButton()
-            btn.setTitle(" \($0.name) ", for: .normal)
-            btn.backgroundColor = hexStringToUIColor(hex: $0.color)
-            btn.setTitleColor(UIColor.black, for: .normal)
-            btn.titleLabel?.font = .systemFont(ofSize: 15)
-            btn.cornerRadius = 5
-            
-            labelStackView.addArrangedSubview(btn)
+    func resetOffset() {
+        UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+            self.scrollView.contentOffset.x = 0
+        }.startAnimation()
+    }
+    
+    func isSwiped() -> Bool {
+        scrollView.contentOffset.x != 0
+    }
+    
+}
+
+
+// MARK: - Extension
+
+extension IssueCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x <= 0 {
+            scrollView.contentOffset.x = 0
+            scrollView.bounces = false
+        } else {
+            scrollView.bounces = true
         }
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.issueListDidInteracted(cell: self)
+    }
 }
+
+
 
 
