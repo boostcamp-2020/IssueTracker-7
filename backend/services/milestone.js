@@ -34,7 +34,9 @@ exports.create = async ({ title, due_date, description }) => {
 
 exports.update = async ({ milestone_id }, { title, due_date, description }) => {
   try {
-    const milestone = await Milestone.findByPk(milestone_id);
+    const milestone = await Milestone.findByPk(milestone_id, {
+      attributes: ['id', 'title', 'due_date', 'description'],
+    });
     if (milestone) {
       if (title) milestone.title = title;
       if (due_date) milestone.due_date = due_date;
