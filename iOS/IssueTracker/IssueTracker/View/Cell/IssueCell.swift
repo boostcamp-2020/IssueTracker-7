@@ -18,6 +18,24 @@ final class IssueCell: UICollectionViewCell {
     static let reuseIdentifier = String(describing: IssueCell.self)
     weak var delegate: IssueCellDelegate?
     
+    
+    private lazy var selectLabel: UILabel = {
+       let selectLabel = UILabel()
+        NSLayoutConstraint.activate([
+            selectLabel.widthAnchor.constraint(equalToConstant: 20),
+            selectLabel.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        selectLabel.layer.cornerRadius = 10
+        selectLabel.layer.masksToBounds = true
+        selectLabel.layer.borderColor = UIColor.gray.cgColor
+        selectLabel.layer.borderWidth = 1.0
+        selectLabel.textAlignment = .center
+        selectLabel.textColor = .white
+        selectLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
+        selectLabel.isHidden = true
+        return selectLabel
+    }()
+    
     // For swipe
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
