@@ -46,3 +46,8 @@ exports.addLabel = async (req, res) => {
   const { status, data } = await issueService.addLabel(req.params.issue_id, req.body.label_id);
   res.status(status).json(data);
 };
+
+exports.deleteLabel = async (req, res) => {
+  const { status, data } = await issueService.deleteLabel(req.params.issue_id, req.params.label_id);
+  res.status(status).json(data);
+};
