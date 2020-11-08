@@ -14,3 +14,8 @@ exports.update = async (req, res) => {
   const { status, data } = await milestoneService.update(req.params, req.body);
   return res.status(status).json(data);
 };
+
+exports.delete = async (req, res) => {
+  const { status, data } = await milestoneService.delete(req.params);
+  return res.status(status).json(data);
+};
