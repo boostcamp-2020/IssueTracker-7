@@ -1,4 +1,5 @@
 const { Issue, Label, Comment, User, Milestone, label_has_issue } = require('../models');
+const issueService = require('../services/issue');
 const queryParser = (queryString) => queryString.match(/(\w+)([@/-\w가-힇]+)|(".*?")+(?=\:?)/gi);
 const queryToObject = (queryString) => {
   const queryArray = queryParser(queryString);
@@ -171,4 +172,10 @@ exports.update = (req, res) => {
       res.status(401).send('유효하지 않은 Label 입니다.');
     }
   });
+};
+
+exports.add = async (req, res) => {
+  const issueParam = req.body;
+  const { status, data } = await issueService.create(issueParam);
+  res.status(status).json(data);
 };
