@@ -48,3 +48,15 @@ exports.update = async ({ milestone_id }, { title, due_date, description }) => {
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
+exports.delete = async ({ milestone_id }) => {
+  const result = await Milestone.destroy({
+    where: {
+      id: milestone_id,
+    },
+  });
+  if (result) {
+    return { status: 200, data: { message: '삭제 되었습니다.' } };
+  } else {
+    return { status: 401, data: { message: '유효하지 않은 milestone 입니다.' } };
+  }
+};
