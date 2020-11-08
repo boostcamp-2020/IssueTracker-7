@@ -1,8 +1,13 @@
-const { Label } = require('../models');
+const labelService = require('../services/label');
 
-exports.get = (req, res) => {
-    Label.findAll({
-        attributes: ['id', 'name', 'description', 'color']
-    }).then(labels => res.status(200).json(labels))
-    .catch(err => res.status(401).send('유효하지 않은 요청입니다.'));
+exports.get = async (req, res) => {
+    const labels = await labelService.getAll();
+    if (labels) res.json(labels);
+    res.status(401).json('유효하지 않은 요청입니다.');
+};
+
+exports.add = async (req, res) => {
+    const newLabel = req.body;
+    const result = await labelService.create(newLabel);
+    res.json(result);
 };
