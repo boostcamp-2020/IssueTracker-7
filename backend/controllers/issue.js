@@ -26,3 +26,18 @@ exports.add = async (req, res) => {
   const { status, data } = await issueService.create(issueParam);
   res.status(status).json(data);
 };
+
+exports.getMilestone = async (req, res) => {
+  const { status, data } = await issueService.getMilestone(req.params);
+  res.status(status).json(data);
+};
+
+exports.addMilestone = async (req, res) => {
+  const { status, data } = await issueService.addMilestone(req.params);
+  res.status(status).json(data);
+};
+
+exports.deleteMilestone = async (req, res) => {
+  const { status, data } = await issueService.deleteMilestone(req.params);
+  res.status(status).json(data);
+};
