@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum barButtonItemState: String {
+    case selectAll = "전체 선택",
+         deselectAll = "전체 선택 해제",
+         edit = "편집",
+         done = "완료"
+}
+
 final class IssueListViewController: UIViewController {
    
     // MARK: - Property
