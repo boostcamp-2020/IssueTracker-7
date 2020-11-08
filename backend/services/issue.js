@@ -22,7 +22,6 @@ const optionStringToObject = (queryString) => {
   }
   return queryObject;
 };
-
 const getLabelFilter = async ({ label, no, user_id }) => {
   return {
     model: Label,
@@ -191,7 +190,7 @@ exports.update = async ({ issue_id }, { title, status }) => {
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
-
+    
 exports.create = async ({ title, milestone_id, author_id }) => {
   try {
     const result = await Issue.findOrCreate({
