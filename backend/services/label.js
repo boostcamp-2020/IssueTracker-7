@@ -1,4 +1,4 @@
-const { Label } = require('../models');
+const { Label, label_has_issue } = require('../models');
 
 exports.getAll = async (issue) => {
     let result;
