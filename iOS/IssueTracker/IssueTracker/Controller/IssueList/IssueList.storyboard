@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -50,76 +50,9 @@
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ONO-gj-CGL">
                                             <rect key="frame" x="0.0" y="0.0" width="413" height="134"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다. 뒷줄은 잘리게 될 것 입니다 쩜쩜쩜" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRY-D3-c3q">
-                                                    <rect key="frame" x="15" y="46" width="300" height="41"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="2tS-Pr-XBv"/>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="41" id="bFF-6b-ZHC"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btQ-GT-NEf">
-                                                    <rect key="frame" x="332" y="16" width="73" height="20"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="MHN-bM-8qV"/>
-                                                        <constraint firstAttribute="height" constant="20" id="xmr-Vw-HGT"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="스프린트 2">
-                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="7"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ac-H0-ytB">
-                                                    <rect key="frame" x="15" y="16" width="162.5" height="23"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="h10-3i-8ED">
-                                                    <rect key="frame" x="15" y="100" width="17" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="NjM-fL-NHY"/>
-                                                    </constraints>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="7Ac-H0-ytB" firstAttribute="leading" secondItem="ONO-gj-CGL" secondAttribute="leading" constant="15" id="7IB-Gn-odC"/>
-                                                <constraint firstItem="btQ-GT-NEf" firstAttribute="top" secondItem="7Ac-H0-ytB" secondAttribute="top" id="QIL-rS-jk0"/>
-                                                <constraint firstItem="rRY-D3-c3q" firstAttribute="leading" secondItem="7Ac-H0-ytB" secondAttribute="leading" id="RBb-5Y-unO"/>
-                                                <constraint firstItem="h10-3i-8ED" firstAttribute="leading" secondItem="rRY-D3-c3q" secondAttribute="leading" id="T2R-6Q-6Kd"/>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="h10-3i-8ED" secondAttribute="trailing" constant="380" id="Zyw-rE-b2d"/>
-                                                <constraint firstItem="rRY-D3-c3q" firstAttribute="top" secondItem="7Ac-H0-ytB" secondAttribute="bottom" constant="7" id="bQE-SC-JJ0"/>
-                                                <constraint firstItem="7Ac-H0-ytB" firstAttribute="top" secondItem="ONO-gj-CGL" secondAttribute="top" constant="16" id="jPF-lS-saF"/>
-                                                <constraint firstAttribute="trailing" secondItem="btQ-GT-NEf" secondAttribute="trailing" constant="8" id="tDk-Fk-9Ub"/>
-                                                <constraint firstAttribute="bottom" secondItem="h10-3i-8ED" secondAttribute="bottom" constant="10" id="uF4-L0-uiG"/>
-                                                <constraint firstItem="h10-3i-8ED" firstAttribute="top" secondItem="rRY-D3-c3q" secondAttribute="bottom" constant="13" id="wAD-ON-5CP"/>
-                                            </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="413" height="134"/>
-                                        <connections>
-                                            <outlet property="content" destination="rRY-D3-c3q" id="pvf-d0-ex9"/>
-                                            <outlet property="labelStackView" destination="h10-3i-8ED" id="gr5-Jd-vPf"/>
-                                            <outlet property="milestone" destination="btQ-GT-NEf" id="Zyo-lZ-Qgp"/>
-                                            <outlet property="title" destination="7Ac-H0-ytB" id="3U9-Py-N0W"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchBarHeader" id="0cA-bn-GO8" customClass="CustomSearchBar" customModule="IssueTracker" customModuleProvider="target">
@@ -201,9 +134,6 @@
     <resources>
         <image name="1.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
