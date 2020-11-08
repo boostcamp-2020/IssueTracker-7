@@ -172,3 +172,9 @@ exports.update = (req, res) => {
     }
   });
 };
+
+exports.add = async (req, res) => {
+  const issueParam = req.body;
+  const { status, data } = await issueService.create(issueParam);
+  res.status(status).json(data);
+};
