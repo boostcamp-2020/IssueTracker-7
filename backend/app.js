@@ -11,7 +11,6 @@ const apiRouter = require('./routes/api');
 
 var app = express();
 sequelize.sync();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -26,8 +25,8 @@ app.use(passport.initialize());
 passportConfig(passport);
 
 app.use('/api', apiRouter);
-app.use('/', (req, res, next) => {
-  if (!req.params.route == 'api') res.sendFile(__dirname + '/public/index.html');
+app.use('/:route', (req, res, next) => {
+  if (!(req.params.route == 'api')) res.sendFile(__dirname + '/public/index.html');
   else res.status(404).json({ message: '유효하지 않은 요청 입니다.' });
 });
 

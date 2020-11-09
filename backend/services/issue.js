@@ -190,7 +190,7 @@ exports.update = async ({ issue_id }, { title, status }) => {
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
-    
+
 exports.create = async ({ title, milestone_id, author_id }) => {
   try {
     const result = await Issue.findOrCreate({
@@ -206,16 +206,15 @@ exports.create = async ({ title, milestone_id, author_id }) => {
 };
 
 exports.getLabel = async (issue_id) => {
-  let result
+  let result;
   try {
-    const issue = await Issue.findByPk(issue_id)
-    result = await issue.getLabels()
+    const issue = await Issue.findByPk(issue_id);
+    result = await issue.getLabels();
     if (result) return { status: 200, data: result };
     else return { status: 401, data: { message: '유효하지 않은 이슈입니다.' } };
-
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
-  };
+  }
 };
 
 exports.addLabel = async (issue_id, label_id) => {
@@ -223,23 +222,24 @@ exports.addLabel = async (issue_id, label_id) => {
     const issue = await Issue.findByPk(issue_id);
     const label = await Label.findByPk(label_id);
     const result = await issue.addLabel(label);
-    
+
     if (result) return { status: 200, data: result[0] };
     else return { status: 401, data: { message: '이미 존재하는 레이블입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
-  };
+  }
 };
 
 exports.deleteLabel = async (issue_id, label_id) => {
   try {
     const result = await label_has_issue.destroy({
-      where: { issue_id: issue_id, label_id: label_id }})
+      where: { issue_id: issue_id, label_id: label_id },
+    });
     if (result) return { status: 200, data: result };
     else return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
-  };
+  }
 };
 
 exports.getAssigneeAll = async (issue_id) => {
@@ -247,12 +247,12 @@ exports.getAssigneeAll = async (issue_id) => {
     const issue = await Issue.findByPk(issue_id);
     const result = await issue.getAssignees({
       attributes: ['id', 'user_id', 'photo_url'],
-    })
+    });
     if (result) return { status: 200, data: result };
     else return { status: 401, data: { message: '유효하지 않은 이슈입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
-  };
+  }
 };
 
 exports.getAssigneeOne = async (issue_id, assignee_id) => {
@@ -261,12 +261,12 @@ exports.getAssigneeOne = async (issue_id, assignee_id) => {
     const result = await issue.getAssignees({
       where: { id: assignee_id },
       attributes: ['id', 'user_id', 'photo_url'],
-    })
+    });
     if (result) return { status: 200, data: result[0] };
     else return { status: 401, data: { message: '유효하지 않은 사용자입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
-  };
+  }
 };
 
 exports.addAssignee = async (issue_id, user_id) => {
@@ -282,7 +282,7 @@ exports.addAssignee = async (issue_id, user_id) => {
     else return { status: 401, data: { message: '이미 승인한 사용자입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
-  };
+  }
 };
 
 exports.deleteAssignee = async (issue_id, user_id) => {
@@ -294,7 +294,53 @@ exports.deleteAssignee = async (issue_id, user_id) => {
     else return { status: 401, data: { message: '존재하지 않는 Assignee입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
-  };
+  }
+};
+
+exports.getMilestone = async ({ issue_id }) => {
+  try {
+    const issue = await Issue.findByPk(issue_id);
+    if (issue) {
+      const milestone = await issue.getMilestone({
+        attributes: ['id', 'title', 'due_date', 'description'],
+      });
+      return { status: 200, data: milestone };
+    } else {
+      return { status: 401, data: { message: '유효하지 않은 Issue 입니다.' } };
+    }
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  }
+};
+
+exports.addMilestone = async ({ issue_id, milestone_id }) => {
+  try {
+    const issue = await Issue.findByPk(issue_id);
+    if (issue) {
+      issue.milestone_id = milestone_id;
+      await issue.save();
+      return { status: 200, data: { message: 'success' } };
+    } else {
+      return { status: 401, data: { message: '유효하지 않은 issue 입니다.' } };
+    }
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  }
+};
+
+exports.deleteMilestone = async ({ issue_id }) => {
+  try {
+    const issue = await Issue.findByPk(issue_id);
+    if (issue) {
+      issue.milestone_id = null;
+      await issue.save();
+      return { status: 200, data: { message: 'success' } };
+    } else {
+      return { status: 401, data: { message: '유효하지 않은 issue 입니다.' } };
+    }
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  }
 };
 
 exports.getCommentAll = async (issue_id) => {
