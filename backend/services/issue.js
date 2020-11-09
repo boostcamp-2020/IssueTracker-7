@@ -376,3 +376,15 @@ exports.updateComment = async ({ issue_id, comment_id, content, user }) => {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
   };
 };
+
+exports.deleteComment = async ({ issue_id, comment_id }) => {
+  try {
+    const result = await Comment.destroy({
+      where: { id: comment_id}
+    })
+    if (result) return { status: 200, message: "success" };
+    else return { status: 401, data: { message: '잘못된 접근입니다.' } };
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  };
+};
