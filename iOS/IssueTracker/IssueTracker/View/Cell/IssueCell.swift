@@ -148,7 +148,7 @@ final class IssueCell: UICollectionViewCell {
         layer.masksToBounds = true
     }
 
-    func configure(issueData: IssueData) {
+    func configure(issueData: IssueInfo) {
         visibleView.configure(issueData: issueData)
     }
     
