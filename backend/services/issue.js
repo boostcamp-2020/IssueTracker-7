@@ -205,6 +205,29 @@ exports.create = async ({ title, milestone_id, author_id }) => {
   }
 };
 
+exports.getLabel = async (issue_id) => {
+  let result
+  try {
+    result = await Label.findAll({
+      attributes: ['id', 'name', 'description', 'color'],
+      include: [
+        {
+          model: label_has_issue,
+          where: {
+            issue_id: issue_id
+          },
+          attributes: ['label_id']
+        }
+      ]
+    });
+    if (result) return { status: 200, data: result };
+    else return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  };
+};
+
 exports.addLabel = async (issue_id, label_id) => {
   try {
     const issue = await Issue.findByPk(issue_id);
