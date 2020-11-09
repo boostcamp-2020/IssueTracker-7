@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -86,6 +86,18 @@
                                     <segue destination="Ozp-3E-fwx" kind="presentation" id="cgu-Vp-CwH"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ufX-Xl-zmk">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="gB8-nO-yee"/>
+                                    <barButtonItem title="선택 이슈 닫기" id="NPt-aD-wQS">
+                                        <connections>
+                                            <action selector="pressedCloseSelectedItems:" destination="Fiu-tR-AEc" id="pQT-is-Vx5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kHZ-Od-lMj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -108,6 +120,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="VGO-WG-P6r" id="UAZ-Uo-Shu"/>
+                        <outlet property="filterButtonItem" destination="bkx-PW-boa" id="Ax2-sT-8vh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyB-SY-otq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
