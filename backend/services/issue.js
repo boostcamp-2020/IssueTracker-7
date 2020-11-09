@@ -308,3 +308,18 @@ exports.getMilestone = async ({ issue_id }) => {
     return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
   }
 };
+
+exports.addMilestone = async ({ issue_id, milestone_id }) => {
+  try {
+    const issue = await Issue.findByPk(issue_id);
+    if (issue) {
+      issue.milestone_id = milestone_id;
+      await issue.save();
+      return { status: 200, data: { message: 'success' } };
+    } else {
+      return { status: 401, data: { message: '유효하지 않은 issue 입니다.' } };
+    }
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  }
+};
