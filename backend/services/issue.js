@@ -254,3 +254,17 @@ exports.getAssigneeAll = async (issue_id) => {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
   };
 };
+
+exports.getAssigneeOne = async (issue_id, assignee_id) => {
+  try {
+    const issue = await Issue.findByPk(issue_id);
+    const result = await issue.getAssignees({
+      where: { id: assignee_id },
+      attributes: ['id', 'user_id', 'photo_url'],
+    })
+    if (result) return { status: 200, data: result };
+    else return { status: 401, data: { message: '유효하지 않은 사용자입니다.' } };
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
+  };
+};
