@@ -268,3 +268,15 @@ exports.getAssigneeOne = async (issue_id, assignee_id) => {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
   };
 };
+
+exports.addAssignee = async (issue_id, user_id) => {
+  try {
+    const issue = await Issue.findByPk(issue_id);
+    const user = await User.findByPk(user_id);
+    const result = await issue.addAssignee(user);
+    if (result) return { status: 200, data: result[0] };
+    else return { status: 401, data: { message: '이미 승인한 사용자입니다.' } };
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
+  };
+};
