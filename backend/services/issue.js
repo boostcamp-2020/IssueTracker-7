@@ -222,7 +222,6 @@ exports.deleteLabel = async (issue_id, label_id) => {
   try {
     const result = await label_has_issue.destroy({
       where: { issue_id: issue_id, label_id: label_id }})
-    console.log(result)
     if (result) return { status: 200, data: result };
     else return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
   } catch (err) {
