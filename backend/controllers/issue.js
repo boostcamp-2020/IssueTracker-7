@@ -56,3 +56,23 @@ exports.deleteLabel = async (req, res) => {
   const { status, data } = await issueService.deleteLabel(req.params.issue_id, req.params.label_id);
   res.status(status).json(data);
 };
+
+exports.getAssigneeAll = async (req, res) => {
+  const { status, data } = await issueService.getAssigneeAll(req.params.issue_id);
+  res.status(status).json(data);
+};
+
+exports.getAssigneeOne = async (req, res) => {
+  const { status, data } = await issueService.getAssigneeOne(req.params.issue_id, req.params.assignee_id);
+  res.status(status).json(data);
+};
+
+exports.addAssignee = async (req, res) => {
+  const { status, data } = await issueService.addAssignee(req.params.issue_id, req.body.user_id);
+  res.status(status).json(data);
+};
+
+exports.deleteAssignee = async (req, res) => {
+  const { status, data } = await issueService.deleteAssignee(req.params.issue_id, req.params.assignee_id);
+  res.status(status).json(data);
+};
