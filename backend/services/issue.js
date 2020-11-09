@@ -204,3 +204,40 @@ exports.create = async ({ title, milestone_id, author_id }) => {
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
+
+exports.getLabel = async (issue_id) => {
+  let result
+  try {
+    const issue = await Issue.findByPk(issue_id)
+    result = await issue.getLabels()
+    if (result) return { status: 200, data: result };
+    else return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  };
+};
+
+exports.addLabel = async (issue_id, label_id) => {
+  try {
+    const issue = await Issue.findByPk(issue_id);
+    const label = await Label.findByPk(label_id);
+    const result = await issue.addLabel(label);
+    
+    if (result) return { status: 200, data: result[0] };
+    else return { status: 401, data: { message: '이미 존재하는 레이블입니다.' } };
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  };
+};
+
+exports.deleteLabel = async (issue_id, label_id) => {
+  try {
+    const result = await label_has_issue.destroy({
+      where: { issue_id: issue_id, label_id: label_id }})
+    if (result) return { status: 200, data: result };
+    else return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  };
+};

@@ -3,11 +3,14 @@ const { Label } = require('../models');
 exports.getAll = async () => {
   let result;
   try {
-    result = await Label.findAll({ attributes: ['id', 'name', 'description', 'color'] });
+      result = await Label.findAll({
+          attributes: ['id', 'name', 'description', 'color']
+      });
   } catch (err) {
-    return false;
-  }
-  return result;
+      return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+  };
+  if (result) return { status: 200, data: result };
+  else return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
 };
 
 exports.getOne = async ({ label_id }) => {
@@ -23,16 +26,6 @@ exports.getOne = async ({ label_id }) => {
   } catch (err) {
     return { status: 401, data: '유효하지 않은 입력 입니다.' };
   }
-};
-
-exports.findByName = async (label) => {
-  let result;
-  try {
-    result = await Label.findOne({ where: { name: label.name } });
-  } catch (err) {
-    return false;
-  }
-  return result;
 };
 
 exports.create = async (newLabel) => {
