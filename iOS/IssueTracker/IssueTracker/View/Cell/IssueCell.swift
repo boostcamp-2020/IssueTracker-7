@@ -153,7 +153,7 @@ final class IssueCell: UICollectionViewCell {
     }
     
     @objc private func contentTapped() {
-    
+      
         delegate?.issueListDidTapped(cell: self)
         delegate?.issueListDidInteracted(cell: self)
     }
@@ -231,15 +231,16 @@ final class IssueCell: UICollectionViewCell {
         layer.masksToBounds = true
     }
 
-    func configure(issueData: IssueData) {
-        
+    func configure(issueData: IssueInfo) {
+      
         visibleView.configure(issueData: issueData)
     }
     
     func resetOffset() {
-        
+      
         UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
             self.scrollView.contentOffset.x = self.contentOffset
+
         }.startAnimation()
     }
     
@@ -256,7 +257,7 @@ final class IssueCell: UICollectionViewCell {
 extension IssueCell: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+
         if !isEditing {
             if scrollView.contentOffset.x < contentOffset + 5 {
                 scrollView.contentOffset.x = contentOffset

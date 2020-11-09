@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct IssueData: Codable {
+struct IssueInfo: Codable {
     let id: Int
     let title: String
     let status: String
@@ -21,7 +21,7 @@ struct IssueData: Codable {
     let assignees: [Assignee]?
     let author: Author?
     let comments: [Comment]
-    let milestone: Milestone
+    let milestone: Milestone?
 
     enum CodingKeys: String, CodingKey {
         case id, title, status, createdAt, updatedAt, deletedAt

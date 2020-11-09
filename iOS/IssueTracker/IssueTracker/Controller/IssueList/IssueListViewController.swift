@@ -21,7 +21,7 @@ final class IssueListViewController: UIViewController {
     @IBOutlet private var collectionView: UICollectionView!
     @IBOutlet var filterButtonItem: UIBarButtonItem!
     
-    private var issueDataList: [IssueData] = []
+    private var issueDataList: [IssueInfo] = []
     
     private lazy var selectAllButtonItem: UIBarButtonItem = UIBarButtonItem(title: barButtonItemState.selectAll.rawValue, style: .plain, target: self, action: #selector(pressedSelectAllButton))
     
@@ -127,7 +127,7 @@ extension IssueListViewController: UICollectionViewDataSource {
 }
 
 extension IssueListViewController: UICollectionViewDelegate {
-    
+  
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
         if isEditing {
@@ -141,7 +141,6 @@ extension IssueListViewController: UICollectionViewDelegate {
             print("selected item")
         } 
     }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let headerView = collectionView.dequeueReusableSupplementaryView(
@@ -150,11 +149,11 @@ extension IssueListViewController: UICollectionViewDelegate {
             for: indexPath)
         
         return headerView
-
     }
 }
 
 extension IssueListViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("입력")
     }
@@ -183,7 +182,6 @@ extension IssueListViewController: IssueCellDelegate {
         
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }
 
 extension IssueListViewController: UIScrollViewDelegate {

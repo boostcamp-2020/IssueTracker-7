@@ -23,7 +23,11 @@ final class DetailIssueListController: UIViewController {
     
     // MARK: - Property
     
-    var cardView: CardView!
+    var cardView: CardView = CardView()
+    var baseView = UIView()
+    let bounce: CGFloat = 10
+    let maximumAlpha: CGFloat = 0.7
+    
     lazy var dimmerView: UIView = {
         let dimmerView = UIView()
         dimmerView.backgroundColor = UIColor.gray
@@ -31,14 +35,14 @@ final class DetailIssueListController: UIViewController {
         return dimmerView
     }()
     
-    lazy var cardStartY: CGFloat = view.bounds.height * 0.1
-    lazy var cardEndY: CGFloat = view.bounds.height * 0.85
+    lazy var cardMinimumY: CGFloat = view.bounds.height * 0.1
+    lazy var cardMaximumY: CGFloat = view.bounds.height * 0.85
     
-    lazy var cardLatestY : CGFloat = cardEndY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
+    lazy var cardLatestY: CGFloat = cardMaximumY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
     var cardCurrentState: CardState = .collapsed
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>! = nil
+    var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>!
     
     
     // MARK: - Life Cycle
@@ -55,14 +59,14 @@ final class DetailIssueListController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        setupCard()
+        setupCardView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         dimmerView.removeFromSuperview()
-        cardView.removeFromSuperview()
+        baseView.removeFromSuperview()
     }
     
     
@@ -73,90 +77,124 @@ final class DetailIssueListController: UIViewController {
         dimmerView.alpha = 0
     }
     
-    func setupCard() {
-        tabBarController?.view.addSubview(dimmerView)
-        
-        cardView = CardView()
-        tabBarController?.view.addSubview(cardView)
-
-        cardView.frame = CGRect(
-            x: 0,
-            y: view.bounds.height,
-            width: self.view.bounds.width,
-            height: self.view.frame.height - cardStartY
-        )
-        
-        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
-            self.cardView.frame.origin.y = self.cardEndY
-        }.startAnimation()
-
-        cardView.clipsToBounds = true
-        cardView.layer.cornerRadius = 15.0
-        cardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(recognizer:)))
-        cardView.addGestureRecognizer(panGestureRecognizer)
+    func addGesture() {
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(baseViewPanned))
+        baseView.addGestureRecognizer(panGestureRecognizer)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dimmerViewTapped))
         dimmerView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    @objc
-    func dimmerViewTapped() {
-        animateTransitionIfNeeded(state: .collapsed, duration: 0.1) // 최소화
+    func setupCardView() {
+        
+        tabBarController?.view.addSubview(dimmerView)
+        tabBarController?.view.addSubview(baseView)
+        
+        // baseView 의 시작지점 및 시작 애니메이션 설정
+        baseView.frame = CGRect(
+            x: 0,
+            y: view.bounds.height,
+            width: self.view.bounds.width,
+            height: self.view.frame.height - cardMinimumY + bounce
+        )
+        
+        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
+            self.baseView.frame.origin.y = self.cardMaximumY
+        }.startAnimation()
+        
+        
+        // baseView 및 cardView 의 테두리, 그림자 설정
+        baseView.addSubview(cardView)
+        cardView.frame = baseView.bounds
+        
+        baseView.setUpShadow(radius: 4, opacity: 0.35)
+        baseView.backgroundColor = .clear
+        
+        cardView.layer.masksToBounds = true
+        cardView.layer.cornerRadius = 15.0
+        cardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        // Pan 제스쳐 설정
+        addGesture()
     }
     
-    @objc
-    func handleCardPan (recognizer:UIPanGestureRecognizer) {
+    @objc func dimmerViewTapped() {
+        animateCardView(to: .collapsed, withDuration: 0.1) // 최소화
+    }
+        
+    @objc func baseViewPanned (recognizer:UIPanGestureRecognizer) {
 
+        dimmerView.alpha = (1 - (baseView.frame.origin.y - cardMinimumY) / (cardMaximumY - cardMinimumY)) * maximumAlpha
+        
         switch recognizer.state {
         case .began:
-            cardLatestY = cardView.frame.origin.y
+            cardLatestY = baseView.frame.origin.y
         case .changed:
-            let translation = recognizer.translation(in: cardView)
+            let translation = recognizer.translation(in: baseView)
             let expectedY = cardLatestY + translation.y
             
-            if (cardStartY...cardEndY) ~= expectedY {
-                cardView.frame.origin.y = cardLatestY + translation.y
+            if (cardMinimumY...cardMaximumY) ~= expectedY {
+                baseView.frame.origin.y = cardLatestY + translation.y
             }
         case .ended:
-            switch cardCurrentState {
-            case .collapsed:
-                if cardView.frame.origin.y < cardLatestY {
-                    animateTransitionIfNeeded(state: .expanded, duration: 0.1) // 확장
-                }
-            case .expanded:
-                if cardView.frame.origin.y > cardLatestY {
-                    animateTransitionIfNeeded(state: .collapsed, duration: 0.1) // 최소화
-                }
+            // velocity 기준 자동 확대 / 축소
+            let velocity = recognizer.velocity(in: baseView)
+            if velocity.y > 1000 {
+                animateCardView(to: .collapsed, withDuration: 0.2, bounce: bounce)
+                return
+            } else if velocity.y < -1000 {
+                animateCardView(to: .expanded, withDuration: 0.2, bounce: bounce)
+                return
+            }
+    
+            // CardView Y 좌표 기준 자동 확대 / 축소
+            let cardMidY = cardMinimumY + (cardMaximumY - cardMinimumY) / 2
+            
+            if (cardMinimumY...cardMidY) ~= baseView.frame.origin.y {
+                animateCardView(to: .expanded, withDuration: 0.2)
+            } else {
+                animateCardView(to: .collapsed, withDuration: 0.2)
             }
         default:
             break
         }
     }
     
-    func animateTransitionIfNeeded (state: CardState, duration: TimeInterval) {
+    func animateCardView (to state: CardState, withDuration duration: TimeInterval, bounce: CGFloat = 0) {
         
-        // TODO: 추후 UIViewPropertyAnimator fractionComplete 활용해서 더 interactive 하게 만들어보기
-        let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) {
+        let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
             switch state {
             case .expanded:
-                self.cardView.frame.origin.y = self.cardStartY
-                self.dimmerView.alpha = 0.7
+                self.baseView.frame.origin.y = self.cardMinimumY - bounce
                 self.dimmerView.isUserInteractionEnabled = true
+                self.dimmerView.alpha = self.maximumAlpha
                 
                 self.cardCurrentState = .expanded
             case .collapsed:
-                self.cardView.frame.origin.y = self.cardEndY
-                self.dimmerView.alpha = 0
+                self.baseView.frame.origin.y = self.cardMaximumY + bounce
                 self.dimmerView.isUserInteractionEnabled = false
+                self.dimmerView.alpha = 0
         
                 self.cardCurrentState = .collapsed
             }
         }
         
-        cardLatestY = cardView.frame.origin.y
-    
+        if bounce != 0 {
+            frameAnimator.addCompletion { _ in
+                switch state {
+                case .expanded:
+                    UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
+                        self.baseView.frame.origin.y = self.cardMinimumY
+                    }.startAnimation()
+                case .collapsed:
+                    UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
+                        self.baseView.frame.origin.y = self.cardMaximumY
+                    }.startAnimation()
+                }
+            }
+        }
+        
+        cardLatestY = baseView.frame.origin.y
         frameAnimator.startAnimation()
     }
 }
@@ -166,19 +204,6 @@ final class DetailIssueListController: UIViewController {
 extension DetailIssueListController {
     
     private func createLayout() -> UICollectionViewLayout {
-//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                             heightDimension: .fractionalHeight(1.0))
-//        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//
-//        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                              heightDimension: .fractionalWidth(0.2))
-//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-//                                                         subitems: [item])
-//
-//        let section = NSCollectionLayoutSection(group: group)
-//
-//        let layout = UICollectionViewCompositionalLayout(section: section)
-//        return layout
         let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         return UICollectionViewCompositionalLayout.list(using: config)
     }
