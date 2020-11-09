@@ -332,3 +332,24 @@ exports.getCommentOne = async ({ issue_id, comment_id }) => {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
   };
 };
+
+exports.addComment = async ({ issue_id, content, user }) => {
+  try {
+    const newComment = await Comment.create({ content: content, user_id: user.id, issue_id: issue_id })
+    const result = await Comment.findOne({
+      where: newComment.dataValues,
+      attributes: ['id', 'content', 'updated_at'],
+      include: [
+        {
+          model: User,
+          as: 'mentions',
+          attributes: ['id', 'user_id', 'photo_url'],
+        },
+      ]
+    });
+    if (result) return { status: 200, data: result };
+    else return { status: 401, data: { message: '잘못된 접근입니다.' } };
+  } catch (err) {
+    return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
+  };
+};
