@@ -18,6 +18,7 @@ final class IssueCell: UICollectionViewCell {
     
     static let reuseIdentifier = String(describing: IssueCell.self)
     weak var delegate: IssueCellDelegate?
+    private lazy var contentOffset: CGFloat = bounds.width * 0.1
     
     var isEditing: Bool = false {
         didSet {
@@ -26,7 +27,7 @@ final class IssueCell: UICollectionViewCell {
                 scrollView.isUserInteractionEnabled = true
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
-                            self.scrollView.contentOffset.x = 38
+                        self.scrollView.contentOffset.x = self.contentOffset
                     }, completion: nil)
                 }
                 hideSelectLabel()
@@ -35,7 +36,7 @@ final class IssueCell: UICollectionViewCell {
                 scrollView.isUserInteractionEnabled = false
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
-                            self.scrollView.contentOffset.x = -38
+                        self.scrollView.contentOffset.x = -self.contentOffset
                     }, completion: nil)
                 }
                 showSelectLabel()
@@ -238,13 +239,13 @@ final class IssueCell: UICollectionViewCell {
     func resetOffset() {
         
         UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
-            self.scrollView.contentOffset.x = 38
+            self.scrollView.contentOffset.x = self.contentOffset
         }.startAnimation()
     }
     
     func isSwiped() -> Bool {
         
-        return scrollView.contentOffset.x != 38
+        return scrollView.contentOffset.x != self.contentOffset
     }
     
 }
@@ -257,8 +258,8 @@ extension IssueCell: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if !isEditing {
-            if scrollView.contentOffset.x < 45 {
-                scrollView.contentOffset.x = 38
+            if scrollView.contentOffset.x < contentOffset + 5 {
+                scrollView.contentOffset.x = contentOffset
                 scrollView.bounces = false
             } else {
                 scrollView.bounces = true
