@@ -20,4 +20,10 @@ router.get('/:issue_id/assignee/:assignee_id', issueController.getAssigneeOne);
 router.post('/:issue_id/assignee', issueController.addAssignee);
 router.delete('/:issue_id/assignee/:assignee_id', issueController.deleteAssignee);
 
+router.get('/:issue_id/comment', issueController.getCommentAll);
+router.get('/:issue_id/comment/:comment_id', issueController.getCommentOne);
+router.post('/:issue_id/comment', issueController.addComment);
+router.put('/:issue_id/comment/:comment_id', issueController.updateComment)
+router.delete('/:issue_id/comment/:comment_id', issueController.deleteComment);
+
 module.exports = router;
