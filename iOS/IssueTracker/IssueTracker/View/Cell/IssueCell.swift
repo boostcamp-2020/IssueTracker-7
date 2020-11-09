@@ -148,7 +148,7 @@ final class IssueCell: UICollectionViewCell {
         layer.masksToBounds = true
     }
 
-    func configure(issueData: IssueData) {
+    func configure(issueData: IssueInfo) {
         visibleView.configure(issueData: issueData)
     }
     
@@ -160,7 +160,7 @@ final class IssueCell: UICollectionViewCell {
     
     func isSwiped() -> Bool {
         scrollView.contentOffset.x != 0
-    
+    }
     
 }
 
@@ -174,7 +174,8 @@ extension IssueCell: UIScrollViewDelegate {
             scrollView.bounces = false
         } else {
             scrollView.bounces = true
-    
+        }
+    }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         delegate?.issueListDidInteracted(cell: self)
