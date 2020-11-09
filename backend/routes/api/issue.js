@@ -12,7 +12,7 @@ router.get('/:issue_id/milestone', issueController.getMilestone);
 router.post('/:issue_id/milestone/:milestone_id', issueController.addMilestone);
 router.delete('/:issue_id/milestone', issueController.deleteMilestone);
 
-router.get('/:issue_id/label', labelController.getAll);
+router.get('/:issue_id/label', issueController.getLabel);
 router.post('/:issue_id/label', issueController.addLabel);
 router.delete('/:issue_id/label/:label_id', issueController.deleteLabel);
 
