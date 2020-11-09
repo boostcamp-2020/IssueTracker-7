@@ -22,7 +22,8 @@ final class IssueListViewController: UIViewController {
     @IBOutlet var filterButtonItem: UIBarButtonItem!
     
     private var issueDataList: [IssueInfo] = []
-    
+    private let api = BackEndAPIManager(router: MockRouter(jsonFactory: JsonFactoryTrue()))
+        
     private lazy var selectAllButtonItem: UIBarButtonItem = UIBarButtonItem(title: barButtonItemState.selectAll.rawValue, style: .plain, target: self, action: #selector(pressedSelectAllButton))
     
     private var selectAllActive: Bool = false {
@@ -79,7 +80,7 @@ final class IssueListViewController: UIViewController {
 extension IssueListViewController {
     
     private func setUpIssueData() {
-        BackEndAPIManager.shared.requestAllIssues() { result in
+        api.requestAllIssues() { result in
             switch result {
             case .success(let issues):
                 self.issueDataList = issues
@@ -178,10 +179,21 @@ extension IssueListViewController: IssueCellDelegate {
         }
         
         let storyboard = UIStoryboard(name: "DetailIssueList", bundle: nil)
-        let viewController = storyboard.instantiateViewController(identifier: "DetailIssueListController")
+        let viewController = storyboard.instantiateViewController(identifier: "DetailIssueListController") as! DetailIssueListController
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        let data = issueDataList[indexPath.item]
         
+        let info = HeaderDetailIssueInfo(userId: data.userID!, title: data.title, issueNumber: data.id)
+        
+        viewController.headerInfo = info
         navigationController?.pushViewController(viewController, animated: true)
     }
+}
+
+struct HeaderDetailIssueInfo {
+    let userId: Int
+    let title: String
+    let issueNumber: Int
 }
 
 extension IssueListViewController: UIScrollViewDelegate {

@@ -18,7 +18,7 @@ final class IssueCell: UICollectionViewCell {
     
     static let reuseIdentifier = String(describing: IssueCell.self)
     weak var delegate: IssueCellDelegate?
-    private lazy var contentOffset: CGFloat = bounds.width * 0.1
+    private lazy var contentOffset: CGFloat = ceil((scrollView.bounds.width * 0.1) * 10) / 10
     
     var isEditing: Bool = false {
         didSet {
@@ -26,7 +26,7 @@ final class IssueCell: UICollectionViewCell {
                 
                 scrollView.isUserInteractionEnabled = true
                 DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                    UIView.animate(withDuration: 0.25, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                         self.scrollView.contentOffset.x = self.contentOffset
                     }, completion: nil)
                 }
@@ -35,7 +35,7 @@ final class IssueCell: UICollectionViewCell {
 
                 scrollView.isUserInteractionEnabled = false
                 DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                    UIView.animate(withDuration: 0.25, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                         self.scrollView.contentOffset.x = -self.contentOffset
                     }, completion: nil)
                 }
@@ -232,7 +232,6 @@ final class IssueCell: UICollectionViewCell {
     }
 
     func configure(issueData: IssueInfo) {
-      
         visibleView.configure(issueData: issueData)
     }
     
@@ -245,7 +244,7 @@ final class IssueCell: UICollectionViewCell {
     }
     
     func isSwiped() -> Bool {
-        
+        print(scrollView.contentOffset.x, self.contentOffset)
         return scrollView.contentOffset.x != self.contentOffset
     }
     
@@ -274,7 +273,6 @@ extension IssueCell: UIScrollViewDelegate {
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
         if !isEditing {
             delegate?.issueListDidInteracted(cell: self)
         }
