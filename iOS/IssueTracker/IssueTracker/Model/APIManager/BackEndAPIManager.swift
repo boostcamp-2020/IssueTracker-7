@@ -14,8 +14,8 @@ class BackEndAPIManager {
     private let router = Router<BackEndAPI>()
     
     
-    func requestAllIssues(completionHandler: @escaping ((Result<[IssueData], APIError>) -> Void)) {
-        router.request(route: .Issues) { (result: Result<[IssueData], APIError>) in
+    func requestAllIssues(completionHandler: @escaping ((Result<[IssueInfo], APIError>) -> Void)) {
+        router.request(route: .Issues) { (result: Result<[IssueInfo], APIError>) in
             completionHandler(result)
         }
     }
