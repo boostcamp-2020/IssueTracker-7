@@ -34,6 +34,7 @@ final class IssueListViewController: UIViewController {
                 navigationItem.leftBarButtonItem!.title = barButtonItemState.selectAll.rawValue
                 deselectAllItems()
             }
+            setNavigationTitle()
         }
     }
     
@@ -94,7 +95,7 @@ extension IssueListViewController {
     private func configureLayout() {
         let spacing: CGFloat = 10
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width-30, height: 50)
+        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width - 30, height: 50)
         collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: 50)
         collectionViewFlowLayout.minimumLineSpacing = spacing
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: 0, right: 0)
@@ -117,7 +118,7 @@ extension IssueListViewController: UICollectionViewDataSource {
         cell.isEditing = isEditing
         
         // cell을 reuse하기 전에 cell이 selected items에 포함된다면 selected 표시 -- selected된 cell이 reuse 되면서 selected state가 유지되는 버그를 수정함
-        if collectionView.indexPathsForSelectedItems!.contains(indexPath) {
+        if let selectedItems = collectionView.indexPathsForSelectedItems, selectedItems.contains(indexPath) {
             cell.isSelected = true
         }
         
@@ -207,8 +208,8 @@ extension IssueListViewController {
     }
     
     private func selectAllItems() {
-        
-        (0..<collectionView!.numberOfItems(inSection: 0)).forEach { itemIndex in
+        guard let collectionView = collectionView else { return }
+        (0..<collectionView.numberOfItems(inSection: 0)).forEach { itemIndex in
             let indexPath = IndexPath(item: itemIndex, section: 0)
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         }
@@ -235,6 +236,7 @@ extension IssueListViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         collectionView.allowsMultipleSelection = editing
+        
         // deselect any selected items when edit mode turns on
         collectionView.indexPathsForSelectedItems?.forEach { indexPath in
             collectionView.deselectItem(at: indexPath, animated: false)
