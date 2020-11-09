@@ -211,7 +211,7 @@ exports.getLabel = async (issue_id) => {
     const issue = await Issue.findByPk(issue_id)
     result = await issue.getLabels()
     if (result) return { status: 200, data: result };
-    else return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
+    else return { status: 401, data: { message: '유효하지 않은 이슈입니다.' } };
 
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
@@ -262,7 +262,7 @@ exports.getAssigneeOne = async (issue_id, assignee_id) => {
       where: { id: assignee_id },
       attributes: ['id', 'user_id', 'photo_url'],
     })
-    if (result) return { status: 200, data: result };
+    if (result) return { status: 200, data: result[0] };
     else return { status: 401, data: { message: '유효하지 않은 사용자입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
@@ -273,7 +273,11 @@ exports.addAssignee = async (issue_id, user_id) => {
   try {
     const issue = await Issue.findByPk(issue_id);
     const user = await User.findByPk(user_id);
-    const result = await issue.addAssignee(user);
+    const assignee = await issue.addAssignee(user);
+    const result = await issue.getAssignees({
+      where: { id: user_id },
+      attributes: ['id', 'user_id', 'photo_url'],
+    })
     if (result) return { status: 200, data: result[0] };
     else return { status: 401, data: { message: '이미 승인한 사용자입니다.' } };
   } catch (err) {
@@ -286,7 +290,7 @@ exports.deleteAssignee = async (issue_id, user_id) => {
     const issue = await Issue.findByPk(issue_id);
     const user = await User.findByPk(user_id);
     const result = await issue.removeAssignee(user);
-    if (result) return { status: 200, data: result };
+    if (result) return { status: 200, data: { message: 'success' } };
     else return { status: 401, data: { message: '존재하지 않는 Assignee입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
