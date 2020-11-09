@@ -76,3 +76,47 @@ exports.deleteAssignee = async (req, res) => {
   const { status, data } = await issueService.deleteAssignee(req.params.issue_id, req.params.assignee_id);
   res.status(status).json(data);
 };
+
+exports.getCommentAll = async (req, res) => {
+  const { status, data } = await issueService.getCommentAll(req.params.issue_id);
+  res.status(status).json(data);
+};
+
+exports.getCommentOne = async (req, res) => {
+  const params = {
+    issue_id: req.params.issue_id,
+    comment_id: req.params.comment_id
+  }
+  const { status, data } = await issueService.getCommentOne(params);
+  res.status(status).json(data);
+};
+
+exports.addComment = async (req, res) => {
+  const params = {
+    issue_id: req.params.issue_id,
+    content: req.body.content,
+    user: req.user
+  }
+  const { status, data } = await issueService.addComment(params);
+  res.status(status).json(data);
+};
+
+exports.updateComment = async (req, res) => {
+  const params = {
+    issue_id: req.params.issue_id,
+    comment_id: req.params.comment_id,
+    content: req.body.content,
+    user: req.user
+  }
+  const { status, data } = await issueService.updateComment(params);
+  res.status(status).json(data);
+};
+
+exports.deleteComment = async (req, res) => {
+  const params = {
+    issue_id: req.params.issue_id,
+    comment_id: req.params.comment_id
+  }
+  const { status, data } = await issueService.deleteComment(params);
+  res.status(status).json(data);
+};
