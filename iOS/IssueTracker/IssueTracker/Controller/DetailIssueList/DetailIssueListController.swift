@@ -23,26 +23,28 @@ final class DetailIssueListController: UIViewController {
     
     // MARK: - Property
     
-    var cardView: CardView = CardView()
-    var baseView = UIView()
-    let bounce: CGFloat = 10
-    let maximumAlpha: CGFloat = 0.7
+    var headerInfo: HeaderDetailIssueInfo! = nil
     
-    lazy var dimmerView: UIView = {
+    private let cardView: CardView = CardView()
+    private let baseView = UIView()
+    private let bounce: CGFloat = 10
+    private let maximumAlpha: CGFloat = 0.7
+    
+    private lazy var dimmerView: UIView = {
         let dimmerView = UIView()
         dimmerView.backgroundColor = UIColor.gray
         dimmerView.frame = self.view.bounds
         return dimmerView
     }()
     
-    lazy var cardMinimumY: CGFloat = view.bounds.height * 0.1
-    lazy var cardMaximumY: CGFloat = view.bounds.height * 0.85
+    private lazy var cardMinimumY: CGFloat = view.bounds.height * 0.1
+    private lazy var cardMaximumY: CGFloat = view.bounds.height * 0.85
     
-    lazy var cardLatestY: CGFloat = cardMaximumY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
-    var cardCurrentState: CardState = .collapsed
+    private lazy var cardLatestY: CGFloat = cardMaximumY // 제스쳐 start 시 갱신되는 가장 최신의 Y 좌표
+    private var cardCurrentState: CardState = .collapsed
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>!
     
     
     // MARK: - Life Cycle
@@ -50,10 +52,11 @@ final class DetailIssueListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureDataSource()
+
         setUpDimmerView()
         
         configureCollectionView()
-        configureDataSource()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -201,11 +204,34 @@ final class DetailIssueListController: UIViewController {
 
 // MARK: collectionView
 
-extension DetailIssueListController {
+extension DetailIssueListController: UICollectionViewDelegate {
     
     private func createLayout() -> UICollectionViewLayout {
-        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        return UICollectionViewCompositionalLayout.list(using: config)
+//        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        
+//        collectionView.register(
+//                    DetailIssueHeader.self,
+//                    forSupplementaryViewOfKind: "section-header-element-kind",
+//                    withReuseIdentifier: DetailIssueHeader.reuseIdentifier) 
+        let heightDimension = NSCollectionLayoutDimension.estimated(500)
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: "DetailIssueHeader",
+            alignment: .top)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [sectionHeader]
+        
+        return UICollectionViewCompositionalLayout(section: section)
     }
     
     private func configureCollectionView() {
@@ -216,22 +242,22 @@ extension DetailIssueListController {
         dataSource = UICollectionViewDiffableDataSource<Section, DetailIssueInfo>(collectionView: collectionView) {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
-            switch indexPath.row {
-            case 0:
-                // TODO: 이 부분은 추후에 HeaderView 로 수정필요
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueTopCell.reuseIdentifier, for: indexPath) as? DetailIssueTopCell else {
-                    fatalError("Cannot create new cell")
-                }
-                DetailIssueTopCell.configureCell(cell: cell, data: item)
-                return cell
-            default:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueCell.reuseIdentifier, for: indexPath) as? DetailIssueCell else {
-                    fatalError("Cannot create new cell")
-                }
-                DetailIssueCell.configureCell(cell: cell, data: item)
-                return cell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueCell.reuseIdentifier, for: indexPath) as? DetailIssueCell else {
+                fatalError("Cannot create new cell")
             }
+            DetailIssueCell.configureCell(cell: cell, data: item)
+            return cell
+            
         }
+        
+        dataSource.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+            
+            guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailIssueHeader.reuseIdentifier, for: indexPath) as? DetailIssueHeader else { return nil }
+            DetailIssueHeader.configureCell(cell: supplementaryView, data: self.headerInfo)
+            
+            return supplementaryView
+        }
+        
         
         let dummy = [DetailIssueInfo(id: 1, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
                      DetailIssueInfo(id: 2, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
