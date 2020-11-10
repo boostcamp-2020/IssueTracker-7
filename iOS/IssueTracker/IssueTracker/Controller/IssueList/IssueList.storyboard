@@ -93,7 +93,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="Kyi-Eh-ypv"/>
                     <navigationItem key="navigationItem" title="이슈" id="RzU-8r-oEh">
-                        <barButtonItem key="leftBarButtonItem" title="편집" id="bkx-PW-boa">
+                        <barButtonItem key="leftBarButtonItem" title="필터" id="bkx-PW-boa">
                             <connections>
                                 <segue destination="0jM-ha-VGr" kind="presentation" identifier="IssueListToFilter" id="YAw-Ar-zCf"/>
                             </connections>
