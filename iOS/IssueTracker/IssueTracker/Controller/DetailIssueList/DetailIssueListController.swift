@@ -48,9 +48,7 @@ final class DetailIssueListController: UIViewController {
     
     
     init?(coder: NSCoder, headerinfo: HeaderDetailIssueInfo) {
-        
         self.headerInfo = headerinfo
-        
         super.init(coder: coder)
     }
     
@@ -58,15 +56,16 @@ final class DetailIssueListController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureDataSource()
-
-        setUpDimmerView()
+        navigationItem.largeTitleDisplayMode = .never
         
+        configureDataSource()
+        setUpDimmerView()
         configureCollectionView()
     }
     

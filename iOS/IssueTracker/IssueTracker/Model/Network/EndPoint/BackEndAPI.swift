@@ -55,10 +55,8 @@ extension BackEndAPI: EndPointable {
         switch self {
         case .token:
             return .post
-        case .allIssues:
+        case .allIssues, .allLabels, .allMilestones, .allAssignees, .allAuthors, .predefinedFilter:
             return .get
-        default:
-            return nil
         }
     }
     

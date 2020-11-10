@@ -20,7 +20,7 @@ struct HeaderDetailIssueInfo {
     let issueNumber: Int
 }
 
-final class IssueListViewController: UIViewController {
+final class IssueListViewController: UIViewController, UISearchControllerDelegate {
    
     // MARK: - Property
     
@@ -38,7 +38,7 @@ final class IssueListViewController: UIViewController {
     private let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Country"
+        searchController.searchBar.placeholder = "Search"
         return searchController
     }()
     
@@ -66,7 +66,8 @@ final class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        
+        navigationItem.largeTitleDisplayMode = .always
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         
@@ -78,7 +79,6 @@ final class IssueListViewController: UIViewController {
 
     
     // MARK: - Method
- 
     
     func requestFiltering(with filterInfo: FilterInfo) {
         self.api.requestFiltering(conditions: filterInfo) { result in

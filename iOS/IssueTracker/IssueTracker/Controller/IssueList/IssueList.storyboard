@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VGO-WG-P6r">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="1" id="rRT-tx-TJG">
                                     <size key="itemSize" width="413" height="134"/>
@@ -84,7 +84,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="VGO-WG-P6r" firstAttribute="leading" secondItem="kHZ-Od-lMj" secondAttribute="leading" id="9SW-73-bTP"/>
-                            <constraint firstItem="VGO-WG-P6r" firstAttribute="top" secondItem="kHZ-Od-lMj" secondAttribute="top" id="BdE-3R-wpk"/>
+                            <constraint firstItem="VGO-WG-P6r" firstAttribute="top" secondItem="DnD-0v-bVn" secondAttribute="top" id="BdE-3R-wpk"/>
                             <constraint firstItem="kHZ-Od-lMj" firstAttribute="bottom" secondItem="mQ1-L5-yoe" secondAttribute="bottom" constant="46" id="CHY-FW-FeW"/>
                             <constraint firstItem="kHZ-Od-lMj" firstAttribute="trailing" secondItem="mQ1-L5-yoe" secondAttribute="trailing" constant="43" id="OEE-DY-cti"/>
                             <constraint firstItem="kHZ-Od-lMj" firstAttribute="bottom" secondItem="VGO-WG-P6r" secondAttribute="bottom" id="SXK-5c-rES"/>
@@ -93,7 +93,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="Kyi-Eh-ypv"/>
                     <navigationItem key="navigationItem" title="이슈" id="RzU-8r-oEh">
-                        <barButtonItem key="leftBarButtonItem" title="Filter" id="bkx-PW-boa">
+                        <barButtonItem key="leftBarButtonItem" title="편집" id="bkx-PW-boa">
                             <connections>
                                 <segue destination="0jM-ha-VGr" kind="presentation" identifier="IssueListToFilter" id="YAw-Ar-zCf"/>
                             </connections>
