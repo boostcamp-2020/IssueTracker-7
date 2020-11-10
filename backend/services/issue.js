@@ -1,6 +1,6 @@
 const { Issue, Label, User, Comment, label_has_issue, Milestone, sequelize } = require('../models');
 const Op = sequelize.Op;
-const optionParser = (queryString) => queryString.match(/(\w+)([@/-\w가-힇]+)|(".*?")+(?=\:?)/gi);
+const optionParser = (queryString) => queryString.match(/(\w+|@)([@/-\w가-힇]+)|(".*?")+(?=\:?)/gi);
 const optionStringToObject = (queryString) => {
   const queryArray = optionParser(queryString);
   const queryObject = { is: [], no: [] };
