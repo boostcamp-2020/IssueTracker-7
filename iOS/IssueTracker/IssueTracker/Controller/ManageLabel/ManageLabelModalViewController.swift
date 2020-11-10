@@ -9,6 +9,7 @@ import UIKit
 
 final class ManageLabelModalViewController: UIViewController{
     
+    
     @IBOutlet var firstTextFieldLabel: UILabel!
     @IBOutlet var secondTextFieldLabel: UILabel!
     @IBOutlet var thirdTextFieldLabel: UILabel!
@@ -27,12 +28,13 @@ final class ManageLabelModalViewController: UIViewController{
     let colorPickerViewController = UIColorPickerViewController()
     
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
         initializeAllFields()
         configureColorPicker()
         configureTextField()
     }
+    
 }
 
 // MARK: - 텍스트필드 설정

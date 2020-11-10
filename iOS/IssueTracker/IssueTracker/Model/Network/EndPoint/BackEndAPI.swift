@@ -26,6 +26,8 @@ extension BackEndAPI: EndPointable, CaseIterable {
             return "http://\(BackEndAPICredentials.ip)/api/auth/github/ios"
         case .allIssues:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
+        case .allLabels:
+            return "http://\(BackEndAPICredentials.ip)/api/label"
         default:
             return ""
         }
@@ -45,6 +47,8 @@ extension BackEndAPI: EndPointable, CaseIterable {
         case .token:
             return .post
         case .allIssues:
+            return .get
+        case .allLabels:
             return .get
         default:
             return nil

@@ -47,5 +47,10 @@ class BackEndAPIManager {
         }
     }
   
-    
+    func requestAllLabels(completionHandler: @escaping((Result<[LabelInfo], APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.allLabels) { (result: Result<[LabelInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
 }

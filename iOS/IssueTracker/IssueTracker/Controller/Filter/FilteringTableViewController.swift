@@ -57,7 +57,7 @@ class FilteringTableViewController: UITableViewController {
                 case 0:
                     return DetailConditionTableViewController<Author>(coder: coder, route: route, detailFilterInfo: filterInfo)
                 case 1:
-                    return DetailConditionTableViewController<Label>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                    return DetailConditionTableViewController<LabelInfo>(coder: coder, route: route, detailFilterInfo: filterInfo)
                 case 2:
                     return DetailConditionTableViewController<Milestone>(coder: coder, route: route, detailFilterInfo: filterInfo)
                 case 3:
