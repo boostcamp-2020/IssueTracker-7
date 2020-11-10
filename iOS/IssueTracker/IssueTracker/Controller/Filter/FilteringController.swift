@@ -49,6 +49,6 @@ extension FilteringController: SendFilterConditionDelegate {
         if let handler = predefinedConditionHandler, let filterInfo = filterInfo {
             handler(filterInfo)
         }
-        dismiss(animated: false)
+        dismiss(animated: true)
     }
 }

@@ -25,6 +25,7 @@ final class UserConditionTableViewController: UIViewController {
     init?(coder: NSCoder, route: BackEndAPI, filterInfo: FilterInfo) {
         self.route = route
         self.filterInfo = filterInfo
+        
         super.init(coder: coder)
     }
     
@@ -73,11 +74,9 @@ final class UserConditionTableViewController: UIViewController {
     }
     
     func selectIndex(by compared: String) {
-        for (index, info) in self.userInfoList.enumerated() {
-            if info.userID == compared {
-                self.selectedIndex = index
-                return
-            }
+        
+        selectedIndex = userInfoList.firstIndex {
+            $0.userID == compared
         }
     }
     

@@ -24,6 +24,7 @@ final class MileStoneConditionTableViewController: UIViewController {
     init?(coder: NSCoder, route: BackEndAPI, filterInfo: FilterInfo) {
         self.route = route
         self.filterInfo = filterInfo
+        
         super.init(coder: coder)
     }
     
@@ -63,11 +64,8 @@ final class MileStoneConditionTableViewController: UIViewController {
     }
     
     func selectIndex() {
-        for (index, info) in self.milestoneInfoList.enumerated() {
-            if info.title == self.filterInfo.milestone {
-                self.selectedIndex = index
-                return
-            }
+        selectedIndex = milestoneInfoList.firstIndex {
+            $0.title == filterInfo.milestone
         }
     }
     

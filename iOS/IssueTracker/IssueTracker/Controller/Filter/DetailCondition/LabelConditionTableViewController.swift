@@ -30,6 +30,7 @@ final class LabelConditionTableViewController: UIViewController {
     init?(coder: NSCoder, route: BackEndAPI, filterInfo: FilterInfo) {
         self.route = route
         self.filterInfo = filterInfo
+        
         super.init(coder: coder)
     }
     
@@ -73,9 +74,10 @@ final class LabelConditionTableViewController: UIViewController {
         - filterInfo 의 label 과 일치하는 labelInfo 데이터들의 isSelected 를 활성화(true) 해주는 역할
      */
     func activateIsSelected() {
-        for index in self.labelInfoList.indices {
-            if self.filterInfo.label.contains(self.labelInfoList[index].name) {
-                self.labelInfoList[index].isSelected = true
+        
+        labelInfoList.indices.forEach {
+            if filterInfo.label.contains(labelInfoList[$0].name) {
+                labelInfoList[$0].isSelected = true
             }
         }
     }
