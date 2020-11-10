@@ -8,6 +8,7 @@ const sequelize = require('./models').sequelize;
 const passport = require('passport');
 const passportConfig = require('./middlewares/passport');
 const apiRouter = require('./routes/api');
+const cors = require('cors');
 
 var app = express();
 sequelize.sync();
@@ -30,6 +31,7 @@ app.use('/:route', (req, res, next) => {
   else res.status(404).json({ message: '유효하지 않은 요청 입니다.' });
 });
 
+app.use(cors());
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
