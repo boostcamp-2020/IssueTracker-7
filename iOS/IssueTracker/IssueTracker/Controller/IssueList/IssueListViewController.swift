@@ -33,6 +33,14 @@ final class IssueListViewController: UIViewController {
     private let api = BackEndAPIManager(router: Router())
         
     private lazy var selectAllButtonItem: UIBarButtonItem = UIBarButtonItem(title: barButtonItemState.selectAll.rawValue, style: .plain, target: self, action: #selector(pressedSelectAllButton))
+    // MARK: 검색
+    private var filteredIssueInfoList: [IssueInfo] = []
+    private let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Country"
+        return searchController
+    }()
     
     private var selectAllActive: Bool = false {
         didSet {
@@ -51,6 +59,9 @@ final class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
         
         setUpIssueData()
         collectionView.layoutIfNeeded()
@@ -107,6 +118,24 @@ final class IssueListViewController: UIViewController {
 
 // MARK: - Extension
 
+// MARK: 검색
+extension IssueListViewController: UISearchResultsUpdating {
+    
+    func filterIssueInfoForSearchKeyword(keyword: String) {
+        
+        filteredIssueInfoList = issueInfoList.filter { issueInfo in
+            issueInfo.title.contains(keyword)
+        }
+        
+        collectionView.reloadSections(IndexSet(integer: 0))
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchKeyword = searchController.searchBar.text else { return }
+        filterIssueInfoForSearchKeyword(keyword: searchKeyword)
+    }
+}
+
 extension IssueListViewController {
     
     private func setUpIssueData() {
@@ -127,7 +156,6 @@ extension IssueListViewController {
         let spacing: CGFloat = 10
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width - 30, height: 50)
-        collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: 50)
         collectionViewFlowLayout.minimumLineSpacing = spacing
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: 0, right: 0)
         collectionView.collectionViewLayout = collectionViewFlowLayout
@@ -137,21 +165,28 @@ extension IssueListViewController {
 extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        if searchController.isActive {
+            return filteredIssueInfoList.count
+        }
         return issueInfoList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath)
+                as? IssueCell else { return UICollectionViewCell() }
         cell.delegate = self
-        cell.configure(issueData: issueInfoList[indexPath.row])
-        cell.isEditing = isEditing
-      
-        // cell을 reuse하기 전에 cell이 selected items에 포함된다면 selected 표시 -- selected된 cell이 reuse 되면서 selected state가 유지되는 버그를 수정함
-        if let selectedItems = collectionView.indexPathsForSelectedItems, selectedItems.contains(indexPath) {
-            cell.isSelected = true
-        }
         
+        if searchController.isActive {
+            cell.configure(issueData: filteredIssueInfoList[indexPath.row])
+        } else {
+            cell.isEditing = isEditing
+            cell.configure(issueData: issueInfoList[indexPath.row])
+            
+            // cell을 reuse하기 전에 cell이 selected items에 포함된다면 selected 표시 -- selected된 cell이 reuse 되면서 selected state가 유지되는 버그를 수정함
+            if let selectedItems = collectionView.indexPathsForSelectedItems, selectedItems.contains(indexPath) {
+                cell.isSelected = true
+            }
+        }
         return cell
     }
 }
@@ -170,22 +205,6 @@ extension IssueListViewController: UICollectionViewDelegate {
             setNavigationTitle()
             print("selected item")
         } 
-    }
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let headerView = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: "searchBarHeader",
-            for: indexPath)
-        
-        return headerView
-    }
-}
-
-extension IssueListViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("입력")
     }
 }
 
