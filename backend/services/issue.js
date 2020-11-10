@@ -203,7 +203,6 @@ exports.create = async ({
   try {
     const label_ids = label_id_list ? JSON.parse(label_id_list) : [];
     const assignee_ids = assignee_id_list ? JSON.parse(assignee_id_list) : [];
-    if (!content) throw new Error('invalid value');
     const result = await Issue.findOrCreate({
       where: { title },
       defaults: { milestone_id: milestone_id, user_id: author_id },
@@ -213,7 +212,10 @@ exports.create = async ({
       const newIssue = result[0];
       await newIssue.addLabels(label_ids, { transaction: t });
       await newIssue.addAssignee(assignee_ids, { transaction: t });
-      await newIssue.addComment({ content, user_id: author_id }, { transaction: t });
+      await Comment.create(
+        { user_id: author_id, content, issue_id: newIssue.id },
+        { transaction: t }
+      );
       await t.commit();
       return await this.getOne({ issue_id: newIssue.id });
     } else return { status: 401, data: { message: '제목이 중복되는 이슈가 있습니다.' } };
