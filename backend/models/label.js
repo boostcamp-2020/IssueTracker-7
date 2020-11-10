@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       underscored: true,
       tableName: 'label',
-      paranoid: true,
       timestamps: true,
     }
   );
