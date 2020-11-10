@@ -1,5 +1,5 @@
-const { Issue, Label, User, Comment, label_has_issue, Milestone } = require('../models');
-const Op = require('sequelize').Op;
+const { Issue, Label, User, Comment, label_has_issue, Milestone, sequelize } = require('../models');
+const Op = sequelize.Op;
 const optionParser = (queryString) => queryString.match(/(\w+)([@/-\w가-힇]+)|(".*?")+(?=\:?)/gi);
 const optionStringToObject = (queryString) => {
   const queryArray = optionParser(queryString);
@@ -61,7 +61,7 @@ const getAuthorFilter = ({ author, no, user_id }) => {
     as: 'author',
     where: author
       ? {
-          user_id: assignee == '@me' ? user_id : author,
+          user_id: author == '@me' ? user_id : author,
         }
       : null,
     attributes: ['id', 'user_id', 'photo_url', 'type'],
@@ -169,7 +169,7 @@ exports.getOne = async ({ issue_id }) => {
       ],
     });
     if (issue) return { status: 200, data: issue };
-    else return { status: 401, data: { message: '유효하지 않은 Label 입니다.' } };
+    else return { status: 401, data: { message: '유효하지 않은 Issue 입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 요청 입니다.' } };
   }
@@ -191,16 +191,36 @@ exports.update = async ({ issue_id }, { title, status }) => {
   }
 };
 
-exports.create = async ({ title, milestone_id, author_id }) => {
+exports.create = async ({
+  title,
+  milestone_id,
+  label_id_list,
+  assignee_id_list,
+  author_id,
+  content,
+}) => {
+  const t = await sequelize.transaction();
   try {
+    const label_ids = label_id_list ? JSON.parse(label_id_list) : [];
+    const assignee_ids = assignee_id_list ? JSON.parse(assignee_id_list) : [];
     const result = await Issue.findOrCreate({
       where: { title },
       defaults: { milestone_id: milestone_id, user_id: author_id },
+      transaction: t,
     });
     if (result[1]) {
-      return { status: 200, data: result[0] };
+      const newIssue = result[0];
+      await newIssue.addLabels(label_ids, { transaction: t });
+      await newIssue.addAssignee(assignee_ids, { transaction: t });
+      await Comment.create(
+        { user_id: author_id, content, issue_id: newIssue.id },
+        { transaction: t }
+      );
+      await t.commit();
+      return await this.getOne({ issue_id: newIssue.id });
     } else return { status: 401, data: { message: '제목이 중복되는 이슈가 있습니다.' } };
   } catch (err) {
+    await t.rollback();
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
@@ -277,7 +297,7 @@ exports.addAssignee = async (issue_id, user_id) => {
     const result = await issue.getAssignees({
       where: { id: user_id },
       attributes: ['id', 'user_id', 'photo_url'],
-    })
+    });
     if (result) return { status: 200, data: result[0] };
     else return { status: 401, data: { message: '이미 승인한 사용자입니다.' } };
   } catch (err) {
@@ -354,13 +374,13 @@ exports.getCommentAll = async (issue_id) => {
           as: 'mentions',
           attributes: ['id', 'user_id', 'photo_url'],
         },
-      ]
+      ],
     });
     if (result) return { status: 200, data: result };
     else return { status: 401, data: { message: '유효하지 않은 이슈입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
-  };
+  }
 };
 
 exports.getCommentOne = async ({ issue_id, comment_id }) => {
@@ -374,18 +394,22 @@ exports.getCommentOne = async ({ issue_id, comment_id }) => {
           as: 'mentions',
           attributes: ['id', 'user_id', 'photo_url'],
         },
-      ]
+      ],
     });
     if (result) return { status: 200, data: result };
     else return { status: 401, data: { message: '유효하지 않은 코멘트입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
-  };
+  }
 };
 
 exports.addComment = async ({ issue_id, content, user }) => {
   try {
-    const newComment = await Comment.create({ content: content, user_id: user.id, issue_id: issue_id })
+    const newComment = await Comment.create({
+      content: content,
+      user_id: user.id,
+      issue_id: issue_id,
+    });
     const result = await Comment.findOne({
       where: newComment.dataValues,
       attributes: ['id', 'content', 'updated_at'],
@@ -395,20 +419,23 @@ exports.addComment = async ({ issue_id, content, user }) => {
           as: 'mentions',
           attributes: ['id', 'user_id', 'photo_url'],
         },
-      ]
+      ],
     });
     if (result) return { status: 200, data: result };
     else return { status: 401, data: { message: '잘못된 접근입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
-  };
+  }
 };
 
 exports.updateComment = async ({ issue_id, comment_id, content, user }) => {
   try {
-    const comment = await Comment.update({ content: content }, {
-      where: { id: comment_id, issue_id: issue_id, user_id: user.id }
-    })
+    const comment = await Comment.update(
+      { content: content },
+      {
+        where: { id: comment_id, issue_id: issue_id, user_id: user.id },
+      }
+    );
     const result = await Comment.findOne({
       where: comment.dataValues,
       attributes: ['id', 'content', 'updated_at'],
@@ -418,23 +445,23 @@ exports.updateComment = async ({ issue_id, comment_id, content, user }) => {
           as: 'mentions',
           attributes: ['id', 'user_id', 'photo_url'],
         },
-      ]
+      ],
     });
     if (result) return { status: 200, data: result };
     else return { status: 401, data: { message: '잘못된 접근입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
-  };
+  }
 };
 
 exports.deleteComment = async ({ issue_id, comment_id }) => {
   try {
     const result = await Comment.destroy({
-      where: { id: comment_id}
-    })
-    if (result) return { status: 200, message: "success" };
+      where: { id: comment_id },
+    });
+    if (result) return { status: 200, message: 'success' };
     else return { status: 401, data: { message: '잘못된 접근입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 입력입니다.' } };
-  };
+  }
 };

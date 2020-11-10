@@ -16,14 +16,10 @@ exports.update = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
-  const issueParam = req.body;
-  const { status, data } = await issueService.create(issueParam);
-  res.status(status).json(data);
-};
-
-exports.add = async (req, res) => {
-  const issueParam = req.body;
-  const { status, data } = await issueService.create(issueParam);
+  const { status, data } = await issueService.create({
+    ...req.body,
+    author_id: req.user.id,
+  });
   res.status(status).json(data);
 };
 
@@ -63,7 +59,10 @@ exports.getAssigneeAll = async (req, res) => {
 };
 
 exports.getAssigneeOne = async (req, res) => {
-  const { status, data } = await issueService.getAssigneeOne(req.params.issue_id, req.params.assignee_id);
+  const { status, data } = await issueService.getAssigneeOne(
+    req.params.issue_id,
+    req.params.assignee_id
+  );
   res.status(status).json(data);
 };
 
@@ -73,7 +72,10 @@ exports.addAssignee = async (req, res) => {
 };
 
 exports.deleteAssignee = async (req, res) => {
-  const { status, data } = await issueService.deleteAssignee(req.params.issue_id, req.params.assignee_id);
+  const { status, data } = await issueService.deleteAssignee(
+    req.params.issue_id,
+    req.params.assignee_id
+  );
   res.status(status).json(data);
 };
 
@@ -85,8 +87,8 @@ exports.getCommentAll = async (req, res) => {
 exports.getCommentOne = async (req, res) => {
   const params = {
     issue_id: req.params.issue_id,
-    comment_id: req.params.comment_id
-  }
+    comment_id: req.params.comment_id,
+  };
   const { status, data } = await issueService.getCommentOne(params);
   res.status(status).json(data);
 };
@@ -95,8 +97,8 @@ exports.addComment = async (req, res) => {
   const params = {
     issue_id: req.params.issue_id,
     content: req.body.content,
-    user: req.user
-  }
+    user: req.user,
+  };
   const { status, data } = await issueService.addComment(params);
   res.status(status).json(data);
 };
@@ -106,8 +108,8 @@ exports.updateComment = async (req, res) => {
     issue_id: req.params.issue_id,
     comment_id: req.params.comment_id,
     content: req.body.content,
-    user: req.user
-  }
+    user: req.user,
+  };
   const { status, data } = await issueService.updateComment(params);
   res.status(status).json(data);
 };
@@ -115,8 +117,8 @@ exports.updateComment = async (req, res) => {
 exports.deleteComment = async (req, res) => {
   const params = {
     issue_id: req.params.issue_id,
-    comment_id: req.params.comment_id
-  }
+    comment_id: req.params.comment_id,
+  };
   const { status, data } = await issueService.deleteComment(params);
   res.status(status).json(data);
 };
