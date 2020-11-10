@@ -137,7 +137,6 @@ final class IssueCell: UICollectionViewCell {
     // MARK: - Method
     
     override func prepareForReuse() {
-        print(self.scrollView.bounds)
 
         visibleView.initLabels()
         self.isSelected = false
