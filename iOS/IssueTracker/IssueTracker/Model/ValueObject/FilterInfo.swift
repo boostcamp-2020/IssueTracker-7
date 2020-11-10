@@ -45,6 +45,10 @@ extension FilterInfo: CustomStringConvertible {
             result.append(author)
         }
         
+        if let label = label {
+            result.append(label)
+        }
+        
         if let milestone = milestone {
             result.append(milestone)
         }
@@ -52,7 +56,7 @@ extension FilterInfo: CustomStringConvertible {
         if let assignee = assignee {
             result.append(assignee)
         }
-        print(result.joined(separator: "+"))
+
         return result.joined(separator: "+")
     }
     

@@ -34,7 +34,7 @@ extension Routable {
     
     func configureRequest(from route: EndPointable) -> URLRequest? {
         var urlComponents = route.baseURL
-        if let query = route.query {
+        if let query = route.query { 
             var queryItems = [URLQueryItem]()
             query.forEach { (key, value) in
                 queryItems.append(URLQueryItem(name: key, value: value))

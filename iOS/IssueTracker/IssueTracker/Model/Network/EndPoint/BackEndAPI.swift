@@ -41,7 +41,7 @@ extension BackEndAPI: EndPointable {
     var query: [String: String]? {
         switch self {
         case .predefinedFilter(let query):
-            return ["q": query.description]
+            return ["q": query]
         default:
             return nil
         }

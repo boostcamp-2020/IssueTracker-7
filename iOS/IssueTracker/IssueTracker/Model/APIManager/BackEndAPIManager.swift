@@ -40,10 +40,6 @@ class BackEndAPIManager {
     
     func requestFiltering(conditions: FilterInfo, completionHandler: @escaping ((Result<[IssueInfo], APIError>) -> Void)) {
         
-        // conditions 파싱 후 .filterIssueList 에 넣어서 보내기
-//        is:open+label:backend
-        
-        
         router.request(route: BackEndAPI.predefinedFilter(query: conditions.description)) { (result: Result<[IssueInfo], APIError>) in
             completionHandler(result)
         }
