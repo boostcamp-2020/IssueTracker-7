@@ -24,6 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 passportConfig(passport);
+app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
+  next();
+});
 
 app.use('/api', apiRouter);
 app.use('/:route', (req, res, next) => {
@@ -31,7 +38,6 @@ app.use('/:route', (req, res, next) => {
   else res.status(404).json({ message: '유효하지 않은 요청 입니다.' });
 });
 
-app.use(cors());
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
