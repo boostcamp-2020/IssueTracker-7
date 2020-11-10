@@ -88,7 +88,7 @@ final class MileStoneConditionTableViewController: UIViewController {
     }
 }
 
-extension MileStoneConditionTableViewController: UITableViewDataSource, UITableViewDelegate {
+extension MileStoneConditionTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return milestoneInfoList.count
@@ -104,9 +104,11 @@ extension MileStoneConditionTableViewController: UITableViewDataSource, UITableV
             
         return cell
     }
+}
+
+extension MileStoneConditionTableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         // 이미 체크된 곳을 누른 경우
         if selectedIndex == indexPath.row {
             selectedIndex = nil
