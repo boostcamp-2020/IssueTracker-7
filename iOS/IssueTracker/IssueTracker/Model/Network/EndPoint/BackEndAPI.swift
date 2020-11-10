@@ -15,7 +15,7 @@ enum BackEndAPI {
          allLabels,
          allMilestones,
          allAssignees
-    
+         
     case predefinedFilter(query: String)
 }
 
@@ -26,10 +26,14 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/auth/github/ios"
         case .allIssues:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
+        case .allLabels:
+            return "http://\(BackEndAPICredentials.ip)/api/label"
+        case .allMilestones:
+            return "http://\(BackEndAPICredentials.ip)/api/milestone"
+        case .allAssignees, .allAuthors:
+            return "http://\(BackEndAPICredentials.ip)/api/user"
         case .predefinedFilter:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
-        default:
-            return ""
         }
     }
     

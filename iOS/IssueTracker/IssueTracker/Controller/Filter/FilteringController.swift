@@ -7,22 +7,28 @@
 
 import UIKit
 
-class FilteringController: UIViewController {
+final class FilteringController: UIViewController {
+    
+    // MARK: - Property
     
     var filterInfo: FilterInfo?
-    var preDefinedConditionHandler: ((FilterInfo)->())?
+    var predefinedConditionHandler: ((FilterInfo)->())?
     var detailConditionHandler: ((FilterInfo)->())?
     
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    // MARK: - Method
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "FilteringTableView" {
-            guard let childVc = segue.destination as? FilteringTableViewController else { return }
-            childVc.delegate = self
-            childVc.filterInfo = filterInfo
+            guard let destionationViewController = segue.destination as? FilteringTableViewController else { return }
+            destionationViewController.delegate = self
+            destionationViewController.filterInfo = filterInfo
         }
     }
     
@@ -39,11 +45,10 @@ class FilteringController: UIViewController {
 }
 
 extension FilteringController: SendFilterConditionDelegate {
-    func sendPreSpecified(condition: PredefinedCondition) {
-        dismiss(animated: false)
-
-        if let handler = preDefinedConditionHandler, let filterInfo = filterInfo {
+    func sendPredefined(condition: PredefinedCondition) {
+        if let handler = predefinedConditionHandler, let filterInfo = filterInfo {
             handler(filterInfo)
         }
+        dismiss(animated: true)
     }
 }

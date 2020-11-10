@@ -17,4 +17,9 @@ import Foundation
 enum StoryboardID {
     static let main = "Main"
     static let initialTabBarController = "InitialTabBarController"
+    
+    static let userConditionTableViewController = "UserConditionTableViewController"
+    static let labelConditionTableViewController = "LabelConditionTableViewController"
+    static let mileStoneConditionTableViewController = "MileStoneConditionTableViewController"
+    
 }
