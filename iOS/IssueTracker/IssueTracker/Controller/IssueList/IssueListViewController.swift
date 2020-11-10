@@ -201,20 +201,21 @@ extension IssueListViewController: IssueCellDelegate {
     }
     
     func issueListDidTapped(cell: IssueCell) {
-        
         guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
         for visibleCell in visibleCells {
             if visibleCell.isSwiped() { return }
         }
         
-        let storyboard = UIStoryboard(name: "DetailIssueList", bundle: nil)
-        let viewController = storyboard.instantiateViewController(identifier: "DetailIssueListController") as! DetailIssueListController
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
-        let data = issueInfoList[indexPath.item]
+        let issueInfo = issueInfoList[indexPath.item]
         
-        let info = HeaderDetailIssueInfo(userId: data.userID!, title: data.title, issueNumber: data.id)
+        let headerInfo = HeaderDetailIssueInfo(userId: issueInfo.userID, title: issueInfo.title, issueNumber: issueInfo.id)
         
-        viewController.headerInfo = info
+        let storyboard = UIStoryboard(name: StoryboardID.DetailIssueList, bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: StoryboardID.DetailIssueListController, creator: { coder in
+            return DetailIssueListController(coder: coder, headerinfo: headerInfo)
+        })
+
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
