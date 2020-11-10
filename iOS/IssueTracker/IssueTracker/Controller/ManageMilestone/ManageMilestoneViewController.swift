@@ -94,11 +94,25 @@ final class MilestoneCell: UICollectionViewCell {
     @IBOutlet var milestoneDescription: UILabel!
     @IBOutlet var openIssueCount: UILabel!
     @IBOutlet var closedIssueCount: UILabel!
-    
+        
     fileprivate func configure(milestoneData: MilestoneInfo) {
         
         name.setTitle(milestoneData.title, for: .normal)
         dueDate.text = milestoneData.dueDate
+        
+        addShadow()
+    }
     
+    private func addShadow() {
+        let radius: CGFloat = 10
+        layer.cornerRadius = radius
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 0.1
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }
