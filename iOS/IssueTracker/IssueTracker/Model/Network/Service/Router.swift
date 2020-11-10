@@ -11,14 +11,14 @@ final class Router: Routable {
     private var task: URLSessionTask?
     
     func openSite(from route: EndPointable) {
-        guard let url = URL(string: "\(route.baseURL)\(route.query)") else { return }
+        guard let url = URL(string: "\(route.baseURL)") else { return }
         UIApplication.shared.open(url)
     }
     
     func request<T: Decodable>(route: EndPointable, completionHandler: ((Result<T,APIError>) -> Void)? = nil) {
         let session = URLSession.shared
         
-        let request = configureRequest(from: route)
+        guard let request = configureRequest(from: route) else { return }
         task = session.dataTask(with: request) { data, response, error in
             guard let completionHandler = completionHandler else { return }
             

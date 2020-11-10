@@ -30,20 +30,22 @@ class BackEndAPIManager {
         }
     }
     
-    // route: 작성자 or 레이블 or 마일스톤 or 담당자
-    func requestDetailCondition<infoType: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
-        router.request(route: route) { (result: Result<infoType, APIError>) in
-            
-            
-        }
-    }
+//    // route: 작성자 or 레이블 or 마일스톤 or 담당자
+//    func requestDetailCondition<T: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<T, APIError>) -> Void)) {
+//        router.request(route: route) { (result: Result<infoType, APIError>) in
+//
+//
+//        }
+//    }
     
-    func requestFiltering<infoType: Decodable>(conditions: FilterInfo, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
+    func requestFiltering(conditions: FilterInfo, completionHandler: @escaping ((Result<[IssueInfo], APIError>) -> Void)) {
         
         // conditions 파싱 후 .filterIssueList 에 넣어서 보내기
+//        is:open+label:backend
         
-        router.request(route: BackEndAPI.filterIssueList) { (result: Result<infoType, APIError>) in
-            
+        
+        router.request(route: BackEndAPI.predefinedFilter(query: conditions.description)) { (result: Result<[IssueInfo], APIError>) in
+            completionHandler(result)
         }
     }
   

@@ -9,7 +9,7 @@ import UIKit
 
 class FilteringController: UIViewController {
     
-    var filterInfo = FilterInfo()
+    var filterInfo: FilterInfo?
     var preDefinedConditionHandler: ((FilterInfo)->())?
     var detailConditionHandler: ((FilterInfo)->())?
     
@@ -22,13 +22,12 @@ class FilteringController: UIViewController {
         if segue.identifier == "FilteringTableView" {
             guard let childVc = segue.destination as? FilteringTableViewController else { return }
             childVc.delegate = self
-            childVc.detailFilterInfo = filterInfo
+            childVc.filterInfo = filterInfo
         }
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        print(filterInfo.assignees)
-        if let handler = detailConditionHandler {
+        if let handler = detailConditionHandler, let filterInfo = filterInfo {
             handler(filterInfo)
         }
         dismiss(animated: true)
@@ -40,11 +39,11 @@ class FilteringController: UIViewController {
 }
 
 extension FilteringController: SendFilterConditionDelegate {
-    func sendPreSpecified(condition: PreSpecifiedCondition) {
-        print(condition)
-        if let handler = preDefinedConditionHandler {
+    func sendPreSpecified(condition: PredefinedCondition) {
+        dismiss(animated: false)
+
+        if let handler = preDefinedConditionHandler, let filterInfo = filterInfo {
             handler(filterInfo)
         }
-        dismiss(animated: true)
     }
 }

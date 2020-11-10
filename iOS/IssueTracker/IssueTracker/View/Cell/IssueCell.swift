@@ -18,15 +18,15 @@ final class IssueCell: UICollectionViewCell {
     
     static let reuseIdentifier = String(describing: IssueCell.self)
     weak var delegate: IssueCellDelegate?
-    private lazy var contentOffset: CGFloat = ceil((scrollView.bounds.width * 0.1) * 10) / 10
+    private lazy var contentOffset: CGFloat = ceil(bounds.width * 0.1 * 10) / 10
     
     var isEditing: Bool = false {
         didSet {
             if !isEditing {
-                
+
                 scrollView.isUserInteractionEnabled = true
                 DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.25, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                    UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                         self.scrollView.contentOffset.x = self.contentOffset
                     }, completion: nil)
                 }
@@ -35,7 +35,7 @@ final class IssueCell: UICollectionViewCell {
 
                 scrollView.isUserInteractionEnabled = false
                 DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.25, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                    UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                         self.scrollView.contentOffset.x = -self.contentOffset
                     }, completion: nil)
                 }
@@ -110,6 +110,7 @@ final class IssueCell: UICollectionViewCell {
         return view
     }()
     
+    
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -126,6 +127,7 @@ final class IssueCell: UICollectionViewCell {
         
         super.init(coder: coder)
         
+
         scrollView.delegate = self
         setUpView()
         setUpSwipable()
@@ -135,7 +137,8 @@ final class IssueCell: UICollectionViewCell {
     // MARK: - Method
     
     override func prepareForReuse() {
-        
+        print(self.scrollView.bounds)
+
         visibleView.initLabels()
         self.isSelected = false
     }
@@ -194,7 +197,6 @@ final class IssueCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1.5),
             stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
             selectView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.1),
@@ -244,7 +246,6 @@ final class IssueCell: UICollectionViewCell {
     }
     
     func isSwiped() -> Bool {
-        print(scrollView.contentOffset.x, self.contentOffset)
         return scrollView.contentOffset.x != self.contentOffset
     }
     
