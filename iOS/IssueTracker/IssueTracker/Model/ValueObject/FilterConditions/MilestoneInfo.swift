@@ -8,11 +8,11 @@
 import Foundation
 
 struct MilestonesInfo: Codable {
-    let milestones: [Milestone]
+    let milestones: [MilestoneInfo]
 }
 
 // MARK: - Milestone
-struct Milestone: Codable {
+struct MilestoneInfo: Codable {
     let id: Int
     let title, dueDate: String
 
