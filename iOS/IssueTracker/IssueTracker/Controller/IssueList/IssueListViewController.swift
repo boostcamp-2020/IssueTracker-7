@@ -21,18 +21,18 @@ struct HeaderDetailIssueInfo {
 }
 
 final class IssueListViewController: UIViewController {
-    
+   
     // MARK: - Property
     
+    // MARK: 컬렉션뷰
     @IBOutlet private var collectionView: UICollectionView!
     private var issueInfoList: [IssueInfo] = []
-
-    @IBOutlet var filterButtonItem: UIBarButtonItem!
-    let filterInfo = FilterInfo()
-    
     private let api = BackEndAPIManager(router: Router())
-        
-    private lazy var selectAllButtonItem: UIBarButtonItem = UIBarButtonItem(title: barButtonItemState.selectAll.rawValue, style: .plain, target: self, action: #selector(pressedSelectAllButton))
+
+    // MARK: 필터
+    @IBOutlet private var filterButtonItem: UIBarButtonItem!
+    private let filterInfo = FilterInfo()
+    
     // MARK: 검색
     private var filteredIssueInfoList: [IssueInfo] = []
     private let searchController: UISearchController = {
@@ -42,6 +42,12 @@ final class IssueListViewController: UIViewController {
         return searchController
     }()
     
+    // MARK: 편집
+    private lazy var selectAllButtonItem: UIBarButtonItem = UIBarButtonItem(
+        title: barButtonItemState.selectAll.rawValue,
+        style: .plain,
+        target: self,
+        action: #selector(pressedSelectAllButton))
     private var selectAllActive: Bool = false {
         didSet {
             if selectAllActive {
@@ -55,6 +61,7 @@ final class IssueListViewController: UIViewController {
         }
     }
     
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -63,7 +70,7 @@ final class IssueListViewController: UIViewController {
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         
-        setUpIssueData()
+        configureInitialData()
         collectionView.layoutIfNeeded()
         configureLayout()
         configureNavigationBarButtonItem()
@@ -71,6 +78,7 @@ final class IssueListViewController: UIViewController {
 
     
     // MARK: - Method
+ 
     
     func requestFiltering(with filterInfo: FilterInfo) {
         self.api.requestFiltering(conditions: filterInfo) { result in
@@ -88,7 +96,6 @@ final class IssueListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         /**
             - **FilteringController 로 넘기는 정보**
                 - 1. FilterInfo 객체
@@ -136,9 +143,10 @@ extension IssueListViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: 컬렉션뷰 초기 설정
 extension IssueListViewController {
     
-    private func setUpIssueData() {
+    private func configureInitialData() {
         api.requestAllIssues() { result in
             switch result {
             case .success(let issues):
@@ -162,6 +170,7 @@ extension IssueListViewController {
     }
 }
 
+// MARK: 컬렉션뷰 DataSource
 extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -191,10 +200,10 @@ extension IssueListViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: 컬렉션뷰 Delegate
 extension IssueListViewController: UICollectionViewDelegate {
   
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
         if isEditing {
             setNavigationTitle()
         }
@@ -208,12 +217,13 @@ extension IssueListViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: IssueCellDelegate
 extension IssueListViewController: IssueCellDelegate {
     
     func issueListDidInteracted(cell: IssueCell) {
         guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
         visibleCells.forEach { visibleCell in
-            if  visibleCell.isSwiped() && visibleCell != cell {
+            if visibleCell.isSwiped() && visibleCell != cell {
                 visibleCell.resetOffset()
             }
         }
@@ -239,7 +249,7 @@ extension IssueListViewController: IssueCellDelegate {
     }
 }
 
-
+// MARK: 스크롤뷰 Delegate
 extension IssueListViewController: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -252,8 +262,7 @@ extension IssueListViewController: UIScrollViewDelegate {
     }
 }
 
-// MARK: - Select/Deselect
-
+// MARK: Select/Deselect
 extension IssueListViewController {
     
     private func configureNavigationBarButtonItem() {
@@ -270,7 +279,6 @@ extension IssueListViewController {
     }
     
     private func deselectAllItems() {
-        
         guard let selectedItems = collectionView.indexPathsForSelectedItems else { return }
         selectedItems.forEach { indexPath in
             collectionView.deselectItem(at: indexPath, animated: true)
