@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum PreSpecifiedCondition: CaseIterable {
+enum PredefinedCondition: CaseIterable {
     case openIssue
     case myIssue
     case assignedIssue
@@ -15,53 +15,68 @@ enum PreSpecifiedCondition: CaseIterable {
     case closedIssued
 }
 
+
 protocol SendFilterConditionDelegate: AnyObject {
-    func sendPreSpecified(condition: PreSpecifiedCondition) // 미리 지정된 조건 전송
+    func sendPreSpecified(condition: PredefinedCondition) // 미리 지정된 조건 전송
 }
 
 class FilteringTableViewController: UITableViewController {
     
     weak var delegate: SendFilterConditionDelegate?
-    var detailFilterInfo: FilterInfo?
+    var filterInfo: FilterInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
     }
     
-//    let types: [Codable.Type] = [Author.self, Label.self, Milestone.self, Assignee.self]
+    func setUpPredefinedConditions() {
+        
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
         switch indexPath.section {
-        /*
-         1. 다음 중에 조건을 고르세요
-         열린 이슈들
-         내가 작성한 이슈들
-         나한테 할당된 이슈들
-         내가 댓글을 남긴 이슈들
-         닫힌 이슈들
-         */
+       
         case 0:
+            filterInfo?.removeAll() // 미리 지정된 조건 선택 시 기존 조건들(filterInfo) 모두 초기화
+            
             let cell = tableView.cellForRow(at: indexPath)
             cell?.accessoryType = .checkmark
             
-            let condition = PreSpecifiedCondition.allCases[indexPath.row]
+            let condition = PredefinedCondition.allCases[indexPath.row]
+            
+            switch condition {
+            case .openIssue:
+                filterInfo?.status = .open
+            case .myIssue:
+                filterInfo?.author = UserInfo.shared.userName
+            case .assignedIssue:
+                filterInfo?.assignee = UserInfo.shared.userName
+            case .commentedIssue:
+                print("지원하지 않음")
+            case .closedIssued:
+                filterInfo?.status = .close
+            }
             delegate?.sendPreSpecified(condition: condition)
+        
+        
         case 1:
-            guard let filterInfo = detailFilterInfo else { return }
+            guard let filterInfo = filterInfo else { return }
             guard let vc = storyboard?.instantiateViewController(identifier: "DetailConditionTableViewController", creator: { coder in
-                let route = BackEndAPI.allCases[indexPath.row]
+//                let route = BackEndAPI.allCases[indexPath.row]
                 switch indexPath.row {
                 case 0:
-                    return DetailConditionTableViewController<Author>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                    return DetailConditionTableViewController<Author>(coder: coder, route: BackEndAPI.allAuthors, detailFilterInfo: filterInfo)
                 case 1:
-                    return DetailConditionTableViewController<Label>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                    return DetailConditionTableViewController<Label>(coder: coder, route: BackEndAPI.allLabels, detailFilterInfo: filterInfo)
                 case 2:
-                    return DetailConditionTableViewController<Milestone>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                    return DetailConditionTableViewController<Milestone>(coder: coder, route: BackEndAPI.allMilestones, detailFilterInfo: filterInfo)
                 case 3:
-                    return DetailConditionTableViewController<Assignee>(coder: coder, route: route, detailFilterInfo: filterInfo)
+                    return DetailConditionTableViewController<Assignee>(coder: coder, route: BackEndAPI.allAssignees, detailFilterInfo: filterInfo)
                 default:
                     return nil
                 }

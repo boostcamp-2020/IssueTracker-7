@@ -50,7 +50,7 @@ class DetailConditionTableViewController<T: Decodable>: UIViewController, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        detailFilterInfo.assignees.append(Assignee(id: 1, userID: "sample", photoURL: nil, type: "sample"))
+//        detailFilterInfo.assignees.append(Assignee(id: 1, userID: "sample", photoURL: nil, type: "sample"))
     }
     
     

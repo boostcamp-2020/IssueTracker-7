@@ -16,28 +16,35 @@ enum BackEndAPI {
          allMilestones,
          allAssignees
     
-    case filterIssueList
+    case predefinedFilter(query: String)
 }
 
-extension BackEndAPI: EndPointable, CaseIterable {
+extension BackEndAPI: EndPointable {
     var environmentBaseURL: String {
         switch self {
         case .token:
             return "http://\(BackEndAPICredentials.ip)/api/auth/github/ios"
         case .allIssues:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
+        case .predefinedFilter:
+            return "http://\(BackEndAPICredentials.ip)/api/issue"
         default:
             return ""
         }
     }
     
-    var baseURL: URL {
-        guard let url = URL(string: environmentBaseURL) else { fatalError() } // TODO: 예외처리로 바꿔주기
+    var baseURL: URLComponents {
+        guard let url = URLComponents(string: environmentBaseURL) else { fatalError() } // TODO: 예외처리로 바꿔주기
         return url
     }
     
-    var query: String {
-        return ""
+    var query: [String: String]? {
+        switch self {
+        case .predefinedFilter(let query):
+            return ["q": query.description]
+        default:
+            return nil
+        }
     }
     
     var httpMethod: HTTPMethod? {
