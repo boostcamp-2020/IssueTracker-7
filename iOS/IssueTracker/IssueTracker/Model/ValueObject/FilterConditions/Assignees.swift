@@ -22,12 +22,12 @@ struct AssigneesInfo: Codable {
 }
 
 // MARK: - Assignee
-struct Assignee: Codable {
+struct Assignee: Codable { // User 로 바꾸기
     let id: Int
     let userID: String
     let photoURL: String?
-    let type: String
-    let createdAt, updatedAt: String
+    let type: String?
+    let createdAt, updatedAt: String?
     let deletedAt: String?
 
     enum CodingKeys: String, CodingKey {
