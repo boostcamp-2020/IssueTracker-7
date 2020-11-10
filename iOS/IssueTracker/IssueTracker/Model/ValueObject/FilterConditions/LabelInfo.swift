@@ -9,11 +9,11 @@ import Foundation
 
 struct LabelInfo: Codable {
     let id: Int
-    let name, labelDescription, color: String?
+    let name, description, color: String
     
     enum CodingKeys: String, CodingKey {
         case id, name
-        case labelDescription = "description"
+        case description = "description"
         case color
     }
 }

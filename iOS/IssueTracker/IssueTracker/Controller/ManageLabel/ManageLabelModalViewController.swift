@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ManageLabelModalViewController: UIViewController{
+final class ManageLabelModalViewController: UIViewController {
     
     
     @IBOutlet var firstTextFieldLabel: UILabel!
@@ -24,13 +24,15 @@ final class ManageLabelModalViewController: UIViewController{
     
     @IBOutlet var colorPicker: UIButton!
     
-    let initialLabelColor = UIColor.systemOrange
     let colorPickerViewController = UIColorPickerViewController()
+    var initialLabelColor = UIColor.systemOrange
+    var labelInfo: LabelInfo? = nil
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        initializeAllFields()
+        
+        initializeAllFields(with: labelInfo)
         configureColorPicker()
         configureTextField()
     }
@@ -107,7 +109,7 @@ extension ManageLabelModalViewController {
     
     @IBAction func pressedInitialize(_ sender: UIButton) {
         
-        initializeAllFields()
+        initializeAllFields(with: labelInfo)
     }
     
     @IBAction func pressedSave(_ sender: UIButton) {
@@ -158,10 +160,12 @@ extension ManageLabelModalViewController {
 // MARK: -
 extension ManageLabelModalViewController {
     
-    private func initializeAllFields() {
+    private func initializeAllFields(with: LabelInfo?) {
         
-        firstTextField.text = ""
-        secondTextField.text = ""
+        initialLabelColor = (labelInfo?.color != nil) ? UIColor.init(hex: labelInfo?.color ?? "#FF9500")! : initialLabelColor
+        
+        firstTextField.text = (labelInfo?.name != nil) ? labelInfo?.name : ""
+        secondTextField.text = (labelInfo?.description != nil) ? labelInfo?.description : ""
         thirdTextField.text = initialLabelColor.toHex
         
         firstTextFieldErrorLabel.text = ""
