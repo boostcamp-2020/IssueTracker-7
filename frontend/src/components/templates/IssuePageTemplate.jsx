@@ -3,15 +3,15 @@ import IssueList from '@organisms/IssueList';
 import Header from '@organisms/Header';
 import styled from 'styled-components';
 
-const Center = styled.div`
+const IssuePage = styled.div`
   width: auto;
 `;
 const IssuePageTemplate = () => {
   return (
-    <Center>
+    <IssuePage>
       <Header />
       <IssueList />
-    </Center>
+    </IssuePage>
   );
 };
 export default IssuePageTemplate;
