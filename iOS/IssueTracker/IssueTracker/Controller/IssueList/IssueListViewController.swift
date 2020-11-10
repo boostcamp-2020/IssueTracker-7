@@ -61,7 +61,30 @@ final class IssueListViewController: UIViewController {
     
     // MARK: - Method
     
+    func requestFiltering(with filterInfo: FilterInfo) {
+        self.api.requestFiltering(conditions: filterInfo) { result in
+            switch result {
+            case .success(let issueInfoList):
+                self.issueInfoList = issueInfoList
+                DispatchQueue.main.async {
+                    let indexSet = IndexSet(integer: 0)
+                    self.collectionView.reloadSections(indexSet)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        /**
+            - **FilteringController 로 넘기는 정보**
+                - 1. FilterInfo 객체
+                - 2. 미리 지정된 조건 선택 시 동작할 핸들러
+                - 3. 세부 조건들 선택 시 동작할 핸들러
+         */
+        
         if segue.identifier == "IssueListToFilter" {
             guard let navigationController = segue.destination as? UINavigationController,
                   let viewController = navigationController.topViewController as? FilteringController
@@ -69,29 +92,14 @@ final class IssueListViewController: UIViewController {
             
             viewController.filterInfo = filterInfo
             
-            viewController.preDefinedConditionHandler = { filterInfo in
-                self.api.requestFiltering(conditions: filterInfo) { result in
-                    switch result {
-                    case .success(let issueInfoList):
-                        self.issueInfoList = issueInfoList
-                        print(issueInfoList)
-                        DispatchQueue.main.async {
-                            let indexSet = IndexSet(integersIn: 0...0)
-                            self.collectionView.reloadSections(indexSet)
-                        }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-                
-                print("predefinedConditionHandler") //
+            viewController.predefinedConditionHandler = { filterInfo in
+                self.requestFiltering(with: filterInfo)
+                self.filterInfo.removeAll()
             }
-//            viewController.detailConditionHandler = { conditions in
-//                //                BackEndAPIManager.shared.requestFiltering(conditions: conditions) { (result: Result<이슈목록Decodable객체, APIError>) in
-//                //
-//                //                }
-//                print("detailConditionHandler")
-//            }
+            
+            viewController.detailConditionHandler = { filterInfo in
+                self.requestFiltering(with: filterInfo)
+            }
         }
     }
 }
@@ -118,7 +126,7 @@ extension IssueListViewController {
     private func configureLayout() {
         let spacing: CGFloat = 10
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width - 30, height: 10)
+        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width - 30, height: 50)
         collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: 50)
         collectionViewFlowLayout.minimumLineSpacing = spacing
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: 0, right: 0)

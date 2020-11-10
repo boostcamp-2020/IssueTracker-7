@@ -12,7 +12,7 @@ final class FilteringController: UIViewController {
     // MARK: - Property
     
     var filterInfo: FilterInfo?
-    var preDefinedConditionHandler: ((FilterInfo)->())?
+    var predefinedConditionHandler: ((FilterInfo)->())?
     var detailConditionHandler: ((FilterInfo)->())?
     
     
@@ -46,7 +46,7 @@ final class FilteringController: UIViewController {
 
 extension FilteringController: SendFilterConditionDelegate {
     func sendPredefined(condition: PredefinedCondition) {
-        if let handler = preDefinedConditionHandler, let filterInfo = filterInfo {
+        if let handler = predefinedConditionHandler, let filterInfo = filterInfo {
             handler(filterInfo)
         }
         dismiss(animated: false)
