@@ -47,5 +47,10 @@ class BackEndAPIManager {
         }
     }
   
-    
+    func requestAllMilestones(completionHandler: @escaping ((Result<[MilestoneInfo], APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.allMilestones) { (result: Result<[MilestoneInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
 }

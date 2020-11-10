@@ -19,11 +19,13 @@ class ManageMilestoneModalViewController: UIViewController {
     @IBOutlet var secondTextFieldErrorLabel: UILabel!
     @IBOutlet var thirdTextFieldErrorLabel: UILabel!
     
+    var milestoneInfo: MilestoneInfo? = nil
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        initializeAllFields()
+        initializeAllFields(with: milestoneInfo)
         configureTextField()
     }
     
@@ -35,6 +37,7 @@ extension ManageMilestoneModalViewController {
     
     private func configureTextField() {
         
+
         let allTextFields: [UITextField] = [firstTextField, secondTextField, thirdTextField]
         
         allTextFields.forEach { textfield in
@@ -84,7 +87,7 @@ extension ManageMilestoneModalViewController {
     }
     @IBAction func pressedInitialize(_ sender: UIButton) {
         
-        initializeAllFields()
+        initializeAllFields(with: milestoneInfo)
     }
     
     @IBAction func pressedSave(_ sender: UIButton) {
@@ -137,10 +140,10 @@ extension ManageMilestoneModalViewController {
 
 extension ManageMilestoneModalViewController {
     
-    private func initializeAllFields() {
+    private func initializeAllFields(with: MilestoneInfo?) {
         
-        firstTextField.text = ""
-        secondTextField.text = ""
+        firstTextField.text = (milestoneInfo?.title != nil) ? milestoneInfo?.title : ""
+        secondTextField.text = (milestoneInfo?.dueDate != nil) ? milestoneInfo?.dueDate : ""
         thirdTextField.text = ""
         
         firstTextFieldErrorLabel.text = ""
