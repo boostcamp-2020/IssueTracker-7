@@ -12,8 +12,8 @@ exports.getOne = async (req, res) => {
 
 exports.add = async (req, res) => {
   const newLabel = req.body;
-  const result = await labelService.create(newLabel);
-  res.json(result);
+  const { status, data } = await labelService.create(newLabel);
+  res.status(status).json(data);
 };
 
 exports.delete = async (req, res) => {
