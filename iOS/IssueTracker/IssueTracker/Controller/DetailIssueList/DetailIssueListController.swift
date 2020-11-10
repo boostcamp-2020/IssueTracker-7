@@ -23,7 +23,7 @@ final class DetailIssueListController: UIViewController {
     
     // MARK: - Property
     
-    var headerInfo: HeaderDetailIssueInfo! = nil
+    private let headerInfo: HeaderDetailIssueInfo!
     
     private let cardView: CardView = CardView()
     private let baseView = UIView()
@@ -46,6 +46,17 @@ final class DetailIssueListController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>!
     
+    
+    init?(coder: NSCoder, headerinfo: HeaderDetailIssueInfo) {
+        
+        self.headerInfo = headerinfo
+        
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
