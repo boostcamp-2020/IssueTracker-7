@@ -8,7 +8,7 @@
 import UIKit
 
 final class ManageLabelViewController: UIViewController, UICollectionViewDelegate {
-
+    
     @IBOutlet var collectionView: UICollectionView!
     private var labelDataList: [LabelInfo] = []
     private let api = BackEndAPIManager(router: Router())
@@ -90,5 +90,20 @@ final class LabelCell: UICollectionViewCell {
         name.setTitle(" \(labelData.name) ", for: .normal)
         name.backgroundColor = UIColor.init(hex: labelData.color)
         labelDescription.text = labelData.description
+        
+        addShadow()
+    }
+    
+    private func addShadow () {
+        let radius: CGFloat = 10
+        layer.cornerRadius = radius
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 0.1
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
     }
 }
