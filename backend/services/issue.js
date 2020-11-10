@@ -70,6 +70,7 @@ const getAuthorFilter = ({ author, no, user_id }) => {
 const getMentionsFilter = ({ mentions, user_id }) => {
   return {
     model: Comment,
+    required: mentions ? true : false,
     include: {
       model: User,
       as: 'mentions',
