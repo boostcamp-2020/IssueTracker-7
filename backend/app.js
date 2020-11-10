@@ -8,6 +8,7 @@ const sequelize = require('./models').sequelize;
 const passport = require('passport');
 const passportConfig = require('./middlewares/passport');
 const apiRouter = require('./routes/api');
+const cors = require('cors');
 
 var app = express();
 sequelize.sync();
@@ -23,6 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 passportConfig(passport);
+app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
+  next();
+});
 
 app.use('/api', apiRouter);
 app.use('/:route', (req, res, next) => {
