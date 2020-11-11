@@ -42,6 +42,11 @@ class BackEndAPIManager {
             completionHandler(result)
         }
     }
-  
     
+    func requestStatusChange(issueInfo: IssueInfo, status: Status, completionHandler: @escaping ((Result<IssueInfo, APIError>) -> Void)) {
+        router.request(route: BackEndAPI.closeIssue(issueNumber: "\(issueInfo.id)", title: issueInfo.title, status: status.rawValue)) { (result: Result<IssueInfo, APIError>) in
+            completionHandler(result)
+        }
+    }
+  
 }
