@@ -15,11 +15,10 @@ enum BackEndAPI {
          allLabels,
          allMilestones,
          allAssignees
-    
-    case filterIssueList
+ 
     case addNewLabel(labelName: String, labelDescription: String, labelColor: String)
     case editExistingLabel(labelId: Int, labelName: String, labelDescription: String, labelColor: String)
-    
+
     case addNewMilestone(milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
     case editExistingMilestone(milestoneId: Int, milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
 

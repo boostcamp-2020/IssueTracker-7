@@ -27,7 +27,6 @@
 		33375C872547F34A00E8A8E8 /* BackEndOAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C862547F34A00E8A8E8 /* BackEndOAuthManager.swift */; };
 		33375C8C2547F59500E8A8E8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375C8B2547F59500E8A8E8 /* Router.swift */; };
 		33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33375CB02548595700E8A8E8 /* OAuthManager.swift */; };
-		333FE28D25510BEC000C0F0B /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE28C25510BEC000C0F0B /* APICredentials.swift */; };
 		333FE2992551214A000C0F0B /* RegParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE2982551214A000C0F0B /* RegParser.swift */; };
 		333FE2A52551513F000C0F0B /* DetailIssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333FE2A42551513F000C0F0B /* DetailIssueList.storyboard */; };
 		333FE2AA25515167000C0F0B /* DetailIssueListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE2A925515167000C0F0B /* DetailIssueListController.swift */; };
@@ -47,7 +46,6 @@
 		33493BC02558589200BB1E11 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33493BA1255844D700BB1E11 /* Routable.swift */; };
 		33493BC4255858A000BB1E11 /* IssueInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393E0BC2552AACC003DCDA4 /* IssueInfo.swift */; };
 		33493BC8255858AD00BB1E11 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5C4254FE724008CEFA3 /* FilterInfo.swift */; };
-		33493BCC255858B200BB1E11 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE28C25510BEC000C0F0B /* APICredentials.swift */; };
 		33493BD0255858B800BB1E11 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393E0D125530B33003DCDA4 /* IssueCell.swift */; };
 		33493BD42558592C00BB1E11 /* LabelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5AC254FDDFB008CEFA3 /* LabelInfo.swift */; };
 		33493BD82558593700BB1E11 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5C9254FE86B008CEFA3 /* Author.swift */; };
@@ -104,6 +102,7 @@
 		718C38AA2553FC5C002E4903 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C38A92553FC5C002E4903 /* UITextField+.swift */; };
 		719453B3254AAF6600A5864E /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 719453B2254AAF6600A5864E /* IssueList.storyboard */; };
 		71969BDE25510D4F00C96CE2 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 71969BDD25510D4F00C96CE2 /* MarkdownView */; };
+		71E910BB255BDE1100889F78 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E910BA255BDE1000889F78 /* APICredentials.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,7 +150,6 @@
 		33375C8B2547F59500E8A8E8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33375C93254810F200E8A8E8 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		33375CB02548595700E8A8E8 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
-		333FE28C25510BEC000C0F0B /* APICredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
 		333FE2982551214A000C0F0B /* RegParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegParser.swift; sourceTree = "<group>"; };
 		333FE2A42551513F000C0F0B /* DetailIssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailIssueList.storyboard; sourceTree = "<group>"; };
 		333FE2A925515167000C0F0B /* DetailIssueListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIssueListController.swift; sourceTree = "<group>"; };
@@ -200,6 +198,7 @@
 		718C38A42553FC3F002E4903 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		718C38A92553FC5C002E4903 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		719453B2254AAF6600A5864E /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
+		71E910BA255BDE1000889F78 /* APICredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,7 +368,7 @@
 		33375C9725483D6A00E8A8E8 /* Constant */ = {
 			isa = PBXGroup;
 			children = (
-				333FE28C25510BEC000C0F0B /* APICredentials.swift */,
+				71E910BA255BDE1000889F78 /* APICredentials.swift */,
 				33BD8DD2254989E100537960 /* NotificationName.swift */,
 				3358A57B254ED757008CEFA3 /* StoryboardID.swift */,
 			);
@@ -739,6 +738,7 @@
 				33493B9D2558449000BB1E11 /* MockRouter.swift in Sources */,
 				33375CB12548595700E8A8E8 /* OAuthManager.swift in Sources */,
 				33375C3A2547E70E00E8A8E8 /* AppDelegate.swift in Sources */,
+				71E910BB255BDE1100889F78 /* APICredentials.swift in Sources */,
 				712CBEA6255008B700E8F95F /* RegisterIssueViewController.swift in Sources */,
 				3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */,
 				333FE2AA25515167000C0F0B /* DetailIssueListController.swift in Sources */,
@@ -757,7 +757,6 @@
 				33493BAB255849F200BB1E11 /* JsonFactory.swift in Sources */,
 				334D0F1B255A4A9F001DE5B4 /* MileStoneConditionTableViewController.swift in Sources */,
 				3393E0BD2552AACC003DCDA4 /* IssueInfo.swift in Sources */,
-				333FE28D25510BEC000C0F0B /* APICredentials.swift in Sources */,
 				3393E0D225530B33003DCDA4 /* IssueCell.swift in Sources */,
 				333FE2992551214A000C0F0B /* RegParser.swift in Sources */,
 				3358A5AD254FDDFB008CEFA3 /* LabelInfo.swift in Sources */,
@@ -800,7 +799,6 @@
 				33493B982558340B00BB1E11 /* IssueListViewController.swift in Sources */,
 				33493BF82558599600BB1E11 /* LabelConditionTableViewController.swift in Sources */,
 				33493BB52558581A00BB1E11 /* MockRouter.swift in Sources */,
-				33493BCC255858B200BB1E11 /* APICredentials.swift in Sources */,
 				33493BF02558597200BB1E11 /* UIButton+.swift in Sources */,
 				33493BE42558594000BB1E11 /* Comment.swift in Sources */,
 				33493BE82558596500BB1E11 /* NotificationName.swift in Sources */,
