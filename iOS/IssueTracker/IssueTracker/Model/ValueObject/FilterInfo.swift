@@ -65,6 +65,4 @@ extension FilterInfo: CustomStringConvertible {
 
         return result.joined(separator: "+")
     }
-    
-    
 }

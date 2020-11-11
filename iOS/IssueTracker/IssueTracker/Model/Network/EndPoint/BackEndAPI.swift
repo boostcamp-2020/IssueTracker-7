@@ -15,8 +15,13 @@ enum BackEndAPI {
          allLabels,
          allMilestones,
          allAssignees
-         
+    
+    case filterIssueList
+    case addNewMilestone(milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
+    case editExistingMilestone(milestoneId: Int, milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
+
     case predefinedFilter(query: String)
+
 }
 
 extension BackEndAPI: EndPointable {
@@ -34,6 +39,10 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/user"
         case .predefinedFilter:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
+        case .addNewMilestone(_, _, _):
+            return "http://\(BackEndAPICredentials.ip)/api/milestone"
+        case .editExistingMilestone(let milestoneId, _, _, _):
+            return "http://\(BackEndAPICredentials.ip)/api/milestone/\(milestoneId)"
         }
     }
     
@@ -57,17 +66,32 @@ extension BackEndAPI: EndPointable {
             return .post
         case .allIssues:
             return .get
+        case .allMilestones:
+            return .get
+        case .addNewMilestone:
+            return .post
+        case .editExistingMilestone:
+            return .put
         default:
             return nil
         }
     }
     
     var headers: HTTPHeader? {
-        return ["Authorization": "bearer \(UserInfo.shared.accessToken)"]
+        return ["Authorization": "bearer \(UserInfo.shared.accessToken)", "content-type": "application/x-www-form-urlencoded"]
     }
     
     var bodies: HTTPBody? {
-        return nil
+        switch self {
+        case .addNewMilestone(let milestoneName, let milestoneDueDate, let milestoneDescription),
+             .editExistingMilestone(_, let milestoneName, let milestoneDueDate, let milestoneDescription):
+            let bodyDictionary = ["title": milestoneName,
+                                  "due_date": milestoneDueDate,
+                                  "description": milestoneDescription]
+            return bodyDictionary
+        default:
+            return nil
+        }
     }
 }
 

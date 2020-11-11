@@ -51,7 +51,7 @@
 		33493BD0255858B800BB1E11 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393E0D125530B33003DCDA4 /* IssueCell.swift */; };
 		33493BD42558592C00BB1E11 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5AC254FDDFB008CEFA3 /* Label.swift */; };
 		33493BD82558593700BB1E11 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5C9254FE86B008CEFA3 /* Author.swift */; };
-		33493BDC2558593A00BB1E11 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B1254FE462008CEFA3 /* Milestone.swift */; };
+		33493BDC2558593A00BB1E11 /* MilestoneInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B1254FE462008CEFA3 /* MilestoneInfo.swift */; };
 		33493BE02558593E00BB1E11 /* Assignees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B9254FE5AD008CEFA3 /* Assignees.swift */; };
 		33493BE42558594000BB1E11 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322CF7D25539E3B0022ABA6 /* Comment.swift */; };
 		33493BE82558596500BB1E11 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DD2254989E100537960 /* NotificationName.swift */; };
@@ -66,7 +66,7 @@
 		3358A581254ED7D3008CEFA3 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3358A580254ED7D3008CEFA3 /* Filter.storyboard */; };
 		3358A593254EEBDF008CEFA3 /* LabelConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A592254EEBDF008CEFA3 /* LabelConditionTableViewController.swift */; };
 		3358A5AD254FDDFB008CEFA3 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5AC254FDDFB008CEFA3 /* Label.swift */; };
-		3358A5B2254FE462008CEFA3 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B1254FE462008CEFA3 /* Milestone.swift */; };
+		3358A5B2254FE462008CEFA3 /* MilestoneInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B1254FE462008CEFA3 /* MilestoneInfo.swift */; };
 		3358A5BA254FE5AD008CEFA3 /* Assignees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B9254FE5AD008CEFA3 /* Assignees.swift */; };
 		3358A5C5254FE724008CEFA3 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5C4254FE724008CEFA3 /* FilterInfo.swift */; };
 		3358A5CA254FE86B008CEFA3 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5C9254FE86B008CEFA3 /* Author.swift */; };
@@ -167,7 +167,7 @@
 		3358A580254ED7D3008CEFA3 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
 		3358A592254EEBDF008CEFA3 /* LabelConditionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelConditionTableViewController.swift; sourceTree = "<group>"; };
 		3358A5AC254FDDFB008CEFA3 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
-		3358A5B1254FE462008CEFA3 /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
+		3358A5B1254FE462008CEFA3 /* MilestoneInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneInfo.swift; sourceTree = "<group>"; };
 		3358A5B9254FE5AD008CEFA3 /* Assignees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignees.swift; sourceTree = "<group>"; };
 		3358A5C4254FE724008CEFA3 /* FilterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfo.swift; sourceTree = "<group>"; };
 		3358A5C9254FE86B008CEFA3 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
@@ -475,7 +475,7 @@
 			isa = PBXGroup;
 			children = (
 				3358A5C9254FE86B008CEFA3 /* Author.swift */,
-				3358A5B1254FE462008CEFA3 /* Milestone.swift */,
+				3358A5B1254FE462008CEFA3 /* MilestoneInfo.swift */,
 				3358A5AC254FDDFB008CEFA3 /* Label.swift */,
 				3358A5B9254FE5AD008CEFA3 /* Assignees.swift */,
 				3322CF7D25539E3B0022ABA6 /* Comment.swift */,
@@ -765,7 +765,7 @@
 				3358A5CA254FE86B008CEFA3 /* Author.swift in Sources */,
 				3393E0CC255301CB003DCDA4 /* CustomSearchBar.swift in Sources */,
 				3358A5C5254FE724008CEFA3 /* FilterInfo.swift in Sources */,
-				3358A5B2254FE462008CEFA3 /* Milestone.swift in Sources */,
+				3358A5B2254FE462008CEFA3 /* MilestoneInfo.swift in Sources */,
 				33151F3E254A6464006B94A9 /* FilteringController.swift in Sources */,
 				718C38932553E6FB002E4903 /* ManageMilestoneViewController.swift in Sources */,
 				33BD8DD3254989E100537960 /* NotificationName.swift in Sources */,
@@ -816,7 +816,7 @@
 				33493BE02558593E00BB1E11 /* Assignees.swift in Sources */,
 				3398929925493ADD00D9FB63 /* Router.swift in Sources */,
 				33493BD0255858B800BB1E11 /* IssueCell.swift in Sources */,
-				33493BDC2558593A00BB1E11 /* Milestone.swift in Sources */,
+				33493BDC2558593A00BB1E11 /* MilestoneInfo.swift in Sources */,
 				33493BC4255858A000BB1E11 /* IssueInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
