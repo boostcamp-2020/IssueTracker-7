@@ -11,7 +11,7 @@ import Foundation
 struct IssueInfo: Codable {
     let id: Int
     let title: String
-    let status: String
+    var status: String
     let createdAt: String?
     let updatedAt: String?
     let deletedAt: String?
