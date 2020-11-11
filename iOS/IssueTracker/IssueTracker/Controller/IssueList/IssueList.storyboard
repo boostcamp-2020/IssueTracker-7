@@ -71,10 +71,15 @@
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="gB8-nO-yee"/>
-                                    <barButtonItem title="선택 이슈 닫기" id="NPt-aD-wQS">
+                                    <barButtonItem title="선택 이슈 열기" id="NPt-aD-wQS">
                                         <connections>
-                                            <action selector="pressedCloseSelectedItems:" destination="Fiu-tR-AEc" id="pQT-is-Vx5"/>
+                                            <action selector="pressedOpenSelectedItems:" destination="Fiu-tR-AEc" id="bNo-T0-Xbb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="gB8-nO-yee"/>
+                                    <barButtonItem title="선택 이슈 닫기" id="ZQF-YG-Wot">
+                                        <connections>
+                                            <action selector="pressedCloseSelectedItems:" destination="Fiu-tR-AEc" id="rfH-rz-3cs"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
