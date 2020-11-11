@@ -17,6 +17,9 @@ enum BackEndAPI {
          allAssignees
     
     case filterIssueList
+    case addNewLabel(labelName: String, labelDescription: String, labelColor: String)
+    case editExistingLabel(labelId: Int, labelName: String, labelDescription: String, labelColor: String)
+    
     case addNewMilestone(milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
     case editExistingMilestone(milestoneId: Int, milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
 
@@ -33,6 +36,10 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/issue"
         case .allLabels:
             return "http://\(BackEndAPICredentials.ip)/api/label"
+        case .addNewLabel:
+            return "http://\(BackEndAPICredentials.ip)/api/label"
+        case .editExistingLabel(let labelId, _, _, _):
+            return "http://\(BackEndAPICredentials.ip)/api/label/\(labelId)"
         case .allMilestones:
             return "http://\(BackEndAPICredentials.ip)/api/milestone"
         case .allAssignees, .allAuthors:
@@ -66,6 +73,11 @@ extension BackEndAPI: EndPointable {
             return .post
         case .allIssues:
             return .get
+        case .allLabels:
+            return .get
+        case .addNewLabel:
+            return .post
+        case .editExistingLabel:
         case .allMilestones:
             return .get
         case .addNewMilestone:
@@ -83,6 +95,15 @@ extension BackEndAPI: EndPointable {
     
     var bodies: HTTPBody? {
         switch self {
+        case .addNewLabel(let labelName, let labelDescription, let labelColor):
+            let bodyDictionary = ["name": labelName,
+                                  "description": labelDescription,
+                                  "color": labelColor]
+            return bodyDictionary
+        case .editExistingLabel(_, let labelName, let labelDescription, let labelColor):
+            let bodyDictionary = ["name": labelName,
+                                  "description": labelDescription,
+                                  "color": labelColor]
         case .addNewMilestone(let milestoneName, let milestoneDueDate, let milestoneDescription),
              .editExistingMilestone(_, let milestoneName, let milestoneDueDate, let milestoneDescription):
             let bodyDictionary = ["title": milestoneName,
