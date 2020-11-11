@@ -27,21 +27,25 @@ final class DetailIssueHeader: UICollectionReusableView {
     }
     
     
-    static func configureCell(cell: DetailIssueHeader, data: HeaderDetailIssueInfo) {
+    static func configureCell(cell: DetailIssueHeader, issueInfo: IssueInfo) {
         
-        cell.issueNumber.text = "\(data.issueNumber)"
-        cell.userId.text = "\(data.userId)"
-        cell.title.text = data.title
+        cell.issueNumber.text = "#\(issueInfo.id)"
+        cell.userId.text = issueInfo.comments?.first?.mentions?.userID ?? "아이디 없음"
+        cell.title.text = issueInfo.title
     }
 }
 
 
 final class DetailIssueCell: UICollectionViewCell {
     
+    // MARK: - Property
+    
     static let reuseIdentifier = String(describing: DetailIssueCell.self)
     @IBOutlet weak var userId: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var content: UITextView!
+    @IBOutlet weak var content: UILabel!
+    
     
     // MARK: - Initializer
     
@@ -55,10 +59,20 @@ final class DetailIssueCell: UICollectionViewCell {
         
     }
     
-    static func configureCell(cell: DetailIssueCell, data: DetailIssueInfo) {
-        
-        cell.userId.text = "sample_id2"
-        
+    
+    // MARK: - Method
+    
+    override func prepareForReuse() {
+//        profileImage.image = nil
     }
     
+    static func configureCell(cell: DetailIssueCell, commentInfo: Comment, imageData: Data?) {
+        
+        cell.userId.text = commentInfo.mentions?.userID ?? "아이디 없음"
+        cell.time.text = commentInfo.updatedAt
+        cell.content.text = commentInfo.content
+        if let imageData = imageData {
+            cell.profileImage.image = UIImage(data: imageData)
+        }
+    }
 }

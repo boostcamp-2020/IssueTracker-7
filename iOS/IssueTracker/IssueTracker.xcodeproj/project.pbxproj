@@ -62,8 +62,8 @@
 		3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */; };
 		3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A57B254ED757008CEFA3 /* StoryboardID.swift */; };
 		3358A581254ED7D3008CEFA3 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3358A580254ED7D3008CEFA3 /* Filter.storyboard */; };
-		3358A5AD254FDDFB008CEFA3 /* LabelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5AC254FDDFB008CEFA3 /* LabelInfo.swift */; };
 		3358A593254EEBDF008CEFA3 /* LabelConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A592254EEBDF008CEFA3 /* LabelConditionTableViewController.swift */; };
+		3358A5AD254FDDFB008CEFA3 /* LabelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5AC254FDDFB008CEFA3 /* LabelInfo.swift */; };
 		3358A5B2254FE462008CEFA3 /* MilestoneInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B1254FE462008CEFA3 /* MilestoneInfo.swift */; };
 		3358A5BA254FE5AD008CEFA3 /* Assignees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B9254FE5AD008CEFA3 /* Assignees.swift */; };
 		3358A5C5254FE724008CEFA3 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5C4254FE724008CEFA3 /* FilterInfo.swift */; };
@@ -77,7 +77,6 @@
 		339892A125497CB400D9FB63 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339892A025497CB400D9FB63 /* UserDefault.swift */; };
 		339892B22549876B00D9FB63 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339892B12549876B00D9FB63 /* UserInfo.swift */; };
 		339F611E2553FF7B00FDB2A9 /* DetailIssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339F611D2553FF7B00FDB2A9 /* DetailIssueCell.swift */; };
-		33A108E32553DF54007F1BB2 /* DetailIssueInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A108E22553DF54007F1BB2 /* DetailIssueInfo.swift */; };
 		33AF9F71255909E100ADF5A6 /* DetailIssueListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FE2A925515167000C0F0B /* DetailIssueListController.swift */; };
 		33BD8DD3254989E100537960 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DD2254989E100537960 /* NotificationName.swift */; };
 		33BD8DDA25498DC000537960 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339892B12549876B00D9FB63 /* UserInfo.swift */; };
@@ -162,8 +161,8 @@
 		3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndAPI.swift; sourceTree = "<group>"; };
 		3358A57B254ED757008CEFA3 /* StoryboardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardID.swift; sourceTree = "<group>"; };
 		3358A580254ED7D3008CEFA3 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
-		3358A5AC254FDDFB008CEFA3 /* LabelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelInfo.swift; sourceTree = "<group>"; };
 		3358A592254EEBDF008CEFA3 /* LabelConditionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelConditionTableViewController.swift; sourceTree = "<group>"; };
+		3358A5AC254FDDFB008CEFA3 /* LabelInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelInfo.swift; sourceTree = "<group>"; };
 		3358A5B1254FE462008CEFA3 /* MilestoneInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneInfo.swift; sourceTree = "<group>"; };
 		3358A5B9254FE5AD008CEFA3 /* Assignees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignees.swift; sourceTree = "<group>"; };
 		3358A5C4254FE724008CEFA3 /* FilterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfo.swift; sourceTree = "<group>"; };
@@ -176,7 +175,6 @@
 		339892A025497CB400D9FB63 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		339892B12549876B00D9FB63 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		339F611D2553FF7B00FDB2A9 /* DetailIssueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailIssueCell.swift; sourceTree = "<group>"; };
-		33A108E22553DF54007F1BB2 /* DetailIssueInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIssueInfo.swift; sourceTree = "<group>"; };
 		33BD8DD2254989E100537960 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		33BD8DE52549956B00537960 /* BackEndAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndAPIManager.swift; sourceTree = "<group>"; };
 		712CBEA02550032F00E8F95F /* RegisterIssue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegisterIssue.storyboard; sourceTree = "<group>"; };
@@ -387,7 +385,6 @@
 			isa = PBXGroup;
 			children = (
 				3393E0BC2552AACC003DCDA4 /* IssueInfo.swift */,
-				33A108E22553DF54007F1BB2 /* DetailIssueInfo.swift */,
 				3358A5C4254FE724008CEFA3 /* FilterInfo.swift */,
 				3358A5DD2550382E008CEFA3 /* FilterConditions */,
 			);
@@ -759,7 +756,6 @@
 				33375C3C2547E70E00E8A8E8 /* SceneDelegate.swift in Sources */,
 				33493BA2255844D700BB1E11 /* Routable.swift in Sources */,
 				33BD8DE62549956B00537960 /* BackEndAPIManager.swift in Sources */,
-				33A108E32553DF54007F1BB2 /* DetailIssueInfo.swift in Sources */,
 				71531F57254A859F00CCFAE2 /* IssueListViewController.swift in Sources */,
 				7130A6B525528B2D00EE2141 /* ManageLabelModalViewController.swift in Sources */,
 				7130A6D12552CD0F00EE2141 /* InputValidator.swift in Sources */,

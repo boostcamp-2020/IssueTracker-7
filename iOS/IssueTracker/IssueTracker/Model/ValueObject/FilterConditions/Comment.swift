@@ -26,3 +26,8 @@ struct Comment: Codable {
     }
 }
 
+extension Comment: Hashable {
+    static func == (lhs: Comment, rhs: Comment) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

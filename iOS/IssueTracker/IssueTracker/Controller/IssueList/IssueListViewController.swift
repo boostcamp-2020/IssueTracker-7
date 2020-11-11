@@ -14,12 +14,6 @@ enum barButtonItemState: String {
          done = "완료"
 }
 
-struct HeaderDetailIssueInfo {
-    let userId: Int
-    let title: String
-    let issueNumber: Int
-}
-
 final class IssueListViewController: UIViewController {
    
     // MARK: - Property
@@ -249,12 +243,10 @@ extension IssueListViewController: IssueCellDelegate {
         
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         let issueInfo = issueInfoList[indexPath.item]
-        
-        let headerInfo = HeaderDetailIssueInfo(userId: issueInfo.userID, title: issueInfo.title, issueNumber: issueInfo.id)
-        
+                
         let storyboard = UIStoryboard(name: StoryboardID.DetailIssueList, bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: StoryboardID.DetailIssueListController, creator: { coder in
-            return DetailIssueListController(coder: coder, headerinfo: headerInfo)
+            return DetailIssueListController(coder: coder, issueInfo: issueInfo)
         })
 
         navigationController?.pushViewController(viewController, animated: true)
