@@ -18,7 +18,8 @@ protocol EndPointable {
 
 enum HTTPMethod: String {
     case post,
-         get
+         get,
+         put
 }
 public typealias HTTPHeader = [String: String]
 public typealias HTTPBody = [String: String]

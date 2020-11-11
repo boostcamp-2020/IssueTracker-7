@@ -8,7 +8,7 @@
 import Foundation
 
 class BackEndAPIManager {
-        
+    
     // MARK: - Property
     
     private let router: Routable
@@ -46,10 +46,24 @@ class BackEndAPIManager {
             
         }
     }
-  
+    
     func requestAllMilestones(completionHandler: @escaping ((Result<[MilestoneInfo], APIError>) -> Void)) {
         
         router.request(route: BackEndAPI.allMilestones) { (result: Result<[MilestoneInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func addNewMilestone(milestoneName: String, milestoneDueDate: String, milestoneDescription: String, completionHandler: @escaping ((Result<MilestoneInfo, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.addNewMilestone(milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)) { (result: Result<MilestoneInfo, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func editExistingMilestone(milestoneId: Int, milestoneName: String, milestoneDueDate: String, milestoneDescription: String, completionHandler: @escaping ((Result<MilestoneInfo, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.editExistingMilestone(milestoneId: milestoneId, milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)) { (result: Result<MilestoneInfo, APIError>) in
             completionHandler(result)
         }
     }

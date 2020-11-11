@@ -55,6 +55,39 @@ extension ManageMilestoneViewController: UICollectionViewDataSource {
     }
 }
 
+extension ManageMilestoneViewController: ManageMilestoneModalViewDelegate {
+    
+    func addNewMilestone(milestone: MilestoneInfo) {
+        
+        milestoneDataList.append(milestone)
+        
+        let lastItemIndex = self.collectionView(self.collectionView, numberOfItemsInSection: 0) - 1
+        let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
+        
+        collectionView.performBatchUpdates {
+            collectionView.insertItems(at: [lastItemIndexPath])
+        } completion: { _ in
+            self.collectionView.scrollToItem(at: lastItemIndexPath, at: .bottom, animated: true)
+        }
+
+    }
+    
+    func updateMilestone(milestone: MilestoneInfo) {
+        
+        guard let selectedItemIndex = milestoneDataList.firstIndex(where: { $0.id == milestone.id }) else { return }
+        milestoneDataList[selectedItemIndex] = milestone
+        let selectedItemIndexPath = IndexPath(item: selectedItemIndex, section: 0)
+        
+        collectionView.performBatchUpdates {
+            collectionView.reloadItems(at: [selectedItemIndexPath])
+        } completion: { _ in
+            self.collectionView.scrollToItem(at: selectedItemIndexPath, at: .bottom, animated: true)
+        }
+
+        
+    }
+}
+
 extension ManageMilestoneViewController {
     
     private func setUpMilestoneData() {
@@ -78,8 +111,16 @@ extension ManageMilestoneViewController {
         viewController.modalPresentationStyle = .overFullScreen
         viewController.modalTransitionStyle = .crossDissolve
         viewController.milestoneInfo = milestoneDataList[indexPath.item]
+        viewController.delegate = self
         
         present(viewController, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ManageMilestoneModalViewControllerSegue" {
+            let modalViewController: ManageMilestoneModalViewController = segue.destination as! ManageMilestoneModalViewController
+            modalViewController.delegate = self
+        }
     }
 }
 
