@@ -1,8 +1,14 @@
-const { Milestone } = require('../models');
+const { Milestone, Issue } = require('../models');
 
 exports.getAll = async () => {
   try {
     const result = await Milestone.findAll({
+      include: [
+        {
+          model: Issue,
+          attributes: ['id', 'title', 'status'],
+        },
+      ],
       attributes: ['id', 'title', 'due_date', 'description'],
     });
     return { status: 200, data: result };
