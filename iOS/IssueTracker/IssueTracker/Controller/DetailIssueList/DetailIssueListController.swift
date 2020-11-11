@@ -23,7 +23,10 @@ final class DetailIssueListController: UIViewController {
     
     // MARK: - Property
     
-    private let headerInfo: HeaderDetailIssueInfo!
+    private let api = BackEndAPIManager(router: Router())
+    
+    private let issueInfo: IssueInfo!
+    private var commentsInfoList: [Comment]!
     
     private let cardView: CardView = CardView()
     private let baseView = UIView()
@@ -44,12 +47,14 @@ final class DetailIssueListController: UIViewController {
     private var cardCurrentState: CardState = .collapsed
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Comment>!
     
     
-    init?(coder: NSCoder, headerinfo: HeaderDetailIssueInfo) {
-        self.headerInfo = headerinfo
+    init?(coder: NSCoder, issueInfo: IssueInfo) {
+        self.issueInfo = issueInfo
+        self.commentsInfoList = issueInfo.comments
         super.init(coder: coder)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -217,28 +222,28 @@ final class DetailIssueListController: UIViewController {
 extension DetailIssueListController: UICollectionViewDelegate {
     
     private func createLayout() -> UICollectionViewLayout {
-//        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        
-//        collectionView.register(
-//                    DetailIssueHeader.self,
-//                    forSupplementaryViewOfKind: "section-header-element-kind",
-//                    withReuseIdentifier: DetailIssueHeader.reuseIdentifier) 
-        let heightDimension = NSCollectionLayoutDimension.estimated(500)
+
+        let heightDimension = NSCollectionLayoutDimension.estimated(50)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 15
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+        
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
+            heightDimension: .estimated(20))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: "DetailIssueHeader",
             alignment: .top)
         
-        let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [sectionHeader]
         
         return UICollectionViewCompositionalLayout(section: section)
@@ -249,37 +254,44 @@ extension DetailIssueListController: UICollectionViewDelegate {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, DetailIssueInfo>(collectionView: collectionView) {
+        dataSource = UICollectionViewDiffableDataSource<Section, Comment>(collectionView: collectionView) {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailIssueCell.reuseIdentifier, for: indexPath) as? DetailIssueCell else {
                 fatalError("Cannot create new cell")
             }
-            DetailIssueCell.configureCell(cell: cell, data: item)
-            return cell
             
+            self.api.requestPhoto(path: item.mentions?.photoURL ?? "") { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                        DetailIssueCell.configureCell(cell: cell, commentInfo: item, imageData: data)
+                    case .failure:
+                        DetailIssueCell.configureCell(cell: cell, commentInfo: item, imageData: nil)
+                    }
+                }
+            }
+
+            return cell
         }
         
         dataSource.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             
-            guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailIssueHeader.reuseIdentifier, for: indexPath) as? DetailIssueHeader else { return nil }
-            DetailIssueHeader.configureCell(cell: supplementaryView, data: self.headerInfo)
+            guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailIssueHeader.reuseIdentifier, for: indexPath) as? DetailIssueHeader,
+                  let issueInfo = self.issueInfo else { return nil }
+            
+            DetailIssueHeader.configureCell(cell: supplementaryView, issueInfo: issueInfo)
             
             return supplementaryView
         }
         
         
-        let dummy = [DetailIssueInfo(id: 1, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
-                     DetailIssueInfo(id: 2, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
-                     DetailIssueInfo(id: 3, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
-                     DetailIssueInfo(id: 4, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
-                     DetailIssueInfo(id: 5, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플")),
-                     DetailIssueInfo(id: 6, content: "샘플", updateAt: "샘플", user: User(id: 1, userId: "샘플"))]
+        
         
         // initial data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailIssueInfo>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Comment>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(dummy)
+        snapshot.appendItems(commentsInfoList)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
