@@ -238,10 +238,10 @@ exports.getLabel = async (issue_id) => {
   }
 };
 
-exports.addLabel = async (issue_id, label_id) => {
+exports.addLabel = async (issue_id, label_name) => {
   try {
     const issue = await Issue.findByPk(issue_id);
-    const label = await Label.findByPk(label_id);
+    const label = await Label.findOne(label_name);
     const result = await issue.addLabel(label);
 
     if (result) return { status: 200, data: result[0] };
