@@ -13,6 +13,7 @@ final class DetailIssueHeader: UICollectionReusableView {
     @IBOutlet weak var userId: UILabel!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var issueNumber: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     
     // MARK: - Initializer
     
@@ -27,11 +28,15 @@ final class DetailIssueHeader: UICollectionReusableView {
     }
     
     
-    static func configureCell(cell: DetailIssueHeader, issueInfo: IssueInfo) {
+    static func configureCell(cell: DetailIssueHeader, issueInfo: IssueInfo, imageData: Data?) {
         
         cell.issueNumber.text = "#\(issueInfo.id)"
         cell.userId.text = issueInfo.comments?.first?.mentions?.userID ?? "아이디 없음"
         cell.title.text = issueInfo.title
+        if let imageData = imageData {
+            cell.profileImage.image = UIImage(data: imageData)
+        }
+        
     }
 }
 
