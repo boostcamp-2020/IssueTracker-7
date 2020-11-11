@@ -20,7 +20,7 @@ struct HeaderDetailIssueInfo {
     let issueNumber: Int
 }
 
-final class IssueListViewController: UIViewController, UISearchControllerDelegate {
+final class IssueListViewController: UIViewController {
    
     // MARK: - Property
     
@@ -60,6 +60,7 @@ final class IssueListViewController: UIViewController, UISearchControllerDelegat
             setNavigationTitle()
         }
     }
+    
     
     
     // MARK: - Life Cycle
@@ -151,8 +152,9 @@ extension IssueListViewController {
             switch result {
             case .success(let issues):
                 self.issueInfoList = issues
+
                 DispatchQueue.main.async {
-                    self.collectionView.reloadData()
+                    self.collectionView.reloadSections(IndexSet(integer: 0))
                 }
             case .failure(let error):
                 print(error)
@@ -163,7 +165,6 @@ extension IssueListViewController {
     private func configureLayout() {
         let spacing: CGFloat = 10
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
-        collectionViewFlowLayout.estimatedItemSize = CGSize(width: collectionView.frame.width - 30, height: 50)
         collectionViewFlowLayout.minimumLineSpacing = spacing
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: 0, right: 0)
         collectionView.collectionViewLayout = collectionViewFlowLayout
@@ -217,9 +218,20 @@ extension IssueListViewController: UICollectionViewDelegate {
     }
 }
 
+extension IssueListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var height: CGFloat = 80
+        if issueInfoList[indexPath.item].labels!.count > 0 {
+            height += 30
+        }
+        return CGSize(width: collectionView.frame.width - 30, height: height)
+    }
+}
+
 // MARK: IssueCellDelegate
 extension IssueListViewController: IssueCellDelegate {
-    
+
     func issueListDidInteracted(cell: IssueCell) {
         guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
         visibleCells.forEach { visibleCell in
@@ -247,6 +259,21 @@ extension IssueListViewController: IssueCellDelegate {
 
         navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    func issueStatusChanged(cell: IssueCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        let issueInfo = issueInfoList[indexPath.item]
+        let status: Status = issueInfo.status == "open" ? .closed : .open
+        api.requestStatusChange(issueInfo: issueInfo, status: status) { result in
+            switch result {
+            case .success:
+                self.configureInitialData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 }
 
 // MARK: 스크롤뷰 Delegate
@@ -285,10 +312,34 @@ extension IssueListViewController {
         }
     }
     
+    @IBAction func pressedOpenSelectedItems(_ sender: Any) {
+        guard let selectedItems = collectionView.indexPathsForSelectedItems else { return }
+        
+        selectedItems.forEach {
+            api.requestStatusChange(issueInfo: issueInfoList[$0.item], status: .open) { result in
+                switch result {
+                case .success:
+                    self.configureInitialData()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
     @IBAction func pressedCloseSelectedItems(_ sender: UIBarButtonItem) {
         guard let selectedItems = collectionView.indexPathsForSelectedItems else { return }
-        print("close selected issues")
-        // TODO: close issues with selected items here
+        
+        selectedItems.forEach {
+            api.requestStatusChange(issueInfo: issueInfoList[$0.item], status: .closed) { result in
+                switch result {
+                case .success:
+                    self.configureInitialData()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
     
     @objc private func pressedSelectAllButton() {
