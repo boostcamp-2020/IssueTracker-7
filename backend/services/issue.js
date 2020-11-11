@@ -299,6 +299,12 @@ exports.getMilestone = async ({ issue_id }) => {
     if (issue) {
       const milestone = await issue.getMilestone({
         attributes: ['id', 'title', 'due_date', 'description'],
+        include: [
+          {
+            model: Issue,
+            attributes: ['id', 'title', 'status'],
+          },
+        ],
       });
       return { status: 200, data: milestone };
     } else {
