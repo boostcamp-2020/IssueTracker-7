@@ -16,7 +16,6 @@ enum BackEndAPI {
          allMilestones,
          allAssignees
     
-    case filterIssueList
     case addNewMilestone(milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
     case editExistingMilestone(milestoneId: Int, milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
 

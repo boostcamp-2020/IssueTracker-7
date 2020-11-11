@@ -15,7 +15,7 @@ final class MileStoneConditionTableViewController: UIViewController {
     private let route: BackEndAPI
     private let filterInfo: FilterInfo
     private let api = BackEndAPIManager(router: Router())
-    private var milestoneInfoList: [Milestone] = []
+    private var milestoneInfoList: [MilestoneInfo] = []
     private var selectedIndex: Int?
     
     
@@ -70,7 +70,7 @@ final class MileStoneConditionTableViewController: UIViewController {
     }
     
     func configureInitialData() {
-        api.requestDetailCondition(route: route) { (result: Result<[Milestone], APIError>) in
+        api.requestDetailCondition(route: route) { (result: Result<[MilestoneInfo], APIError>) in
             switch result {
             case .success(let milestoneInfo):
                 self.milestoneInfoList = milestoneInfo
@@ -134,7 +134,7 @@ final class MileStoneConditionCell: UITableViewCell {
         accessoryType = .none
     }
     
-    func configure(by milestoneInfo: Milestone) {
+    func configure(by milestoneInfo: MilestoneInfo) {
         label.text = " \(milestoneInfo.title) "
     }
 }
