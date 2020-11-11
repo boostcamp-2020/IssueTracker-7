@@ -8,7 +8,7 @@
 import Foundation
 
 class BackEndAPIManager {
-        
+    
     // MARK: - Property
     
     private let router: Routable
@@ -31,19 +31,29 @@ class BackEndAPIManager {
     }
     
     // route: 작성자 or 레이블 or 마일스톤 or 담당자
-    func requestDetailCondition<infoType: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
-        router.request(route: route) { (result: Result<infoType, APIError>) in
-            
-            
+    func requestDetailCondition<T: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<T, APIError>) -> Void)) {
+        router.request(route: route) { (result: Result<T, APIError>) in
+            completionHandler(result)
         }
     }
     
-    func requestFiltering<infoType: Decodable>(conditions: FilterInfo, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
+    func requestFiltering(conditions: FilterInfo, completionHandler: @escaping ((Result<[IssueInfo], APIError>) -> Void)) {
+        router.request(route: BackEndAPI.predefinedFilter(query: conditions.description)) { (result: Result<[IssueInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func requestAllMilestones(completionHandler: @escaping ((Result<[MilestoneInfo], APIError>) -> Void)) {
         
-        // conditions 파싱 후 .filterIssueList 에 넣어서 보내기
+        router.request(route: BackEndAPI.allMilestones) { (result: Result<[MilestoneInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func addNewMilestone(milestoneName: String, milestoneDueDate: String, milestoneDescription: String, completionHandler: @escaping ((Result<MilestoneInfo, APIError>) -> Void)) {
         
-        router.request(route: BackEndAPI.filterIssueList) { (result: Result<infoType, APIError>) in
-            
+        router.request(route: BackEndAPI.addNewMilestone(milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)) { (result: Result<MilestoneInfo, APIError>) in
+            completionHandler(result)
         }
     }
   
@@ -64,6 +74,13 @@ class BackEndAPIManager {
     func editExistingLabel(labelId: Int, labelName: String, labelDescription: String, labelColor: String, completionHandler: @escaping((Result<LabelInfo, APIError>) -> Void)) {
         
         router.request(route: BackEndAPI.editExistingLabel(labelId: labelId, labelName: labelName, labelDescription: labelDescription, labelColor: labelColor)) { (result: Result<LabelInfo, APIError>) in
+        completionHandler(result)
+        }
+    }
+    
+    func editExistingMilestone(milestoneId: Int, milestoneName: String, milestoneDueDate: String, milestoneDescription: String, completionHandler: @escaping ((Result<MilestoneInfo, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.editExistingMilestone(milestoneId: milestoneId, milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)) { (result: Result<MilestoneInfo, APIError>) in
             completionHandler(result)
         }
     }

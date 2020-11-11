@@ -63,7 +63,7 @@ class IssueCellContentView: UIView {
         issueData.labels?.forEach {
             let btn = UIButton()
             btn.setTitle(" \($0.name) ", for: .normal)
-            btn.backgroundColor = hexStringToUIColor(hex: $0.color)
+            btn.backgroundColor = $0.color.hexStringToUIColor()
             btn.setTitleColor(UIColor.black, for: .normal)
             btn.titleLabel?.font = .systemFont(ofSize: 15)
             btn.cornerRadius = 5
