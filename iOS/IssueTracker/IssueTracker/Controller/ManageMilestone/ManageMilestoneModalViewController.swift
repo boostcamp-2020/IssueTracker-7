@@ -190,7 +190,7 @@ extension ManageMilestoneModalViewController {
         
         firstTextField.text = (milestoneInfo?.title != nil) ? milestoneInfo?.title : ""
         secondTextField.text = (milestoneInfo?.dueDate != nil) ? milestoneInfo?.dueDate : ""
-        thirdTextField.text = ""
+        thirdTextField.text = (milestoneInfo?.description != nil) ? milestoneInfo?.description : ""
         
         firstTextFieldErrorLabel.text = ""
         secondTextFieldErrorLabel.text = ""

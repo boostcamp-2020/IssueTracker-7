@@ -140,7 +140,7 @@ final class MilestoneCell: UICollectionViewCell {
         
         name.setTitle(milestoneData.title, for: .normal)
         dueDate.text = milestoneData.dueDate
-        
+        milestoneDescription.text = milestoneData.description
         addShadow()
     }
     
