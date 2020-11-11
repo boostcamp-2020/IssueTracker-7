@@ -25,6 +25,7 @@ class FilterInfo {
     var milestone: String = ""
     var assignee: String = ""
     
+    
     func removeAll() {
         status = nil
         mentions = ""

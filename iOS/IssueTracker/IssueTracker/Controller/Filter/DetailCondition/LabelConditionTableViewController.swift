@@ -22,7 +22,7 @@ final class LabelConditionTableViewController: UIViewController {
     private let route: BackEndAPI
     private let filterInfo: FilterInfo
     private let api = BackEndAPIManager(router: Router())
-    private var labelInfoList: [Label] = []
+    private var labelInfoList: [LabelInfo] = []
     
     
     // MARK: - Initializer
@@ -83,7 +83,7 @@ final class LabelConditionTableViewController: UIViewController {
     }
     
     func configureInitialData() {
-        api.requestDetailCondition(route: route) { (result: Result<[Label], APIError>) in
+        api.requestDetailCondition(route: route) { (result: Result<[LabelInfo], APIError>) in
             switch result {
             case .success(let labelInfo):
                 self.labelInfoList = labelInfo
@@ -135,7 +135,7 @@ class LabelConditionCell: UITableViewCell {
         label.layer.cornerRadius = 5
     }
     
-    func configure(by labelInfo: Label) {
+    func configure(by labelInfo: LabelInfo) {
         label.setTitle(" \(labelInfo.name) ", for: .normal)
         label.backgroundColor = labelInfo.color.hexStringToUIColor()
     }
