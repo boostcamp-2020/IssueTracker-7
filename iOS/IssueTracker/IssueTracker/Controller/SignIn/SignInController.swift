@@ -17,20 +17,14 @@ class SignInController: UIViewController {
         super.viewDidLoad()
        
         signInAppleButton.delegate = self
-        setUpNotificationCenter()
     }
-    
-    func setUpNotificationCenter() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: Notification.Name.backEndTokenReceived, object: nil)
-    }
-    
+   
     @IBAction func githubLogin(_ sender: Any) {
         let handler = {
             DispatchQueue.main.async {
                 self.loginSuccess()
             }
         }
-//        oauth = OAuthManager(oauth: GithubOAuthManager(), handler: handler)
         oauth = OAuthManager(oauth: BackEndOAuthManager(router: Router()), handler: handler)
         oauth?.requestAuthorization()
     }
@@ -58,7 +52,7 @@ extension SignInController {
         )
         
         viewController.modalPresentationStyle = .fullScreen
-        setUpTransitionStyle() // TODO: transition 공부하고 좀 더 수정해보기
+        setUpTransitionStyle()
         view.window?.rootViewController = viewController
     }
 }
@@ -72,16 +66,11 @@ extension SignInController: ASAuthorizationControllerDelegate {
             let userFullName = appleIDCredential.fullName?.givenName
             let userEmail = appleIDCredential.email
             
-            print(userIdentifier, userFullName, userEmail)
-            // 애플 로그인시, 여기서 유저 정보를 백엔드로 보냄
             
-            //Navigate to other view controller
         } else if let passwordCredential = authorization.credential as? ASPasswordCredential {
             // Sign in using an existing iCloud Keychain credential.
             let username = passwordCredential.user
             let password = passwordCredential.password
-            print(username, password)
-            //Navigate to other view controller
         }
       }
       
