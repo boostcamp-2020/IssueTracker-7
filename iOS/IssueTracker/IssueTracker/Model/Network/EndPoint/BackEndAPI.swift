@@ -77,6 +77,7 @@ extension BackEndAPI: EndPointable {
         case .addNewLabel:
             return .post
         case .editExistingLabel:
+            return .put
         case .allMilestones:
             return .get
         case .addNewMilestone:
@@ -103,6 +104,7 @@ extension BackEndAPI: EndPointable {
             let bodyDictionary = ["name": labelName,
                                   "description": labelDescription,
                                   "color": labelColor]
+            return bodyDictionary
         case .addNewMilestone(let milestoneName, let milestoneDueDate, let milestoneDescription),
              .editExistingMilestone(_, let milestoneName, let milestoneDueDate, let milestoneDescription):
             let bodyDictionary = ["title": milestoneName,
