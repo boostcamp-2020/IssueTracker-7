@@ -32,16 +32,27 @@ extension Routable {
         }
     }
     
-    func configureRequest(from route: EndPointable) -> URLRequest {
-        let url = route.query == "" ? route.baseURL : route.baseURL.appendingPathComponent(route.query)
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = route.httpMethod?.rawValue
-        request.httpBody = route.bodies?.encode().data(using: String.Encoding.utf8)
-        route.headers?.forEach { key, value in
-            request.setValue(value, forHTTPHeaderField: key)
+    func configureRequest(from route: EndPointable) -> URLRequest? {
+        var urlComponents = route.baseURL
+        if let query = route.query { 
+            var queryItems = [URLQueryItem]()
+            query.forEach { (key, value) in
+                queryItems.append(URLQueryItem(name: key, value: value))
+            }
+            
+            urlComponents.queryItems = queryItems
         }
         
-        return request
+        if let url = urlComponents.url {
+            var request = URLRequest(url: url)
+            
+            request.httpMethod = route.httpMethod?.rawValue
+            request.httpBody = route.bodies?.encode().data(using: String.Encoding.utf8)
+            route.headers?.forEach { key, value in
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+            return request
+        }
+        return nil
     }
 }

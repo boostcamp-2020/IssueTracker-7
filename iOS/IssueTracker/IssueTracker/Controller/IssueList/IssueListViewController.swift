@@ -14,25 +14,33 @@ enum barButtonItemState: String {
          done = "완료"
 }
 
+struct HeaderDetailIssueInfo {
+    let userId: Int
+    let title: String
+    let issueNumber: Int
+}
+
 final class IssueListViewController: UIViewController {
     
     // MARK: - Property
     
     @IBOutlet private var collectionView: UICollectionView!
+    private var issueInfoList: [IssueInfo] = []
+
     @IBOutlet var filterButtonItem: UIBarButtonItem!
+    let filterInfo = FilterInfo()
     
-    private var issueDataList: [IssueInfo] = []
-    private let api = BackEndAPIManager(router: MockRouter(jsonFactory: JsonFactoryTrue()))
+    private let api = BackEndAPIManager(router: Router())
         
     private lazy var selectAllButtonItem: UIBarButtonItem = UIBarButtonItem(title: barButtonItemState.selectAll.rawValue, style: .plain, target: self, action: #selector(pressedSelectAllButton))
     
     private var selectAllActive: Bool = false {
         didSet {
             if selectAllActive {
-                navigationItem.leftBarButtonItem!.title = barButtonItemState.deselectAll.rawValue
+                navigationItem.leftBarButtonItem?.title = barButtonItemState.deselectAll.rawValue
                 selectAllItems()
             } else {
-                navigationItem.leftBarButtonItem!.title = barButtonItemState.selectAll.rawValue
+                navigationItem.leftBarButtonItem?.title = barButtonItemState.selectAll.rawValue
                 deselectAllItems()
             }
             setNavigationTitle()
@@ -49,26 +57,48 @@ final class IssueListViewController: UIViewController {
         configureLayout()
         configureNavigationBarButtonItem()
     }
+
     
     // MARK: - Method
     
+    func requestFiltering(with filterInfo: FilterInfo) {
+        self.api.requestFiltering(conditions: filterInfo) { result in
+            switch result {
+            case .success(let issueInfoList):
+                self.issueInfoList = issueInfoList
+                DispatchQueue.main.async {
+                    let indexSet = IndexSet(integer: 0)
+                    self.collectionView.reloadSections(indexSet)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        /**
+            - **FilteringController 로 넘기는 정보**
+                - 1. FilterInfo 객체
+                - 2. 미리 지정된 조건 선택 시 동작할 핸들러
+                - 3. 세부 조건들 선택 시 동작할 핸들러
+         */
+        
         if segue.identifier == "IssueListToFilter" {
             guard let navigationController = segue.destination as? UINavigationController,
                   let viewController = navigationController.topViewController as? FilteringController
             else { return }
             
-            viewController.preDefinedConditionHandler = { conditions in
-                //                BackEndAPIManager.shared.requestFiltering(conditions: conditions) { (result: Result<이슈목록Decodable객체, APIError>) in
-                //
-                //                }
-                print("predefinedConditionHandler") //
+            viewController.filterInfo = filterInfo
+            
+            viewController.predefinedConditionHandler = { filterInfo in
+                self.requestFiltering(with: filterInfo)
+                self.filterInfo.removeAll()
             }
-            viewController.detailConditionHandler = { conditions in
-                //                BackEndAPIManager.shared.requestFiltering(conditions: conditions) { (result: Result<이슈목록Decodable객체, APIError>) in
-                //
-                //                }
-                print("detailConditionHandler")
+            
+            viewController.detailConditionHandler = { filterInfo in
+                self.requestFiltering(with: filterInfo)
             }
         }
     }
@@ -83,7 +113,7 @@ extension IssueListViewController {
         api.requestAllIssues() { result in
             switch result {
             case .success(let issues):
-                self.issueDataList = issues
+                self.issueInfoList = issues
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -108,16 +138,15 @@ extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return issueDataList.count
+        return issueInfoList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as! IssueCell
         cell.delegate = self
-        cell.configure(issueData: issueDataList[indexPath.row])
+        cell.configure(issueData: issueInfoList[indexPath.row])
         cell.isEditing = isEditing
-        
+      
         // cell을 reuse하기 전에 cell이 selected items에 포함된다면 selected 표시 -- selected된 cell이 reuse 되면서 selected state가 유지되는 버그를 수정함
         if let selectedItems = collectionView.indexPathsForSelectedItems, selectedItems.contains(indexPath) {
             cell.isSelected = true
@@ -165,7 +194,7 @@ extension IssueListViewController: IssueCellDelegate {
     func issueListDidInteracted(cell: IssueCell) {
         guard let visibleCells = collectionView.visibleCells as? [IssueCell] else { return }
         visibleCells.forEach { visibleCell in
-            if  visibleCell.isSwiped() {
+            if  visibleCell.isSwiped() && visibleCell != cell {
                 visibleCell.resetOffset()
             }
         }
@@ -181,7 +210,7 @@ extension IssueListViewController: IssueCellDelegate {
         let storyboard = UIStoryboard(name: "DetailIssueList", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "DetailIssueListController") as! DetailIssueListController
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
-        let data = issueDataList[indexPath.item]
+        let data = issueInfoList[indexPath.item]
         
         let info = HeaderDetailIssueInfo(userId: data.userID!, title: data.title, issueNumber: data.id)
         
@@ -190,11 +219,6 @@ extension IssueListViewController: IssueCellDelegate {
     }
 }
 
-struct HeaderDetailIssueInfo {
-    let userId: Int
-    let title: String
-    let issueNumber: Int
-}
 
 extension IssueListViewController: UIScrollViewDelegate {
     

@@ -58,11 +58,13 @@
 		33493BEC2558596B00BB1E11 /* FilteringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F3D254A6464006B94A9 /* FilteringController.swift */; };
 		33493BF02558597200BB1E11 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F5F254A88F000CCFAE2 /* UIButton+.swift */; };
 		33493BF42558598000BB1E11 /* FilteringTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33151F42254A6E55006B94A9 /* FilteringTableViewController.swift */; };
-		33493BF82558599600BB1E11 /* DetailConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A592254EEBDF008CEFA3 /* DetailConditionTableViewController.swift */; };
+		33493BF82558599600BB1E11 /* LabelConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A592254EEBDF008CEFA3 /* LabelConditionTableViewController.swift */; };
+		334D0F1B255A4A9F001DE5B4 /* MileStoneConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334D0F1A255A4A9F001DE5B4 /* MileStoneConditionTableViewController.swift */; };
+		334D0F21255A7656001DE5B4 /* UserConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334D0F20255A7656001DE5B4 /* UserConditionTableViewController.swift */; };
 		3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */; };
 		3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A57B254ED757008CEFA3 /* StoryboardID.swift */; };
 		3358A581254ED7D3008CEFA3 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3358A580254ED7D3008CEFA3 /* Filter.storyboard */; };
-		3358A593254EEBDF008CEFA3 /* DetailConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A592254EEBDF008CEFA3 /* DetailConditionTableViewController.swift */; };
+		3358A593254EEBDF008CEFA3 /* LabelConditionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A592254EEBDF008CEFA3 /* LabelConditionTableViewController.swift */; };
 		3358A5AD254FDDFB008CEFA3 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5AC254FDDFB008CEFA3 /* Label.swift */; };
 		3358A5B2254FE462008CEFA3 /* MilestoneInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B1254FE462008CEFA3 /* MilestoneInfo.swift */; };
 		3358A5BA254FE5AD008CEFA3 /* Assignees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358A5B9254FE5AD008CEFA3 /* Assignees.swift */; };
@@ -158,10 +160,12 @@
 		33493B9C2558449000BB1E11 /* MockRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRouter.swift; sourceTree = "<group>"; };
 		33493BA1255844D700BB1E11 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
 		33493BAA255849F200BB1E11 /* JsonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFactory.swift; sourceTree = "<group>"; };
+		334D0F1A255A4A9F001DE5B4 /* MileStoneConditionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneConditionTableViewController.swift; sourceTree = "<group>"; };
+		334D0F20255A7656001DE5B4 /* UserConditionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConditionTableViewController.swift; sourceTree = "<group>"; };
 		3358A573254D1D5F008CEFA3 /* BackEndAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndAPI.swift; sourceTree = "<group>"; };
 		3358A57B254ED757008CEFA3 /* StoryboardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardID.swift; sourceTree = "<group>"; };
 		3358A580254ED7D3008CEFA3 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
-		3358A592254EEBDF008CEFA3 /* DetailConditionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionTableViewController.swift; sourceTree = "<group>"; };
+		3358A592254EEBDF008CEFA3 /* LabelConditionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelConditionTableViewController.swift; sourceTree = "<group>"; };
 		3358A5AC254FDDFB008CEFA3 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		3358A5B1254FE462008CEFA3 /* MilestoneInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneInfo.swift; sourceTree = "<group>"; };
 		3358A5B9254FE5AD008CEFA3 /* Assignees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignees.swift; sourceTree = "<group>"; };
@@ -420,6 +424,16 @@
 			path = MockService;
 			sourceTree = "<group>";
 		};
+		334D0F13255A43A7001DE5B4 /* DetailCondition */ = {
+			isa = PBXGroup;
+			children = (
+				334D0F20255A7656001DE5B4 /* UserConditionTableViewController.swift */,
+				3358A592254EEBDF008CEFA3 /* LabelConditionTableViewController.swift */,
+				334D0F1A255A4A9F001DE5B4 /* MileStoneConditionTableViewController.swift */,
+			);
+			path = DetailCondition;
+			sourceTree = "<group>";
+		};
 		3358A589254EDEDA008CEFA3 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,7 +457,7 @@
 				3358A580254ED7D3008CEFA3 /* Filter.storyboard */,
 				33151F3D254A6464006B94A9 /* FilteringController.swift */,
 				33151F42254A6E55006B94A9 /* FilteringTableViewController.swift */,
-				3358A592254EEBDF008CEFA3 /* DetailConditionTableViewController.swift */,
+				334D0F13255A43A7001DE5B4 /* DetailCondition */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -732,14 +746,16 @@
 				7130A6A025527E8900EE2141 /* ManageLabelModalView.swift in Sources */,
 				7130A69525516AC500EE2141 /* ManageLabelViewController.swift in Sources */,
 				3322CF7E25539E3B0022ABA6 /* Comment.swift in Sources */,
-				3358A593254EEBDF008CEFA3 /* DetailConditionTableViewController.swift in Sources */,
+				3358A593254EEBDF008CEFA3 /* LabelConditionTableViewController.swift in Sources */,
 				718C389D2553E72E002E4903 /* ManageMilestoneModalViewController.swift in Sources */,
 				3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */,
 				3393E0AC2552698C003DCDA4 /* UIView+.swift in Sources */,
 				33493B49255662B100BB1E11 /* IssueCellContentView.swift in Sources */,
+				334D0F21255A7656001DE5B4 /* UserConditionTableViewController.swift in Sources */,
 				3358A574254D1D5F008CEFA3 /* BackEndAPI.swift in Sources */,
 				339F611E2553FF7B00FDB2A9 /* DetailIssueCell.swift in Sources */,
 				33493BAB255849F200BB1E11 /* JsonFactory.swift in Sources */,
+				334D0F1B255A4A9F001DE5B4 /* MileStoneConditionTableViewController.swift in Sources */,
 				3393E0BD2552AACC003DCDA4 /* IssueInfo.swift in Sources */,
 				333FE28D25510BEC000C0F0B /* APICredentials.swift in Sources */,
 				3393E0D225530B33003DCDA4 /* IssueCell.swift in Sources */,
@@ -782,7 +798,7 @@
 				33493BB92558581D00BB1E11 /* JsonFactory.swift in Sources */,
 				33AF9F71255909E100ADF5A6 /* DetailIssueListController.swift in Sources */,
 				33493B982558340B00BB1E11 /* IssueListViewController.swift in Sources */,
-				33493BF82558599600BB1E11 /* DetailConditionTableViewController.swift in Sources */,
+				33493BF82558599600BB1E11 /* LabelConditionTableViewController.swift in Sources */,
 				33493BB52558581A00BB1E11 /* MockRouter.swift in Sources */,
 				33493BCC255858B200BB1E11 /* APICredentials.swift in Sources */,
 				33493BF02558597200BB1E11 /* UIButton+.swift in Sources */,

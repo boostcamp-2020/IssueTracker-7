@@ -7,7 +7,7 @@
 
 import Foundation
 
-// API 명세에 아직 없으므로 추후 수정 필요
+
 
 struct AuthorsInfo: Codable {
     let authors: [Author]

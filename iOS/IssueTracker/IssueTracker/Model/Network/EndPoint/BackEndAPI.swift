@@ -19,6 +19,9 @@ enum BackEndAPI {
     case filterIssueList
     case addNewMilestone(milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
     case editExistingMilestone(milestoneId: Int, milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
+
+    case predefinedFilter(query: String)
+
 }
 
 extension BackEndAPI: EndPointable {
@@ -28,24 +31,33 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/auth/github/ios"
         case .allIssues:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
+        case .allLabels:
+            return "http://\(BackEndAPICredentials.ip)/api/label"
         case .allMilestones:
             return "http://\(BackEndAPICredentials.ip)/api/milestone"
+        case .allAssignees, .allAuthors:
+            return "http://\(BackEndAPICredentials.ip)/api/user"
+        case .predefinedFilter:
+            return "http://\(BackEndAPICredentials.ip)/api/issue"
         case .addNewMilestone(_, _, _):
             return "http://\(BackEndAPICredentials.ip)/api/milestone"
         case .editExistingMilestone(let milestoneId, _, _, _):
             return "http://\(BackEndAPICredentials.ip)/api/milestone/\(milestoneId)"
-        default:
-            return ""
         }
     }
     
-    var baseURL: URL {
-        guard let url = URL(string: environmentBaseURL) else { fatalError() } // TODO: 예외처리로 바꿔주기
+    var baseURL: URLComponents {
+        guard let url = URLComponents(string: environmentBaseURL) else { fatalError() } // TODO: 예외처리로 바꿔주기
         return url
     }
     
-    var query: String {
-        return ""
+    var query: [String: String]? {
+        switch self {
+        case .predefinedFilter(let query):
+            return ["q": query]
+        default:
+            return nil
+        }
     }
     
     var httpMethod: HTTPMethod? {

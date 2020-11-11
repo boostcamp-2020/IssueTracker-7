@@ -9,8 +9,8 @@ import Foundation
 
 protocol EndPointable {
     var environmentBaseURL: String { get }
-    var baseURL: URL { get }
-    var query: String { get }
+    var baseURL: URLComponents { get }
+    var query: [String: String]? { get }
     var httpMethod: HTTPMethod? { get }
     var headers: HTTPHeader? { get }
     var bodies: HTTPBody? { get }
