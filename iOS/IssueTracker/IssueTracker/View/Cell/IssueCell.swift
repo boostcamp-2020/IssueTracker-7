@@ -10,6 +10,8 @@ import UIKit
 protocol IssueCellDelegate: AnyObject {
     func issueListDidInteracted(cell: IssueCell)
     func issueListDidTapped(cell: IssueCell)
+    
+    func issueStatusChanged(cell: IssueCell)
 }
 
 final class IssueCell: UICollectionViewCell {
@@ -79,7 +81,9 @@ final class IssueCell: UICollectionViewCell {
         scrollView.isPagingEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.backgroundColor = .systemRed
+        
+        scrollView.layer.cornerRadius = 10
+        
         return scrollView
     }()
     
@@ -90,15 +94,24 @@ final class IssueCell: UICollectionViewCell {
         return stackView
     }()
     
-    private let visibleView = IssueCellContentView()
-    
-    private var closeView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.systemGreen
-        return view
+    private lazy var statusButtonImageView: UIImageView = {
+        let statusButtonImageView = UIImageView()
+        statusButtonImageView.tintColor = .white
+        
+        self.statusChangeView.addSubview(statusButtonImageView)
+        
+        statusButtonImageView.translatesAutoresizingMaskIntoConstraints = false
+        statusButtonImageView.centerXAnchor.constraint(equalTo: self.statusChangeView.centerXAnchor).isActive = true
+        statusButtonImageView.centerYAnchor.constraint(equalTo: self.statusChangeView.centerYAnchor).isActive = true
+        statusButtonImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        statusButtonImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        return statusButtonImageView
     }()
     
-    private var deleteView: UIView = {
+    private let visibleView = IssueCellContentView()
+
+    private var statusChangeView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.systemRed
         return view
@@ -127,7 +140,6 @@ final class IssueCell: UICollectionViewCell {
         
         super.init(coder: coder)
         
-
         scrollView.delegate = self
         setUpView()
         setUpSwipable()
@@ -139,7 +151,7 @@ final class IssueCell: UICollectionViewCell {
     override func prepareForReuse() {
 
         visibleView.initLabels()
-        self.isSelected = false
+        isSelected = false
     }
     
     private func setUpTapGesture() {
@@ -147,11 +159,8 @@ final class IssueCell: UICollectionViewCell {
         let visibleRecognizer = UITapGestureRecognizer(target: self, action: #selector(contentTapped))
         visibleView.addGestureRecognizer(visibleRecognizer)
         
-        let closeRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeIssue))
-        closeView.addGestureRecognizer(closeRecognizer)
-        
-        let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteIssue))
-        deleteView.addGestureRecognizer(deleteRecognizer)
+        let statusRecognizer = UITapGestureRecognizer(target: self, action: #selector(statusChanged))
+        statusChangeView.addGestureRecognizer(statusRecognizer)
     }
     
     @objc private func contentTapped() {
@@ -160,16 +169,9 @@ final class IssueCell: UICollectionViewCell {
         delegate?.issueListDidInteracted(cell: self)
     }
     
-    @objc private func closeIssue() {
+    @objc private func statusChanged() {
         
-        print("close")
-        resetOffset()
-    }
-    
-    
-    @objc private func deleteIssue() {
-        
-        print("delete")
+        delegate?.issueStatusChanged(cell: self)
         resetOffset()
     }
     
@@ -183,16 +185,14 @@ final class IssueCell: UICollectionViewCell {
                 
         stackView.addArrangedSubview(selectView)
         stackView.addArrangedSubview(visibleView)
-        stackView.addArrangedSubview(closeView)
-        stackView.addArrangedSubview(deleteView)
+        stackView.addArrangedSubview(statusChangeView)
         
         selectView.addSubview(selectLabel)
 
         selectLabel.translatesAutoresizingMaskIntoConstraints = false
         selectView.translatesAutoresizingMaskIntoConstraints = false
         visibleView.translatesAutoresizingMaskIntoConstraints = false
-        closeView.translatesAutoresizingMaskIntoConstraints = false
-        deleteView.translatesAutoresizingMaskIntoConstraints = false
+        statusChangeView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -200,47 +200,43 @@ final class IssueCell: UICollectionViewCell {
             
             selectView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.1),
             visibleView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            closeView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
-            deleteView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
+            statusChangeView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.2),
 
             selectLabel.centerXAnchor.constraint(equalTo: selectView.centerXAnchor, constant: 5),
             selectLabel.centerYAnchor.constraint(equalTo: selectView.centerYAnchor)
         ])
-        
-        addImage(view: closeView, imageName: "xmark.rectangle")
-        addImage(view: deleteView, imageName: "trash")
     }
-    
-    func addImage(view: UIView, imageName: String) {
-        
-        let image = UIImage(systemName: imageName)
-        let imageView = UIImageView(image: image)
-        imageView.tintColor = .white
-        
-        view.addSubview(imageView)
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    }
+   
     
     private func setUpView() {
         
+        // cell layer 에는 shadow 를 적용해야 하므로 masktobounds 가 false. 따라서 cell 위에 있는 scrollview 의 cornerradius 를 주면
+        // scrollview 위에 있는 visible view 도 같이 코너가 둥글게 나온다.
         layer.cornerRadius = 10
-        layer.masksToBounds = true
+        layer.masksToBounds = false
+        setUpShadow(radius: 3, opacity: 0.1)
     }
 
     func configure(issueData: IssueInfo) {
-        visibleView.configure(issueData: issueData)
+        if issueData.status == "open" {
+            statusChangeView.backgroundColor = .systemRed
+            scrollView.backgroundColor = .systemRed
+            
+            statusButtonImageView.image = UIImage(systemName: "checkmark.circle")
+        } else {
+            statusChangeView.backgroundColor = .systemGreen
+            scrollView.backgroundColor = .systemGreen
+            
+            statusButtonImageView.image = UIImage(systemName: "exclamationmark.circle")
+        }
+
+        visibleView.configure(issueInfo: issueData)
     }
     
     func resetOffset() {
       
         UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
             self.scrollView.contentOffset.x = self.contentOffset
-
         }.startAnimation()
     }
     
