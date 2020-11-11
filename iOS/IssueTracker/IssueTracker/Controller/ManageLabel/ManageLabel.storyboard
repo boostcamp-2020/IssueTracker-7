@@ -20,7 +20,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MJS-qW-swq">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.97588783182123651" green="0.97588783182123651" blue="0.97588783182123651" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dxb-yR-UoN">
                                     <size key="itemSize" width="414" height="93"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -100,7 +100,7 @@
                     <navigationItem key="navigationItem" title="레이블" largeTitleDisplayMode="always" id="yhZ-Oa-Fvc">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="spd-id-sj9">
                             <connections>
-                                <segue destination="jRf-jR-yWq" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="INO-NC-xKl"/>
+                                <segue destination="jRf-jR-yWq" kind="presentation" identifier="ModalViewControllerSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="INO-NC-xKl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
