@@ -23,7 +23,7 @@ enum BackEndAPI {
     case editExistingMilestone(milestoneId: Int, milestoneName: String,  milestoneDueDate: String, milestoneDescription: String)
 
     case predefinedFilter(query: String)
-
+    case closeIssue(issueNumber: String, title: String, status: String)
 }
 
 extension BackEndAPI: EndPointable {
@@ -45,6 +45,8 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/user"
         case .predefinedFilter:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
+        case .closeIssue(let issueNumber, _, _):
+            return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueNumber)"
         case .addNewMilestone(_, _, _):
             return "http://\(BackEndAPICredentials.ip)/api/milestone"
         case .editExistingMilestone(let milestoneId, _, _, _):
@@ -70,16 +72,14 @@ extension BackEndAPI: EndPointable {
         switch self {
         case .token:
             return .post
-        case .allIssues:
+        case .allIssues, .allLabels, .allMilestones, .allAssignees, .allAuthors, .predefinedFilter:
             return .get
-        case .allLabels:
-            return .get
+        case .closeIssue:
+            return .put
         case .addNewLabel:
             return .post
         case .editExistingLabel:
             return .put
-        case .allMilestones:
-            return .get
         case .addNewMilestone:
             return .post
         case .editExistingMilestone:
@@ -95,6 +95,8 @@ extension BackEndAPI: EndPointable {
     
     var bodies: HTTPBody? {
         switch self {
+        case .closeIssue(_, let title, let status):
+            return ["title": "\(title)", "status":"\(status)"]
         case .addNewLabel(let labelName, let labelDescription, let labelColor):
             let bodyDictionary = ["name": labelName,
                                   "description": labelDescription,

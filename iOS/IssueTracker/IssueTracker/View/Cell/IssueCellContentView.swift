@@ -15,6 +15,8 @@ class IssueCellContentView: UIView {
     @IBOutlet var content: UILabel!
     @IBOutlet var milestone: UIButton!
     @IBOutlet weak var labelStackView: UIStackView!
+    @IBOutlet weak var statusImageView: UIImageView!
+    @IBOutlet weak var issueNumber: UILabel!
     
     
     // MARK: - Initializer
@@ -54,19 +56,29 @@ class IssueCellContentView: UIView {
         )
     }
     
-    func configure(issueData: IssueInfo) {
+    func configure(issueInfo: IssueInfo) {
         
-        title.text = issueData.title
-        // cell.content.text = // TODO: API 쪽에서 아직 구현이 안되서 추후 수정
-        milestone.setTitle(issueData.milestone?.title, for: .normal)
+        title.text = issueInfo.title
+        content.text = issueInfo.comments?.first?.content
+        milestone.setTitle(issueInfo.milestone?.title, for: .normal)
+        issueNumber.text = "#\(issueInfo.id)"
         
-        issueData.labels?.forEach {
+        if issueInfo.status == "open" {
+            statusImageView.image = UIImage(systemName: "exclamationmark.circle")
+            statusImageView.tintColor = .systemGreen
+        } else {
+            statusImageView.image = UIImage(systemName: "checkmark.circle")
+            statusImageView.tintColor = .systemRed
+        }
+        
+        
+        issueInfo.labels?.forEach {
             let btn = UIButton()
-            btn.setTitle(" \($0.name) ", for: .normal)
+            btn.setTitle("  \($0.name)  ", for: .normal)
             btn.backgroundColor = $0.color.hexStringToUIColor()
             btn.setTitleColor(UIColor.black, for: .normal)
-            btn.titleLabel?.font = .systemFont(ofSize: 15)
-            btn.cornerRadius = 5
+            btn.titleLabel?.font = .systemFont(ofSize: 13, weight: .bold)
+            btn.cornerRadius = 10
             
             labelStackView.addArrangedSubview(btn)
         }

@@ -23,7 +23,7 @@ final class DetailIssueListController: UIViewController {
     
     // MARK: - Property
     
-    var headerInfo: HeaderDetailIssueInfo! = nil
+    private let headerInfo: HeaderDetailIssueInfo!
     
     private let cardView: CardView = CardView()
     private let baseView = UIView()
@@ -47,15 +47,25 @@ final class DetailIssueListController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, DetailIssueInfo>!
     
     
+    init?(coder: NSCoder, headerinfo: HeaderDetailIssueInfo) {
+        self.headerInfo = headerinfo
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureDataSource()
-
-        setUpDimmerView()
+        navigationItem.largeTitleDisplayMode = .never
         
+        configureDataSource()
+        setUpDimmerView()
         configureCollectionView()
     }
     
