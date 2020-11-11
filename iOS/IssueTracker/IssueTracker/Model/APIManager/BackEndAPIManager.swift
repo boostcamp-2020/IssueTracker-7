@@ -53,4 +53,18 @@ class BackEndAPIManager {
             completionHandler(result)
         }
     }
+    
+    func addNewLabel(labelName: String, labelDescription: String, labelColor: String, completionHandler: @escaping((Result<LabelInfo, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.addNewLabel(labelName: labelName, labelDescription: labelDescription, labelColor: labelColor)) { (result: Result<LabelInfo, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func editExistingLabel(labelId: Int, labelName: String, labelDescription: String, labelColor: String, completionHandler: @escaping((Result<LabelInfo, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.editExistingLabel(labelId: labelId, labelName: labelName, labelDescription: labelDescription, labelColor: labelColor)) { (result: Result<LabelInfo, APIError>) in
+            completionHandler(result)
+        }
+    }
 }

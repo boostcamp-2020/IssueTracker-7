@@ -17,9 +17,11 @@ enum BackEndAPI {
          allAssignees
     
     case filterIssueList
+    case addNewLabel(labelName: String, labelDescription: String, labelColor: String)
+    case editExistingLabel(labelId: Int, labelName: String, labelDescription: String, labelColor: String)
 }
 
-extension BackEndAPI: EndPointable, CaseIterable {
+extension BackEndAPI: EndPointable {
     var environmentBaseURL: String {
         switch self {
         case .token:
@@ -28,6 +30,10 @@ extension BackEndAPI: EndPointable, CaseIterable {
             return "http://\(BackEndAPICredentials.ip)/api/issue"
         case .allLabels:
             return "http://\(BackEndAPICredentials.ip)/api/label"
+        case .addNewLabel:
+            return "http://\(BackEndAPICredentials.ip)/api/label"
+        case .editExistingLabel(let labelId, _, _, _):
+            return "http://\(BackEndAPICredentials.ip)/api/label/\(labelId)"
         default:
             return ""
         }
@@ -50,17 +56,34 @@ extension BackEndAPI: EndPointable, CaseIterable {
             return .get
         case .allLabels:
             return .get
+        case .addNewLabel:
+            return .post
+        case .editExistingLabel:
+            return .put
         default:
             return nil
         }
     }
     
     var headers: HTTPHeader? {
-        return ["Authorization": "bearer \(UserInfo.shared.accessToken)"]
+        return ["Authorization": "bearer \(UserInfo.shared.accessToken)", "content-type": "application/x-www-form-urlencoded"]
     }
     
     var bodies: HTTPBody? {
-        return nil
+        switch self {
+        case .addNewLabel(let labelName, let labelDescription, let labelColor):
+            let bodyDictionary = ["name": labelName,
+                                  "description": labelDescription,
+                                  "color": labelColor]
+            return bodyDictionary
+        case .editExistingLabel(_, let labelName, let labelDescription, let labelColor):
+            let bodyDictionary = ["name": labelName,
+                                  "description": labelDescription,
+                                  "color": labelColor]
+            return bodyDictionary
+        default:
+            return nil
+        }
     }
 }
 

@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ManageLabelModalViewDelegate: AnyObject {
+    func updateLabel(label: LabelInfo)
+    func addNewLabel(label: LabelInfo)
+}
+
 final class ManageLabelModalViewController: UIViewController {
     
     
@@ -24,12 +29,15 @@ final class ManageLabelModalViewController: UIViewController {
     
     @IBOutlet var colorPicker: UIButton!
     
+    private let api = BackEndAPIManager(router: Router())
+    private var initialLabelColor = UIColor.systemOrange
+    
     let colorPickerViewController = UIColorPickerViewController()
-    var initialLabelColor = UIColor.systemOrange
     var labelInfo: LabelInfo? = nil
+    weak var delegate: ManageLabelModalViewDelegate?
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         
         initializeAllFields(with: labelInfo)
@@ -113,19 +121,22 @@ extension ManageLabelModalViewController {
     }
     
     @IBAction func pressedSave(_ sender: UIButton) {
+        var labelName = ""
+        var labelInfo = ""
+        var labelColor = ""
         do {
             try firstTextField.validatedText(validationType: .requiredField(field: "이름"))
             try secondTextField.validatedText(validationType: .requiredField(field: "설명"))
             try thirdTextField.validatedText(validationType: .requiredField(field: "색상"))
             
-            let _ = try firstTextField.validatedText(validationType: .labelName)
-            let _ = try secondTextField.validatedText(validationType: .labelInfo)
-            let _ = try thirdTextField.validatedText(validationType: .labelColor)
+            labelName = try firstTextField.validatedText(validationType: .labelName)
+            labelInfo = try secondTextField.validatedText(validationType: .labelInfo)
+            labelColor = try thirdTextField.validatedText(validationType: .labelColor)
         } catch (let error) {
             alertValidationErrorOnSave(error: error)
             return
         }
-        alertProceedSave()
+        alertProceedSave(labelName: labelName, labelDescription: labelInfo, labelColor: labelColor)
         // TODO: alertProceedSave 안에서 OK 시 위의 3가지 값(labelName, labelInfo, labelColor)을 서버로 전송하기
     }
 }
@@ -133,12 +144,16 @@ extension ManageLabelModalViewController {
 // MARK: - 경고창
 extension ManageLabelModalViewController {
     
-    private func alertProceedSave() {
+    private func alertProceedSave(labelName: String, labelDescription: String, labelColor: String) {
         
         let saveAlert = UIAlertController(title: "알림", message: "레이블을 저장하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
-
+        
         saveAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-              // TODO: 값 저장하기
+            if self.labelInfo == nil {
+                self.registerNewLabel(labelName: labelName, labelDescription: labelDescription, labelColor: labelColor)
+            } else {
+                self.editExistingLabel(labelName: labelName, labelDescription: labelDescription, labelColor: labelColor)
+            }
             self.dismiss(animated: true, completion: nil)
         }))
         
@@ -159,6 +174,39 @@ extension ManageLabelModalViewController {
 
 // MARK: -
 extension ManageLabelModalViewController {
+    
+    private func editExistingLabel(labelName: String, labelDescription: String, labelColor: String) {
+        
+        guard let labelInfo = labelInfo else { return }
+        api.editExistingLabel(labelId: labelInfo.id, labelName: labelName, labelDescription: labelDescription, labelColor: labelColor) {
+            result in
+
+            switch result {
+            case .success(let label):
+                print(".success:", label)
+                DispatchQueue.main.async {
+                    self.delegate?.updateLabel(label: label)
+                }
+            case .failure(let error):
+                print(error)
+                
+            }
+        }
+    }
+    
+    private func registerNewLabel(labelName: String, labelDescription: String, labelColor: String) {
+        api.addNewLabel(labelName: labelName, labelDescription: labelDescription, labelColor: labelColor) { result in
+            switch result {
+            case .success(let label):
+                DispatchQueue.main.async {
+                    self.delegate?.addNewLabel(label: label)
+                }
+            case .failure(let error):
+                print(error)
+                
+            }
+        }
+    }
     
     private func initializeAllFields(with: LabelInfo?) {
         
