@@ -71,12 +71,8 @@ extension BackEndAPI: EndPointable {
     
     var bodies: HTTPBody? {
         switch self {
-        case .addNewMilestone(let milestoneName, let milestoneDueDate, let milestoneDescription):
-            let bodyDictionary = ["title": milestoneName,
-                                  "due_date": milestoneDueDate,
-                                  "description": milestoneDescription]
-            return bodyDictionary
-        case .editExistingMilestone(_, let milestoneName, let milestoneDueDate, let milestoneDescription):
+        case .addNewMilestone(let milestoneName, let milestoneDueDate, let milestoneDescription),
+             .editExistingMilestone(_, let milestoneName, let milestoneDueDate, let milestoneDescription):
             let bodyDictionary = ["title": milestoneName,
                                   "due_date": milestoneDueDate,
                                   "description": milestoneDescription]
