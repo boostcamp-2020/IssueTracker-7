@@ -32,12 +32,17 @@ final class Router: Routable {
                 
                 switch responseError {
                 case nil: // 200번
-                    do {
-                        let model = try JSONDecoder().decode(T.self, from: data)
-                        completionHandler(.success(model))
-                    } catch {
-                        print(error)
-                        completionHandler(.failure(.decodingJSON))
+                    
+                    if T.self == Data.self {
+                        completionHandler(.success(data as! T))
+                    } else {
+                        do {
+                            let model = try JSONDecoder().decode(T.self, from: data)
+                            completionHandler(.success(model))
+                        } catch {
+                            print(error)
+                            completionHandler(.failure(.decodingJSON))
+                        }
                     }
                 default: // 300~500번
                     if let responseError = responseError {
