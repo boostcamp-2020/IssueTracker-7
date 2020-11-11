@@ -17,6 +17,7 @@ enum BackEndAPI {
          allAssignees
          
     case predefinedFilter(query: String)
+    case closeIssue(issueNumber: String, title: String, status: String)
 }
 
 extension BackEndAPI: EndPointable {
@@ -34,6 +35,8 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/user"
         case .predefinedFilter:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
+        case .closeIssue(let issueNumber, _, _):
+            return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueNumber)"
         }
     }
     
@@ -57,15 +60,23 @@ extension BackEndAPI: EndPointable {
             return .post
         case .allIssues, .allLabels, .allMilestones, .allAssignees, .allAuthors, .predefinedFilter:
             return .get
+        case .closeIssue:
+            return .put
         }
     }
     
     var headers: HTTPHeader? {
-        return ["Authorization": "bearer \(UserInfo.shared.accessToken)"]
+        return ["Authorization": "bearer \(UserInfo.shared.accessToken)", "content-type":"application/x-www-form-urlencoded"]
     }
     
     var bodies: HTTPBody? {
-        return nil
+        switch self {
+        case .closeIssue(_, let title, let status):
+            return ["title": "\(title)", "status":"\(status)"]
+        default:
+            return nil
+        }
+        
     }
 }
 
