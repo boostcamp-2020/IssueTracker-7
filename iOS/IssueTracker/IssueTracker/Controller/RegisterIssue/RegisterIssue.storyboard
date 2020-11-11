@@ -98,6 +98,15 @@
                                     <constraint firstItem="hLS-Fq-LbG" firstAttribute="leading" secondItem="B5n-0n-u7W" secondAttribute="leading" id="tQB-S1-6uj"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4y-da-19G">
+                                <rect key="frame" x="20" y="99" width="250" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="nXj-7V-zil"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" systemColor="systemPinkColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ObJ-i8-8CK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -109,10 +118,12 @@
                             <constraint firstItem="idB-yn-buE" firstAttribute="width" secondItem="qP8-o9-R2v" secondAttribute="width" id="Bgl-6o-DXL"/>
                             <constraint firstItem="ajT-fE-68f" firstAttribute="top" secondItem="idB-yn-buE" secondAttribute="bottom" constant="20" id="DfL-yi-TPc"/>
                             <constraint firstItem="ObJ-i8-8CK" firstAttribute="bottom" secondItem="B5n-0n-u7W" secondAttribute="bottom" id="ECA-lf-Qxd"/>
+                            <constraint firstItem="n4y-da-19G" firstAttribute="top" secondItem="idB-yn-buE" secondAttribute="bottom" constant="3" id="Iye-m6-jHk"/>
                             <constraint firstItem="idB-yn-buE" firstAttribute="leading" secondItem="qP8-o9-R2v" secondAttribute="leading" id="WJf-TI-SS9"/>
                             <constraint firstItem="B5n-0n-u7W" firstAttribute="centerX" secondItem="qXF-79-Vib" secondAttribute="centerX" id="XEf-pq-oZh"/>
                             <constraint firstItem="B5n-0n-u7W" firstAttribute="top" secondItem="ajT-fE-68f" secondAttribute="bottom" constant="10" id="efC-zX-omu"/>
                             <constraint firstItem="idB-yn-buE" firstAttribute="top" secondItem="qP8-o9-R2v" secondAttribute="bottom" constant="10" id="h1F-9S-E87"/>
+                            <constraint firstItem="n4y-da-19G" firstAttribute="leading" secondItem="idB-yn-buE" secondAttribute="leading" id="hDk-JA-FKF"/>
                             <constraint firstItem="qP8-o9-R2v" firstAttribute="top" secondItem="ddW-pd-P7F" secondAttribute="bottom" constant="20" id="hGq-7g-AoA"/>
                             <constraint firstItem="ObJ-i8-8CK" firstAttribute="trailing" secondItem="qP8-o9-R2v" secondAttribute="trailing" constant="20" id="lPj-st-dRf"/>
                             <constraint firstItem="ddW-pd-P7F" firstAttribute="leading" secondItem="ObJ-i8-8CK" secondAttribute="leading" constant="13" id="oll-Pe-uit"/>
@@ -135,6 +146,8 @@
                         <outlet property="contentView" destination="B5n-0n-u7W" id="chn-5B-5uJ"/>
                         <outlet property="markdownTextView" destination="hLS-Fq-LbG" id="wHi-bh-s3M"/>
                         <outlet property="segmentedControl" destination="ajT-fE-68f" id="Ym1-76-RFF"/>
+                        <outlet property="titleTextField" destination="qP8-o9-R2v" id="BwA-rh-asQ"/>
+                        <outlet property="titleTextFieldErrorLabel" destination="n4y-da-19G" id="rVm-T3-JKO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BxN-aQ-VwD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -151,6 +164,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

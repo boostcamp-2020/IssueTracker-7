@@ -30,6 +30,13 @@ class BackEndAPIManager {
         }
     }
     
+    func addNewIssue(title: String, content: String, completionHandler: @escaping ((Result<IssueInfo, APIError>) -> Void)) {
+       
+        router.request(route: BackEndAPI.addNewIssue(title: title, content: content)) { (result: Result<IssueInfo, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
     // route: 작성자 or 레이블 or 마일스톤 or 담당자
     func requestDetailCondition<T: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<T, APIError>) -> Void)) {
         router.request(route: route) { (result: Result<T, APIError>) in

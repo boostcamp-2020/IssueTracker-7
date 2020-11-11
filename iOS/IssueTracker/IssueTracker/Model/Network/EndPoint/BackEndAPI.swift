@@ -16,6 +16,8 @@ enum BackEndAPI {
          allMilestones,
          allAssignees
  
+    case addNewIssue(title: String, content: String)
+    
     case addNewLabel(labelName: String, labelDescription: String, labelColor: String)
     case editExistingLabel(labelId: Int, labelName: String, labelDescription: String, labelColor: String)
 
@@ -31,7 +33,7 @@ extension BackEndAPI: EndPointable {
         switch self {
         case .token:
             return "http://\(BackEndAPICredentials.ip)/api/auth/github/ios"
-        case .allIssues:
+        case .allIssues, .addNewIssue:
             return "http://\(BackEndAPICredentials.ip)/api/issue"
         case .allLabels:
             return "http://\(BackEndAPICredentials.ip)/api/label"
@@ -76,7 +78,7 @@ extension BackEndAPI: EndPointable {
             return .get
         case .closeIssue:
             return .put
-        case .addNewLabel:
+        case .addNewLabel, .addNewIssue:
             return .post
         case .editExistingLabel:
             return .put
@@ -97,12 +99,10 @@ extension BackEndAPI: EndPointable {
         switch self {
         case .closeIssue(_, let title, let status):
             return ["title": "\(title)", "status":"\(status)"]
-        case .addNewLabel(let labelName, let labelDescription, let labelColor):
-            let bodyDictionary = ["name": labelName,
-                                  "description": labelDescription,
-                                  "color": labelColor]
-            return bodyDictionary
-        case .editExistingLabel(_, let labelName, let labelDescription, let labelColor):
+        case .addNewIssue(let title, let content):
+            return ["title": title, "content": content]
+        case .addNewLabel(let labelName, let labelDescription, let labelColor),
+             .editExistingLabel(_, let labelName, let labelDescription, let labelColor):
             let bodyDictionary = ["name": labelName,
                                   "description": labelDescription,
                                   "color": labelColor]
