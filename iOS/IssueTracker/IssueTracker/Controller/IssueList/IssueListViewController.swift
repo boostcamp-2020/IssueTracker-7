@@ -213,11 +213,11 @@ extension IssueListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if isEditing {
             setNavigationTitle()
-            print("selected item")
-        } 
+        }
     }
 }
 
+// MARK: 컬렉션뷰 DelegateFlowLayout
 extension IssueListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -260,6 +260,14 @@ extension IssueListViewController: IssueCellDelegate {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    private func batchUpdateCells(of indexPaths: [IndexPath]) {
+        self.collectionView.performBatchUpdates {
+            UIViewPropertyAnimator(duration: 1, curve: .easeInOut) {
+                self.collectionView.reloadItems(at: indexPaths)
+            }.startAnimation()
+        }
+    }
+    
     func issueStatusChanged(cell: IssueCell) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         let issueInfo = issueInfoList[indexPath.item]
@@ -267,7 +275,10 @@ extension IssueListViewController: IssueCellDelegate {
         api.requestStatusChange(issueInfo: issueInfo, status: status) { result in
             switch result {
             case .success:
-                self.configureInitialData()
+                self.issueInfoList[indexPath.item].status = status.rawValue
+                DispatchQueue.main.async {
+                    self.batchUpdateCells(of: [indexPath])
+                }
             case .failure(let error):
                 print(error)
             }
@@ -312,34 +323,47 @@ extension IssueListViewController {
         }
     }
     
-    @IBAction func pressedOpenSelectedItems(_ sender: Any) {
-        guard let selectedItems = collectionView.indexPathsForSelectedItems else { return }
+    private func changeInfoStatus(of indexPaths: [IndexPath], to status: Status) {
+        indexPaths.forEach { indexPath in
+            self.issueInfoList[indexPath.item].status = status.rawValue
+        }
+    }
+    
+    private func changeStatus(selectedItems: [IndexPath], to status: Status) {
+        let group = DispatchGroup()
+        var indexPaths: [IndexPath] = []
         
-        selectedItems.forEach {
-            api.requestStatusChange(issueInfo: issueInfoList[$0.item], status: .open) { result in
+        selectedItems.forEach { indexPath in
+            group.enter()
+            api.requestStatusChange(issueInfo: issueInfoList[indexPath.item], status: status) { result in
                 switch result {
                 case .success:
-                    self.configureInitialData()
+                    indexPaths.append(indexPath)
                 case .failure(let error):
                     print(error)
                 }
+                group.leave()
             }
         }
+        
+        group.notify(queue: .main) {
+            self.changeInfoStatus(of: indexPaths, to: status)
+           
+            self.batchUpdateCells(of: indexPaths)
+            self.selectAllActive = false
+        }
+    }
+    
+    @IBAction func pressedOpenSelectedItems(_ sender: Any) {
+        guard let selectedItems = collectionView.indexPathsForSelectedItems else { return }
+        
+        changeStatus(selectedItems: selectedItems, to: .open)
     }
     
     @IBAction func pressedCloseSelectedItems(_ sender: UIBarButtonItem) {
         guard let selectedItems = collectionView.indexPathsForSelectedItems else { return }
         
-        selectedItems.forEach {
-            api.requestStatusChange(issueInfo: issueInfoList[$0.item], status: .closed) { result in
-                switch result {
-                case .success:
-                    self.configureInitialData()
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+        changeStatus(selectedItems: selectedItems, to: .closed)
     }
     
     @objc private func pressedSelectAllButton() {
