@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
-    "storybook": "start-storybook -p 6006 --no-dll",
-    "build-storybook": "build-storybook --no-dll"
+    "start": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +20,7 @@
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
     "clean-webpack-plugin": "^3.0.0",
-    "core-js": "^3.7.0",
+    "corejs": "^1.0.0",
     "css-loader": "^5.0.1",
     "dotenv": "^8.2.0",
     "extract-text-webpack-plugin": "^3.0.2",
@@ -35,11 +33,6 @@
     "webpack": "^4.44.2"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.0.28",
-    "@storybook/addon-essentials": "^6.0.28",
-    "@storybook/addon-links": "^6.0.28",
-    "@storybook/react": "^6.0.28",
-    "react-is": "^17.0.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   }

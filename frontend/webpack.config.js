@@ -19,15 +19,12 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       '@components': path.resolve(__dirname, './src/components'),
-      '@atoms': path.resolve(__dirname, './src/components/atoms'),
-      '@molecules': path.resolve(__dirname, './src/components/molecules'),
-      '@organisms': path.resolve(__dirname, './src/components/organisms'),
-      '@templates': path.resolve(__dirname, './src/components/templates'),
-      '@pages': path.resolve(__dirname, './src/components/pages'),
+      '@pages': path.resolve(__dirname, './src/pages'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@styles': path.resolve(__dirname, './src/styles'),
     },
   },
+
   module: {
     rules: [
       {
@@ -67,6 +64,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `public/index.html`,
     }),
+    new CleanWebpackPlugin(),
   ],
-  devtool: 'cheap-eval-source-map',
+  devtool: 'cheap-module-source-map',
 };
