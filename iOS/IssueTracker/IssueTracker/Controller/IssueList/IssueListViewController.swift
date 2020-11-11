@@ -155,7 +155,6 @@ extension IssueListViewController {
 
                 DispatchQueue.main.async {
                     self.collectionView.reloadSections(IndexSet(integer: 0))
-//                    self.collectionView.reloadData()
                 }
             case .failure(let error):
                 print(error)
