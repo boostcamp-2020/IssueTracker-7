@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import A from '@atoms/'
 import M from '@molecules/';
 
 const FilterBox = styled.div`
@@ -13,6 +14,14 @@ const FilterBox = styled.div`
     display:flex;
     flex-direction:${(props) => props.direction || "row"};
     justify-content: flex-end;
+
+    ${A.FlexBox}{
+        padding-top: 20px;
+        padding-left: 12px;
+    }
+    ${A.FlexItem} {
+        justify-content: flex-end;
+    }
 `;
 
 const filters = [
@@ -40,7 +49,16 @@ const Filter = () => {
         return <M.DropdownButton name={filter.name} key={filter.name} right={filter.right}>{filter.title}</M.DropdownButton>
     })
     return (
-        <FilterBox direction="row">{contents}</FilterBox>
+
+        
+        <FilterBox direction="row">
+            <A.FlexBox>
+                <A.CheckBox type="checkbox" />
+            </A.FlexBox>
+            <A.FlexItem>
+                {contents}
+            </A.FlexItem>
+        </FilterBox>
     );
 };
 
