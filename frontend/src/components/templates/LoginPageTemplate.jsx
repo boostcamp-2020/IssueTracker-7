@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import A from '@atoms/';
 import O from '@organisms/';
+import '@styles/LoginPage.css';
 
-const IssuePage = styled.div`
-  width: 100%;
-  background-color: #ffffff;
-  margin: 0;
-`;
+const LoginPageTemplate = () => {
+  const LoginPage = styled.div`
+    width: fit-content;
+    padding-left: 40%;
+    padding-top: 100px;
+  `;
 
-const IssuePageTemplate = () => {
+  const LoginTitle = styled.p`
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+  `;
+
   return (
-    <IssuePage>
-      <A.Wrapper>
-        <O.Header />
-        <O.Filter />
-        <O.IssueList />
-      </A.Wrapper>
-    </IssuePage>
+    <LoginPage>
+      <LoginTitle>이슈 트래커</LoginTitle>
+      <O.LoginForm></O.LoginForm>
+    </LoginPage>
   );
 };
-export default IssuePageTemplate;
+
+export default LoginPageTemplate;
