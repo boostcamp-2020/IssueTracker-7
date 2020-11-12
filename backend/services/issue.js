@@ -146,6 +146,7 @@ exports.getFilteredAll = async (params, user_id) => {
     let issues = await Issue.findAll({
       where,
       include,
+      order: [['id', 'DESC']],
     });
     if (options.no.includes('assignee')) {
       issues = issues.filter((isssue) => isssue.assignees.length == 0);
@@ -193,7 +194,6 @@ exports.update = async ({ issue_id }, { title, status }) => {
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
-
 
 exports.create = async ({
   title,
