@@ -9,8 +9,8 @@ import Foundation
 
 struct Comment: Codable {
     let id: Int
-    let content, createdAt, updatedAt: String
-    let deletedAt: String?
+    let content, updatedAt: String
+    let deletedAt, createdAt: String?
     let userID: Int?
     let issueID: Int
     let mentions: Assignee?
@@ -18,7 +18,7 @@ struct Comment: Codable {
     enum CodingKeys: String, CodingKey {
         case id, content
         case createdAt
-        case updatedAt
+        case updatedAt = "updated_at"
         case deletedAt
         case userID = "user_id"
         case issueID = "issue_id"
