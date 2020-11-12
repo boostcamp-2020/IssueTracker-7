@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import FilterButton from '../molecules/filter/FilterButton';
+import M from '@molecules/';
 
 const FilterBox = styled.div`
-    width: 94%;
+    width: 90%;
     height: 60px;
-    border:1px solid #919191;
+    margin: 50px auto 0 auto;
+    border: 1px solid #919191;
     border-radius: 4px;
     background-color: #f3f3f3;
-    margin-left: 3%;
     display:flex;
     flex-direction:${(props) => props.direction || "row"};
     justify-content: flex-end;
@@ -36,7 +36,7 @@ const filters = [
 
 const Filter = () => {
     const contents = filters.map(filter => {
-        return <FilterButton name={filter.name} key={filter.name} right={filter.right}>{filter.title}</FilterButton>
+        return <M.DropdownButton name={filter.name} key={filter.name} right={filter.right}>{filter.title}</M.DropdownButton>
     })
     return (
         <FilterBox direction="row">{contents}</FilterBox>

@@ -4,9 +4,8 @@ import { IssueContext } from '@stores/issue';
 import O from '@organisms/';
 
 const IssueListContainer = styled.ul`
-  min-width: 1200px;
-  width: 1200px;
-  padding: 0 32px;
+  width: 90%;
+  padding: 0;
   margin: 0 auto;
   list-style-type: none;
 `;
