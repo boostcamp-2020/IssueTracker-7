@@ -2,7 +2,6 @@ require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const port = process.env.PORT || 80;
 module.exports = {
   mode: 'development',
@@ -14,10 +13,14 @@ module.exports = {
     ),
     filename: 'bundle.js',
   },
-
+  node: {
+    fs: 'empty',
+    net: 'empty',
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+      '@stores': path.resolve(__dirname, './src/stores'),
       '@components': path.resolve(__dirname, './src/components'),
       '@atoms': path.resolve(__dirname, './src/components/atoms'),
       '@molecules': path.resolve(__dirname, './src/components/molecules'),
