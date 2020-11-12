@@ -6,7 +6,7 @@ import M from '@molecules/';
 
 const Button = styled.button`
     width: 100px;
-    background-color: #f3f3f3;
+    background-color: #EAECEF;
     border: none;
     cursor: pointer;
     font-size: 14px;
