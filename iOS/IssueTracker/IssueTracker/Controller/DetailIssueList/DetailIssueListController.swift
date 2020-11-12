@@ -246,7 +246,7 @@ extension DetailIssueListController: CommentViewControllerDelegate {
         snapshot.appendSections([.main])
         snapshot.appendItems(commentsInfoList)
         dataSource?.apply(snapshot, animatingDifferences: true)
-        completion()
+        completionHandler()
     }
 }
 
