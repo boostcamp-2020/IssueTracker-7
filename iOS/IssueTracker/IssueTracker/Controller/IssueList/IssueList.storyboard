@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="2674" y="114"/>
         </scene>
-        <!--이슈-->
+        <!--이슈 📑-->
         <scene sceneID="gdl-FY-vGc">
             <objects>
                 <viewController id="Fiu-tR-AEc" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -97,7 +97,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="Kyi-Eh-ypv"/>
-                    <navigationItem key="navigationItem" title="이슈" id="RzU-8r-oEh">
+                    <navigationItem key="navigationItem" title="이슈 📑" id="RzU-8r-oEh">
                         <barButtonItem key="leftBarButtonItem" title="필터" id="bkx-PW-boa">
                             <connections>
                                 <segue destination="0jM-ha-VGr" kind="presentation" identifier="IssueListToFilter" id="YAw-Ar-zCf"/>
