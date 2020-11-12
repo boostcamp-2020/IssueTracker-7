@@ -1,12 +1,11 @@
 import React from 'react';
-import Input from '@atoms/Input';
-import Label from '@atoms/Label';
+import A from '@atoms/';
 
 const InputBox = ({ label, ...options }) => {
   return (
     <label>
-      <Label>{label}</Label>
-      <Input {...options} />
+      <A.Label>{label}</A.Label>
+      <A.Input {...options} />
     </label>
   );
 };

@@ -1,13 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import HeaderTitle from '@molecules/HeaderTitle';
-import ColorSpace from '@atoms/ColorSpace';
+import M from '@molecules/';
+import A from '@atoms/';
 
 const Header = () => {
   return (
-    <ColorSpace backgroundColor="black">
-      <HeaderTitle title="ISSUES" />
-    </ColorSpace>
+    <A.ColorSpace backgroundColor="black">
+      <M.HeaderTitle title="ISSUES" />
+    </A.ColorSpace>
   );
 };
 
