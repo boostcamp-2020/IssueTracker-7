@@ -4,7 +4,6 @@ import A from '@atoms/'
 import M from '@molecules/';
 
 const FilterBox = styled.div`
-    width: 90%;
     height: 60px;
     margin: 50px auto 0 auto;
     border: 1px solid #d6d8db;
@@ -49,8 +48,6 @@ const Filter = () => {
         return <M.DropdownButton name={filter.name} key={filter.name} right={filter.right}>{filter.title}</M.DropdownButton>
     })
     return (
-
-        
         <FilterBox direction="row">
             <A.FlexBox>
                 <A.CheckBox type="checkbox" />

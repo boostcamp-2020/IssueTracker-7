@@ -4,15 +4,15 @@ import A from '@atoms/';
 import O from '@organisms/';
 
 const IssuePage = styled.div`
-  width: 100%;
+  width: auto;
   background-color: #ffffff;
 `;
 
 const IssuePageTemplate = () => {
   return (
     <IssuePage>
+    <O.Header />
       <A.Wrapper>
-        <O.Header />
         <O.IssueList />
       </A.Wrapper>
     </IssuePage>

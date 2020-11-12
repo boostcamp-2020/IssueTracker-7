@@ -4,7 +4,6 @@ import { IssueContext } from '@stores/issue';
 import O from '@organisms/';
 
 const IssueListContainer = styled.ul`
-  width: 90%;
   padding: 0;
   margin: 0 auto;
   list-style-type: none;
