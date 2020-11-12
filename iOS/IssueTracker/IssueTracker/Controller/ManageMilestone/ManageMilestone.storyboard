@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--마일스톤-->
+        <!--마일스톤🗿-->
         <scene sceneID="8jE-eh-h63">
             <objects>
                 <viewController id="BEF-ob-tcE" customClass="ManageMilestoneViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -128,7 +128,7 @@
                             <constraint firstItem="w8F-kl-Cek" firstAttribute="top" secondItem="Fdc-il-ex1" secondAttribute="top" id="mT1-QG-mga"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="마일스톤" id="UVE-O6-1dW">
+                    <navigationItem key="navigationItem" title="마일스톤🗿" id="UVE-O6-1dW">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="ffr-VY-6sb">
                             <connections>
                                 <segue destination="YwG-UJ-Jsn" kind="presentation" identifier="ManageMilestoneModalViewControllerSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="6PW-jG-3aT"/>

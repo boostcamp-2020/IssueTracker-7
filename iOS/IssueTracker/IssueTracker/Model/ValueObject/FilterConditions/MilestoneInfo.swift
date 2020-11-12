@@ -15,9 +15,15 @@ struct MilestonesInfo: Codable {
 struct MilestoneInfo: Codable {
     let id: Int
     let title, dueDate, description: String
-
+    let issues: [IssuesInMilestone]
+  
     enum CodingKeys: String, CodingKey {
-        case id, title, description
+        case id, title, description, issues
         case dueDate = "due_date"
     }
+}
+
+struct IssuesInMilestone: Codable {
+    let id: Int
+    let title, status: String
 }

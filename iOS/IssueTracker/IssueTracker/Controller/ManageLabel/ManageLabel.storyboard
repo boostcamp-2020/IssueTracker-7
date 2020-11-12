@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--레이블-->
+        <!--레이블 🏷-->
         <scene sceneID="1sX-ax-4a8">
             <objects>
                 <viewController id="Euh-Aj-MVR" customClass="ManageLabelViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -97,7 +97,7 @@
                             <constraint firstItem="MJS-qW-swq" firstAttribute="leading" secondItem="Zaa-0z-Ikc" secondAttribute="leading" id="lIN-xT-9zr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="레이블" largeTitleDisplayMode="always" id="yhZ-Oa-Fvc">
+                    <navigationItem key="navigationItem" title="레이블 🏷" largeTitleDisplayMode="always" id="yhZ-Oa-Fvc">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="spd-id-sj9">
                             <connections>
                                 <segue destination="jRf-jR-yWq" kind="presentation" identifier="ModalViewControllerSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="INO-NC-xKl"/>
@@ -382,7 +382,7 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="jEl-XB-ON9">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

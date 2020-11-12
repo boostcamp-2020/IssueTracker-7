@@ -16,7 +16,8 @@ final class ManageMilestoneViewController: UIViewController, UICollectionViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpMilestoneData()
-        configureLayout()
+        
+      Layout()
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -137,10 +138,22 @@ final class MilestoneCell: UICollectionViewCell {
     @IBOutlet var closedIssueCount: UILabel!
         
     fileprivate func configure(milestoneData: MilestoneInfo) {
+        let numberOfOpenIssues = milestoneData.issues.filter { $0.status == "open" }.count
+        let numberOfClosedIssues = milestoneData.issues.filter { $0.status == "closed" }.count
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .percent
+        numberFormatter.locale = Locale(identifier: "en_US")
+        
+        let fractionOfCompleteIssues = (Double(numberOfOpenIssues) / Double(numberOfOpenIssues + numberOfClosedIssues))
+        let percentCompleteString = numberFormatter.string(from: NSNumber(value: fractionOfCompleteIssues))
+        
         
         name.setTitle(milestoneData.title, for: .normal)
         dueDate.text = milestoneData.dueDate
         milestoneDescription.text = milestoneData.description
+        openIssueCount.text = "\(numberOfOpenIssues) open"
+        closedIssueCount.text = "\(numberOfClosedIssues) closed"
+        percentComplete.text =  fractionOfCompleteIssues.isNaN ? "0%" : percentCompleteString
         addShadow()
     }
     
