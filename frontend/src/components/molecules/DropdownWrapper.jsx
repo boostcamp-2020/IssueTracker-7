@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import FilterOverlay from '../../atoms/filter/FilterOverlay';
-import FilterHeader from './FilterHeader';
-import FilterList from './FilterList';
+import A from '@atoms/';
+import M from '@molecules/';
 
 const Wrapper = styled.div`
     position: absolute;
     height: fit-content;
-    top: 50px;
+    top: 130px;
     right: ${(props) => props.right};
     width: 300px;
     border: 1px solid #cccccc;
@@ -19,10 +18,10 @@ const Wrapper = styled.div`
 const FilterListWrapper = ({ name, onClick, right, children }) => {
     return (
         <>
-            <FilterOverlay onClick={onClick} />
+            <A.DropdownOverlay onClick={onClick} />
             <Wrapper right={right}>
-                <FilterHeader onClick={onClick}>{children}</FilterHeader>
-                <FilterList name={name}/>
+                <M.DropdownHeader onClick={onClick}>{children}</M.DropdownHeader>
+                <M.Dropdown name={name}/>
             </Wrapper>
         </>
     );
