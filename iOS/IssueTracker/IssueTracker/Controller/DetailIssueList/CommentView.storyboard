@@ -1,7 +1,73 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Comment View Controller-->
+        <scene sceneID="Fg8-v2-kXe">
+            <objects>
+                <viewController storyboardIdentifier="CommentViewController" id="mwU-8t-65T" customClass="CommentViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k2I-Tc-0rI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12o-VK-d7m">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="댓글" id="XR3-4Q-1xg">
+                                        <barButtonItem key="leftBarButtonItem" title="취소" id="PPB-1Y-xVe">
+                                            <connections>
+                                                <action selector="pressedCancel:" destination="mwU-8t-65T" id="42R-OD-vrR"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="저장" id="1zS-n4-Uzl">
+                                            <connections>
+                                                <action selector="pressedSave:" destination="mwU-8t-65T" id="CJa-td-Atn"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WpH-D7-Tsb">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="icS-9f-Kb8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WpH-D7-Tsb" firstAttribute="top" secondItem="12o-VK-d7m" secondAttribute="bottom" id="5l8-Mv-aPg"/>
+                            <constraint firstItem="12o-VK-d7m" firstAttribute="top" secondItem="icS-9f-Kb8" secondAttribute="top" id="6zM-s6-RoG"/>
+                            <constraint firstItem="12o-VK-d7m" firstAttribute="leading" secondItem="icS-9f-Kb8" secondAttribute="leading" id="SAA-RO-goB"/>
+                            <constraint firstItem="12o-VK-d7m" firstAttribute="trailing" secondItem="icS-9f-Kb8" secondAttribute="trailing" id="TKQ-ua-SkZ"/>
+                            <constraint firstItem="icS-9f-Kb8" firstAttribute="trailing" secondItem="WpH-D7-Tsb" secondAttribute="trailing" id="pgm-rN-UIq"/>
+                            <constraint firstItem="WpH-D7-Tsb" firstAttribute="leading" secondItem="icS-9f-Kb8" secondAttribute="leading" id="s8a-ev-apS"/>
+                            <constraint firstItem="icS-9f-Kb8" firstAttribute="bottom" secondItem="WpH-D7-Tsb" secondAttribute="bottom" id="wR0-9B-rD1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="commentTextview" destination="WpH-D7-Tsb" id="uIB-Qv-zQa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uak-JR-erf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-101" y="110"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
