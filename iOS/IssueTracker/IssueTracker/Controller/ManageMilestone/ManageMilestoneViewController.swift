@@ -16,7 +16,8 @@ final class ManageMilestoneViewController: UIViewController, UICollectionViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpMilestoneData()
-        configureLayout()
+        
+      Layout()
         collectionView.dataSource = self
         collectionView.delegate = self
     }
