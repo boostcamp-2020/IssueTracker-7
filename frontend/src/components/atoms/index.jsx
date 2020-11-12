@@ -7,7 +7,6 @@ import FlexItem from '@atoms/FlexItem';
 import Image from '@atoms/Image';
 import Input from '@atoms/Input';
 import Label from '@atoms/Label';
-import Photo from '@atoms/Photo';
 import Text from '@atoms/Text';
 import TextButton from '@atoms/TextButton';
 
@@ -21,7 +20,6 @@ export default {
   Image,
   Input,
   Label,
-  Photo,
   Text,
   TextButton,
 };
