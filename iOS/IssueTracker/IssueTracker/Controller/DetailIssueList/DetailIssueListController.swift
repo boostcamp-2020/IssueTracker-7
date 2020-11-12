@@ -28,7 +28,7 @@ final class DetailIssueListController: UIViewController {
     private let issueInfo: IssueInfo!
     private var commentsInfoList: [Comment]!
     
-    private let cardView: CardView = CardView()
+    private let cardView = CardViewController(nibName: "CardViewController", bundle: nil)
     private let baseView = UIView()
     private let bounce: CGFloat = 10
     private let maximumAlpha: CGFloat = 0.7
@@ -39,7 +39,7 @@ final class DetailIssueListController: UIViewController {
         dimmerView.frame = self.view.bounds
         return dimmerView
     }()
-    
+
     private lazy var cardMinimumY: CGFloat = view.bounds.height * 0.1
     private lazy var cardMaximumY: CGFloat = view.bounds.height * 0.85
     
@@ -54,7 +54,6 @@ final class DetailIssueListController: UIViewController {
         self.issueInfo = issueInfo
         self.commentsInfoList = issueInfo.comments
         super.init(coder: coder)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -68,10 +67,14 @@ final class DetailIssueListController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(edit))
         
+        configureCollectionView()
         configureDataSource()
         setUpDimmerView()
-        configureCollectionView()
+    }
+    
+    @objc private func edit() {
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,16 +89,20 @@ final class DetailIssueListController: UIViewController {
         dimmerView.removeFromSuperview()
         baseView.removeFromSuperview()
     }
-    
-    
-    // MARK: - Method
-    
-    func setUpDimmerView() {
+}
+
+
+// MARK: - Extension
+
+// MARK: 카드뷰(풀업뷰)
+extension DetailIssueListController {
+        
+    private func setUpDimmerView() {
         dimmerView.isUserInteractionEnabled = false
         dimmerView.alpha = 0
     }
     
-    func addGesture() {
+    private func addGesture() {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(baseViewPanned))
         baseView.addGestureRecognizer(panGestureRecognizer)
         
@@ -103,7 +110,7 @@ final class DetailIssueListController: UIViewController {
         dimmerView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func setupCardView() {
+    private func setupCardView() {
         
         tabBarController?.view.addSubview(dimmerView)
         tabBarController?.view.addSubview(baseView)
@@ -122,25 +129,25 @@ final class DetailIssueListController: UIViewController {
         
         
         // baseView 및 cardView 의 테두리, 그림자 설정
-        baseView.addSubview(cardView)
-        cardView.frame = baseView.bounds
+        baseView.addSubview(cardView.view)
+        cardView.view.frame = baseView.bounds
         
         baseView.setUpShadow(radius: 4, opacity: 0.35)
         baseView.backgroundColor = .clear
         
-        cardView.layer.masksToBounds = true
-        cardView.layer.cornerRadius = 15.0
-        cardView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        cardView.view.layer.masksToBounds = true
+        cardView.view.layer.cornerRadius = 15.0
+        cardView.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         // Pan 제스쳐 설정
         addGesture()
     }
     
-    @objc func dimmerViewTapped() {
+    @objc private func dimmerViewTapped() {
         animateCardView(to: .collapsed, withDuration: 0.1) // 최소화
     }
         
-    @objc func baseViewPanned (recognizer:UIPanGestureRecognizer) {
+    @objc private func baseViewPanned (recognizer:UIPanGestureRecognizer) {
 
         dimmerView.alpha = (1 - (baseView.frame.origin.y - cardMinimumY) / (cardMaximumY - cardMinimumY)) * maximumAlpha
         
@@ -178,7 +185,7 @@ final class DetailIssueListController: UIViewController {
         }
     }
     
-    func animateCardView (to state: CardState, withDuration duration: TimeInterval, bounce: CGFloat = 0) {
+    private func animateCardView (to state: CardState, withDuration duration: TimeInterval, bounce: CGFloat = 0) {
         
         let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
             switch state {
@@ -217,13 +224,14 @@ final class DetailIssueListController: UIViewController {
     }
 }
 
-// MARK: collectionView
 
-extension DetailIssueListController: UICollectionViewDelegate {
+// MARK: 컬렉션뷰
+
+extension DetailIssueListController {
     
     private func createLayout() -> UICollectionViewLayout {
 
-        let heightDimension = NSCollectionLayoutDimension.estimated(50)
+        let heightDimension = NSCollectionLayoutDimension.estimated(500)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -234,7 +242,7 @@ extension DetailIssueListController: UICollectionViewDelegate {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 15
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: cardMinimumY, trailing: 0)
         
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -280,18 +288,22 @@ extension DetailIssueListController: UICollectionViewDelegate {
             guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailIssueHeader.reuseIdentifier, for: indexPath) as? DetailIssueHeader,
                   let issueInfo = self.issueInfo else { return nil }
             
-            DetailIssueHeader.configureCell(cell: supplementaryView, issueInfo: issueInfo)
-            
+            self.api.requestPhoto(path: self.commentsInfoList.first?.mentions?.photoURL ?? "") { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                        DetailIssueHeader.configureCell(cell: supplementaryView, issueInfo: issueInfo, imageData: data)
+                    case .failure:
+                        DetailIssueHeader.configureCell(cell: supplementaryView, issueInfo: issueInfo, imageData: nil)
+                    }
+                }
+            }
             return supplementaryView
         }
         
-        
-        
-        
-        // initial data
         var snapshot = NSDiffableDataSourceSnapshot<Section, Comment>()
         snapshot.appendSections([.main])
         snapshot.appendItems(commentsInfoList)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
