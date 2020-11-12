@@ -67,10 +67,14 @@ final class DetailIssueListController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(edit))
         
         configureCollectionView()
         configureDataSource()
         setUpDimmerView()
+    }
+    
+    @objc private func edit() {
     }
     
     override func viewDidAppear(_ animated: Bool) {
