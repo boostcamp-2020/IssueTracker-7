@@ -19,6 +19,7 @@ final class RegisterIssueViewController: UIViewController, UINavigationControlle
     var imageView: UIImageView!
     var markdownView: MarkdownView!
     var imagePicker = UIImagePickerController()
+    var handler: (()->())?
     
     private let api = BackEndAPIManager(router: Router())
     
@@ -27,6 +28,14 @@ final class RegisterIssueViewController: UIViewController, UINavigationControlle
         
         configureTextArea()
         addCustomMenu()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let handler = handler {
+            handler()
+        }
     }
     
     @IBAction func pressedDone(_ sender: UIButton) {
