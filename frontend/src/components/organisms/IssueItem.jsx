@@ -8,7 +8,7 @@ const IssueItemContainer = styled.li`
   border: 1px solid #d6d8db;
   padding: 10px 0;
   &:hover {
-    background-color: #eeeeee;
+    background-color: #EAECEF;
   }
   ${A.FlexBox} {
     margin: 0 4px;
