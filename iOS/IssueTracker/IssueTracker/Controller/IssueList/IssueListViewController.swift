@@ -160,7 +160,7 @@ extension IssueListViewController {
         let spacing: CGFloat = 10
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.minimumLineSpacing = spacing
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: 0, right: 0)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0, bottom: 30, right: 0)
         collectionView.collectionViewLayout = collectionViewFlowLayout
     }
 }

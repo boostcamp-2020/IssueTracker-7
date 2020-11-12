@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -391,7 +391,7 @@
         <scene sceneID="8si-Qc-XRH">
             <objects>
                 <navigationController storyboardIdentifier="ManageMilestoneInitialController" automaticallyAdjustsScrollViewInsets="NO" id="z6E-1z-clE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="마일스톤" image="3.circle.fill" catalog="system" id="dKn-e5-lua"/>
+                    <tabBarItem key="tabBarItem" title="마일스톤" image="calendar" catalog="system" id="dKn-e5-lua"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="1mT-sv-gtf">
@@ -409,7 +409,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">

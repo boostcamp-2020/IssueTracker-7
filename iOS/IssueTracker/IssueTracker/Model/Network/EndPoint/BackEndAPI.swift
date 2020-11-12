@@ -27,6 +27,9 @@ enum BackEndAPI {
     case predefinedFilter(query: String)
     case closeIssue(issueNumber: String, title: String, status: String)
     
+    case addAssignee(issueNumber: String, userID: Int),
+         deleteAssignee(issueNumber: String, userID: Int)
+    
     case photo(path: String)
     
     case addComment(issueId: Int, content: String)
@@ -59,9 +62,14 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/milestone/\(milestoneId)"
         case .photo(let path):
             return "\(path)"
+        case .addAssignee(let issueNumber, _):
+            return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueNumber)/assignee"
+        case .deleteAssignee(let issueNumber, let userID):
+            return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueNumber)/assignee/\(userID)"
         case .addComment(let issueId, _):
             return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueId)/comment"
         }
+        
     }
     
     var baseURL: URLComponents {
@@ -96,6 +104,10 @@ extension BackEndAPI: EndPointable {
             return .put
         case .photo:
             return .get
+        case .addAssignee:
+            return .post
+        case .deleteAssignee:
+            return .delete
         default:
             return nil
         }
@@ -123,6 +135,8 @@ extension BackEndAPI: EndPointable {
                                   "due_date": milestoneDueDate,
                                   "description": milestoneDescription]
             return bodyDictionary
+        case .addAssignee(_, let userID):
+            return ["user_id": "\(userID)"]
         case .addComment(_, let content):
             return ["content": content]
         default:
@@ -131,12 +145,3 @@ extension BackEndAPI: EndPointable {
     }
 }
 
-
-//var bodies: HTTPBody? {
-//    switch self {
-//    case .accessToken(let code):
-//        return ["client_id": GithubAPICredentials.clientId, "client_secret": GithubAPICredentials.clientSecret, "code": code]
-//    default:
-//        return nil
-//    }
-//}

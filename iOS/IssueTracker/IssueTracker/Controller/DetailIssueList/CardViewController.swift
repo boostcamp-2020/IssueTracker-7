@@ -14,12 +14,23 @@ protocol CardViewControllerDelegate {
 }
 
 class CardViewController: UIViewController {
-
-    @IBOutlet weak var handle: UIView!
-    @IBOutlet weak var commentAddBtn: UIButton!
-    @IBOutlet weak var commentUpDownStackView: UIStackView!
-    @IBOutlet weak var baseView: UIView!
-    @IBOutlet weak var closeButton: UIButton!
+    
+    // MARK: - Property
+    
+    private let api = BackEndAPIManager(router: Router())
+    
+    @IBOutlet private weak var handle: UIView!
+    @IBOutlet private weak var commentAddBtn: UIButton!
+    @IBOutlet private weak var commentUpDownStackView: UIStackView!
+    @IBOutlet private weak var baseView: UIView!
+    @IBOutlet private weak var closeButton: UIButton!
+    
+    @IBOutlet weak var assigneeStackView: AssigneesProfileStackView!
+    
+    var issueInfo: IssueInfo?
+    
+    
+    // MARK: - Life Cycle
     
     private let api = BackEndAPIManager(router: Router())
     
@@ -32,6 +43,10 @@ class CardViewController: UIViewController {
         
         setUpViews()
         
+        if let assignees = issueInfo?.assignees {
+            reloadAssigneeProfiles(assignees: assignees)
+        }
+
     }
     
     func setUpViews() {
@@ -39,7 +54,7 @@ class CardViewController: UIViewController {
         
         commentAddBtn.setUpShadow()
         commentAddBtn.layer.cornerRadius = 5
-
+        
         baseView.backgroundColor = UIColor.clear
         baseView.setUpShadow()
         
@@ -51,6 +66,9 @@ class CardViewController: UIViewController {
         closeButton.setTitle(issueInfo.status == "closed" ? "이슈 열기" : "이슈 닫기", for: .normal)
         
     }
+}
+
+
 
     @IBAction func pressedAddCommentButton(_ sender: UIButton) {
         
@@ -83,4 +101,91 @@ class CardViewController: UIViewController {
     }
 }
 
+// MARK: 담당자(Assignee)
+extension CardViewController {
+    private func reloadAssigneeProfiles(assignees: [Assignee]) {
+        
+        let group = DispatchGroup()
+        
+        var assignees = assignees
+        assignees.enumerated().forEach { (index, assignee) in
+            if let url = assignee.photoURL {
+                group.enter()
+                api.requestPhoto(path: url) { result in
+                    switch result {
+                    case .success(let imageData):
+                        assignees[index].data = imageData
+                    case .failure(let error):
+                        print(error)
+                    }
+                    group.leave()
+                }
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.assigneeStackView.configure(by: assignees)
+        }
+    }
+    
+    
+    @IBAction private func editAssignees(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "DetailIssueList", bundle: nil)
+        
+        guard let navigationController = storyboard.instantiateViewController(
+                identifier: "AssigneeNavigationController") as? UINavigationController,
+              let viewController = navigationController.topViewController as? AssigneeSelectController
+        else { return }
+        
+        viewController.delegate = self
+        if let assignees = issueInfo?.assignees {
+            viewController.selectedAssignees = assignees
+        }
+        navigationController.modalPresentationStyle = .pageSheet
+        present(navigationController, animated: true)
+    }
+}
+
+extension CardViewController: SendAssigneeDelegate {
+    
+    private func updateBackEnd(of issueNumber: Int, by originAssignees: Set<Assignee>, and newAssignees: Set<Assignee>) {
+        
+        // 원본 - 새 담당자 = 빼야 할 담당자들
+        let deletedAssignees = originAssignees.subtracting(newAssignees)
+        deletedAssignees.forEach { assignee in
+            api.requestDeleteAssignee(issueNumber: "\(issueNumber)", userID: assignee.id) { result in
+                switch result {
+                case .success(let assignee):
+                    print(assignee)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+        let addedAssignees = Set(newAssignees).subtracting(Set(originAssignees))
+        addedAssignees.forEach { assignee in
+            api.requestAddAssignee(issueNumber: "\(issueNumber)", userID: assignee.id) { result in
+                switch result {
+                case .success(let assignee):
+                    print(assignee)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func send(newAssignees: [Assignee]) {
+        
+        guard let originAssignees = issueInfo?.assignees, let issueNumber = issueInfo?.id else { return }
+        
+        updateBackEnd(of: issueNumber, by: Set(originAssignees), and: Set(newAssignees))
+        
+        self.assigneeStackView.initializeView()
+        self.reloadAssigneeProfiles(assignees: newAssignees)
+        self.issueInfo?.assignees = newAssignees
+    }
+}
 

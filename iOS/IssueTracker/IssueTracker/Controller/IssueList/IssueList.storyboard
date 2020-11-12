@@ -13,7 +13,7 @@
         <scene sceneID="tek-Jt-Ti6">
             <objects>
                 <navigationController storyboardIdentifier="IssueListInitialController" id="ABG-JX-FJB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ogt-OC-NeK"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="list.bullet.rectangle" catalog="system" id="ogt-OC-NeK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Y0g-6n-Nhi">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="2674" y="114"/>
         </scene>
-        <!--이슈-->
+        <!--이슈 📑-->
         <scene sceneID="gdl-FY-vGc">
             <objects>
                 <viewController id="Fiu-tR-AEc" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -97,7 +97,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="Kyi-Eh-ypv"/>
-                    <navigationItem key="navigationItem" title="이슈" id="RzU-8r-oEh">
+                    <navigationItem key="navigationItem" title="이슈 📑" id="RzU-8r-oEh">
                         <barButtonItem key="leftBarButtonItem" title="필터" id="bkx-PW-boa">
                             <connections>
                                 <segue destination="0jM-ha-VGr" kind="presentation" identifier="IssueListToFilter" id="YAw-Ar-zCf"/>
@@ -132,6 +132,7 @@
     </scenes>
     <resources>
         <image name="1.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

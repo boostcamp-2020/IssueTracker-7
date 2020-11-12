@@ -17,7 +17,7 @@ struct Comment: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id, content
-        case createdAt
+        case createdAt = "created_at"
         case updatedAt = "updated_at"
         case deletedAt
         case userID = "user_id"
