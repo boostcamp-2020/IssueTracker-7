@@ -15,7 +15,7 @@ const Button = styled.button`
     cursor: pointer;  
 `;
 
-const FilterButton = ({ name, right, children }) => {
+const DropdownButton = ({ name, right, children }) => {
     const [visible, setVisible] = useState(false);
     
     const openFilter = () => {
@@ -34,4 +34,4 @@ const FilterButton = ({ name, right, children }) => {
     );
 };
 
-export default FilterButton;
+export default DropdownButton;

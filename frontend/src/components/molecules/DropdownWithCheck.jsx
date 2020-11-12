@@ -14,7 +14,7 @@ const List = styled.div`
     }
 `;
 
-const FilterListWithCheck = ({ children }) => {
+const DropdownWithCheck = ({ children }) => {
     const [check, setCheck] = useState(false)
     
     return (
@@ -28,4 +28,4 @@ const FilterListWithCheck = ({ children }) => {
 };
 
 
-export default FilterListWithCheck;
+export default DropdownWithCheck;

@@ -117,7 +117,7 @@ const MilestoneName = styled.span`
     margin-top: 5px;
 `;
 
-const FilterList = ({name}) => {
+const Dropdown = ({name}) => {
 
     if (name === 'Author' || name === 'Assignee') {
         const userList = userInfo.sort((a, b) => {
@@ -174,4 +174,4 @@ const FilterList = ({name}) => {
 }
 
 
-export default FilterList;
+export default Dropdown;

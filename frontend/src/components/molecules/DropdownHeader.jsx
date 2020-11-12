@@ -7,7 +7,7 @@ const Header = styled.div`
     margin: 0;
 `;
 
-const FilterHeader = ({ onClick, children }) => {
+const DropdownHeader = ({ onClick, children }) => {
     return (
         <Header>
             <A.DropdownTitle>{children}</A.DropdownTitle>
@@ -16,4 +16,4 @@ const FilterHeader = ({ onClick, children }) => {
     );
 };
 
-export default FilterHeader;
+export default DropdownHeader;

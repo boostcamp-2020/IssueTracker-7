@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     z-index: 100;
 `;
 
-const FilterListWrapper = ({ name, onClick, right, children }) => {
+const DropdownWrapper = ({ name, onClick, right, children }) => {
     return (
         <>
             <A.DropdownOverlay onClick={onClick} />
@@ -27,4 +27,4 @@ const FilterListWrapper = ({ name, onClick, right, children }) => {
     );
 };
 
-export default FilterListWrapper;
+export default DropdownWrapper;
