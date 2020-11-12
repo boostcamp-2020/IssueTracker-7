@@ -6,7 +6,7 @@ import M from '@molecules/';
 const Wrapper = styled.div`
     position: absolute;
     height: fit-content;
-    top: 250ㅔㅌ;
+    top: 250px;
     right: ${(props) => props.right};
     width: 300px;
     border: 1px solid #cccccc;
@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const DropdownWrapper = ({ name, onClick, right, children }) => {
+    
     return (
         <>
             <A.DropdownOverlay onClick={onClick} />
