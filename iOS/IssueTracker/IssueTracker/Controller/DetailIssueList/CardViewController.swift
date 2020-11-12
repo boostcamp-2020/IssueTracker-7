@@ -13,11 +13,11 @@ class CardViewController: UIViewController {
     
     private let api = BackEndAPIManager(router: Router())
     
-    @IBOutlet weak var handle: UIView!
-    @IBOutlet weak var commentAddBtn: UIButton!
-    @IBOutlet weak var commentUpDownStackView: UIStackView!
-    @IBOutlet weak var baseView: UIView!
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet private weak var handle: UIView!
+    @IBOutlet private weak var commentAddBtn: UIButton!
+    @IBOutlet private weak var commentUpDownStackView: UIStackView!
+    @IBOutlet private weak var baseView: UIView!
+    @IBOutlet private weak var closeButton: UIButton!
     
     @IBOutlet weak var assigneeStackView: AssigneesProfileStackView!
     
@@ -58,7 +58,7 @@ class CardViewController: UIViewController {
 
 // MARK: 담당자(Assignee)
 extension CardViewController {
-    func reloadAssigneeProfiles(assignees: [Assignee]) {
+    private func reloadAssigneeProfiles(assignees: [Assignee]) {
         
         let group = DispatchGroup()
         
@@ -84,7 +84,7 @@ extension CardViewController {
     }
     
     
-    @IBAction func editAssignees(_ sender: Any) {
+    @IBAction private func editAssignees(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "DetailIssueList", bundle: nil)
         
@@ -104,7 +104,7 @@ extension CardViewController {
 
 extension CardViewController: SendAssigneeDelegate {
     
-    func updateBackEnd(of issueNumber: Int, by originAssignees: Set<Assignee>, and newAssignees: Set<Assignee>) {
+    private func updateBackEnd(of issueNumber: Int, by originAssignees: Set<Assignee>, and newAssignees: Set<Assignee>) {
         
         // 원본 - 새 담당자 = 빼야 할 담당자들
         let deletedAssignees = originAssignees.subtracting(newAssignees)

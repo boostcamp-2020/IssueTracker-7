@@ -15,14 +15,14 @@ class AssigneeSelectController: UIViewController {
 
     // MARK: - Property
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     private let route: BackEndAPI = BackEndAPI.allAssignees
     private let api = BackEndAPIManager(router: Router())
     
     private var unselectedAssignees: Set<Assignee> = []
     var selectedAssignees: [Assignee] = []
-    var sectionsInfo: [[Assignee]] = []
+    private var sectionsInfo: [[Assignee]] = []
     private let sectionsTitle = ["지정 담당자", "미지정"]
     
     weak var delegate: SendAssigneeDelegate?
@@ -33,14 +33,13 @@ class AssigneeSelectController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         configureInitialData()
     }
     
     
     // MARK: - Method
     
-    func configureInitialData() {
+    private func configureInitialData() {
         api.requestDetailCondition(route: route) { (result: Result<[Assignee], APIError>) in
             
             switch result {
@@ -62,16 +61,14 @@ class AssigneeSelectController: UIViewController {
         }
     }
     
-    @IBAction func cancelButtonTapped(_ sender: Any) {
+    @IBAction private func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true)
     }
     
-    @IBAction func doneButtonTapped(_ sender: Any) {
+    @IBAction private func doneButtonTapped(_ sender: Any) {
         delegate?.send(newAssignees: sectionsInfo[0])
-        
         dismiss(animated: true)
     }
-    
 }
 
 
@@ -132,6 +129,5 @@ class AssigneeCell: UITableViewCell {
     
     func configure(by assigneeInfo: Assignee) {
         userID.text = assigneeInfo.userID
-
     }
 }
