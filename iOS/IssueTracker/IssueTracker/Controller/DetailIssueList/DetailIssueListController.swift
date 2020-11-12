@@ -65,7 +65,7 @@ final class DetailIssueListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        cardView.issueInfo = issueInfo
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(edit))
         
@@ -139,8 +139,8 @@ extension DetailIssueListController {
         cardView.view.layer.cornerRadius = 15.0
         cardView.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        cardView.issueInfo = issueInfo
         cardView.commentViewControllerDelegate = self
+        cardView.delegate = self
         
         // Pan 제스쳐 설정
         addGesture()
@@ -188,7 +188,7 @@ extension DetailIssueListController {
         }
     }
     
-    private func animateCardView (to state: CardState, withDuration duration: TimeInterval, bounce: CGFloat = 0) {
+    func animateCardView (to state: CardState, withDuration duration: TimeInterval, bounce: CGFloat = 0) {
         
         let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
             switch state {
@@ -236,17 +236,27 @@ extension DetailIssueListController: CommentViewControllerDelegate {
         let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
         let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
         
-        reloadSnapshot(completionHandler: {
+        reloadSnapshot(animatingDifferences: true, completionHandler: {
             self.collectionView.scrollToItem(at: lastItemIndexPath, at: .centeredVertically, animated: false)
         })
     }
     
-    func reloadSnapshot(completionHandler: () -> Void) {
+    func reloadSnapshot(animatingDifferences: Bool, completionHandler: (() -> Void)? = nil) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Comment>()
         snapshot.appendSections([.main])
         snapshot.appendItems(commentsInfoList)
-        dataSource?.apply(snapshot, animatingDifferences: true)
-        completionHandler()
+        dataSource?.apply(snapshot, animatingDifferences: animatingDifferences)
+        completionHandler?()
+    }
+}
+
+extension DetailIssueListController: CardViewControllerDelegate {
+    
+    func changeIssueStatus(to status: Status) {
+        
+        issueInfo.status = issueInfo.status == "open" ? "closed" : "open"
+        cardView.issueInfo = issueInfo
+        reloadSnapshot(animatingDifferences: false)
     }
 }
 
