@@ -7,16 +7,22 @@
 
 import UIKit
 
+protocol CommentViewControllerDelegate: AnyObject {
+    
+    func appendComment(comment: Comment)
+}
+
 final class CommentViewController: UIViewController {
+    
+    private let api = BackEndAPIManager(router: Router())
+    weak var delegate: CommentViewControllerDelegate?
+    var issueId: Int? = nil
     
     @IBOutlet var commentTextview: UITextView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
     
-    private func commonInitializer() {
         configureTextview()
     }
     
@@ -24,7 +30,33 @@ final class CommentViewController: UIViewController {
         commentTextview.delegate = self
     }
     
+    @IBAction func pressedCancel(_ sender: UIButton) {
+        
+        dismiss(animated: true, completion: nil)
+    }
     
+    @IBAction func pressedSave(_ sender: UIButton) {
+        
+        guard let issueId = issueId else { return }
+        
+        api.addComment(issueId: issueId, content: commentTextview.text )  { result in
+            switch result {
+            case .success(let comment):
+                DispatchQueue.main.async {
+                    self.delegate?.appendComment(comment: comment)
+                    // TODO: comment를 상세화면으로 전달하여 추가해주기 delegate 이용?
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func addComment() {
+        
+        
+    }
 }
 
 extension CommentViewController: UITextViewDelegate {

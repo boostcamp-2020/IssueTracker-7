@@ -25,7 +25,7 @@ final class DetailIssueListController: UIViewController {
     
     private let api = BackEndAPIManager(router: Router())
     
-    private let issueInfo: IssueInfo!
+    private var issueInfo: IssueInfo!
     private var commentsInfoList: [Comment]!
     
     private let cardView = CardViewController(nibName: "CardViewController", bundle: nil)
@@ -139,6 +139,9 @@ extension DetailIssueListController {
         cardView.view.layer.cornerRadius = 15.0
         cardView.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
+        cardView.issueInfo = issueInfo
+        cardView.commentViewControllerDelegate = self
+        
         // Pan 제스쳐 설정
         addGesture()
     }
@@ -221,6 +224,25 @@ extension DetailIssueListController {
         
         cardLatestY = baseView.frame.origin.y
         frameAnimator.startAnimation()
+    }
+}
+
+extension DetailIssueListController: CommentViewControllerDelegate {
+    
+    func appendComment(comment: Comment) {
+        
+        issueInfo.comments?.append(comment)
+        
+        let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
+        let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
+        
+        print("DetailIssueController, appendingComment:", comment)
+        self.collectionView.performBatchUpdates {
+            collectionView.insertItems(at: [lastItemIndexPath])
+        } completion: { _ in
+            self.collectionView.scrollToItem(at: lastItemIndexPath, at: .bottom, animated: true)
+        }
+
     }
 }
 

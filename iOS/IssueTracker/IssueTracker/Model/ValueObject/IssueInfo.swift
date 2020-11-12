@@ -20,7 +20,7 @@ struct IssueInfo: Codable {
     let labels: [LabelInfo]?
     let assignees: [Assignee]?
     let author: Author?
-    let comments: [Comment]?
+    var comments: [Comment]?
     let milestone: MilestoneInfo?
 
     enum CodingKeys: String, CodingKey {
