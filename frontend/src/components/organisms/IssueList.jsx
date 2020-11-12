@@ -13,6 +13,11 @@ const IssueListContainer = styled.ul`
 const IssueList = () => {
   const { issues, issueDispatch } = useContext(IssueContext);
   const issueList = issues.map((issue) => <O.IssueItem key={issue.id} {...issue} />);
-  return <IssueListContainer>{issueList}</IssueListContainer>;
+  return (
+    <>
+      <O.Filter />
+      <IssueListContainer>{issueList}</IssueListContainer>
+    </>
+  );
 };
 export default IssueList;

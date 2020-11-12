@@ -5,6 +5,7 @@ import O from '@organisms/';
 
 const IssuePage = styled.div`
   width: 100%;
+  background-color: #ffffff;
 `;
 
 const IssuePageTemplate = () => {
@@ -12,7 +13,6 @@ const IssuePageTemplate = () => {
     <IssuePage>
       <A.Wrapper>
         <O.Header />
-        <O.Filter />
         <O.IssueList />
       </A.Wrapper>
     </IssuePage>
