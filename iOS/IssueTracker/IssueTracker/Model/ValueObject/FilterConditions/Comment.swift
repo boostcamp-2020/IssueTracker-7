@@ -12,7 +12,7 @@ struct Comment: Codable {
     let content, updatedAt: String
     let deletedAt, createdAt: String?
     let userID: Int?
-    let issueID: Int
+    let issueID: Int?
     let mentions: Assignee?
 
     enum CodingKeys: String, CodingKey {

@@ -39,7 +39,7 @@ final class DetailIssueListController: UIViewController {
         dimmerView.frame = self.view.bounds
         return dimmerView
     }()
-
+    
     private lazy var cardMinimumY: CGFloat = view.bounds.height * 0.1
     private lazy var cardMaximumY: CGFloat = view.bounds.height * 0.85
     
@@ -96,7 +96,7 @@ final class DetailIssueListController: UIViewController {
 
 // MARK: 카드뷰(풀업뷰)
 extension DetailIssueListController {
-        
+    
     private func setUpDimmerView() {
         dimmerView.isUserInteractionEnabled = false
         dimmerView.alpha = 0
@@ -149,9 +149,9 @@ extension DetailIssueListController {
     @objc private func dimmerViewTapped() {
         animateCardView(to: .collapsed, withDuration: 0.1) // 최소화
     }
-        
+    
     @objc private func baseViewPanned (recognizer:UIPanGestureRecognizer) {
-
+        
         dimmerView.alpha = (1 - (baseView.frame.origin.y - cardMinimumY) / (cardMaximumY - cardMinimumY)) * maximumAlpha
         
         switch recognizer.state {
@@ -174,7 +174,7 @@ extension DetailIssueListController {
                 animateCardView(to: .expanded, withDuration: 0.2, bounce: bounce)
                 return
             }
-    
+            
             // CardView Y 좌표 기준 자동 확대 / 축소
             let cardMidY = cardMinimumY + (cardMaximumY - cardMinimumY) / 2
             
@@ -202,7 +202,7 @@ extension DetailIssueListController {
                 self.baseView.frame.origin.y = self.cardMaximumY + bounce
                 self.dimmerView.isUserInteractionEnabled = false
                 self.dimmerView.alpha = 0
-        
+                
                 self.cardCurrentState = .collapsed
             }
         }
@@ -231,18 +231,22 @@ extension DetailIssueListController: CommentViewControllerDelegate {
     
     func appendComment(comment: Comment) {
         
-        issueInfo.comments?.append(comment)
+        commentsInfoList.append(comment)
         
         let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
         let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
         
-        print("DetailIssueController, appendingComment:", comment)
-        self.collectionView.performBatchUpdates {
-            collectionView.insertItems(at: [lastItemIndexPath])
-        } completion: { _ in
-            self.collectionView.scrollToItem(at: lastItemIndexPath, at: .bottom, animated: true)
-        }
-
+        reloadSnapshot(completionHandler: {
+            self.collectionView.scrollToItem(at: lastItemIndexPath, at: .centeredVertically, animated: false)
+        })
+    }
+    
+    func reloadSnapshot(completionHandler: () -> Void) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Comment>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(commentsInfoList)
+        dataSource?.apply(snapshot, animatingDifferences: true)
+        completion()
     }
 }
 
@@ -252,7 +256,7 @@ extension DetailIssueListController: CommentViewControllerDelegate {
 extension DetailIssueListController {
     
     private func createLayout() -> UICollectionViewLayout {
-
+        
         let heightDimension = NSCollectionLayoutDimension.estimated(500)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
@@ -301,7 +305,7 @@ extension DetailIssueListController {
                     }
                 }
             }
-
+            
             return cell
         }
         
