@@ -97,4 +97,12 @@ class BackEndAPIManager {
             completionHandler(result)
         }
     }
+    
+    func requestPhoto(path: String, completionHandler: @escaping ((Result<Data, APIError>) -> Void)) {
+        router.request(route: BackEndAPI.photo(path: path)) { (result: Result<Data, APIError>) in
+            
+            completionHandler(result)
+
+        }
+    }
 }

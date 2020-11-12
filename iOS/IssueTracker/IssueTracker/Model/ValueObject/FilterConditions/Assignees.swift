@@ -37,3 +37,9 @@ struct Assignee: Codable { // User 로 바꾸기
         case type, createdAt, updatedAt, deletedAt
     }
 }
+
+extension Assignee: Hashable {
+    static func == (lhs: Assignee, rhs: Assignee) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

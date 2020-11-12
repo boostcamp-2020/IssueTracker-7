@@ -26,6 +26,8 @@ enum BackEndAPI {
 
     case predefinedFilter(query: String)
     case closeIssue(issueNumber: String, title: String, status: String)
+    
+    case photo(path: String)
 }
 
 extension BackEndAPI: EndPointable {
@@ -53,6 +55,8 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/milestone"
         case .editExistingMilestone(let milestoneId, _, _, _):
             return "http://\(BackEndAPICredentials.ip)/api/milestone/\(milestoneId)"
+        case .photo(let path):
+            return "\(path)"
         }
     }
     
@@ -86,6 +90,8 @@ extension BackEndAPI: EndPointable {
             return .post
         case .editExistingMilestone:
             return .put
+        case .photo:
+            return .get
         default:
             return nil
         }
