@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { request } from '@utils/request';
-import IssuePageTemplate from '@templates/IssuePageTemplate';
-const isAuthenticated = async () => await request('GET', '/api/auth/token');
+import T from '@templates/';
+import { IssueContext } from '@stores/issue';
 
 const IssuePage = () => {
+  const { issues, issueDispatch } = useContext(IssueContext);
   useEffect(async () => {
-    const { status, data } = await isAuthenticated();
-    if (!data.accessToken) {
-      location.href = '/login';
-    }
+    const { status, data } = await request('GET', '/api/issue');
+    issueDispatch(data);
   }, []);
-  return <IssuePageTemplate />;
+  return <T.IssuePageTemplate issues={issues} />;
 };
 export default IssuePage;
