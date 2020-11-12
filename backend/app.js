@@ -8,10 +8,10 @@ const sequelize = require('./models').sequelize;
 const passport = require('passport');
 const passportConfig = require('./middlewares/passport');
 const apiRouter = require('./routes/api');
+const cors = require('cors');
 
 var app = express();
 sequelize.sync();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -24,10 +24,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 passportConfig(passport);
+app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
+  next();
+});
 
 app.use('/api', apiRouter);
-app.use('/', (req, res, next) => {
-  if (!req.params.route == 'api') res.sendFile(__dirname + '/public/index.html');
+app.use('/:route', (req, res, next) => {
+  if (!(req.params.route == 'api')) res.sendFile(__dirname + '/public/index.html');
   else res.status(404).json({ message: '유효하지 않은 요청 입니다.' });
 });
 

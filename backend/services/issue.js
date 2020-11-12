@@ -1,6 +1,6 @@
-const { Issue, Label, User, Comment, label_has_issue, Milestone } = require('../models');
+const { Issue, Label, User, Comment, label_has_issue, Milestone, sequelize } = require('../models');
 const Op = require('sequelize').Op;
-const optionParser = (queryString) => queryString.match(/(\w+)([@/-\w가-힇]+)|(".*?")+(?=\:?)/gi);
+const optionParser = (queryString) => queryString.match(/(\w+|@)([@/-\w가-힇]+)|(".*?")+(?=\:?)/gi);
 const optionStringToObject = (queryString) => {
   const queryArray = optionParser(queryString);
   const queryObject = { is: [], no: [] };
@@ -61,7 +61,7 @@ const getAuthorFilter = ({ author, no, user_id }) => {
     as: 'author',
     where: author
       ? {
-          user_id: assignee == '@me' ? user_id : author,
+          user_id: author == '@me' ? user_id : author,
         }
       : null,
     attributes: ['id', 'user_id', 'photo_url', 'type'],
@@ -172,7 +172,7 @@ exports.getOne = async ({ issue_id }) => {
       ],
     });
     if (issue) return { status: 200, data: issue };
-    else return { status: 401, data: { message: '유효하지 않은 Label 입니다.' } };
+    else return { status: 401, data: { message: '유효하지 않은 Issue 입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 요청 입니다.' } };
   }
@@ -194,16 +194,37 @@ exports.update = async ({ issue_id }, { title, status }) => {
   }
 };
 
-exports.create = async ({ title, milestone_id, author_id }) => {
+
+exports.create = async ({
+  title,
+  milestone_id,
+  label_id_list,
+  assignee_id_list,
+  author_id,
+  content,
+}) => {
+  const t = await sequelize.transaction();
   try {
+    const label_ids = label_id_list ? JSON.parse(label_id_list) : [];
+    const assignee_ids = assignee_id_list ? JSON.parse(assignee_id_list) : [];
     const result = await Issue.findOrCreate({
       where: { title },
       defaults: { milestone_id: milestone_id, user_id: author_id },
+      transaction: t,
     });
     if (result[1]) {
-      return { status: 200, data: result[0] };
+      const newIssue = result[0];
+      await newIssue.addLabels(label_ids, { transaction: t });
+      await newIssue.addAssignee(assignee_ids, { transaction: t });
+      await Comment.create(
+        { user_id: author_id, content, issue_id: newIssue.id },
+        { transaction: t }
+      );
+      await t.commit();
+      return await this.getOne({ issue_id: newIssue.id });
     } else return { status: 401, data: { message: '제목이 중복되는 이슈가 있습니다.' } };
   } catch (err) {
+    await t.rollback();
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
@@ -435,8 +456,6 @@ exports.updateComment = async ({ issue_id, comment_id, content, user }) => {
       ],
     });
     if (comment) {
-      comment.content = content;
-      const result = await comment.save();
       return { status: 200, data: result };
     } else return { status: 401, data: { message: '유효하지 않은 Comment 입니다.' } };
   } catch (err) {
