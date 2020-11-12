@@ -3,6 +3,7 @@ import Header from '@organisms/Header';
 import IssueItem from '@organisms/IssueItem';
 import IssueList from '@organisms/IssueList';
 import LoginForm from '@organisms/LoginForm';
+import SearchBar from '@organisms/SearchBar';
 
 export default {
   Filter,
@@ -10,4 +11,5 @@ export default {
   IssueItem,
   IssueList,
   LoginForm,
+  SearchBar
 };
