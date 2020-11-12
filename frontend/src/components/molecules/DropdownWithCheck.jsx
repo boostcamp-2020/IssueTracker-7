@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Check from '../../atoms/filter/Check';
-import Uncheck from '../../atoms/filter/Uncheck';
+import A from '@atoms/';
 
 const List = styled.div`
     display: flex;
@@ -21,8 +20,8 @@ const FilterListWithCheck = ({ children }) => {
     return (
         <>
             { check ?
-                <List onClick={() => { setCheck(false) }} backgroundColor='#EAECEF'><Check />{children}</List>
-                : <List onClick={() => { setCheck(true) }}><Uncheck />{children}</List>
+                <List onClick={() => { setCheck(false) }} backgroundColor='#EAECEF'><A.Check />{children}</List>
+                : <List onClick={() => { setCheck(true) }}><A.Uncheck />{children}</List>
             }
         </>
     );
