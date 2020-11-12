@@ -27,6 +27,7 @@ final class DetailIssueListController: UIViewController {
     
     private var issueInfo: IssueInfo!
     private var commentsInfoList: [Comment]!
+    private let handler: (()->())!
     
     private let cardView = CardViewController(nibName: "CardViewController", bundle: nil)
     private let baseView = UIView()
@@ -50,9 +51,12 @@ final class DetailIssueListController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Comment>!
     
     
-    init?(coder: NSCoder, issueInfo: IssueInfo) {
+    // MARK: - Initializer
+    
+    init?(coder: NSCoder, issueInfo: IssueInfo, handler: @escaping (()->())) {
         self.issueInfo = issueInfo
         self.commentsInfoList = issueInfo.comments
+        self.handler = handler
         super.init(coder: coder)
     }
     
@@ -86,6 +90,8 @@ final class DetailIssueListController: UIViewController {
         
         dimmerView.removeFromSuperview()
         baseView.removeFromSuperview()
+        
+        handler()
     }
 }
 

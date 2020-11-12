@@ -55,7 +55,20 @@ final class IssueListViewController: UIViewController {
         }
     }
     
-    
+    lazy var handler: ()->() = { [weak self] in
+        guard let self = self else { return }
+        self.api.requestAllIssues() { result in
+            switch result {
+            case .success(let issueInfoList):
+                self.issueInfoList = issueInfoList
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     // MARK: - Life Cycle
     
@@ -113,6 +126,13 @@ final class IssueListViewController: UIViewController {
             viewController.detailConditionHandler = { filterInfo in
                 self.requestFiltering(with: filterInfo)
             }
+        } else if segue.identifier == "IssueListToRegisterIssue" {
+            
+            guard let navigationController = segue.destination as? UINavigationController,
+                  let viewController = navigationController.topViewController as? RegisterIssueViewController
+            else { return }
+            
+            viewController.handler = handler
         }
     }
 }
@@ -244,11 +264,15 @@ extension IssueListViewController: IssueCellDelegate {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         let issueInfo = issueInfoList[indexPath.item]
                 
+        
+//        let handler = makeHandler(indexPath: indexPath)
+        
         let storyboard = UIStoryboard(name: StoryboardID.DetailIssueList, bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: StoryboardID.DetailIssueListController, creator: { coder in
-            return DetailIssueListController(coder: coder, issueInfo: issueInfo)
+            return DetailIssueListController(coder: coder, issueInfo: issueInfo, handler: self.handler)
         })
 
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
     

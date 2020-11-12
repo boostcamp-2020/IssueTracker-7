@@ -21,19 +21,10 @@ class CardViewController: UIViewController {
     
     @IBOutlet private weak var handle: UIView!
     @IBOutlet private weak var commentAddBtn: UIButton!
-    @IBOutlet private weak var commentUpDownStackView: UIStackView!
-    @IBOutlet private weak var baseView: UIView!
     @IBOutlet private weak var closeButton: UIButton!
     
     @IBOutlet weak var assigneeStackView: AssigneesProfileStackView!
-    
-    var issueInfo: IssueInfo?
-    
-    
-    // MARK: - Life Cycle
-    
-    private let api = BackEndAPIManager(router: Router())
-    
+        
     var delegate: CardViewControllerDelegate?
     var commentViewControllerDelegate: CommentViewControllerDelegate?
     var issueInfo: IssueInfo!
@@ -55,18 +46,12 @@ class CardViewController: UIViewController {
         commentAddBtn.setUpShadow()
         commentAddBtn.layer.cornerRadius = 5
         
-        baseView.backgroundColor = UIColor.clear
-        baseView.setUpShadow()
-        
-        commentUpDownStackView.layer.masksToBounds = true
-        commentUpDownStackView.layer.cornerRadius = 5
-        
         closeButton.setUpShadow()
         closeButton.layer.cornerRadius = 5
         closeButton.setTitle(issueInfo.status == "closed" ? "이슈 열기" : "이슈 닫기", for: .normal)
         
     }
-}
+
 
 
 

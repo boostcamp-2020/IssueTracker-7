@@ -15,7 +15,7 @@
                 <navigationController storyboardIdentifier="IssueListInitialController" id="ABG-JX-FJB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="list.bullet.rectangle" catalog="system" id="ogt-OC-NeK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Y0g-6n-Nhi">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -61,10 +61,14 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQ1-L5-yoe">
-                                <rect key="frame" x="351" y="794" width="20" height="22"/>
-                                <state key="normal" image="plus.circle.fill" catalog="system"/>
+                                <rect key="frame" x="321" y="766" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mQ1-L5-yoe" secondAttribute="height" multiplier="1:1" id="bSy-5I-7p9"/>
+                                    <constraint firstAttribute="width" constant="50" id="w80-zE-L2f"/>
+                                </constraints>
+                                <state key="normal" image="add (1)"/>
                                 <connections>
-                                    <segue destination="Ozp-3E-fwx" kind="presentation" id="cgu-Vp-CwH"/>
+                                    <segue destination="Ozp-3E-fwx" kind="presentation" identifier="IssueListToRegisterIssue" id="cgu-Vp-CwH"/>
                                 </connections>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ufX-Xl-zmk">
@@ -132,8 +136,8 @@
     </scenes>
     <resources>
         <image name="1.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="add (1)" width="64" height="64"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
-        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
