@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Photo from '../../atoms/filter/Photo';
-import Hr from '../../atoms/filter/Hr';
-import FilterListWithCheck from './FilterListWithCheck';
+import A from '@atoms/';
+import M from '@molecules/';
 
 const userInfo = [
     {
@@ -126,11 +125,11 @@ const FilterList = ({name}) => {
         }).map(user => {
             return (
                 <Wrapper key={user.user_id}>
-                    <Hr />
-                    <FilterListWithCheck>
-                        <Photo src={user.photo_url}></Photo>
+                    <A.Hr />
+                    <M.DropdownWithCheck>
+                        <A.Photo src={user.photo_url}></A.Photo>
                         <UserId>{user.user_id}</UserId>
-                    </FilterListWithCheck>
+                    </M.DropdownWithCheck>
                 </Wrapper>
             );
         });
@@ -142,8 +141,8 @@ const FilterList = ({name}) => {
         }).map(label => {
             return (
                 <Wrapper key={label.id}>
-                    <Hr />
-                    <FilterListWithCheck key={label.id}>
+                    <A.Hr />
+                    <M.DropdownWithCheck key={label.id}>
                         <LabelInfo>
                             <Info>
                                 <Color backgroundColor={label.color}></Color>
@@ -151,7 +150,7 @@ const FilterList = ({name}) => {
                             </Info>
                             <Description>{label.description}</Description>
                         </LabelInfo>
-                    </FilterListWithCheck>
+                    </M.DropdownWithCheck>
                 </Wrapper>
             );
         });
@@ -163,10 +162,10 @@ const FilterList = ({name}) => {
         }).map(milestone => {
             return (
                 <Wrapper key={milestone.id}>
-                    <Hr />
-                    <FilterListWithCheck>
+                    <A.Hr />
+                    <M.DropdownWithCheck>
                         <MilestoneName>{milestone.title}</MilestoneName>
-                    </FilterListWithCheck>
+                    </M.DropdownWithCheck>
                 </Wrapper>
             );
         });
