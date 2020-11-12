@@ -28,6 +28,8 @@ enum BackEndAPI {
     case closeIssue(issueNumber: String, title: String, status: String)
     
     case photo(path: String)
+    
+    case addComment(issueId: Int, content: String)
 }
 
 extension BackEndAPI: EndPointable {
@@ -57,6 +59,8 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/milestone/\(milestoneId)"
         case .photo(let path):
             return "\(path)"
+        case .addComment(let issueId, _):
+            return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueId)/comment"
         }
     }
     
@@ -82,7 +86,7 @@ extension BackEndAPI: EndPointable {
             return .get
         case .closeIssue:
             return .put
-        case .addNewLabel, .addNewIssue:
+        case .addNewLabel, .addNewIssue, .addComment:
             return .post
         case .editExistingLabel:
             return .put
@@ -119,6 +123,8 @@ extension BackEndAPI: EndPointable {
                                   "due_date": milestoneDueDate,
                                   "description": milestoneDescription]
             return bodyDictionary
+        case .addComment(_, let content):
+            return ["content": content]
         default:
             return nil
         }
