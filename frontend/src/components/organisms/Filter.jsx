@@ -1,17 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import FilterButton from '../molecules/filter/FilterButton';
+import A from '@atoms/'
+import M from '@molecules/';
 
 const FilterBox = styled.div`
-    width: 94%;
     height: 60px;
-    border:1px solid #919191;
-    border-radius: 4px;
-    background-color: #f3f3f3;
-    margin-left: 3%;
+    margin: 50px auto 0 auto;
+    border: 1px solid #d6d8db;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #EAECEF;
     display:flex;
     flex-direction:${(props) => props.direction || "row"};
     justify-content: flex-end;
+
+    ${A.FlexBox}{
+        padding-top: 20px;
+        padding-left: 12px;
+    }
+    ${A.FlexItem} {
+        justify-content: flex-end;
+    }
 `;
 
 const filters = [
@@ -36,10 +45,17 @@ const filters = [
 
 const Filter = () => {
     const contents = filters.map(filter => {
-        return <FilterButton name={filter.name} key={filter.name} right={filter.right}>{filter.title}</FilterButton>
+        return <M.DropdownButton name={filter.name} key={filter.name} right={filter.right}>{filter.title}</M.DropdownButton>
     })
     return (
-        <FilterBox direction="row">{contents}</FilterBox>
+        <FilterBox direction="row">
+            <A.FlexBox>
+                <A.CheckBox type="checkbox" />
+            </A.FlexBox>
+            <A.FlexItem>
+                {contents}
+            </A.FlexItem>
+        </FilterBox>
     );
 };
 

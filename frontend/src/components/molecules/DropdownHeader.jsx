@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import CloseButton from '../../atoms/filter/CloseButton';
-import FilterTitle from '../../atoms/filter/FilterTitle';
+import A from '@atoms/';
 
 const Header = styled.div`
     display: flex;
@@ -11,8 +10,8 @@ const Header = styled.div`
 const FilterHeader = ({ onClick, children }) => {
     return (
         <Header>
-            <FilterTitle>{children}</FilterTitle>
-            <CloseButton onClick={onClick} />
+            <A.DropdownTitle>{children}</A.DropdownTitle>
+            <A.CloseButton onClick={onClick} />
         </Header>
     );
 };

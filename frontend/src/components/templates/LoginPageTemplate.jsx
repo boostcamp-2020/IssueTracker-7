@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginForm from '../organisms/LoginForm';
+import O from '@organisms/';
 import '@styles/LoginPage.css';
 
 const LoginPageTemplate = () => {
@@ -19,7 +19,7 @@ const LoginPageTemplate = () => {
   return (
     <LoginPage>
       <LoginTitle>이슈 트래커</LoginTitle>
-      <LoginForm></LoginForm>
+      <O.LoginForm></O.LoginForm>
     </LoginPage>
   );
 };

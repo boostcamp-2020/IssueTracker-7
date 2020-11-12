@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import IssueList from '@organisms/IssueList';
-import Header from '@organisms/Header';
 import styled from 'styled-components';
+import A from '@atoms/';
+import O from '@organisms/';
 
 const IssuePage = styled.div`
   width: auto;
+  background-color: #ffffff;
 `;
+
 const IssuePageTemplate = () => {
   return (
     <IssuePage>
-      <Header />
-      <IssueList />
+    <O.Header />
+      <A.Wrapper>
+        <O.IssueList />
+      </A.Wrapper>
     </IssuePage>
   );
 };
