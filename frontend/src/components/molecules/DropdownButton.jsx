@@ -5,6 +5,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import M from '@molecules/';
 
 const Button = styled.button`
+    position: relative;
     width: 100px;
     background-color: #EAECEF;
     border: none;

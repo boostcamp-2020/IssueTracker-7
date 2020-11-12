@@ -6,9 +6,9 @@ import M from '@molecules/';
 const Wrapper = styled.div`
     position: absolute;
     height: fit-content;
-    top: 250px;
     right: ${(props) => props.right};
     width: 300px;
+    margin-top: 60px;
     border: 1px solid #cccccc;
     border-radius: 5px;
     background-color: #ffffff;
