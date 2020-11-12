@@ -88,7 +88,10 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhC-YZ-s2P">
-                    <rect key="frame" x="208.5" y="13" width="27.5" height="23"/>
+                    <rect key="frame" x="208.5" y="13" width="35" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="35" id="lyQ-wE-4j7"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                     <color key="textColor" systemColor="systemGray2Color"/>
                     <nil key="highlightedColor"/>
@@ -105,6 +108,7 @@
                 <constraint firstItem="LrQ-07-6ET" firstAttribute="centerY" secondItem="JAU-gS-nWy" secondAttribute="centerY" id="O2X-j8-4xo"/>
                 <constraint firstItem="KhC-YZ-s2P" firstAttribute="centerY" secondItem="JAU-gS-nWy" secondAttribute="centerY" id="UtE-9N-jDp"/>
                 <constraint firstItem="JAU-gS-nWy" firstAttribute="leading" secondItem="LrQ-07-6ET" secondAttribute="trailing" constant="5" id="Xye-Gp-aQS"/>
+                <constraint firstItem="vbc-DR-tdp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KhC-YZ-s2P" secondAttribute="trailing" constant="10" id="eih-uT-ABE"/>
                 <constraint firstItem="KhC-YZ-s2P" firstAttribute="leading" secondItem="JAU-gS-nWy" secondAttribute="trailing" constant="8" id="g3C-4o-0xw"/>
                 <constraint firstItem="vbc-DR-tdp" firstAttribute="top" secondItem="JAU-gS-nWy" secondAttribute="top" id="hbh-VE-j4p"/>
                 <constraint firstItem="bSr-YV-p98" firstAttribute="leading" secondItem="JAU-gS-nWy" secondAttribute="leading" id="hzT-SW-Uvp"/>
