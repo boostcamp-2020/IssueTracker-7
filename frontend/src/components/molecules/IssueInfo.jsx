@@ -1,7 +1,9 @@
 import React from 'react';
-import Text from '@atoms/Text';
+import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSign } from '@fortawesome/free-solid-svg-icons';
+import A from '@atoms/';
+import M from '@molecules/';
 
 const getAgoTime = (time) => {
   let agoSeconds = Math.floor((Date.now() - Date.parse(time)) / 1000);
@@ -13,23 +15,34 @@ const getAgoTime = (time) => {
   else if (agoMinute > 0) return `${agoMinute} minute ago`;
   else return `${agoSeconds < 0 ? 0 : agoSeconds} seconds ago`;
 };
-
-const MilestoneInfo = ({ milestone }) => {
+const IssueTitle = ({ title }) => <Bold>{title}</Bold>;
+const MilestoneInfo = ({ title }) => {
   return (
     <span stlye="margin: 0 8px">
-      {milestone && <FontAwesomeIcon icon={faSign} />}
-      {milestone ? milestone : ''}
+      {title && <FontAwesomeIcon icon={faSign} />}
+      {title ? title : ''}
     </span>
   );
 };
+const Bold = styled.span`
+  font-weight: 800;
+`;
+const getLabels = (labels) => labels.map((label) => <M.Label key={label.id} {...label} />);
 
-const IssueInfo = ({ id, status, created_at, author, milestone }) => {
+const IssueInfo = ({ id, title, status, labels, createdAt, author, milestone }) => {
   return (
-    <Text color="gray">
-      #{id} {status} {getAgoTime(created_at)} by {author?.user_id}{' '}
-      <MilestoneInfo milestone={milestone} />
-    </Text>
+    <A.FlexBox direction="column">
+      <A.FlexBox direction="row">
+        <IssueTitle title={title} />
+        {getLabels(labels)}
+      </A.FlexBox>
+      <A.FlexBox direction="row">
+        <A.Text color="gray">
+          #{id} {status} {getAgoTime(createdAt)} by {author?.user_id}{' '}
+          <MilestoneInfo {...milestone} />
+        </A.Text>
+      </A.FlexBox>
+    </A.FlexBox>
   );
 };
-
 export default IssueInfo;
