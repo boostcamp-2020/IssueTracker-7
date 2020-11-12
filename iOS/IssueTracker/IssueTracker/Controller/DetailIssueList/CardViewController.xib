@@ -243,6 +243,9 @@
                             <state key="normal" title="이슈 닫기">
                                 <color key="titleColor" cyan="0.00015814602379999999" magenta="1" yellow="1" black="0.0" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="pressedCloseButton:" destination="-1" eventType="touchUpInside" id="5yQ-cR-BFF"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
