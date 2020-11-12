@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import LoginPage from '@pages/LoginPage';
-import IssuePage from '@pages/IssuePage';
+import P from '@pages/';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { request } from '@utils/request';
 import { IssueProvider } from '@stores/issue';
@@ -24,8 +23,8 @@ const App = () => {
       <IssueProvider>
         <BrowserRouter>
           <Switch>
-            <Route path="/login" component={LoginPage} />
-            <Route path="/issue" component={IssuePage} />
+            <Route path="/login" component={P.LoginPage} />
+            <Route path="/issue" component={P.IssuePage} />
             <Redirect path="*" to="/issue" />
           </Switch>
         </BrowserRouter>
