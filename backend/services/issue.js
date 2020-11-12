@@ -71,9 +71,11 @@ const getMentionsFilter = ({ mentions, user_id }) => {
   return {
     model: Comment,
     required: mentions ? true : false,
+    attributes: ['id', 'content', 'created_at', 'updated_at', 'user_id', 'issue_id'],
     include: {
       model: User,
       as: 'mentions',
+      attributes: ['id', 'user_id', 'photo_url', 'type'],
       where: mentions
         ? {
             user_id: mentions == '@me' ? user_id : mentions,
@@ -191,6 +193,7 @@ exports.update = async ({ issue_id }, { title, status }) => {
     return { status: 401, data: { message: '유효하지 않은 입력 입니다.' } };
   }
 };
+
 
 exports.create = async ({
   title,
@@ -437,14 +440,12 @@ exports.addComment = async ({ issue_id, content, user }) => {
 
 exports.updateComment = async ({ issue_id, comment_id, content, user }) => {
   try {
-    const comment = await Comment.update(
+    const updatedComment = await Comment.update(
       { content: content },
-      {
-        where: { id: comment_id, issue_id: issue_id, user_id: user.id },
-      }
+      { where: { id: comment_id } }
     );
-    const result = await Comment.findOne({
-      where: comment.dataValues,
+    const comment = await Comment.findOne({
+      where: { id: comment_id },
       attributes: ['id', 'content', 'updated_at'],
       include: [
         {
@@ -454,8 +455,9 @@ exports.updateComment = async ({ issue_id, comment_id, content, user }) => {
         },
       ],
     });
-    if (result) return { status: 200, data: result };
-    else return { status: 401, data: { message: '잘못된 접근입니다.' } };
+    if (comment) {
+      return { status: 200, data: result };
+    } else return { status: 401, data: { message: '유효하지 않은 Comment 입니다.' } };
   } catch (err) {
     return { status: 401, data: { message: '유효하지 않은 접근입니다.' } };
   }
