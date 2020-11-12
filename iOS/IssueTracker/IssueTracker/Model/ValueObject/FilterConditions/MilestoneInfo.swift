@@ -14,10 +14,10 @@ struct MilestonesInfo: Codable {
 // MARK: - Milestone
 struct MilestoneInfo: Codable {
     let id: Int
-    let title, dueDate: String
+    let title, dueDate, description: String
 
     enum CodingKeys: String, CodingKey {
-        case id, title
+        case id, title, description
         case dueDate = "due_date"
     }
 }
