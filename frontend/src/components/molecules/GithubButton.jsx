@@ -5,7 +5,7 @@ import A from '@atoms/';
 
 const GithubButton = ({ onClick }) => {
   return (
-    <A.Button onClick={onClick} backgroundColor="#a0a0a0">
+    <A.Button onClick={onClick} backgroundColor="#a0a0a0" color='#ffffff'>
       Sign with GitHub <FontAwesomeIcon icon={faGithub} color="black" size="lg" />
     </A.Button>
   );
