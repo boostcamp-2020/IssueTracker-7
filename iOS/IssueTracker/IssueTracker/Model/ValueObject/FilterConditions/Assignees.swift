@@ -30,6 +30,8 @@ struct Assignee: Codable { // User 로 바꾸기
     let createdAt, updatedAt: String?
     let deletedAt: String?
 
+    var data: Data?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case userID = "user_id"
@@ -40,6 +42,10 @@ struct Assignee: Codable { // User 로 바꾸기
 
 extension Assignee: Hashable {
     static func == (lhs: Assignee, rhs: Assignee) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.userID == rhs.userID
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
     }
 }

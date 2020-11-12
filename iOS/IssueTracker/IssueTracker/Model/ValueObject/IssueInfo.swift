@@ -18,7 +18,7 @@ struct IssueInfo: Codable {
     let userID: Int
     let milestoneID: Int?
     let labels: [LabelInfo]?
-    let assignees: [Assignee]?
+    var assignees: [Assignee]?
     let author: Author?
     let comments: [Comment]?
     let milestone: MilestoneInfo?
