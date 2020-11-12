@@ -66,6 +66,8 @@ final class DetailIssueListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cardView.issueInfo = issueInfo
+        
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(edit))
         
@@ -96,7 +98,7 @@ final class DetailIssueListController: UIViewController {
 
 // MARK: 카드뷰(풀업뷰)
 extension DetailIssueListController {
-        
+
     private func setUpDimmerView() {
         dimmerView.isUserInteractionEnabled = false
         dimmerView.alpha = 0
