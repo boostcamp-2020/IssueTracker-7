@@ -7,7 +7,7 @@ import { request } from '@utils/request';
 import { Link } from 'react-router-dom';
 import Wrapper from '../atoms/Wrapper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faMapSigns, faTag } from '@fortawesome/free-solid-svg-icons';
+import { faMapSigns, faTag } from '@fortawesome/free-solid-svg-icons';
 
 const numLabel = 600
 const numMilestone = 13
@@ -16,15 +16,10 @@ const SearchBarContainer = styled.div`
     width: auto;
     display: flex;
     margin-top: 50px;
-;
-    ${M.DropdownButton} {
-        padding: 0;
-    }
+    
     ${A.Input} {
         width: 800px;
         height: 33px;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
         margin-right: 10px;
