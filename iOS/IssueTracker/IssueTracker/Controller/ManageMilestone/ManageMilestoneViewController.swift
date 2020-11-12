@@ -9,14 +9,20 @@ import UIKit
 
 final class ManageMilestoneViewController: UIViewController, UICollectionViewDelegate {
     
+    //MARK:- IBOutlets
     @IBOutlet var collectionView: UICollectionView!
+    
+    //MARK:- Properties
     private var milestoneDataList: [MilestoneInfo] = []
     private let api = BackEndAPIManager(router: Router())
     
+    //MARK:- View Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpMilestoneData()
         
+
+        configureLayout()
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -137,8 +143,10 @@ final class MilestoneCell: UICollectionViewCell {
     @IBOutlet var closedIssueCount: UILabel!
         
     fileprivate func configure(milestoneData: MilestoneInfo) {
-        guard let numberOfOpenIssues = milestoneData.issues?.filter({ $0.status == "open" }).count,
-              let numberOfClosedIssues = milestoneData.issues?.filter({ $0.status == "closed" }).count else { return }
+
+        guard let numberOfOpenIssues = milestoneData.issues?.filter { $0.status == "open" }.count,
+              let numberOfClosedIssues = milestoneData.issues?.filter { $0.status == "closed" }.count else { return }
+      
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .percent
         numberFormatter.locale = Locale(identifier: "en_US")

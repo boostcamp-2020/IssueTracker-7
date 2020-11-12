@@ -95,6 +95,9 @@
 		7130A6D12552CD0F00EE2141 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7130A6D02552CD0F00EE2141 /* InputValidator.swift */; };
 		71531F57254A859F00CCFAE2 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F56254A859F00CCFAE2 /* IssueListViewController.swift */; };
 		71531F60254A88F000CCFAE2 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F5F254A88F000CCFAE2 /* UIButton+.swift */; };
+		7179187E255CF4A30009496A /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179187D255CF4A30009496A /* CommentViewController.swift */; };
+		71791883255CF9CD0009496A /* CommentView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71791882255CF9CD0009496A /* CommentView.storyboard */; };
+		71791897255D1ED90009496A /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71791896255D1ED90009496A /* CardViewController.xib */; };
 		718C388E2553E6E1002E4903 /* ManageMilestone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 718C388D2553E6E1002E4903 /* ManageMilestone.storyboard */; };
 		718C38932553E6FB002E4903 /* ManageMilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C38922553E6FB002E4903 /* ManageMilestoneViewController.swift */; };
 		718C38982553E716002E4903 /* ManageMilestoneModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C38972553E716002E4903 /* ManageMilestoneModalView.swift */; };
@@ -193,6 +196,9 @@
 		7130A6D02552CD0F00EE2141 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
 		71531F56254A859F00CCFAE2 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		71531F5F254A88F000CCFAE2 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		7179187D255CF4A30009496A /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		71791882255CF9CD0009496A /* CommentView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CommentView.storyboard; sourceTree = "<group>"; };
+		71791896255D1ED90009496A /* CardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
 		718C388D2553E6E1002E4903 /* ManageMilestone.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ManageMilestone.storyboard; sourceTree = "<group>"; };
 		718C38922553E6FB002E4903 /* ManageMilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMilestoneViewController.swift; sourceTree = "<group>"; };
 		718C38972553E716002E4903 /* ManageMilestoneModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMilestoneModalView.swift; sourceTree = "<group>"; };
@@ -405,6 +411,8 @@
 				33DE7556255C64A300A92814 /* CardViewController.swift */,
 				33DE7557255C64A300A92814 /* CardViewController.xib */,
 				33DE7561255CDC2B00A92814 /* AssigneeSelectController.swift */,
+				7179187D255CF4A30009496A /* CommentViewController.swift */,
+				71791882255CF9CD0009496A /* CommentView.storyboard */,
 			);
 			path = DetailIssueList;
 			sourceTree = "<group>";
@@ -677,7 +685,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33DE7559255C64A300A92814 /* CardViewController.xib in Resources */,
+				71791897255D1ED90009496A /* CardViewController.xib in Resources */,
 				719453B3254AAF6600A5864E /* IssueList.storyboard in Resources */,
 				33151F2725499E04006B94A9 /* NanumSquareBold.ttf in Resources */,
 				718C388E2553E6E1002E4903 /* ManageMilestone.storyboard in Resources */,
@@ -690,6 +698,7 @@
 				33375C432547E71000E8A8E8 /* Assets.xcassets in Resources */,
 				33375C412547E70E00E8A8E8 /* Main.storyboard in Resources */,
 				33151F2925499E04006B94A9 /* NanumSquareOTF_acEB.otf in Resources */,
+				71791883255CF9CD0009496A /* CommentView.storyboard in Resources */,
 				33493B4E2556632800BB1E11 /* IssueCellContentView.xib in Resources */,
 				333FE2A52551513F000C0F0B /* DetailIssueList.storyboard in Resources */,
 			);
@@ -736,6 +745,7 @@
 				3358A593254EEBDF008CEFA3 /* LabelConditionTableViewController.swift in Sources */,
 				33DE7558255C64A300A92814 /* CardViewController.swift in Sources */,
 				718C389D2553E72E002E4903 /* ManageMilestoneModalViewController.swift in Sources */,
+				7179187E255CF4A30009496A /* CommentViewController.swift in Sources */,
 				3358A57C254ED757008CEFA3 /* StoryboardID.swift in Sources */,
 				3393E0AC2552698C003DCDA4 /* UIView+.swift in Sources */,
 				33493B49255662B100BB1E11 /* IssueCellContentView.swift in Sources */,

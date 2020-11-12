@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,6 +43,9 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="댓글 추가"/>
+                            <connections>
+                                <action selector="pressedAddCommentButton:" destination="-1" eventType="touchUpInside" id="bTC-3z-8Oo"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOO-oK-3zB">
                             <rect key="frame" x="256" y="0.0" width="93" height="45"/>
@@ -231,6 +234,9 @@
                             <state key="normal" title="이슈 닫기">
                                 <color key="titleColor" cyan="0.00015814602379999999" magenta="1" yellow="1" black="0.0" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="pressedCloseButton:" destination="-1" eventType="touchUpInside" id="5yQ-cR-BFF"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

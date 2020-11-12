@@ -31,6 +31,8 @@ enum BackEndAPI {
          deleteAssignee(issueNumber: String, userID: Int)
     
     case photo(path: String)
+    
+    case addComment(issueId: Int, content: String)
 }
 
 extension BackEndAPI: EndPointable {
@@ -64,6 +66,8 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueNumber)/assignee"
         case .deleteAssignee(let issueNumber, let userID):
             return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueNumber)/assignee/\(userID)"
+        case .addComment(let issueId, _):
+            return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueId)/comment"
         }
         
     }
@@ -90,7 +94,7 @@ extension BackEndAPI: EndPointable {
             return .get
         case .closeIssue:
             return .put
-        case .addNewLabel, .addNewIssue:
+        case .addNewLabel, .addNewIssue, .addComment:
             return .post
         case .editExistingLabel:
             return .put
@@ -133,18 +137,11 @@ extension BackEndAPI: EndPointable {
             return bodyDictionary
         case .addAssignee(_, let userID):
             return ["user_id": "\(userID)"]
+        case .addComment(_, let content):
+            return ["content": content]
         default:
             return nil
         }
     }
 }
 
-
-//var bodies: HTTPBody? {
-//    switch self {
-//    case .accessToken(let code):
-//        return ["client_id": GithubAPICredentials.clientId, "client_secret": GithubAPICredentials.clientSecret, "code": code]
-//    default:
-//        return nil
-//    }
-//}

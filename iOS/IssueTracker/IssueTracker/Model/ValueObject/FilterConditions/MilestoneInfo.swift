@@ -27,4 +27,5 @@ struct MilestoneInfo: Codable {
 struct IssuesInMilestone: Codable {
     let id: Int
     let title, status: String
+    
 }

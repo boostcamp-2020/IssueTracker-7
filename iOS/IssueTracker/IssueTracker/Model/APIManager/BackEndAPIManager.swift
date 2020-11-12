@@ -120,4 +120,11 @@ class BackEndAPIManager {
         }
     }
     
+    func addComment(issueId: Int, content: String, completionHandler: @escaping ((Result<Comment, APIError>) -> Void)) {
+        router.request(route: BackEndAPI.addComment(issueId: issueId, content: content)) { (result: Result<Comment, APIError>) in
+            
+            completionHandler(result)
+            
+        }
+    }
 }

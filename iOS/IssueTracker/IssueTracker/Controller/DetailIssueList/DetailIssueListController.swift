@@ -25,7 +25,7 @@ final class DetailIssueListController: UIViewController {
     
     private let api = BackEndAPIManager(router: Router())
     
-    private let issueInfo: IssueInfo!
+    private var issueInfo: IssueInfo!
     private var commentsInfoList: [Comment]!
     
     private let cardView = CardViewController(nibName: "CardViewController", bundle: nil)
@@ -39,7 +39,7 @@ final class DetailIssueListController: UIViewController {
         dimmerView.frame = self.view.bounds
         return dimmerView
     }()
-
+    
     private lazy var cardMinimumY: CGFloat = view.bounds.height * 0.1
     private lazy var cardMaximumY: CGFloat = view.bounds.height * 0.85
     
@@ -65,20 +65,16 @@ final class DetailIssueListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         cardView.issueInfo = issueInfo
-        
+      
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(edit))
         
         configureCollectionView()
         configureDataSource()
         setUpDimmerView()
     }
-    
-    @objc private func edit() {
-    }
-    
+ 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -141,6 +137,9 @@ extension DetailIssueListController {
         cardView.view.layer.cornerRadius = 15.0
         cardView.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
+        cardView.commentViewControllerDelegate = self
+        cardView.delegate = self
+        
         // Pan 제스쳐 설정
         addGesture()
     }
@@ -148,9 +147,9 @@ extension DetailIssueListController {
     @objc private func dimmerViewTapped() {
         animateCardView(to: .collapsed, withDuration: 0.1) // 최소화
     }
-        
+    
     @objc private func baseViewPanned (recognizer:UIPanGestureRecognizer) {
-
+        
         dimmerView.alpha = (1 - (baseView.frame.origin.y - cardMinimumY) / (cardMaximumY - cardMinimumY)) * maximumAlpha
         
         switch recognizer.state {
@@ -173,7 +172,7 @@ extension DetailIssueListController {
                 animateCardView(to: .expanded, withDuration: 0.2, bounce: bounce)
                 return
             }
-    
+            
             // CardView Y 좌표 기준 자동 확대 / 축소
             let cardMidY = cardMinimumY + (cardMaximumY - cardMinimumY) / 2
             
@@ -187,7 +186,7 @@ extension DetailIssueListController {
         }
     }
     
-    private func animateCardView (to state: CardState, withDuration duration: TimeInterval, bounce: CGFloat = 0) {
+    func animateCardView (to state: CardState, withDuration duration: TimeInterval, bounce: CGFloat = 0) {
         
         let frameAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) {
             switch state {
@@ -201,7 +200,7 @@ extension DetailIssueListController {
                 self.baseView.frame.origin.y = self.cardMaximumY + bounce
                 self.dimmerView.isUserInteractionEnabled = false
                 self.dimmerView.alpha = 0
-        
+                
                 self.cardCurrentState = .collapsed
             }
         }
@@ -226,13 +225,46 @@ extension DetailIssueListController {
     }
 }
 
+extension DetailIssueListController: CommentViewControllerDelegate {
+    
+    func appendComment(comment: Comment) {
+        
+        commentsInfoList.append(comment)
+        
+        let lastItemIndex = self.collectionView.numberOfItems(inSection: 0) - 1
+        let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
+        
+        reloadSnapshot(animatingDifferences: true, completionHandler: {
+            self.collectionView.scrollToItem(at: lastItemIndexPath, at: .centeredVertically, animated: false)
+        })
+    }
+    
+    func reloadSnapshot(animatingDifferences: Bool, completionHandler: (() -> Void)? = nil) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Comment>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(commentsInfoList)
+        dataSource?.apply(snapshot, animatingDifferences: animatingDifferences)
+        completionHandler?()
+    }
+}
+
+extension DetailIssueListController: CardViewControllerDelegate {
+    
+    func changeIssueStatus(to status: Status) {
+        
+        issueInfo.status = issueInfo.status == "open" ? "closed" : "open"
+        cardView.issueInfo = issueInfo
+        reloadSnapshot(animatingDifferences: false)
+    }
+}
+
 
 // MARK: 컬렉션뷰
 
 extension DetailIssueListController {
     
     private func createLayout() -> UICollectionViewLayout {
-
+        
         let heightDimension = NSCollectionLayoutDimension.estimated(500)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
@@ -281,7 +313,7 @@ extension DetailIssueListController {
                     }
                 }
             }
-
+            
             return cell
         }
         
