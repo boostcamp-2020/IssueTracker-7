@@ -15,6 +15,9 @@ class CardViewController: UIViewController {
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     
+    var commentViewControllerDelegate: CommentViewControllerDelegate?
+    var issueInfo: IssueInfo!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +40,14 @@ class CardViewController: UIViewController {
         closeButton.layer.cornerRadius = 5
     }
 
-
-
+    @IBAction func pressedAddCommentButton(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "CommentView", bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: "CommentViewController") as! CommentViewController
+        viewController.issueId = issueInfo.id
+        viewController.delegate = commentViewControllerDelegate
+        present(viewController, animated: true, completion: nil)
+    }
 }
+
+
