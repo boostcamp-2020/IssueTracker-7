@@ -1,6 +1,5 @@
 import React from 'react';
-import ColorSpan from '@atoms/ColorSpan';
-
-const Label = ({ name, color }) => <ColorSpan color={color}>{name}</ColorSpan>;
+import A from '@atoms/';
+const Label = ({ name, color }) => <A.ColorSpan color={color}>{name}</A.ColorSpan>;
 
 export default Label;

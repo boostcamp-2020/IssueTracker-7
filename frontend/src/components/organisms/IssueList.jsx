@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import IssueItem from '@organisms/IssueItem';
-import { request } from '@utils/request';
+import { IssueContext } from '@stores/issue';
+import O from '@organisms/';
 
 const IssueListContainer = styled.ul`
   min-width: 1200px;
@@ -11,13 +11,9 @@ const IssueListContainer = styled.ul`
   list-style-type: none;
 `;
 
-const IssueList = (props) => {
-  const [issues, setIssues] = useState([]);
-  useEffect(async () => {
-    const { status, data } = await request('GET', '/api/issue');
-    setIssues(data);
-  }, []);
-  const issueList = issues.map((issue) => <IssueItem key={issue.id} {...issue} />);
+const IssueList = () => {
+  const { issues, issueDispatch } = useContext(IssueContext);
+  const issueList = issues.map((issue) => <O.IssueItem key={issue.id} {...issue} />);
   return <IssueListContainer>{issueList}</IssueListContainer>;
 };
 export default IssueList;
