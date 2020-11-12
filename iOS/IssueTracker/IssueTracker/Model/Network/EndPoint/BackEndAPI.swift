@@ -27,6 +27,9 @@ enum BackEndAPI {
     case predefinedFilter(query: String)
     case closeIssue(issueNumber: String, title: String, status: String)
     
+    case addAssignee(issueNumber: String, userID: Int),
+         deleteAssignee(issueNumber: String, userID: Int)
+    
     case photo(path: String)
 }
 
@@ -57,7 +60,12 @@ extension BackEndAPI: EndPointable {
             return "http://\(BackEndAPICredentials.ip)/api/milestone/\(milestoneId)"
         case .photo(let path):
             return "\(path)"
+        case .addAssignee(let issueNumber, _):
+            return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueNumber)/assignee"
+        case .deleteAssignee(let issueNumber, let userID):
+            return "http://\(BackEndAPICredentials.ip)/api/issue/\(issueNumber)/assignee/\(userID)"
         }
+        
     }
     
     var baseURL: URLComponents {
@@ -92,6 +100,10 @@ extension BackEndAPI: EndPointable {
             return .put
         case .photo:
             return .get
+        case .addAssignee:
+            return .post
+        case .deleteAssignee:
+            return .delete
         default:
             return nil
         }
@@ -119,6 +131,8 @@ extension BackEndAPI: EndPointable {
                                   "due_date": milestoneDueDate,
                                   "description": milestoneDescription]
             return bodyDictionary
+        case .addAssignee(_, let userID):
+            return ["user_id": "\(userID)"]
         default:
             return nil
         }

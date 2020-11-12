@@ -105,4 +105,19 @@ class BackEndAPIManager {
 
         }
     }
+    
+    func requestAddAssignee(issueNumber: String, userID: Int, completionHandler: @escaping ((Result<Assignee, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.addAssignee(issueNumber: issueNumber, userID: userID)) { (result: Result<Assignee, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func requestDeleteAssignee(issueNumber: String, userID: Int, completionHandler: @escaping ((Result<Assignee, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.deleteAssignee(issueNumber: issueNumber, userID: userID)) { (result: Result<Assignee, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
 }
