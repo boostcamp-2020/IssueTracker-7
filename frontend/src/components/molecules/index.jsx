@@ -10,6 +10,7 @@ import DropdownHeader from '@molecules/DropdownHeader';
 import Dropdown from '@molecules/Dropdown';
 import DropdownWithCheck from '@molecules/DropdownWithCheck';
 import DropdownWrapper from '@molecules/DropdownWrapper';
+import InitFilterButton from '@molecules/InitFilterButton';
 
 export default {
   GithubButton,
@@ -23,5 +24,6 @@ export default {
   DropdownHeader,
   Dropdown,
   DropdownWithCheck,
-  DropdownWrapper
+  DropdownWrapper,
+  InitFilterButton
 };
