@@ -3,7 +3,11 @@ import P from '@pages/';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { request } from '@utils/request';
 import { IssueProvider } from '@stores/issue';
-import { AuthProvider, AuthContext } from '@stores/auth';
+import { AuthProvider } from '@stores/auth';
+import { FilterProvider } from '@stores/filter';
+import { LabelProvider } from '@stores/label';
+import { UserProvider } from '@stores/user';
+import { MilestoneProvider } from '@stores/milestone';
 
 const isAuthenticated = async () => await request('GET', '/api/auth/token');
 const App = () => {
@@ -21,13 +25,21 @@ const App = () => {
   return (
     <AuthProvider>
       <IssueProvider>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/login" component={P.LoginPage} />
-            <Route path="/issue" component={P.IssuePage} />
-            <Redirect path="*" to="/issue" />
-          </Switch>
-        </BrowserRouter>
+        <FilterProvider>
+          <LabelProvider>
+            <UserProvider>
+              <MilestoneProvider>
+                <BrowserRouter>
+                  <Switch>
+                    <Route path="/login" component={P.LoginPage} />
+                    <Route path="/issue" component={P.IssuePage} />
+                    <Redirect path="*" to="/issue" />
+                  </Switch>
+                </BrowserRouter>
+              </MilestoneProvider>
+            </UserProvider>
+          </LabelProvider>
+        </FilterProvider>
       </IssueProvider>
     </AuthProvider>
   );
