@@ -29,7 +29,7 @@
 
 </div>
 
-### 화목한 사진
+### 함께 개발한 사람들 👨‍👨‍👧‍👦
 <img src="https://user-images.githubusercontent.com/20080283/99057884-bc2e0780-25df-11eb-9ad5-2784a4416619.png" width="500" align="center" />
 
 </br>
