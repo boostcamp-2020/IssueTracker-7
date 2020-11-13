@@ -2,7 +2,6 @@ require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const port = process.env.PORT || 80;
 module.exports = {
   mode: 'development',
@@ -14,17 +13,24 @@ module.exports = {
     ),
     filename: 'bundle.js',
   },
-
+  node: {
+    fs: 'empty',
+    net: 'empty',
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+      '@stores': path.resolve(__dirname, './src/stores'),
       '@components': path.resolve(__dirname, './src/components'),
-      '@pages': path.resolve(__dirname, './src/pages'),
+      '@atoms': path.resolve(__dirname, './src/components/atoms'),
+      '@molecules': path.resolve(__dirname, './src/components/molecules'),
+      '@organisms': path.resolve(__dirname, './src/components/organisms'),
+      '@templates': path.resolve(__dirname, './src/components/templates'),
+      '@pages': path.resolve(__dirname, './src/components/pages'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@styles': path.resolve(__dirname, './src/styles'),
     },
   },
-
   module: {
     rules: [
       {
@@ -64,7 +70,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `public/index.html`,
     }),
-    new CleanWebpackPlugin(),
   ],
-  devtool: 'cheap-module-source-map',
+  devtool: 'cheap-eval-source-map',
 };
