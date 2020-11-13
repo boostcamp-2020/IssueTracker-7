@@ -55,12 +55,15 @@ const SearchBarContainer = styled.div`
 
     ${A.Button} {
         display: flex;
-        width: 130px;
+        width: 160px;
         height: 35px;
+        align-items:center;
         justify-content: center;
-        padding: 10px 0 0 6px;
+        padding: 0 6px;
         border: 1px solid #d6d8db;
-        border-radius: 7px;
+        & svg {
+            margin-right:8px;
+        }
     }
 `;
 
