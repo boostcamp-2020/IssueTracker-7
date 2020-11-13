@@ -82,16 +82,26 @@ const DefaultText = styled.span`
 `;
 
 const DropdownList = ({ name }) => {
+  const { labels } = useLabel();
+  const { users } = useUser();
+  const { milestones } = useMilestone();
+  const { filterDispatch } = useFilter();
+  const handleOnClick = (type, value) => async () => {
+    filterDispatch({ type, value });
+  };
+
   if (name === 'Author' || name === 'Assignee') {
-    const userList = userInfo
+    const userList = users
       .sort((a, b) => {
         return a.user_id < b.user_id ? -1 : a.user_id > b.user_id ? 1 : 0;
       })
       .map((user) => {
+        const type = name === 'Author' ? 'author' : 'assignee';
+        const value = user.user_id;
         return (
           <Wrapper key={user.user_id}>
             <A.Hr />
-            <M.DropdownWithCheck>
+            <M.DropdownWithCheck type={type} value={value} onClick={handleOnClick}>
               <A.Photo src={user.photo_url}></A.Photo>
               <UserId>{user.user_id}</UserId>
             </M.DropdownWithCheck>
@@ -100,15 +110,17 @@ const DropdownList = ({ name }) => {
       });
     return <>{userList}</>;
   } else if (name === 'Label') {
-    const labelList = labelInfo
+    const labelList = labels
       .sort((a, b) => {
         return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
       })
       .map((label) => {
+        const type = 'label';
+        const value = label.name;
         return (
           <Wrapper key={label.id}>
             <A.Hr />
-            <M.DropdownWithCheck key={label.id}>
+            <M.DropdownWithCheck type={type} value={value} onClick={handleOnClick} key={label.id}>
               <LabelInfo>
                 <Info>
                   <Color backgroundColor={label.color}></Color>
@@ -121,16 +133,18 @@ const DropdownList = ({ name }) => {
         );
       });
     return <>{labelList}</>;
-  } else if (name === 'Milestone') {
-    const milestoneList = milestoneInfo
+  } else if (name === 'Milestones') {
+    const milestoneList = milestones
       .sort((a, b) => {
         return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
       })
       .map((milestone) => {
+        const type = 'milestone';
+        const value = milestone.title;
         return (
           <Wrapper key={milestone.id}>
             <A.Hr />
-            <M.DropdownWithCheck>
+            <M.DropdownWithCheck type={type} value={value} onClick={handleOnClick}>
               <DefaultText>{milestone.title}</DefaultText>
             </M.DropdownWithCheck>
           </Wrapper>
