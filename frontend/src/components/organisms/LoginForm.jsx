@@ -27,8 +27,8 @@ const handleGitHubLogin = (e) => {
 const LoginForm = () => {
   return (
     <Form>
-      <M.InputBox label="아이디" type="text"></M.InputBox>
-      <M.InputBox label="비밀번호" type="password"></M.InputBox>
+      <M.InputBox label="아이디" type="text" width="250px" height="25px"></M.InputBox>
+      <M.InputBox label="비밀번호" type="password" width="250px" height="25px"></M.InputBox>
       <A.FlexBox direction="row">
         <A.TextButton type="submit" value="로그인" onClick={handleClick} />
         <A.TextButton type="button" value="회원가입" onClick={handleClick} />
