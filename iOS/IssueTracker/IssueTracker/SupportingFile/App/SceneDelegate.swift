@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func autoLogin(scene: UIScene) {
         // 토큰 정보가 있을 시 자동 로그인
-        guard UserInfo.shared.isAllInfoExisted() else { return }
+//        guard UserInfo.shared.isAllInfoExisted() else { return }
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
@@ -48,6 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
+        UserInfo.shared.accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInR5cGUiOiJnaXRodWIiLCJ1c2VyX2lkIjoic2VvdWxib3kiLCJpYXQiOjE2MDUyNTM1MDZ9.vs5tDYZzpjNqiCugU1Tv6G1-pyOC5Hv4OaaCj3hdaIo"
         autoLogin(scene: scene)
     }
     

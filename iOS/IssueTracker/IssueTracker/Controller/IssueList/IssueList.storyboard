@@ -13,9 +13,9 @@
         <scene sceneID="tek-Jt-Ti6">
             <objects>
                 <navigationController storyboardIdentifier="IssueListInitialController" id="ABG-JX-FJB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ogt-OC-NeK"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="list.bullet.rectangle" catalog="system" id="ogt-OC-NeK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Y0g-6n-Nhi">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="2674" y="114"/>
         </scene>
-        <!--이슈-->
+        <!--이슈 📑-->
         <scene sceneID="gdl-FY-vGc">
             <objects>
                 <viewController id="Fiu-tR-AEc" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,130 +35,65 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VGO-WG-P6r">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <color key="backgroundColor" red="0.97588783180000005" green="0.97588783180000005" blue="0.97588783180000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="1" id="rRT-tx-TJG">
                                     <size key="itemSize" width="413" height="134"/>
-                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IssueCell" id="aIG-2q-XR7" customClass="IssueCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.5" y="60" width="413" height="134"/>
+                                        <rect key="frame" x="0.5" y="10" width="413" height="134"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ONO-gj-CGL">
                                             <rect key="frame" x="0.0" y="0.0" width="413" height="134"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다. 뒷줄은 잘리게 될 것 입니다 쩜쩜쩜" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRY-D3-c3q">
-                                                    <rect key="frame" x="15" y="46" width="300" height="41"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="2tS-Pr-XBv"/>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="41" id="bFF-6b-ZHC"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btQ-GT-NEf">
-                                                    <rect key="frame" x="332" y="16" width="73" height="20"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="MHN-bM-8qV"/>
-                                                        <constraint firstAttribute="height" constant="20" id="xmr-Vw-HGT"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="스프린트 2">
-                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="7"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ac-H0-ytB">
-                                                    <rect key="frame" x="15" y="16" width="162.5" height="23"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="h10-3i-8ED">
-                                                    <rect key="frame" x="15" y="100" width="17" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="NjM-fL-NHY"/>
-                                                    </constraints>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="7Ac-H0-ytB" firstAttribute="leading" secondItem="ONO-gj-CGL" secondAttribute="leading" constant="15" id="7IB-Gn-odC"/>
-                                                <constraint firstItem="btQ-GT-NEf" firstAttribute="top" secondItem="7Ac-H0-ytB" secondAttribute="top" id="QIL-rS-jk0"/>
-                                                <constraint firstItem="rRY-D3-c3q" firstAttribute="leading" secondItem="7Ac-H0-ytB" secondAttribute="leading" id="RBb-5Y-unO"/>
-                                                <constraint firstItem="h10-3i-8ED" firstAttribute="leading" secondItem="rRY-D3-c3q" secondAttribute="leading" id="T2R-6Q-6Kd"/>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="h10-3i-8ED" secondAttribute="trailing" constant="380" id="Zyw-rE-b2d"/>
-                                                <constraint firstItem="rRY-D3-c3q" firstAttribute="top" secondItem="7Ac-H0-ytB" secondAttribute="bottom" constant="7" id="bQE-SC-JJ0"/>
-                                                <constraint firstItem="7Ac-H0-ytB" firstAttribute="top" secondItem="ONO-gj-CGL" secondAttribute="top" constant="16" id="jPF-lS-saF"/>
-                                                <constraint firstAttribute="trailing" secondItem="btQ-GT-NEf" secondAttribute="trailing" constant="8" id="tDk-Fk-9Ub"/>
-                                                <constraint firstAttribute="bottom" secondItem="h10-3i-8ED" secondAttribute="bottom" constant="10" id="uF4-L0-uiG"/>
-                                                <constraint firstItem="h10-3i-8ED" firstAttribute="top" secondItem="rRY-D3-c3q" secondAttribute="bottom" constant="13" id="wAD-ON-5CP"/>
-                                            </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="413" height="134"/>
-                                        <connections>
-                                            <outlet property="content" destination="rRY-D3-c3q" id="pvf-d0-ex9"/>
-                                            <outlet property="labelStackView" destination="h10-3i-8ED" id="gr5-Jd-vPf"/>
-                                            <outlet property="milestone" destination="btQ-GT-NEf" id="Zyo-lZ-Qgp"/>
-                                            <outlet property="title" destination="7Ac-H0-ytB" id="3U9-Py-N0W"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchBarHeader" id="0cA-bn-GO8" customClass="CustomSearchBar" customModule="IssueTracker" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" translatesAutoresizingMaskIntoConstraints="NO" id="4BS-DN-OxP">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.99595838790000002" green="0.99606746440000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="Fiu-tR-AEc" id="Vfw-xN-qCD"/>
-                                            </connections>
-                                        </searchBar>
-                                    </subviews>
-                                    <connections>
-                                        <outlet property="searchBar" destination="4BS-DN-OxP" id="VqW-G1-Zpr"/>
-                                    </connections>
-                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="Fiu-tR-AEc" id="opr-rE-b1T"/>
                                     <outlet property="delegate" destination="Fiu-tR-AEc" id="p3Y-LY-TuH"/>
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQ1-L5-yoe">
-                                <rect key="frame" x="351" y="794" width="20" height="22"/>
-                                <state key="normal" image="plus.circle.fill" catalog="system"/>
+                                <rect key="frame" x="321" y="766" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mQ1-L5-yoe" secondAttribute="height" multiplier="1:1" id="bSy-5I-7p9"/>
+                                    <constraint firstAttribute="width" constant="50" id="w80-zE-L2f"/>
+                                </constraints>
+                                <state key="normal" image="plus"/>
                                 <connections>
-                                    <segue destination="Ozp-3E-fwx" kind="presentation" id="cgu-Vp-CwH"/>
+                                    <segue destination="Ozp-3E-fwx" kind="presentation" identifier="IssueListToRegisterIssue" id="cgu-Vp-CwH"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ufX-Xl-zmk">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="선택 이슈 열기" id="NPt-aD-wQS">
+                                        <connections>
+                                            <action selector="pressedOpenSelectedItems:" destination="Fiu-tR-AEc" id="bNo-T0-Xbb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="gB8-nO-yee"/>
+                                    <barButtonItem title="선택 이슈 닫기" id="ZQF-YG-Wot">
+                                        <connections>
+                                            <action selector="pressedCloseSelectedItems:" destination="Fiu-tR-AEc" id="rfH-rz-3cs"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kHZ-Od-lMj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="VGO-WG-P6r" firstAttribute="leading" secondItem="kHZ-Od-lMj" secondAttribute="leading" id="9SW-73-bTP"/>
-                            <constraint firstItem="VGO-WG-P6r" firstAttribute="top" secondItem="kHZ-Od-lMj" secondAttribute="top" id="BdE-3R-wpk"/>
+                            <constraint firstItem="VGO-WG-P6r" firstAttribute="top" secondItem="DnD-0v-bVn" secondAttribute="top" id="BdE-3R-wpk"/>
                             <constraint firstItem="kHZ-Od-lMj" firstAttribute="bottom" secondItem="mQ1-L5-yoe" secondAttribute="bottom" constant="46" id="CHY-FW-FeW"/>
                             <constraint firstItem="kHZ-Od-lMj" firstAttribute="trailing" secondItem="mQ1-L5-yoe" secondAttribute="trailing" constant="43" id="OEE-DY-cti"/>
                             <constraint firstItem="kHZ-Od-lMj" firstAttribute="bottom" secondItem="VGO-WG-P6r" secondAttribute="bottom" id="SXK-5c-rES"/>
@@ -166,8 +101,8 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="Kyi-Eh-ypv"/>
-                    <navigationItem key="navigationItem" title="이슈" id="RzU-8r-oEh">
-                        <barButtonItem key="leftBarButtonItem" title="Filter" id="bkx-PW-boa">
+                    <navigationItem key="navigationItem" title="이슈 📑" id="RzU-8r-oEh">
+                        <barButtonItem key="leftBarButtonItem" title="필터" id="bkx-PW-boa">
                             <connections>
                                 <segue destination="0jM-ha-VGr" kind="presentation" identifier="IssueListToFilter" id="YAw-Ar-zCf"/>
                             </connections>
@@ -175,6 +110,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="VGO-WG-P6r" id="UAZ-Uo-Shu"/>
+                        <outlet property="filterButtonItem" destination="bkx-PW-boa" id="Ax2-sT-8vh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyB-SY-otq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -200,15 +136,10 @@
     </scenes>
     <resources>
         <image name="1.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
+        <image name="plus" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

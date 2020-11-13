@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ManageMilestoneModalViewDelegate: AnyObject {
+    func updateMilestone(milestone: MilestoneInfo)
+    func addNewMilestone(milestone: MilestoneInfo)
+}
+
 class ManageMilestoneModalViewController: UIViewController {
     
     @IBOutlet var secondTextFieldLabel: UILabel!
@@ -19,11 +24,15 @@ class ManageMilestoneModalViewController: UIViewController {
     @IBOutlet var secondTextFieldErrorLabel: UILabel!
     @IBOutlet var thirdTextFieldErrorLabel: UILabel!
     
+    private let api = BackEndAPIManager(router: Router())
+    var milestoneInfo: MilestoneInfo? = nil
+    weak var delegate: ManageMilestoneModalViewDelegate?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        initializeAllFields()
+        initializeAllFields(with: milestoneInfo)
         configureTextField()
     }
     
@@ -34,6 +43,7 @@ class ManageMilestoneModalViewController: UIViewController {
 extension ManageMilestoneModalViewController {
     
     private func configureTextField() {
+        
         
         let allTextFields: [UITextField] = [firstTextField, secondTextField, thirdTextField]
         
@@ -84,24 +94,25 @@ extension ManageMilestoneModalViewController {
     }
     @IBAction func pressedInitialize(_ sender: UIButton) {
         
-        initializeAllFields()
+        initializeAllFields(with: milestoneInfo)
     }
     
     @IBAction func pressedSave(_ sender: UIButton) {
-        
+        var milestoneName = ""
+        var milestoneDueDate = ""
+        var milestoneDescription = ""
         do {
             try firstTextField.validatedText(validationType: .requiredField(field: "이름"))
             
-            let _ = try firstTextField.validatedText(validationType: .milestoneName)
-            let _ = try secondTextField.validatedText(validationType: .milestoneDueDate)
-            let _ = try thirdTextField.validatedText(validationType: .milestoneInfo)
+            milestoneName = try firstTextField.validatedText(validationType: .milestoneName)
+            milestoneDueDate = try secondTextField.validatedText(validationType: .milestoneDueDate)
+            milestoneDescription = try thirdTextField.validatedText(validationType: .milestoneInfo)
         } catch (let error) {
             alertValidationErrorOnSave(error: error)
             return
         }
         
-        alertProceedSave()
-        // TODO: alertProceedSave 안에서 OK 시 위의 3가지 값(milestoneName, milestoneDueDate, milestoneInfo)을 서버로 전송하기
+        alertProceedSave(milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)
     }
 }
 
@@ -109,12 +120,16 @@ extension ManageMilestoneModalViewController {
 
 extension ManageMilestoneModalViewController {
     
-    private func alertProceedSave() {
+    private func alertProceedSave(milestoneName: String, milestoneDueDate: String, milestoneDescription: String) {
         
         let saveAlert = UIAlertController(title: "알림", message: "마일스톤을 저장하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
         
         saveAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-            // TODO: 값 저장하기
+            if self.milestoneInfo == nil {
+                self.registerNewMilestone(milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)
+            } else {
+                self.editExistingMilestone(milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)
+            }
             self.dismiss(animated: true, completion: nil)
         }))
         
@@ -137,11 +152,45 @@ extension ManageMilestoneModalViewController {
 
 extension ManageMilestoneModalViewController {
     
-    private func initializeAllFields() {
+    private func registerNewMilestone(milestoneName: String, milestoneDueDate: String, milestoneDescription: String) {
         
-        firstTextField.text = ""
-        secondTextField.text = ""
-        thirdTextField.text = ""
+        api.addNewMilestone(milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription) { result in
+            switch result {
+            case .success(let milestone):
+                DispatchQueue.main.async {
+                    self.delegate?.addNewMilestone(milestone: milestone)
+                }
+            case .failure(let error):
+                print(error)
+                
+            }
+        }
+    }
+    
+    private func editExistingMilestone(milestoneName: String, milestoneDueDate: String, milestoneDescription: String) {
+    
+        guard let milestoneInfo = milestoneInfo else { return }
+        api.editExistingMilestone(milestoneId: milestoneInfo.id, milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription) {
+            result in
+
+            switch result {
+            case .success(let milestone):
+                print(".success:", milestone)
+                DispatchQueue.main.async {
+                    self.delegate?.updateMilestone(milestone: milestone)
+                }
+            case .failure(let error):
+                print(error)
+                
+            }
+        }
+    }
+    
+    private func initializeAllFields(with: MilestoneInfo?) {
+        
+        firstTextField.text = (milestoneInfo?.title != nil) ? milestoneInfo?.title : ""
+        secondTextField.text = (milestoneInfo?.dueDate != nil) ? milestoneInfo?.dueDate : ""
+        thirdTextField.text = (milestoneInfo?.description != nil) ? milestoneInfo?.description : ""
         
         firstTextFieldErrorLabel.text = ""
         secondTextFieldErrorLabel.text = ""

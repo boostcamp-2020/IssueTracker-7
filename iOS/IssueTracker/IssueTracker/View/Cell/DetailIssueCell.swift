@@ -7,40 +7,16 @@
 
 import UIKit
 
-final class DetailIssueTopCell: UICollectionViewCell {
-    
-    static let reuseIdentifier = String(describing: DetailIssueTopCell.self)
-    @IBOutlet weak var userId: UILabel!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var issueNumber: UILabel!
-    
-    
-    // MARK: - Initializer
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-    }
-    
-    static func configureCell(cell: DetailIssueTopCell, data: DetailIssueInfo) {
-        
-        cell.userId.text = "sampleId"
-        cell.title.text = "곧 완성될 제목"
-    }
-}
-
-
 final class DetailIssueCell: UICollectionViewCell {
+    
+    // MARK: - Property
     
     static let reuseIdentifier = String(describing: DetailIssueCell.self)
     @IBOutlet weak var userId: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var content: UITextView!
+    @IBOutlet weak var content: UILabel!
+    
     
     // MARK: - Initializer
     
@@ -54,10 +30,16 @@ final class DetailIssueCell: UICollectionViewCell {
         
     }
     
-    static func configureCell(cell: DetailIssueCell, data: DetailIssueInfo) {
-        
-        cell.userId.text = "sample_id2"
-        
-    }
     
+    // MARK: - Method
+    
+    static func configureCell(cell: DetailIssueCell, commentInfo: Comment, imageData: Data?) {
+        
+        cell.userId.text = commentInfo.mentions?.userID ?? "아이디 없음"
+        cell.time.text = commentInfo.updatedAt
+        cell.content.text = commentInfo.content
+        if let imageData = imageData {
+            cell.profileImage.image = UIImage(data: imageData)
+        }
+    }
 }

@@ -9,33 +9,122 @@ import Foundation
 
 class BackEndAPIManager {
     
-    static let shared = BackEndAPIManager()
+    // MARK: - Property
     
-    private let router = Router<BackEndAPI>()
+    private let router: Routable
     
     
-    func requestAllIssues(completionHandler: @escaping ((Result<[IssueData], APIError>) -> Void)) {
-        router.request(route: .Issues) { (result: Result<[IssueData], APIError>) in
+    // MARK: - Initializer
+    
+    init(router: Routable) {
+        self.router = router
+    }
+    
+    
+    // MARK: - Method
+    
+    func requestAllIssues(completionHandler: @escaping ((Result<[IssueInfo], APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.allIssues) { (result: Result<[IssueInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func addNewIssue(title: String, content: String, completionHandler: @escaping ((Result<IssueInfo, APIError>) -> Void)) {
+       
+        router.request(route: BackEndAPI.addNewIssue(title: title, content: content)) { (result: Result<IssueInfo, APIError>) in
             completionHandler(result)
         }
     }
     
     // route: 작성자 or 레이블 or 마일스톤 or 담당자
-    func requestDetailCondition<infoType: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
-        router.request(route: route) { (result: Result<infoType, APIError>) in
-            
-            
+    func requestDetailCondition<T: Decodable>(route: BackEndAPI, completionHandler: @escaping ((Result<T, APIError>) -> Void)) {
+        router.request(route: route) { (result: Result<T, APIError>) in
+            completionHandler(result)
         }
     }
     
-    func requestFiltering<infoType: Decodable>(conditions: FilterInfo, completionHandler: @escaping ((Result<infoType, APIError>) -> Void)) {
+    func requestFiltering(conditions: FilterInfo, completionHandler: @escaping ((Result<[IssueInfo], APIError>) -> Void)) {
+        router.request(route: BackEndAPI.predefinedFilter(query: conditions.description)) { (result: Result<[IssueInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func requestStatusChange(issueInfo: IssueInfo, status: Status, completionHandler: @escaping ((Result<IssueInfo, APIError>) -> Void)) {
+        router.request(route: BackEndAPI.closeIssue(issueNumber: "\(issueInfo.id)", title: issueInfo.title, status: status.rawValue)) { (result: Result<IssueInfo, APIError>) in
+            completionHandler(result)
+        }
+    }
+      
+    func requestAllMilestones(completionHandler: @escaping ((Result<[MilestoneInfo], APIError>) -> Void)) {
         
-        // conditions 파싱 후 .filterIssueList 에 넣어서 보내기
+        router.request(route: BackEndAPI.allMilestones) { (result: Result<[MilestoneInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func addNewMilestone(milestoneName: String, milestoneDueDate: String, milestoneDescription: String, completionHandler: @escaping ((Result<MilestoneInfo, APIError>) -> Void)) {
         
-        router.request(route: .filterIssueList) { (result: Result<infoType, APIError>) in
-            
+        router.request(route: BackEndAPI.addNewMilestone(milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)) { (result: Result<MilestoneInfo, APIError>) in
+            completionHandler(result)
         }
     }
   
+    func requestAllLabels(completionHandler: @escaping((Result<[LabelInfo], APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.allLabels) { (result: Result<[LabelInfo], APIError>) in
+            completionHandler(result)
+        }
+    }
     
+    func addNewLabel(labelName: String, labelDescription: String, labelColor: String, completionHandler: @escaping((Result<LabelInfo, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.addNewLabel(labelName: labelName, labelDescription: labelDescription, labelColor: labelColor)) { (result: Result<LabelInfo, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func editExistingLabel(labelId: Int, labelName: String, labelDescription: String, labelColor: String, completionHandler: @escaping((Result<LabelInfo, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.editExistingLabel(labelId: labelId, labelName: labelName, labelDescription: labelDescription, labelColor: labelColor)) { (result: Result<LabelInfo, APIError>) in
+        completionHandler(result)
+        }
+    }
+    
+    func editExistingMilestone(milestoneId: Int, milestoneName: String, milestoneDueDate: String, milestoneDescription: String, completionHandler: @escaping ((Result<MilestoneInfo, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.editExistingMilestone(milestoneId: milestoneId, milestoneName: milestoneName, milestoneDueDate: milestoneDueDate, milestoneDescription: milestoneDescription)) { (result: Result<MilestoneInfo, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func requestPhoto(path: String, completionHandler: @escaping ((Result<Data, APIError>) -> Void)) {
+        router.request(route: BackEndAPI.photo(path: path)) { (result: Result<Data, APIError>) in
+            
+            completionHandler(result)
+
+        }
+    }
+    
+    func requestAddAssignee(issueNumber: String, userID: Int, completionHandler: @escaping ((Result<Assignee, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.addAssignee(issueNumber: issueNumber, userID: userID)) { (result: Result<Assignee, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func requestDeleteAssignee(issueNumber: String, userID: Int, completionHandler: @escaping ((Result<Assignee, APIError>) -> Void)) {
+        
+        router.request(route: BackEndAPI.deleteAssignee(issueNumber: issueNumber, userID: userID)) { (result: Result<Assignee, APIError>) in
+            completionHandler(result)
+        }
+    }
+    
+    func addComment(issueId: Int, content: String, completionHandler: @escaping ((Result<Comment, APIError>) -> Void)) {
+        router.request(route: BackEndAPI.addComment(issueId: issueId, content: content)) { (result: Result<Comment, APIError>) in
+            
+            completionHandler(result)
+            
+        }
+    }
 }

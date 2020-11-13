@@ -27,5 +27,7 @@ struct LabelsInfo: Codable {
 struct Label: Codable {
     let id: Int
     let name, color, description: String
+    
+    var isSelected: Bool? = false
 }
 

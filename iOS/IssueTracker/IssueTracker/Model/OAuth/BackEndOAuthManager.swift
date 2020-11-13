@@ -9,10 +9,12 @@ import UIKit
 
 class BackEndOAuthManager {
         
-    private let router = Router<BackEndAPI>()
+    private let router: Routable
     var handler: (() -> ())?
     
-    init() {
+    init(router: Routable) {
+        self.router = router
+        
         setUpNotificationCenter()
     }
     
@@ -29,7 +31,7 @@ class BackEndOAuthManager {
 
 extension BackEndOAuthManager: OAuthable {
     func requestAuthorization() {
-        router.openSite(from: .token)
+        router.openSite(from: BackEndAPI.token)
     }
     
     

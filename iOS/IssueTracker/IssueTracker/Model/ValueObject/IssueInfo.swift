@@ -8,20 +8,20 @@
 import Foundation
 
 
-struct IssueData: Codable {
+struct IssueInfo: Codable {
     let id: Int
     let title: String
-    let status: String
+    var status: String
     let createdAt: String?
     let updatedAt: String?
     let deletedAt: String?
-    let userID: Int?
+    let userID: Int
     let milestoneID: Int?
-    let labels: [Label]?
-    let assignees: [Assignee]?
+    let labels: [LabelInfo]?
+    var assignees: [Assignee]?
     let author: Author?
-    let comments: [Comment]
-    let milestone: Milestone
+    var comments: [Comment]?
+    let milestone: MilestoneInfo?
 
     enum CodingKeys: String, CodingKey {
         case id, title, status, createdAt, updatedAt, deletedAt

@@ -7,27 +7,25 @@
 
 import Foundation
 
-//{
-//    "milestones": [
-//        {
-//            "id": 1,
-//            "title": "1주차",
-//            "due_date": "2020-11-03"
-//        }
-//    ]
-//}
-
 struct MilestonesInfo: Codable {
-    let milestones: [Milestone]
+    let milestones: [MilestoneInfo]
 }
 
 // MARK: - Milestone
-struct Milestone: Codable {
+struct MilestoneInfo: Codable {
     let id: Int
     let title, dueDate: String
-
+    let description: String?
+    let issues: [IssuesInMilestone]?
+  
     enum CodingKeys: String, CodingKey {
-        case id, title
+        case id, title, description, issues
         case dueDate = "due_date"
     }
+}
+
+struct IssuesInMilestone: Codable {
+    let id: Int
+    let title, status: String
+    
 }
