@@ -1,11 +1,14 @@
-import React, { useReducer, createContext, useEffect } from 'react';
+import React, { useReducer, createContext, useContext } from 'react';
 
 const issueReducer = (issues, action) => {
-  return action;
+  switch (action.type) {
+    case 'GET':
+      return action.data || [];
+  }
 };
 
 const IssueContext = createContext();
-
+const useIssue = () => useContext(IssueContext);
 const IssueProvider = ({ children }) => {
   const [issues, issueDispatch] = useReducer(issueReducer, []);
   return (
@@ -13,4 +16,4 @@ const IssueProvider = ({ children }) => {
   );
 };
 
-export { IssueProvider, IssueContext };
+export { IssueProvider, useIssue };
