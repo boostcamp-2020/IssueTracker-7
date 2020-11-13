@@ -1,5 +1,9 @@
 # IssueTracker-7
 
+<h1 align="center">
+  
+<img src="https://user-images.githubusercontent.com/20080283/99056989-79b7fb00-25de-11eb-8c26-ae42671d8f70.png" align="center" />
+
 <h1 align="center"
 
 </h1>
@@ -9,11 +13,9 @@
 
 
 ![Swift](https://img.shields.io/badge/swift-v5.1-orange?logo=swift)
-
 ![Xcode](https://img.shields.io/badge/xcode-v12.1-blue?logo=xcode)
 ![Javascript](https://img.shields.io/badge/javascript-ES6+-yellow?logo=javascript)
-![Typescript](https://img.shields.io/badge/typescript-v4.0.3-white?logo=typescript)
-![react](https://img.shields.io/badge/react-0.0-9cf?logo=react)
+![react](https://img.shields.io/badge/react-17.0.1-9cf?logo=react)
 ![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
 
 [![GitHub Open Issues](https://img.shields.io/github/issues-raw/boostcamp-2020/IssueTracker-7?color=green)](https://github.com/boostcamp-2020/IssueTracker-7/issues)
@@ -27,10 +29,16 @@
 
 </div>
 
+### 화목한 사진
+<img src="https://user-images.githubusercontent.com/20080283/99057884-bc2e0780-25df-11eb-9ad5-2784a4416619.png" width="500" align="center" />
 
-### License
+</br>
+
+### License 🔑
 
 - [MIT License](https://github.com/boostcamp-2020/IssueTracker-7/blob/master/LICENSE)
+
+</br>
 
 ### Member 👨‍👩‍👦‍👦
 #### 🖥 FE & BE
@@ -40,8 +48,21 @@
 - **S029 심영민** [@tksrl0379](https://github.com/tksrl0379)
 - **S046 장임호** [@seoulboy](https://github.com/seoulboy)
 
+</br>
 
-### Wiki 
+### Wiki 🎞
 - [위키 보기](https://github.com/boostcamp-2020/IssueTracker-7/wiki)
-### Issue
+
+</br>
+
+### Issue 🔖
 - [이슈 보기](https://github.com/boostcamp-2020/IssueTracker-7/issues)
+
+</br>
+
+### 릴리즈 🏷
+
+#### 🖥 FE & BE
+시연 영상 링크: [클릭](https://youtu.be/puAvTsYITww)
+#### 📱iOS
+시연 영상 링크: [클릭](https://youtu.be/VpsULPfmI-4)
