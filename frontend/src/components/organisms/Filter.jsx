@@ -5,7 +5,7 @@ import M from '@molecules/';
 
 const FilterBox = styled.div`
     height: 60px;
-    margin: 50px auto 0 auto;
+    margin: 30px auto 0 auto;
     border: 1px solid #d6d8db;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;

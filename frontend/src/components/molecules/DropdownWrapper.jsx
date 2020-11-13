@@ -6,16 +6,17 @@ import M from '@molecules/';
 const Wrapper = styled.div`
     position: absolute;
     height: fit-content;
-    top: 170px;
     right: ${(props) => props.right};
     width: 300px;
+    margin-top: 60px;
     border: 1px solid #cccccc;
     border-radius: 5px;
     background-color: #ffffff;
     z-index: 100;
 `;
 
-const FilterListWrapper = ({ name, onClick, right, children }) => {
+const DropdownWrapper = ({ name, onClick, right, children }) => {
+    
     return (
         <>
             <A.DropdownOverlay onClick={onClick} />
@@ -27,4 +28,4 @@ const FilterListWrapper = ({ name, onClick, right, children }) => {
     );
 };
 
-export default FilterListWrapper;
+export default DropdownWrapper;

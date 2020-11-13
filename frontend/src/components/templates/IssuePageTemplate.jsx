@@ -13,6 +13,7 @@ const IssuePageTemplate = () => {
     <IssuePage>
     <O.Header />
       <A.Wrapper>
+        <O.SearchBar />
         <O.IssueList />
       </A.Wrapper>
     </IssuePage>

@@ -5,17 +5,16 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import M from '@molecules/';
 
 const Button = styled.button`
+    position: relative;
     width: 100px;
     background-color: #EAECEF;
     border: none;
-    cursor: pointer;
     font-size: 14px;
     outline: none;
-    margin-right: 20px;
     cursor: pointer;  
 `;
 
-const FilterButton = ({ name, right, children }) => {
+const DropdownButton = ({ name, right, children }) => {
     const [visible, setVisible] = useState(false);
     
     const openFilter = () => {
@@ -34,4 +33,4 @@ const FilterButton = ({ name, right, children }) => {
     );
 };
 
-export default FilterButton;
+export default DropdownButton;

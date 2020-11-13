@@ -3,6 +3,19 @@ import styled from 'styled-components';
 import A from '@atoms/';
 import M from '@molecules/';
 
+const filters = [
+    {
+        text: 'Open issues'
+    },{
+        text: 'Your issues'
+    },{
+        text: 'Everything assigned to you'
+    },{
+        text: 'Everything mentioning you'
+    },{
+        text: 'Closed issues'
+    }
+]
 const userInfo = [
     {
         id: 1,
@@ -112,12 +125,12 @@ const Description = styled.div`
     margin-left: 50px;
 `;
 
-const MilestoneName = styled.span`
+const DefaultText = styled.span`
     margin-left: 30px;
     margin-top: 5px;
 `;
 
-const FilterList = ({name}) => {
+const DropdownList = ({name}) => {
 
     if (name === 'Author' || name === 'Assignee') {
         const userList = userInfo.sort((a, b) => {
@@ -156,7 +169,7 @@ const FilterList = ({name}) => {
         });
         return <>{labelList}</>
     }
-    else {
+    else if (name === 'Milestone') {
         const milestoneList = milestoneInfo.sort((a, b) => {
             return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
         }).map(milestone => {
@@ -164,14 +177,26 @@ const FilterList = ({name}) => {
                 <Wrapper key={milestone.id}>
                     <A.Hr />
                     <M.DropdownWithCheck>
-                        <MilestoneName>{milestone.title}</MilestoneName>
+                        <DefaultText>{milestone.title}</DefaultText>
                     </M.DropdownWithCheck>
                 </Wrapper>
             );
         });
         return <>{milestoneList}</>
+    } else {
+        const filterList = filters.map((filter, index) => {
+            return (
+                <Wrapper key={index}>
+                    <A.Hr />
+                    <M.DropdownWithCheck>
+                        <DefaultText>{filter.text}</DefaultText>
+                    </M.DropdownWithCheck>
+                </Wrapper>
+            );
+        });
+        return <>{filterList}</>
     }
 }
 
 
-export default FilterList;
+export default DropdownList;
