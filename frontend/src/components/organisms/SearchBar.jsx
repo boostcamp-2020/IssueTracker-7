@@ -67,6 +67,7 @@ const SearchBarContainer = styled.div`
 const SearchBar = () => {
     const { query } = useFilter();
     const { milestones } = useMilestone();
+    const { labels } = useLabel();
 
     const handleFilters = () => {
         alert('개발 중입니다😥')
@@ -91,7 +92,7 @@ const SearchBar = () => {
             <Wrapper>
                 <A.Button onClick={moveLabel} backgroundColor='#FFFFFF' color='#000000'>
                     <FontAwesomeIcon icon={faTag} />Labels
-                    <A.ColorSpan color='#EAECEF'>{numLabel}</A.ColorSpan>
+                    <A.ColorSpan color='#EAECEF'>{labels.length || 0}</A.ColorSpan>
                 </A.Button>
                 <A.Button onClick={moveMilestone} backgroundColor='#FFFFFF' color='#000000'>
                     <FontAwesomeIcon icon={faMapSigns} /> Milestones
