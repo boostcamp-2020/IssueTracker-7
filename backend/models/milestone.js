@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING(100),
         allowNull: false,
+        unique: true,
       },
       due_date: {
         type: DataTypes.DATEONLY,
