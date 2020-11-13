@@ -8,6 +8,8 @@ const filterReducer = (state, { type, value }) => {
         ...state,
         is: [...state.is, value],
       };
+    case 'init':
+      return { is: ['issue', 'open'] };
     default:
       if (value == '@me') {
         Object.keys(state).forEach((eachType) => {
