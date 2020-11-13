@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import O from '@organisms/'
 import M from '@molecules/';
 import A from '@atoms/';
-import { request } from '@utils/request';
-import { Link } from 'react-router-dom';
 import Wrapper from '../atoms/Wrapper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapSigns, faTag } from '@fortawesome/free-solid-svg-icons';
+import {useFilter} from '@stores/filter'
+import {useLabel} from '@stores/label'
+import {useMilestone} from '@stores/milestone'
 
-const numLabel = 600
-const numMilestone = 13
 
 const SearchBarContainer = styled.div`
     width: auto;
@@ -67,6 +65,10 @@ const SearchBarContainer = styled.div`
 `;
 
 const SearchBar = () => {
+    const { query } = useFilter();
+    const { milestones } = useMilestone();
+    const { labels } = useLabel();
+
     const handleFilters = () => {
         alert('개발 중입니다😥')
     }
@@ -86,15 +88,15 @@ const SearchBar = () => {
     return (
         <SearchBarContainer>
             <M.DropdownButton name='Filters' right='900px'>Filters</M.DropdownButton>
-            <A.Input />
+            <A.Input value={query}/>
             <Wrapper>
                 <A.Button onClick={moveLabel} backgroundColor='#FFFFFF' color='#000000'>
                     <FontAwesomeIcon icon={faTag} />Labels
-                    <A.ColorSpan color='#EAECEF'>{numLabel}</A.ColorSpan>
+                    <A.ColorSpan color='#EAECEF'>{labels.length || 0}</A.ColorSpan>
                 </A.Button>
                 <A.Button onClick={moveMilestone} backgroundColor='#FFFFFF' color='#000000'>
                     <FontAwesomeIcon icon={faMapSigns} /> Milestones
-                    <A.ColorSpan color='#EAECEF'>{numMilestone}</A.ColorSpan>
+                    <A.ColorSpan color='#EAECEF'>{milestones.length || 0}</A.ColorSpan>
                 </A.Button>
             </Wrapper>
             <A.Button onClick={moveNewIssue} backgroundColor='#2C974B' color='#ffffff'>

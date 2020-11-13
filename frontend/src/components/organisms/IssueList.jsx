@@ -1,6 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { IssueContext } from '@stores/issue';
+import { request } from '@utils/request';
+import { useIssue } from '@stores/issue';
+import { useFilter } from '@stores/filter';
 import O from '@organisms/';
 
 const IssueListContainer = styled.ul`
@@ -10,12 +12,20 @@ const IssueListContainer = styled.ul`
 `;
 
 const IssueList = () => {
-  const { issues, issueDispatch } = useContext(IssueContext);
+  const { issues, issueDispatch } = useIssue();
+  const { query } = useFilter();
   const issueList = issues.map((issue) => <O.IssueItem key={issue.id} {...issue} />);
+  useEffect(async () => {
+    const { status, data } = await request('GET', `/api/issue/?q=${query}`);
+    issueDispatch({
+      type: 'GET',
+      data,
+    });
+  }, [query]);
   return (
     <IssueListContainer>
-        <O.Filter />
-        {issueList}
+      <O.Filter />
+      {issueList}
     </IssueListContainer>
   );
 };

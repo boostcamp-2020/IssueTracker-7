@@ -17,6 +17,7 @@ import Hr from '@atoms/Hr';
 import Photo from '@atoms/Photo';
 import Uncheck from '@atoms/Uncheck';
 import Wrapper from '@atoms/Wrapper';
+import Icon from '@atoms/Icon';
 
 export default {
   Button,
@@ -37,5 +38,6 @@ export default {
   Hr,
   Photo,
   Uncheck,
-  Wrapper
+  Wrapper,
+  Icon,
 };
