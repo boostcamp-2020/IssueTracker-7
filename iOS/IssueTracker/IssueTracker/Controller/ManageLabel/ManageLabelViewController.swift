@@ -16,6 +16,7 @@ final class ManageLabelViewController: UIViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLabelData()
+        collectionView.layoutIfNeeded()
         configureLayout()
         collectionView.dataSource = self
         collectionView.delegate = self

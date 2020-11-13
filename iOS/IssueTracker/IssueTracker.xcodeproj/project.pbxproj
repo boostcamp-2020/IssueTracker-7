@@ -82,7 +82,6 @@
 		33BD8DE62549956B00537960 /* BackEndAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8DE52549956B00537960 /* BackEndAPIManager.swift */; };
 		33DE7552255C5EFD00A92814 /* DetailIssueHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DE7551255C5EFD00A92814 /* DetailIssueHeader.swift */; };
 		33DE7558255C64A300A92814 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DE7556255C64A300A92814 /* CardViewController.swift */; };
-		33DE7559255C64A300A92814 /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33DE7557255C64A300A92814 /* CardViewController.xib */; };
 		33DE7562255CDC2B00A92814 /* AssigneeSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DE7561255CDC2B00A92814 /* AssigneeSelectController.swift */; };
 		33DE757A255D1C7400A92814 /* AssigneesProfileStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DE7579255D1C7400A92814 /* AssigneesProfileStackView.swift */; };
 		712CBEA12550032F00E8F95F /* RegisterIssue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 712CBEA02550032F00E8F95F /* RegisterIssue.storyboard */; };
@@ -97,7 +96,6 @@
 		71531F60254A88F000CCFAE2 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71531F5F254A88F000CCFAE2 /* UIButton+.swift */; };
 		7179187E255CF4A30009496A /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179187D255CF4A30009496A /* CommentViewController.swift */; };
 		71791883255CF9CD0009496A /* CommentView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71791882255CF9CD0009496A /* CommentView.storyboard */; };
-		71791897255D1ED90009496A /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71791896255D1ED90009496A /* CardViewController.xib */; };
 		718C388E2553E6E1002E4903 /* ManageMilestone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 718C388D2553E6E1002E4903 /* ManageMilestone.storyboard */; };
 		718C38932553E6FB002E4903 /* ManageMilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C38922553E6FB002E4903 /* ManageMilestoneViewController.swift */; };
 		718C38982553E716002E4903 /* ManageMilestoneModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C38972553E716002E4903 /* ManageMilestoneModalView.swift */; };
@@ -106,6 +104,7 @@
 		718C38AA2553FC5C002E4903 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718C38A92553FC5C002E4903 /* UITextField+.swift */; };
 		719453B3254AAF6600A5864E /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 719453B2254AAF6600A5864E /* IssueList.storyboard */; };
 		71969BDE25510D4F00C96CE2 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 71969BDD25510D4F00C96CE2 /* MarkdownView */; };
+		71C6B247255E1B1F001CF3AE /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71C6B246255E1B1F001CF3AE /* CardViewController.xib */; };
 		71E910BB255BDE1100889F78 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E910BA255BDE1000889F78 /* APICredentials.swift */; };
 /* End PBXBuildFile section */
 
@@ -183,7 +182,6 @@
 		33BD8DE52549956B00537960 /* BackEndAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndAPIManager.swift; sourceTree = "<group>"; };
 		33DE7551255C5EFD00A92814 /* DetailIssueHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIssueHeader.swift; sourceTree = "<group>"; };
 		33DE7556255C64A300A92814 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
-		33DE7557255C64A300A92814 /* CardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
 		33DE7561255CDC2B00A92814 /* AssigneeSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeSelectController.swift; sourceTree = "<group>"; };
 		33DE7579255D1C7400A92814 /* AssigneesProfileStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneesProfileStackView.swift; sourceTree = "<group>"; };
 		712CBEA02550032F00E8F95F /* RegisterIssue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegisterIssue.storyboard; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 		71531F5F254A88F000CCFAE2 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		7179187D255CF4A30009496A /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		71791882255CF9CD0009496A /* CommentView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CommentView.storyboard; sourceTree = "<group>"; };
-		71791896255D1ED90009496A /* CardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
 		718C388D2553E6E1002E4903 /* ManageMilestone.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ManageMilestone.storyboard; sourceTree = "<group>"; };
 		718C38922553E6FB002E4903 /* ManageMilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMilestoneViewController.swift; sourceTree = "<group>"; };
 		718C38972553E716002E4903 /* ManageMilestoneModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMilestoneModalView.swift; sourceTree = "<group>"; };
@@ -206,6 +203,7 @@
 		718C38A42553FC3F002E4903 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		718C38A92553FC5C002E4903 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		719453B2254AAF6600A5864E /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
+		71C6B246255E1B1F001CF3AE /* CardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
 		71E910BA255BDE1000889F78 /* APICredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICredentials.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -409,7 +407,7 @@
 				333FE2A42551513F000C0F0B /* DetailIssueList.storyboard */,
 				333FE2A925515167000C0F0B /* DetailIssueListController.swift */,
 				33DE7556255C64A300A92814 /* CardViewController.swift */,
-				33DE7557255C64A300A92814 /* CardViewController.xib */,
+				71C6B246255E1B1F001CF3AE /* CardViewController.xib */,
 				33DE7561255CDC2B00A92814 /* AssigneeSelectController.swift */,
 				7179187D255CF4A30009496A /* CommentViewController.swift */,
 				71791882255CF9CD0009496A /* CommentView.storyboard */,
@@ -685,7 +683,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71791897255D1ED90009496A /* CardViewController.xib in Resources */,
+				71C6B247255E1B1F001CF3AE /* CardViewController.xib in Resources */,
 				719453B3254AAF6600A5864E /* IssueList.storyboard in Resources */,
 				33151F2725499E04006B94A9 /* NanumSquareBold.ttf in Resources */,
 				718C388E2553E6E1002E4903 /* ManageMilestone.storyboard in Resources */,
@@ -989,7 +987,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sym.IssueTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp2020.IssueTracker777;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1009,7 +1007,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sym.IssueTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp2020.IssueTracker777;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

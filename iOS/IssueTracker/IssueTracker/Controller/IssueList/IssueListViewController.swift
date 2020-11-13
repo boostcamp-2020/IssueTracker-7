@@ -235,7 +235,7 @@ extension IssueListViewController: UICollectionViewDelegate {
 extension IssueListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        var height: CGFloat = 80
+        var height: CGFloat = 88
         if issueInfoList[indexPath.item].labels!.count > 0 {
             height += 30
         }

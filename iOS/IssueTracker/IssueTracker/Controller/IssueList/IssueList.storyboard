@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -36,7 +36,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VGO-WG-P6r">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="backgroundColor" red="0.97588783180000005" green="0.97588783180000005" blue="0.97588783180000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="1" id="rRT-tx-TJG">
                                     <size key="itemSize" width="413" height="134"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -66,7 +66,7 @@
                                     <constraint firstAttribute="width" secondItem="mQ1-L5-yoe" secondAttribute="height" multiplier="1:1" id="bSy-5I-7p9"/>
                                     <constraint firstAttribute="width" constant="50" id="w80-zE-L2f"/>
                                 </constraints>
-                                <state key="normal" image="add (1)"/>
+                                <state key="normal" image="plus"/>
                                 <connections>
                                     <segue destination="Ozp-3E-fwx" kind="presentation" identifier="IssueListToRegisterIssue" id="cgu-Vp-CwH"/>
                                 </connections>
@@ -136,13 +136,10 @@
     </scenes>
     <resources>
         <image name="1.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="add (1)" width="64" height="64"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
+        <image name="plus" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

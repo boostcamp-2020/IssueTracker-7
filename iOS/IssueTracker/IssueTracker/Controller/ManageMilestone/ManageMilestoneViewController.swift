@@ -20,8 +20,7 @@ final class ManageMilestoneViewController: UIViewController, UICollectionViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpMilestoneData()
-        
-
+        collectionView.layoutIfNeeded()
         configureLayout()
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -55,8 +54,9 @@ extension ManageMilestoneViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MilestoneCell.reuseIdentifier, for: indexPath) as! MilestoneCell
-        // TODO: 각 cell을 터치했을 때 편집화면으로 이동해야한다.
+        
         cell.configure(milestoneData: milestoneDataList[indexPath.row])
+        
         return cell
     }
 }
@@ -66,16 +66,16 @@ extension ManageMilestoneViewController: ManageMilestoneModalViewDelegate {
     func addNewMilestone(milestone: MilestoneInfo) {
         
         milestoneDataList.append(milestone)
-        
+ 
+///        collectionView.reloadData()
         let lastItemIndex = self.collectionView(self.collectionView, numberOfItemsInSection: 0) - 1
         let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
-        
+
         collectionView.performBatchUpdates {
             collectionView.insertItems(at: [lastItemIndexPath])
         } completion: { _ in
             self.collectionView.scrollToItem(at: lastItemIndexPath, at: .bottom, animated: true)
         }
-
     }
     
     func updateMilestone(milestone: MilestoneInfo) {
