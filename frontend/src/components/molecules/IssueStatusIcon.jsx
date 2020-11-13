@@ -1,8 +1,6 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import A from '@atoms/';
 
-const IssueStatusIcon = ({ status }) => (
-  <FontAwesomeIcon icon={faExclamationCircle} color="#6ca972" />
-);
+const IssueStatusIcon = ({ status }) => <A.Icon icon={faExclamationCircle} color="#6ca972" />;
 export default IssueStatusIcon;
