@@ -1,9 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import O from '@organisms/';
-import '@styles/LoginPage.css';
 
 const LoginPageTemplate = () => {
+  const GlobalStyle = createGlobalStyle`
+    body {
+      margin: 0;
+      background-color: ${props => props.backgroundColor || '#ffffff'};
+    }
+  `;
+
   const LoginPage = styled.div`
     width: fit-content;
     padding-left: 40%;
@@ -17,10 +23,13 @@ const LoginPageTemplate = () => {
   `;
 
   return (
-    <LoginPage>
-      <LoginTitle>이슈 트래커</LoginTitle>
-      <O.LoginForm></O.LoginForm>
-    </LoginPage>
+    <>
+      <GlobalStyle backgroundColor='#eeeeee'/>
+        <LoginPage>
+          <LoginTitle>이슈 트래커</LoginTitle>
+          <O.LoginForm></O.LoginForm>
+      </LoginPage>
+      </>
   );
 };
 

@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import A from '@atoms/';
 import O from '@organisms/';
 
+const GlobalStyle = createGlobalStyle`
+    body {
+      margin: 0;
+      background-color: ${props => props.backgroundColor || '#ffffff'};
+    }
+  `;
 const IssuePage = styled.div`
   width: auto;
   background-color: #ffffff;
@@ -10,13 +16,16 @@ const IssuePage = styled.div`
 
 const IssuePageTemplate = () => {
   return (
-    <IssuePage>
-    <O.Header />
-      <A.Wrapper>
-        <O.SearchBar />
-        <O.IssueList />
-      </A.Wrapper>
-    </IssuePage>
+    <>
+      <GlobalStyle />
+      <IssuePage>
+      <O.Header />
+        <A.Wrapper>
+          <O.SearchBar />
+          <O.IssueList />
+        </A.Wrapper>
+      </IssuePage>
+    </>
   );
 };
 export default IssuePageTemplate;
